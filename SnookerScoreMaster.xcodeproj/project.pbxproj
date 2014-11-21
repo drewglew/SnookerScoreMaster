@@ -22,6 +22,7 @@
 		96D22DB41A1FDEFE00E0ADE3 /* ball_largex_green03.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D22DAD1A1FDEFE00E0ADE3 /* ball_largex_green03.png */; };
 		96D22DB51A1FDEFE00E0ADE3 /* ball_largex_yellow02.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D22DAE1A1FDEFE00E0ADE3 /* ball_largex_yellow02.png */; };
 		96D22DB61A1FDEFE00E0ADE3 /* ball_largex_red01.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D22DAF1A1FDEFE00E0ADE3 /* ball_largex_red01.png */; };
+		96D22DB81A1FE94E00E0ADE3 /* cueball.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D22DB71A1FE94E00E0ADE3 /* cueball.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		96D22DAD1A1FDEFE00E0ADE3 /* ball_largex_green03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_largex_green03.png; sourceTree = "<group>"; };
 		96D22DAE1A1FDEFE00E0ADE3 /* ball_largex_yellow02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_largex_yellow02.png; sourceTree = "<group>"; };
 		96D22DAF1A1FDEFE00E0ADE3 /* ball_largex_red01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_largex_red01.png; sourceTree = "<group>"; };
+		96D22DB71A1FE94E00E0ADE3 /* cueball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cueball.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				96D22D881A1FD58100E0ADE3 /* ViewController.h */,
 				96D22D891A1FD58100E0ADE3 /* ViewController.m */,
 				96D22D8B1A1FD58100E0ADE3 /* Main.storyboard */,
+				96D22DB71A1FE94E00E0ADE3 /* cueball.png */,
 				96D22DA71A1FD5CD00E0ADE3 /* greenbaize_clear.jpg */,
 				96D22DA91A1FDEFE00E0ADE3 /* ball_largex_black07.png */,
 				96D22DAA1A1FDEFE00E0ADE3 /* ball_largex_pink06.png */,
@@ -229,6 +232,7 @@
 				96D22D8D1A1FD58100E0ADE3 /* Main.storyboard in Resources */,
 				96D22DB31A1FDEFE00E0ADE3 /* ball_largex_brown04.png in Resources */,
 				96D22DB61A1FDEFE00E0ADE3 /* ball_largex_red01.png in Resources */,
+				96D22DB81A1FE94E00E0ADE3 /* cueball.png in Resources */,
 				96D22DA81A1FD5CD00E0ADE3 /* greenbaize_clear.jpg in Resources */,
 				96D22DB21A1FDEFE00E0ADE3 /* ball_largex_blue05.png in Resources */,
 				96D22D921A1FD58100E0ADE3 /* LaunchScreen.xib in Resources */,
