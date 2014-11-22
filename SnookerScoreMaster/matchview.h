@@ -11,7 +11,7 @@
 #import "player.h"
 #import "AdjustPointsViewController.h"
 
-@interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, AdjustPointsDelegate>  {
+@interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate>  {
     int frameNumber;
 }
 @property (assign) int frameNumber;

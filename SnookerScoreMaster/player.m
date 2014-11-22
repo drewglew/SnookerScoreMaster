@@ -23,6 +23,8 @@
 @synthesize frames;
 @synthesize nbrOfBreaks;
 @synthesize sumOfBreaks;
+@synthesize playersBreaks;
+
 
 
 -(void) createFrame:(int) value {
@@ -33,6 +35,8 @@
     currentFrame.frameScore = 0;
     currentFrame.frameHighestBreak = 0;
     currentFrameIndex = value;
+
+    
 }
 
 
@@ -40,8 +44,10 @@
     return currentFrame.frameScore;
 }
 
+// is this called at all?
 -(void)setFrameScore:(int) value {
         currentFrame.frameScore = currentFrame.frameScore + value;
+    
         NSString *labelScore = [NSString stringWithFormat:@"%d",currentFrame.frameScore];
         self.text = labelScore;
 }
@@ -62,6 +68,17 @@
 
 -(void)addBreakScore:(int) value {
     currentFrame.frameScore = currentFrame.frameScore + value;
+    
+    NSNumber* playerBreak = [NSNumber numberWithInt:value];
+    
+    if ([self.playersBreaks count] == 0) {
+        self.playersBreaks = [NSMutableArray arrayWithObjects:playerBreak, nil];
+    } else {
+        [self.playersBreaks addObject:playerBreak];
+    }
+
+    
+
     NSString *labelScore = [NSString stringWithFormat:@"%d",currentFrame.frameScore];
     self.text = labelScore;
 }

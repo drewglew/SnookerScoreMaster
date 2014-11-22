@@ -18,6 +18,7 @@
     int nbrOfBreaks;
     int sumOfBreaks;
     NSMutableArray     *highestBreakHistory;
+    NSMutableArray *playersBreaks;
     NSMutableArray *frames;
 }
 
@@ -31,6 +32,7 @@
 @property (assign) int sumOfBreaks;
 @property (nonatomic, strong) NSMutableArray *frames;
 @property (strong, nonatomic) frame     *currentFrame;
+@property (strong, nonatomic) NSMutableArray     *playersBreaks;
 @property (strong, nonatomic) NSMutableArray     *highestBreakHistory;
 
 

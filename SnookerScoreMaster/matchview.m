@@ -52,6 +52,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imagePottedBall;
 
 @property (nonatomic) UIDynamicAnimator *animator;
+
+@property (weak, nonatomic) IBOutlet UIView *playerStatsView;
+@property (weak, nonatomic) IBOutlet UILabel *statPlayerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statContentLabel;
+
 @end
 
 
@@ -134,6 +139,26 @@ enum scoreStatus scoreState;
     endBreakTap.numberOfTapsRequired = 1;
     [self.viewBreak addGestureRecognizer:endBreakTap];
     
+   
+    /* gesture swipe right to get player 1 stats*/
+    UISwipeGestureRecognizer *gestureRight;
+    gestureRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipePlayer1Stats:)];
+    [gestureRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self view] addGestureRecognizer:gestureRight];//this gets things rolling.
+    
+    
+    /* gesture swipe left to get player 2 stats*/
+    UISwipeGestureRecognizer *gestureLeft;
+    gestureLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipePlayer2Stats:)];//need to set direction.
+    [gestureLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [[self view] addGestureRecognizer:gestureLeft];//this gets things rolling.
+    
+    /* to close player 1 stats */
+    UITapGestureRecognizer *statPlayerVanishTap = [[UITapGestureRecognizer alloc]
+                                                  initWithTarget:self action:@selector(statPlayerVanishTap:)];
+    statPlayerVanishTap.numberOfTapsRequired = 1;
+    [self.playerStatsView addGestureRecognizer:statPlayerVanishTap];
+    
     self.frameNumber=1;
     [self.textScorePlayer1 createFrame:(self.frameNumber)];
     [self.textScorePlayer2 createFrame:(self.frameNumber)];
@@ -141,6 +166,74 @@ enum scoreStatus scoreState;
     self.joinedFrameResult = [[NSMutableArray alloc] init];
     
 }
+
+
+-(void)swipePlayer1Stats:(UITapGestureRecognizer *)gesture
+{
+
+    self.playerStatsView.hidden = false;
+    
+    self.playerStatsView.alpha = 0.0;
+    [UIView animateWithDuration:1
+                          delay:0.0
+                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionTransitionFlipFromLeft
+                     animations:^{
+                         self.playerStatsView.alpha = 1.0;
+                     }
+                     completion:nil
+     ];
+    
+    self.statPlayerLabel.text = self.textPlayerOneName.text;
+    self.statContentLabel.text = [self getBreakdown :self.textScorePlayer1];
+}
+
+
+-(void)swipePlayer2Stats:(UITapGestureRecognizer *)gesture
+{
+    
+    self.playerStatsView.hidden = false;
+    
+    self.playerStatsView.alpha = 0.0;
+    [UIView animateWithDuration:1
+                          delay:0.0
+                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionTransitionFlipFromRight
+                     animations:^{
+                         self.playerStatsView.alpha = 1.0;
+                     }
+                     completion:nil
+     ];
+    self.statPlayerLabel.text = self.textPlayerTwoName.text;
+    self.statContentLabel.text = [self getBreakdown :self.textScorePlayer2];
+}
+
+
+
+
+
+-(void)statPlayerVanishTap:(UITapGestureRecognizer *)gesture
+{
+    
+    self.playerStatsView.alpha = 1.0;
+    [UIView animateWithDuration:1
+                          delay:0.0
+                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionTransitionCrossDissolve
+                     animations:^{
+                         self.playerStatsView.alpha = 0.0;
+                     }
+                     completion:nil
+     ];
+    self.playerStatsView.hidden = true;
+    
+}
+
+
+
+
+
+
+
+
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -542,9 +635,149 @@ enum scoreStatus scoreState;
         hiBreakBallsImagePlayer = [NSString stringWithFormat:@"%@%@",hiBreakBallsImagePlayer, ballImageData];
     }
     
+    
     NSString *ballsPotted = [NSString stringWithFormat:@"</br>Total Pots: %d</br>",currentFrame.frameBallsPotted ];
     NSString *dataPlayer = [NSString stringWithFormat:@"%@%@%@%@%@END)%@",ballsPotted, PottedPoints, bonusPoints, hiBreakPlayer, hiBreakBallsPlayer,hiBreakBallsImagePlayer];
     return dataPlayer;
+}
+
+-(NSString*) getBreakdown :(player*) currentPlayerStats {
+    
+    long breakValue;
+    int counter8To9=0, counter10To19=0, counter20To29=0, counter30To39=0, counter40To49=0, counter50To59=0, counter60To69=0, counter70To79=0, counter80To89=0, counter90To99=0, counter100To109=0, counter110To119=0, counter120To129=0, counter130To139=0, counter140to147=0;
+    long playersHighestBreak=0;
+    
+    for (int index=0; index < [currentPlayerStats.playersBreaks count]; index++) {
+ 
+        breakValue = [[currentPlayerStats.playersBreaks objectAtIndex:index] integerValue];
+        
+        if (breakValue > playersHighestBreak) {
+            playersHighestBreak = breakValue;
+        }
+        
+        if (breakValue >=140) {
+            counter140to147 ++;
+        } else if (breakValue >=130) {
+            counter130To139 ++;
+        } else if (breakValue >= 120) {
+            counter120To129 ++;
+        } else if (breakValue >= 110) {
+            counter110To119 ++;
+        } else if (breakValue >= 100) {
+            counter100To109 ++;
+        } else if (breakValue >= 90) {
+            counter90To99 ++;
+        } else if (breakValue >= 80) {
+            counter80To89 ++;
+        } else if (breakValue >= 70) {
+            counter70To79 ++;
+        } else if (breakValue >= 60) {
+            counter60To69 ++;
+        } else if (breakValue >= 50) {
+            counter50To59 ++;
+        } else if (breakValue >= 40) {
+            counter40To49 ++;
+        } else if (breakValue >= 30) {
+            counter30To39 ++;
+        } else if (breakValue >= 20) {
+            counter20To29 ++;
+        } else if (breakValue >= 10) {
+            counter10To19 ++;
+        } else if (breakValue >= 8) {
+            counter8To9 ++;
+        }
+    }
+    
+    
+    
+    
+    int maxNbrOfRanges = 4;
+    int nbrOfRanges = 0;
+    NSString *result = [NSString stringWithFormat:@"Highest Break = %ld\n\n",playersHighestBreak];
+    
+    if (counter140to147 > 0) {
+        result = [NSString stringWithFormat:@"%@Breaks > 140 = %d\n",result, counter140to147];
+        nbrOfRanges ++;
+    }
+    
+    if (counter130To139 > 0) {
+        result = [NSString stringWithFormat:@"%@Breaks > 130 = %d\n",result, counter130To139];
+        nbrOfRanges ++;
+    }
+    
+    if (counter120To129 > 0) {
+        result = [NSString stringWithFormat:@"%@Breaks > 120 = %d\n",result, counter120To129];
+        nbrOfRanges ++;
+    }
+    
+    
+    if (counter110To119 > 0) {
+        result = [NSString stringWithFormat:@"%@Breaks > 110 = %d\n",result, counter110To119];
+        nbrOfRanges ++;
+    }
+    
+    if (counter100To109 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 100 = %d\n",result, counter100To109];
+        nbrOfRanges ++;
+    }
+    
+    if (counter90To99 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 90 = %d\n",result, counter90To99];
+        nbrOfRanges ++;
+    }
+    
+    if (counter80To89 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 80 = %d\n",result, counter80To89];
+        nbrOfRanges ++;
+    }
+    
+    if (counter70To79 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 70 = %d\n",result, counter70To79];
+        nbrOfRanges ++;
+    }
+    
+    if (counter60To69 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 60 = %d\n",result, counter60To69];
+        nbrOfRanges ++;
+    }
+    
+    if (counter50To59 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 50 = %d\n",result, counter50To59];
+        nbrOfRanges ++;
+    }
+    
+    if (counter40To49 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 40 = %d\n",result, counter40To49];
+        nbrOfRanges ++;
+    }
+    
+    if (counter30To39 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 30 = %d\n",result, counter30To39];
+        nbrOfRanges ++;
+    }
+  
+    if (counter20To29 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 20 = %d\n",result, counter20To29];
+        nbrOfRanges ++;
+    }
+    
+    if (counter10To19 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 10 = %d\n",result, counter10To19];
+        nbrOfRanges ++;
+    }
+    
+    
+    if (counter8To9 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+        result = [NSString stringWithFormat:@"%@Breaks > 7 = %d\n",result, counter8To9];
+        nbrOfRanges ++;
+    }
+    
+    
+    if([result isEqualToString:@""]) {
+        result = @"Player has not yet had any breaks of note!";
+    }
+    
+    return result;
 }
 
 
