@@ -652,7 +652,7 @@
                             <constraint firstAttribute="trailing" secondItem="bMN-0i-vgX" secondAttribute="trailing" id="npK-7t-ybp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="jUG-0Q-uYp" secondAttribute="bottom" id="of1-e8-ybM"/>
                             <constraint firstAttribute="centerX" secondItem="7pL-yv-TMP" secondAttribute="centerX" id="pnf-j6-4T1"/>
-                            <constraint firstItem="BVk-D7-AyH" firstAttribute="top" secondItem="zbo-VC-TiV" secondAttribute="bottom" constant="25" id="wmR-da-Gvf"/>
+                            <constraint firstItem="BVk-D7-AyH" firstAttribute="top" secondItem="zbo-VC-TiV" secondAttribute="bottom" id="wmR-da-Gvf"/>
                             <constraint firstAttribute="centerX" secondItem="BVk-D7-AyH" secondAttribute="centerX" id="z2e-Ak-sml"/>
                         </constraints>
                         <variation key="default">
@@ -673,6 +673,7 @@
                             <mask key="constraints">
                                 <include reference="0R4-lL-Pd6"/>
                                 <include reference="BJR-ah-0vc"/>
+                                <include reference="wmR-da-Gvf"/>
                                 <include reference="z2e-Ak-sml"/>
                             </mask>
                         </variation>
