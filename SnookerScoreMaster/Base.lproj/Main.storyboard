@@ -317,10 +317,13 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 <variation key="widthClass=compact">
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="dismissPlayerOneKB:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="4zn-5g-3YI"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKR-9e-fyh">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -468,10 +471,13 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 <variation key="widthClass=compact">
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="dismissPlayerTwoKB:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="oLZ-OL-T1j"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irF-sK-z6o">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -783,6 +789,11 @@
                             </label>
                             <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hue-pC-2tI">
                                 <rect key="frame" x="0.0" y="207" width="600" height="162"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="igg-oy-Wbg" id="ZyO-3w-gfY"/>
+                                    <outlet property="delegate" destination="igg-oy-Wbg" id="mgQ-Vg-0Da"/>
+                                </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ItY-U1-Y20">
                                 <rect key="frame" x="226" y="437" width="149" height="30"/>
@@ -792,7 +803,10 @@
                                     <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=compact" misplaced="YES">
-                                    <rect key="frame" x="226" y="280" width="149" height="30"/>
+                                    <rect key="frame" x="0.0" y="349" width="600" height="30"/>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="178" y="445" width="45" height="30"/>
                                 </variation>
                                 <connections>
                                     <action selector="selectClicked:" destination="igg-oy-Wbg" eventType="touchUpInside" id="ajb-RT-KqB"/>
@@ -803,17 +817,33 @@
                         <constraints>
                             <constraint firstItem="ItY-U1-Y20" firstAttribute="top" secondItem="gtx-bQ-FH4" secondAttribute="bottom" constant="22" id="86J-pS-s3M"/>
                             <constraint firstItem="KjI-DE-ggf" firstAttribute="top" secondItem="GSz-Uk-HTu" secondAttribute="top" id="EJk-34-Nha"/>
-                            <constraint firstAttribute="trailing" secondItem="ItY-U1-Y20" secondAttribute="trailing" id="GZn-WF-pcY"/>
                             <constraint firstAttribute="centerX" secondItem="Hue-pC-2tI" secondAttribute="centerX" id="SwP-eu-beS"/>
                             <constraint firstAttribute="trailing" secondItem="KjI-DE-ggf" secondAttribute="trailing" id="YV0-ed-Ldz"/>
                             <constraint firstItem="KjI-DE-ggf" firstAttribute="leading" secondItem="GSz-Uk-HTu" secondAttribute="leading" id="hb3-Lq-DxV"/>
                             <constraint firstAttribute="centerY" secondItem="Hue-pC-2tI" secondAttribute="centerY" id="hc7-ZU-vGO"/>
+                            <constraint firstAttribute="centerX" secondItem="ItY-U1-Y20" secondAttribute="centerX" id="hcW-U2-RcI"/>
                             <constraint firstItem="gtx-bQ-FH4" firstAttribute="leading" secondItem="GSz-Uk-HTu" secondAttribute="leading" id="lC9-PW-W1v"/>
                             <constraint firstAttribute="trailing" secondItem="gtx-bQ-FH4" secondAttribute="trailing" id="tKD-SZ-TzU"/>
                             <constraint firstItem="gtx-bQ-FH4" firstAttribute="top" secondItem="Hue-pC-2tI" secondAttribute="bottom" constant="31" id="wIM-CM-hMu"/>
                             <constraint firstItem="YV5-K9-MYY" firstAttribute="top" secondItem="KjI-DE-ggf" secondAttribute="bottom" id="xiP-c9-aoK"/>
                             <constraint firstItem="ItY-U1-Y20" firstAttribute="leading" secondItem="GSz-Uk-HTu" secondAttribute="leading" id="zQq-RI-aBg"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="hcW-U2-RcI"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <include reference="hcW-U2-RcI"/>
+                                <exclude reference="zQq-RI-aBg"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="hcW-U2-RcI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="PointsPicker" destination="Hue-pC-2tI" id="n7O-bs-wGl"/>
