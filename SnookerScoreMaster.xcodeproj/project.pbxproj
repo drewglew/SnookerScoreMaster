@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		96D22D841A1FD58100E0ADE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22D831A1FD58100E0ADE3 /* main.m */; };
 		96D22D871A1FD58100E0ADE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22D861A1FD58100E0ADE3 /* AppDelegate.m */; };
-		96D22D8A1A1FD58100E0ADE3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22D891A1FD58100E0ADE3 /* ViewController.m */; };
 		96D22D8D1A1FD58100E0ADE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D22D8B1A1FD58100E0ADE3 /* Main.storyboard */; };
 		96D22D8F1A1FD58100E0ADE3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D22D8E1A1FD58100E0ADE3 /* Images.xcassets */; };
 		96D22D921A1FD58100E0ADE3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96D22D901A1FD58100E0ADE3 /* LaunchScreen.xib */; };
@@ -23,6 +22,13 @@
 		96D22DB51A1FDEFE00E0ADE3 /* ball_largex_yellow02.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D22DAE1A1FDEFE00E0ADE3 /* ball_largex_yellow02.png */; };
 		96D22DB61A1FDEFE00E0ADE3 /* ball_largex_red01.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D22DAF1A1FDEFE00E0ADE3 /* ball_largex_red01.png */; };
 		96D22DB81A1FE94E00E0ADE3 /* cueball.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D22DB71A1FE94E00E0ADE3 /* cueball.png */; };
+		96D22DC51A20679B00E0ADE3 /* AdjustPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22DBA1A20679B00E0ADE3 /* AdjustPointsViewController.m */; };
+		96D22DC61A20679B00E0ADE3 /* ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22DBC1A20679B00E0ADE3 /* ball.m */; };
+		96D22DC71A20679B00E0ADE3 /* frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22DBE1A20679B00E0ADE3 /* frame.m */; };
+		96D22DC81A20679B00E0ADE3 /* matchview.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22DC01A20679B00E0ADE3 /* matchview.m */; };
+		96D22DC91A20679B00E0ADE3 /* player.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22DC21A20679B00E0ADE3 /* player.m */; };
+		96D22DCA1A20679B00E0ADE3 /* snookerbreak.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22DC41A20679B00E0ADE3 /* snookerbreak.m */; };
+		96D22DCC1A2073BC00E0ADE3 /* Reds-Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D22DCB1A2073BC00E0ADE3 /* Reds-Triangle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +47,6 @@
 		96D22D831A1FD58100E0ADE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		96D22D851A1FD58100E0ADE3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		96D22D861A1FD58100E0ADE3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		96D22D881A1FD58100E0ADE3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		96D22D891A1FD58100E0ADE3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		96D22D8C1A1FD58100E0ADE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96D22D8E1A1FD58100E0ADE3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		96D22D911A1FD58100E0ADE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -58,6 +62,19 @@
 		96D22DAE1A1FDEFE00E0ADE3 /* ball_largex_yellow02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_largex_yellow02.png; sourceTree = "<group>"; };
 		96D22DAF1A1FDEFE00E0ADE3 /* ball_largex_red01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_largex_red01.png; sourceTree = "<group>"; };
 		96D22DB71A1FE94E00E0ADE3 /* cueball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cueball.png; sourceTree = "<group>"; };
+		96D22DB91A20679B00E0ADE3 /* AdjustPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdjustPointsViewController.h; sourceTree = "<group>"; };
+		96D22DBA1A20679B00E0ADE3 /* AdjustPointsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdjustPointsViewController.m; sourceTree = "<group>"; };
+		96D22DBB1A20679B00E0ADE3 /* ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ball.h; sourceTree = "<group>"; };
+		96D22DBC1A20679B00E0ADE3 /* ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ball.m; sourceTree = "<group>"; };
+		96D22DBD1A20679B00E0ADE3 /* frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frame.h; sourceTree = "<group>"; };
+		96D22DBE1A20679B00E0ADE3 /* frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = frame.m; sourceTree = "<group>"; };
+		96D22DBF1A20679B00E0ADE3 /* matchview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matchview.h; sourceTree = "<group>"; };
+		96D22DC01A20679B00E0ADE3 /* matchview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = matchview.m; sourceTree = "<group>"; };
+		96D22DC11A20679B00E0ADE3 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = player.h; sourceTree = "<group>"; };
+		96D22DC21A20679B00E0ADE3 /* player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = player.m; sourceTree = "<group>"; };
+		96D22DC31A20679B00E0ADE3 /* snookerbreak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = snookerbreak.h; sourceTree = "<group>"; };
+		96D22DC41A20679B00E0ADE3 /* snookerbreak.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = snookerbreak.m; sourceTree = "<group>"; };
+		96D22DCB1A2073BC00E0ADE3 /* Reds-Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reds-Triangle.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +118,20 @@
 			children = (
 				96D22D851A1FD58100E0ADE3 /* AppDelegate.h */,
 				96D22D861A1FD58100E0ADE3 /* AppDelegate.m */,
-				96D22D881A1FD58100E0ADE3 /* ViewController.h */,
-				96D22D891A1FD58100E0ADE3 /* ViewController.m */,
+				96D22DB91A20679B00E0ADE3 /* AdjustPointsViewController.h */,
+				96D22DBA1A20679B00E0ADE3 /* AdjustPointsViewController.m */,
+				96D22DBB1A20679B00E0ADE3 /* ball.h */,
+				96D22DBC1A20679B00E0ADE3 /* ball.m */,
+				96D22DBD1A20679B00E0ADE3 /* frame.h */,
+				96D22DBE1A20679B00E0ADE3 /* frame.m */,
+				96D22DBF1A20679B00E0ADE3 /* matchview.h */,
+				96D22DC01A20679B00E0ADE3 /* matchview.m */,
+				96D22DC11A20679B00E0ADE3 /* player.h */,
+				96D22DC21A20679B00E0ADE3 /* player.m */,
+				96D22DC31A20679B00E0ADE3 /* snookerbreak.h */,
+				96D22DC41A20679B00E0ADE3 /* snookerbreak.m */,
 				96D22D8B1A1FD58100E0ADE3 /* Main.storyboard */,
+				96D22DCB1A2073BC00E0ADE3 /* Reds-Triangle.png */,
 				96D22DB71A1FE94E00E0ADE3 /* cueball.png */,
 				96D22DA71A1FD5CD00E0ADE3 /* greenbaize_clear.jpg */,
 				96D22DA91A1FDEFE00E0ADE3 /* ball_largex_black07.png */,
@@ -231,6 +259,7 @@
 				96D22DB41A1FDEFE00E0ADE3 /* ball_largex_green03.png in Resources */,
 				96D22D8D1A1FD58100E0ADE3 /* Main.storyboard in Resources */,
 				96D22DB31A1FDEFE00E0ADE3 /* ball_largex_brown04.png in Resources */,
+				96D22DCC1A2073BC00E0ADE3 /* Reds-Triangle.png in Resources */,
 				96D22DB61A1FDEFE00E0ADE3 /* ball_largex_red01.png in Resources */,
 				96D22DB81A1FE94E00E0ADE3 /* cueball.png in Resources */,
 				96D22DA81A1FD5CD00E0ADE3 /* greenbaize_clear.jpg in Resources */,
@@ -255,8 +284,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96D22D8A1A1FD58100E0ADE3 /* ViewController.m in Sources */,
+				96D22DC91A20679B00E0ADE3 /* player.m in Sources */,
+				96D22DC61A20679B00E0ADE3 /* ball.m in Sources */,
+				96D22DCA1A20679B00E0ADE3 /* snookerbreak.m in Sources */,
 				96D22D871A1FD58100E0ADE3 /* AppDelegate.m in Sources */,
+				96D22DC81A20679B00E0ADE3 /* matchview.m in Sources */,
+				96D22DC71A20679B00E0ADE3 /* frame.m in Sources */,
+				96D22DC51A20679B00E0ADE3 /* AdjustPointsViewController.m in Sources */,
 				96D22D841A1FD58100E0ADE3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
