@@ -11,6 +11,7 @@
 @interface ball : UIButton {
     int pottedPoints;
     int foulPoints;
+    int potsInBreakCounter;
     int quantity;
     NSString *colour;
     NSString *imageNameSmall;
@@ -21,6 +22,7 @@
 @property (assign) int pottedPoints;
 @property (assign) int foulPoints;
 @property (assign) int quantity;
+@property (assign) int potsInBreakCounter;
 @property (nonatomic) NSString *colour;
 @property (nonatomic) NSString *imageNameSmall;
 @property (nonatomic) NSString *imageNameLarge;

@@ -15,6 +15,7 @@
 @synthesize quantity;
 @synthesize colour;
 @synthesize imageNameSmall;
+@synthesize potsInBreakCounter;
 
 -(id)init {
     if (self = [super init])  {
@@ -32,6 +33,13 @@
     pottedPoints = value;
 }
 
+-(int)potsInBreakCounter {
+    return potsInBreakCounter;
+}
+
+-(void)setPotsInBreakCounter:(int) value {
+    potsInBreakCounter = value;
+}
 
 -(int)foulPoints {
     return foulPoints;
@@ -75,6 +83,10 @@
 }
 
 -(void)decreaseQty {
+    //if ([self.colour  isEqual: @"red"]) {
+    //}
+    
+    
     quantity--;
     if (quantity == 0) {
         self.hidden = true;

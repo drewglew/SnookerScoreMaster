@@ -18,13 +18,19 @@
 
 
 @property (weak, nonatomic) IBOutlet ball *buttonRed;
+@property (weak, nonatomic) IBOutlet UILabel *redIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonYellow;
-
+@property (weak, nonatomic) IBOutlet UILabel *yellowIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonGreen;
+@property (weak, nonatomic) IBOutlet UILabel *greenIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonBrown;
+@property (weak, nonatomic) IBOutlet UILabel *brownIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonBlue;
+@property (weak, nonatomic) IBOutlet UILabel *blueIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonPink;
+@property (weak, nonatomic) IBOutlet UILabel *pinkIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonBlack;
+@property (weak, nonatomic) IBOutlet UILabel *blackIndicator;
 
 @property (weak, nonatomic) IBOutlet player *textScorePlayer1;
 @property (weak, nonatomic) IBOutlet player *textScorePlayer2;
@@ -67,6 +73,8 @@
 @synthesize frameNumber;
 enum scoreStatus { FrameScore, FrameHighestBreak, HighestBreak, FrameBallsPotted, BallsPotted };
 enum scoreStatus scoreState;
+enum IndicatorStyle {highlight, hide};
+
 
 
 #pragma mark -standard methods
@@ -271,7 +279,7 @@ enum scoreStatus scoreState;
 // plan is to replace the above method ballClicked with this new one allowing us to
 // also log the balls potted along the way into an array that we can process.
 
--(void)ballPotted:(ball*)pottedBall {
+-(void)ballPotted:(ball*)pottedBall :(UILabel*) indicatorBall {
 
     if (self.currentPlayersBreak.breakScore==0) {
     self.viewBreak.alpha = 0.0;
@@ -307,6 +315,14 @@ enum scoreStatus scoreState;
         [self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ];
         [self.currentPlayer incrementNbrBalls:1];
         [self.currentPlayer.currentFrame incrementFrameBallsPotted];
+        //[pottedBall decreaseQty];
+        pottedBall.potsInBreakCounter ++;
+        indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+        [self clearIndicators :highlight];
+        [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
+        indicatorBall.textColor = [UIColor whiteColor];
+        indicatorBall.hidden = false;
+        
     }
     
     [self.currentPlayer.currentFrame increaseFrameScore:self.currentPlayer.frameScore];
@@ -314,25 +330,26 @@ enum scoreStatus scoreState;
 }
 
 - (IBAction)redClicked:(id)sender {
-    [self ballPotted:self.buttonRed];
+    [self ballPotted:self.buttonRed :self.redIndicator];
+   
 }
 - (IBAction)yellowClicked:(id)sender {
-    [self ballPotted:self.buttonYellow];
+    [self ballPotted:self.buttonYellow :self.yellowIndicator];
 }
 - (IBAction)greenClicked:(id)sender {
-    [self ballPotted:self.buttonGreen];
+    [self ballPotted:self.buttonGreen :self.greenIndicator];
 }
 - (IBAction)brownClicked:(id)sender {
-    [self ballPotted:self.buttonBrown];
+    [self ballPotted:self.buttonBrown :self.brownIndicator];
 }
 - (IBAction)blueClicked:(id)sender {
-    [self ballPotted:self.buttonBlue];
+    [self ballPotted:self.buttonBlue :self.blueIndicator];
 }
 - (IBAction)pinkClicked:(id)sender {
-    [self ballPotted:self.buttonPink];
+    [self ballPotted:self.buttonPink :self.pinkIndicator];
 }
 - (IBAction)blackClicked:(id)sender {
-    [self ballPotted:self.buttonBlack];
+    [self ballPotted:self.buttonBlack :self.blackIndicator];
 }
 
 
@@ -352,9 +369,41 @@ enum scoreStatus scoreState;
         [self.currentPlayer addBreakScore:self.currentPlayersBreak.breakScore];
         [self processCurrentUsersHighestBreak];
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
+        [self clearIndicators :hide];
     }
 }
 
+
+-(void)clearIndicators :(enum IndicatorStyle) indicator {
+    
+    if (indicator == hide) {
+        [self resetIndicator:self.buttonRed :self.redIndicator];
+        [self resetIndicator:self.buttonYellow :self.yellowIndicator];
+        [self resetIndicator:self.buttonGreen :self.greenIndicator];
+        [self resetIndicator:self.buttonBrown :self.brownIndicator];
+        [self resetIndicator:self.buttonBlue :self.blueIndicator];
+        [self resetIndicator:self.buttonPink :self.pinkIndicator];
+        [self resetIndicator:self.buttonBlack :self.blackIndicator];
+    } else if (indicator == highlight) {
+        [self resetIndicatorStyle:self.redIndicator];
+        [self resetIndicatorStyle:self.yellowIndicator];
+        [self resetIndicatorStyle:self.greenIndicator];
+        [self resetIndicatorStyle:self.brownIndicator];
+        [self resetIndicatorStyle:self.blueIndicator];
+        [self resetIndicatorStyle:self.pinkIndicator];
+        [self resetIndicatorStyle:self.blackIndicator];
+    }
+}
+
+-(void)resetIndicator :(ball*)pottedBall :(UILabel*) indicatorBall {
+    pottedBall.potsInBreakCounter = 0;
+    indicatorBall.hidden=true;
+}
+
+-(void)resetIndicatorStyle :(UILabel*) indicatorBall {
+    [indicatorBall setFont:[UIFont systemFontOfSize:14]];
+    indicatorBall.textColor = [UIColor orangeColor];
+}
 
 
 -(void)swapPlayers {
@@ -687,12 +736,11 @@ enum scoreStatus scoreState;
             counter8To9 ++;
         }
     }
-    
-    
-    
+
     
     int maxNbrOfRanges = 4;
     int nbrOfRanges = 0;
+    
     NSString *result = [NSString stringWithFormat:@"Highest Break = %ld\n\n",playersHighestBreak];
     
     if (counter140to147 > 0) {
@@ -716,58 +764,58 @@ enum scoreStatus scoreState;
         nbrOfRanges ++;
     }
     
-    if (counter100To109 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter100To109 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 100 = %d\n",result, counter100To109];
         nbrOfRanges ++;
     }
     
-    if (counter90To99 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter90To99 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 90 = %d\n",result, counter90To99];
         nbrOfRanges ++;
     }
     
-    if (counter80To89 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter80To89 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 80 = %d\n",result, counter80To89];
         nbrOfRanges ++;
     }
     
-    if (counter70To79 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter70To79 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 70 = %d\n",result, counter70To79];
         nbrOfRanges ++;
     }
     
-    if (counter60To69 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter60To69 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 60 = %d\n",result, counter60To69];
         nbrOfRanges ++;
     }
     
-    if (counter50To59 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter50To59 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 50 = %d\n",result, counter50To59];
         nbrOfRanges ++;
     }
     
-    if (counter40To49 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter40To49 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 40 = %d\n",result, counter40To49];
         nbrOfRanges ++;
     }
     
-    if (counter30To39 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter30To39 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 30 = %d\n",result, counter30To39];
         nbrOfRanges ++;
     }
   
-    if (counter20To29 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter20To29 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 20 = %d\n",result, counter20To29];
         nbrOfRanges ++;
     }
     
-    if (counter10To19 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter10To19 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 10 = %d\n",result, counter10To19];
         nbrOfRanges ++;
     }
     
     
-    if (counter8To9 > 0 && nbrOfRanges <= maxNbrOfRanges) {
+    if (counter8To9 > 0 && nbrOfRanges < maxNbrOfRanges) {
         result = [NSString stringWithFormat:@"%@Breaks > 7 = %d\n",result, counter8To9];
         nbrOfRanges ++;
     }
@@ -826,6 +874,7 @@ enum scoreStatus scoreState;
 - (IBAction)clearClicked:(id)sender {
     if (self.currentPlayersBreak.breakScore > 0) {
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
+        [self clearIndicators :hide];
     }
     
 }
