@@ -845,19 +845,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWC-oV-8ZR" userLabel="Player Stats">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <view alpha="0.79999999999999982" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tz5-e4-ZlT" userLabel="background">
+                                    <view alpha="0.84999999999999987" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tz5-e4-ZlT" userLabel="background">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <variation key="widthClass=compact" misplaced="YES">
                                             <rect key="frame" x="0.0" y="0.0" width="195" height="600"/>
                                         </variation>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDT-kn-CPj" userLabel="Player 1 Name">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDT-kn-CPj" userLabel="Player 1 Name">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="bfd-H2-YQc"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
@@ -890,13 +890,13 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeS-0q-mpS" userLabel="Player 1 Name">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeS-0q-mpS" userLabel="Player 1 Name">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="HWY-1A-5QE"/>
                                             <constraint firstAttribute="height" constant="20" id="uG8-4x-CxF"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
@@ -1214,6 +1214,7 @@
                         <outlet property="labelScoreMatchPlayer2" destination="YQS-rQ-uz2" id="1n6-tF-WXw"/>
                         <outlet property="labelStatePlayer1" destination="fKR-9e-fyh" id="F7Q-ao-wcx"/>
                         <outlet property="labelStatePlayer2" destination="irF-sK-z6o" id="yfn-xp-qap"/>
+                        <outlet property="navButtonNew" destination="MqU-Az-QiH" id="y6m-uc-xY1"/>
                         <outlet property="pinkIndicator" destination="k2x-gm-eHF" id="tPf-7L-pbF"/>
                         <outlet property="playerStatsPosition" destination="Ubf-nQ-NcV" id="gQv-A8-BE8"/>
                         <outlet property="redIndicator" destination="TH7-8b-1E9" id="TQt-mN-tS5"/>

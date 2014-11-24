@@ -66,10 +66,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *statContentLabelPlayer2;
 
 
-
-
-
 @property (weak, nonatomic) IBOutlet UIView *PlayerStatsView;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *navButtonNew;
+
+
 
 @end
 
@@ -170,9 +171,9 @@ enum IndicatorStyle {highlight, hide};
     [self.view addGestureRecognizer:swipeRight];
     
     UISwipeGestureRecognizer  *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeftHidePlayersStats:)];
-    swipeRight.numberOfTouchesRequired = 1;//give required num of touches here ..
-    swipeRight.delegate = (id)self;
-    swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipeLeft.numberOfTouchesRequired = 1;//give required num of touches here ..
+    swipeLeft.delegate = (id)self;
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:swipeLeft];
     
     self.frameNumber=1;
@@ -183,40 +184,48 @@ enum IndicatorStyle {highlight, hide};
     
 }
 
-//to do - hide/show switch around!
-
-
 -(void)swipeRightShowPlayersStats:(UISwipeGestureRecognizer *)gesture
 {
-    self.playerStatsPosition.constant=-198;
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.PlayerStatsView layoutIfNeeded];
-    }];
-}
-
--(void)tapHidePlayersStats:(UISwipeGestureRecognizer *)gesture
-{
-    self.playerStatsPosition.constant=-198;
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.PlayerStatsView layoutIfNeeded];
-    }];
-}
+    self.navButtonNew.title  = @"";
+    self.navButtonNew.enabled=false;
     
-
--(void)swipeLeftHidePlayersStats:(UISwipeGestureRecognizer *)gesture
-{
-    self.statNameLabelPlayer1.text = self.textPlayerOneName.text;
+    
+    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    self.statNameLabelPlayer1.attributedText = [[NSAttributedString alloc] initWithString:self.textPlayerOneName.text attributes:underlineAttribute];
+    self.statNameLabelPlayer2.attributedText = [[NSAttributedString alloc] initWithString:self.textPlayerTwoName.text attributes:underlineAttribute];
+    
     self.statContentLabelPlayer1.text = [self getBreakdown :self.textScorePlayer1];
-    self.statNameLabelPlayer2.text = self.textPlayerTwoName.text;
+
     self.statContentLabelPlayer2.text = [self getBreakdown :self.textScorePlayer2];
+    
     self.playerStatsPosition.constant=0;
     
     [UIView animateWithDuration:0.5f animations:^{
         [self.PlayerStatsView layoutIfNeeded];
     }];
+    
 }
 
+-(void)tapHidePlayersStats:(UISwipeGestureRecognizer *)gesture
+{
+    [self hidePlayersStats];
+}
 
+-(void)swipeLeftHidePlayersStats:(UISwipeGestureRecognizer *)gesture
+{
+    [self hidePlayersStats];
+}
+
+-(void)hidePlayersStats {
+    
+    self.playerStatsPosition.constant=-198;
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.PlayerStatsView layoutIfNeeded];
+    }];
+    self.navButtonNew.title  = @"New";
+    self.navButtonNew.enabled=true;
+    
+}
 
 
 
