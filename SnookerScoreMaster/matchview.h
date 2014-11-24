@@ -10,12 +10,16 @@
 #import <MessageUI/MessageUI.h>
 #import "player.h"
 #import "AdjustPointsViewController.h"
+#import "statsViewController.h"
 
 @interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate>  {
     int frameNumber;
+    statsViewController *statsVC;
+    
 }
 @property (assign) int frameNumber;
 @property (strong, nonatomic) NSMutableArray     *joinedFrameResult;
+/* https://www.youtube.com/watch?v=mdG6XpwwuwI */
 -(void)processCurrentUsersHighestBreak;
 -(NSString*) composePlayerStats :(frame*) currentFrame;
 -(void) processMatchEnd;

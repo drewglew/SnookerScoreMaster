@@ -13,10 +13,9 @@
 #import "snookerbreak.h"
 
 
-
 @interface matchview ()
 
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *playerStatsPosition;
 @property (weak, nonatomic) IBOutlet ball *buttonRed;
 @property (weak, nonatomic) IBOutlet UILabel *redIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonYellow;
@@ -59,9 +58,18 @@
 
 @property (nonatomic) UIDynamicAnimator *animator;
 
-@property (weak, nonatomic) IBOutlet UIView *playerStatsView;
-@property (weak, nonatomic) IBOutlet UILabel *statPlayerLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statContentLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *statContentLabelPlayer1;
+@property (weak, nonatomic) IBOutlet UILabel *statNameLabelPlayer1;
+
+@property (weak, nonatomic) IBOutlet UILabel *statNameLabelPlayer2;
+@property (weak, nonatomic) IBOutlet UILabel *statContentLabelPlayer2;
+
+
+
+
+
+@property (weak, nonatomic) IBOutlet UIView *PlayerStatsView;
 
 @end
 
@@ -147,25 +155,25 @@ enum IndicatorStyle {highlight, hide};
     endBreakTap.numberOfTapsRequired = 1;
     [self.viewBreak addGestureRecognizer:endBreakTap];
     
-   
-    /* gesture swipe right to get player 1 stats*/
-    UISwipeGestureRecognizer *gestureRight;
-    gestureRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipePlayer1Stats:)];
-    [gestureRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [[self view] addGestureRecognizer:gestureRight];//this gets things rolling.
+
+    UITapGestureRecognizer *tapHideStats = [[UITapGestureRecognizer alloc]
+                                           initWithTarget:self action:@selector(tapHidePlayersStats:)];
+    tapHideStats.numberOfTapsRequired = 1;
+    [self.PlayerStatsView addGestureRecognizer:tapHideStats];
     
     
-    /* gesture swipe left to get player 2 stats*/
-    UISwipeGestureRecognizer *gestureLeft;
-    gestureLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipePlayer2Stats:)];//need to set direction.
-    [gestureLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    [[self view] addGestureRecognizer:gestureLeft];//this gets things rolling.
     
-    /* to close player 1 stats */
-    UITapGestureRecognizer *statPlayerVanishTap = [[UITapGestureRecognizer alloc]
-                                                  initWithTarget:self action:@selector(statPlayerVanishTap:)];
-    statPlayerVanishTap.numberOfTapsRequired = 1;
-    [self.playerStatsView addGestureRecognizer:statPlayerVanishTap];
+    UISwipeGestureRecognizer  *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRightShowPlayersStats:)];
+    swipeRight.numberOfTouchesRequired = 1;//give required num of touches here ..
+    swipeRight.delegate = (id)self;
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeRight];
+    
+    UISwipeGestureRecognizer  *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeftHidePlayersStats:)];
+    swipeRight.numberOfTouchesRequired = 1;//give required num of touches here ..
+    swipeRight.delegate = (id)self;
+    swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeLeft];
     
     self.frameNumber=1;
     [self.textScorePlayer1 createFrame:(self.frameNumber)];
@@ -175,66 +183,38 @@ enum IndicatorStyle {highlight, hide};
     
 }
 
+//to do - hide/show switch around!
 
--(void)swipePlayer1Stats:(UITapGestureRecognizer *)gesture
+
+-(void)swipeRightShowPlayersStats:(UISwipeGestureRecognizer *)gesture
 {
-
-    self.playerStatsView.hidden = false;
-    
-    self.playerStatsView.alpha = 0.0;
-    [UIView animateWithDuration:1
-                          delay:0.0
-                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionTransitionFlipFromLeft
-                     animations:^{
-                         self.playerStatsView.alpha = 1.0;
-                     }
-                     completion:nil
-     ];
-    
-    self.statPlayerLabel.text = self.textPlayerOneName.text;
-    self.statContentLabel.text = [self getBreakdown :self.textScorePlayer1];
+    self.playerStatsPosition.constant=-198;
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.PlayerStatsView layoutIfNeeded];
+    }];
 }
 
-
--(void)swipePlayer2Stats:(UITapGestureRecognizer *)gesture
+-(void)tapHidePlayersStats:(UISwipeGestureRecognizer *)gesture
 {
-    
-    self.playerStatsView.hidden = false;
-    
-    self.playerStatsView.alpha = 0.0;
-    [UIView animateWithDuration:1
-                          delay:0.0
-                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionTransitionFlipFromRight
-                     animations:^{
-                         self.playerStatsView.alpha = 1.0;
-                     }
-                     completion:nil
-     ];
-    self.statPlayerLabel.text = self.textPlayerTwoName.text;
-    self.statContentLabel.text = [self getBreakdown :self.textScorePlayer2];
+    self.playerStatsPosition.constant=-198;
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.PlayerStatsView layoutIfNeeded];
+    }];
 }
+    
 
-
-
-
-
--(void)statPlayerVanishTap:(UITapGestureRecognizer *)gesture
+-(void)swipeLeftHidePlayersStats:(UISwipeGestureRecognizer *)gesture
 {
+    self.statNameLabelPlayer1.text = self.textPlayerOneName.text;
+    self.statContentLabelPlayer1.text = [self getBreakdown :self.textScorePlayer1];
+    self.statNameLabelPlayer2.text = self.textPlayerTwoName.text;
+    self.statContentLabelPlayer2.text = [self getBreakdown :self.textScorePlayer2];
+    self.playerStatsPosition.constant=0;
     
-    self.playerStatsView.alpha = 1.0;
-    [UIView animateWithDuration:1
-                          delay:0.0
-                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionTransitionCrossDissolve
-                     animations:^{
-                         self.playerStatsView.alpha = 0.0;
-                     }
-                     completion:nil
-     ];
-    self.playerStatsView.hidden = true;
-    
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.PlayerStatsView layoutIfNeeded];
+    }];
 }
-
-
 
 
 
@@ -304,6 +284,7 @@ enum IndicatorStyle {highlight, hide};
             [self.currentPlayer incrementNbrBalls:1];
             [self.currentPlayer setFrameScore:self.currentPlayersBreak.breakScore];
             [self.currentPlayer.currentFrame incrementFrameBallsPotted];
+            [self clearIndicators :hide];
         }
         // add the foul points to opposing player
         [self.opposingPlayer setFoulScore:pottedBall.foulPoints];
@@ -690,6 +671,8 @@ enum IndicatorStyle {highlight, hide};
     return dataPlayer;
 }
 
+
+
 -(NSString*) getBreakdown :(player*) currentPlayerStats {
     
     long breakValue;
@@ -742,75 +725,77 @@ enum IndicatorStyle {highlight, hide};
     int nbrOfRanges = 0;
     
     NSString *result = [NSString stringWithFormat:@"Highest Break = %ld\n\n",playersHighestBreak];
+    NSString *breakstats =@"";
+    
     
     if (counter140to147 > 0) {
-        result = [NSString stringWithFormat:@"%@Breaks > 140 = %d\n",result, counter140to147];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 140 = %d\n",breakstats, counter140to147];
         nbrOfRanges ++;
     }
     
     if (counter130To139 > 0) {
-        result = [NSString stringWithFormat:@"%@Breaks > 130 = %d\n",result, counter130To139];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 130 = %d\n",breakstats, counter130To139];
         nbrOfRanges ++;
     }
     
     if (counter120To129 > 0) {
-        result = [NSString stringWithFormat:@"%@Breaks > 120 = %d\n",result, counter120To129];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 120 = %d\n",breakstats, counter120To129];
         nbrOfRanges ++;
     }
     
     
     if (counter110To119 > 0) {
-        result = [NSString stringWithFormat:@"%@Breaks > 110 = %d\n",result, counter110To119];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 110 = %d\n",breakstats, counter110To119];
         nbrOfRanges ++;
     }
     
     if (counter100To109 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 100 = %d\n",result, counter100To109];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 100 = %d\n",breakstats, counter100To109];
         nbrOfRanges ++;
     }
     
     if (counter90To99 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 90 = %d\n",result, counter90To99];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 90 = %d\n",breakstats, counter90To99];
         nbrOfRanges ++;
     }
     
     if (counter80To89 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 80 = %d\n",result, counter80To89];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 80 = %d\n",breakstats, counter80To89];
         nbrOfRanges ++;
     }
     
     if (counter70To79 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 70 = %d\n",result, counter70To79];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 70 = %d\n",breakstats, counter70To79];
         nbrOfRanges ++;
     }
     
     if (counter60To69 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 60 = %d\n",result, counter60To69];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 60 = %d\n",breakstats, counter60To69];
         nbrOfRanges ++;
     }
     
     if (counter50To59 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 50 = %d\n",result, counter50To59];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 50 = %d\n",breakstats, counter50To59];
         nbrOfRanges ++;
     }
     
     if (counter40To49 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 40 = %d\n",result, counter40To49];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 40 = %d\n",breakstats, counter40To49];
         nbrOfRanges ++;
     }
     
     if (counter30To39 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 30 = %d\n",result, counter30To39];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 30 = %d\n",breakstats, counter30To39];
         nbrOfRanges ++;
     }
   
     if (counter20To29 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 20 = %d\n",result, counter20To29];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 20 = %d\n",breakstats, counter20To29];
         nbrOfRanges ++;
     }
     
     if (counter10To19 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 10 = %d\n",result, counter10To19];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 10 = %d\n",breakstats, counter10To19];
         nbrOfRanges ++;
     }
     
@@ -821,11 +806,11 @@ enum IndicatorStyle {highlight, hide};
     }
     
     
-    if([result isEqualToString:@""]) {
-        result = @"Player has not yet had any breaks of note!";
+    if([breakstats isEqualToString:@""]) {
+        breakstats = @"Player has not yet had any breaks of note!";
     }
     
-    return result;
+    return [NSString stringWithFormat:@"%@%@",result,breakstats];
 }
 
 
@@ -903,6 +888,10 @@ enum IndicatorStyle {highlight, hide};
 - (void)addItemViewController:(AdjustPointsViewController *)controller didPickDeduction:(int)selectedPoints {
     [self.currentPlayer setFoulScore:selectedPoints];
 }
+
+
+
+
 
 
 @end

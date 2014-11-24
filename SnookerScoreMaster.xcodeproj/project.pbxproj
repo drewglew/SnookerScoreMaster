@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		969FC9B51A223EF3007EC93F /* statsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FC9B41A223EF3007EC93F /* statsViewController.m */; };
 		96CCF0591A214F7000FB7BDF /* ball_small_yellow02.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0521A214F7000FB7BDF /* ball_small_yellow02.png */; };
 		96CCF05A1A214F7000FB7BDF /* ball_small_green03.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0531A214F7000FB7BDF /* ball_small_green03.png */; };
 		96CCF05B1A214F7000FB7BDF /* ball_small_brown04.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0541A214F7000FB7BDF /* ball_small_brown04.png */; };
@@ -50,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		969FC9B31A223EF3007EC93F /* statsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statsViewController.h; sourceTree = "<group>"; };
+		969FC9B41A223EF3007EC93F /* statsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = statsViewController.m; sourceTree = "<group>"; };
 		96CCF0521A214F7000FB7BDF /* ball_small_yellow02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_yellow02.png; sourceTree = "<group>"; };
 		96CCF0531A214F7000FB7BDF /* ball_small_green03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_green03.png; sourceTree = "<group>"; };
 		96CCF0541A214F7000FB7BDF /* ball_small_brown04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_brown04.png; sourceTree = "<group>"; };
@@ -147,6 +150,8 @@
 				96D22DC31A20679B00E0ADE3 /* snookerbreak.h */,
 				96D22DC41A20679B00E0ADE3 /* snookerbreak.m */,
 				96D22D8B1A1FD58100E0ADE3 /* Main.storyboard */,
+				969FC9B31A223EF3007EC93F /* statsViewController.h */,
+				969FC9B41A223EF3007EC93F /* statsViewController.m */,
 				96D22DCB1A2073BC00E0ADE3 /* Reds-Triangle.png */,
 				96D22DB71A1FE94E00E0ADE3 /* cueball.png */,
 				96D22DA71A1FD5CD00E0ADE3 /* greenbaize_clear.jpg */,
@@ -324,6 +329,7 @@
 				96D22DC71A20679B00E0ADE3 /* frame.m in Sources */,
 				96D22DC51A20679B00E0ADE3 /* AdjustPointsViewController.m in Sources */,
 				96D22D841A1FD58100E0ADE3 /* main.m in Sources */,
+				969FC9B51A223EF3007EC93F /* statsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
