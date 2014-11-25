@@ -54,26 +54,19 @@
 
 
 // used by ViewController
--(void)incrementScore:(ball*) pottedball :(UIImageView*) imagePottedBall {
+-(bool)incrementScore:(ball*) pottedball :(UIImageView*) imagePottedBall {
     
     // here we can validate the number of reds left on the table??
     
     
     if (breakScore + currentBall.pottedPoints > 155) {
-    
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unforunately it is impossible to score such a high break!" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
         alert.alertViewStyle = UIAlertViewStyleDefault ;
         [alert show];
+        return false;
     }
     else {
         
-        //imagePottedBall.image = [UIImage imageNamed:pottedball.imageNameLarge];
-        //if ([pottedball.colour  isEqual: @"Black"]) {
-        //[self setTextColor:[UIColor grayColor]];
-        //} else {
-        //[self setTextColor:[UIColor blackColor]];
-        //}
-            
         if (breakScore==0) {
             self.hidden = false;
             imagePottedBall.hidden = false;
@@ -93,6 +86,7 @@
     
         NSString *labelScore = [NSString stringWithFormat:@"%d",self.breakScore];
         self.text = labelScore;
+        return true;
     }
 }
 

@@ -23,6 +23,9 @@
 @property (nonatomic, strong) NSMutableArray *pottedBalls;
 @property (strong, nonatomic) ball     *currentBall;
 -(void)clearBreak:(UIImageView*) imageCueBall;
--(void)incrementScore:(ball*) pottedball :(UIImageView*) imageCueBall;
+
+-(bool)incrementScore:(ball*) pottedball :(UIImageView*) imagePottedBall ;
+
 -(void)incrementScore:(ball*) pottedball;
+
 @end

@@ -302,16 +302,20 @@ enum IndicatorStyle {highlight, hide};
         [self swapPlayers];
     } else {
         // it is a pot, so credit the current user
-        [self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ];
-        [self.currentPlayer incrementNbrBalls:1];
-        [self.currentPlayer.currentFrame incrementFrameBallsPotted];
-        //[pottedBall decreaseQty];
-        pottedBall.potsInBreakCounter ++;
-        indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
-        [self clearIndicators :highlight];
-        [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
-        indicatorBall.textColor = [UIColor whiteColor];
-        indicatorBall.hidden = false;
+        
+        
+        if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ] == true) {
+        
+            [self.currentPlayer incrementNbrBalls:1];
+            [self.currentPlayer.currentFrame incrementFrameBallsPotted];
+            //[pottedBall decreaseQty];
+            pottedBall.potsInBreakCounter ++;
+            indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+            [self clearIndicators :highlight];
+            [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
+            indicatorBall.textColor = [UIColor whiteColor];
+            indicatorBall.hidden = false;
+        }
         
     }
     
@@ -729,11 +733,17 @@ enum IndicatorStyle {highlight, hide};
         }
     }
 
-    
     int maxNbrOfRanges = 4;
     int nbrOfRanges = 0;
+    float avgPlayer = 0.0;
     
-    NSString *result = [NSString stringWithFormat:@"Highest Break = %ld\n\n",playersHighestBreak];
+    avgPlayer = (float)currentPlayerStats.sumOfBreaks / (float)currentPlayerStats.nbrOfBreaks;
+    NSString *dataAvgPlayer = [NSString stringWithFormat:@"Average Break = %0.2f", avgPlayer];
+    
+    NSString *dataNbrOfPots = [NSString stringWithFormat:@"Number of Pots = %d\n", currentPlayerStats.nbrBallsPotted];
+    
+    NSString *result = [NSString stringWithFormat:@"Highest Break = %ld\n%@\n%@\n",playersHighestBreak,dataAvgPlayer,dataNbrOfPots];
+    
     NSString *breakstats =@"";
     
     
@@ -821,6 +831,8 @@ enum IndicatorStyle {highlight, hide};
     
     return [NSString stringWithFormat:@"%@%@",result,breakstats];
 }
+
+
 
 
 -(NSString*) composeMessage {
