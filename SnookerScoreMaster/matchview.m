@@ -30,61 +30,64 @@
 @property (weak, nonatomic) IBOutlet UILabel *pinkIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonBlack;
 @property (weak, nonatomic) IBOutlet UILabel *blackIndicator;
-
 @property (weak, nonatomic) IBOutlet player *textScorePlayer1;
 @property (weak, nonatomic) IBOutlet player *textScorePlayer2;
-
 @property (strong, nonatomic) player    *currentPlayer;
 @property (strong, nonatomic) player    *opposingPlayer;
-
 @property (weak, nonatomic) IBOutlet UITextField *textPlayerOneName;
 @property (weak, nonatomic) IBOutlet UITextField *textPlayerTwoName;
 @property (weak, nonatomic) IBOutlet UIView *viewScorePlayer1;
 @property (weak, nonatomic) IBOutlet UIView *viewScorePlayer2;
-
 @property (weak, nonatomic) IBOutlet frame *labelScoreMatchPlayer1;
-
 @property (weak, nonatomic) IBOutlet frame *labelScoreMatchPlayer2;
-
 @property (weak, nonatomic) IBOutlet UIView *viewBreak;
-
 @property (weak, nonatomic) IBOutlet UISwitch *switchFoul;
-
+@property (weak, nonatomic) IBOutlet UILabel *foulLabel;
 @property (weak, nonatomic) IBOutlet snookerbreak *currentPlayersBreak;
 @property (weak, nonatomic) IBOutlet UILabel *labelStatePlayer1;
 @property (weak, nonatomic) IBOutlet UILabel *labelStatePlayer2;
-
 @property (weak, nonatomic) IBOutlet UIImageView *imagePottedBall;
-
 @property (nonatomic) UIDynamicAnimator *animator;
-
-
 @property (weak, nonatomic) IBOutlet UILabel *statContentLabelPlayer1;
 @property (weak, nonatomic) IBOutlet UILabel *statNameLabelPlayer1;
-
 @property (weak, nonatomic) IBOutlet UILabel *statNameLabelPlayer2;
 @property (weak, nonatomic) IBOutlet UILabel *statContentLabelPlayer2;
-
-
 @property (weak, nonatomic) IBOutlet UIView *PlayerStatsView;
-
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *navButtonNew;
-
-
-
+@property (weak, nonatomic) IBOutlet UILabel *frameInfo;
+@property (weak, nonatomic) IBOutlet UIButton *buttonClear;
+@property (weak, nonatomic) IBOutlet UIButton *buttonAdjust;
+@property (weak, nonatomic) IBOutlet UIView *disabledView;
 @end
 
 
+/*
 
+ DONE
+Added control to disable colours as frame progresses
+Provide difference in players score and compare against expected amount left on table.
+Allow freeballs
+Handle tied frames and respotted black
 
+TODO
+CLear button - only visible/enabled when user is actually on a break
+Adjust button - only visibale/enabled when user is not on a break
+Player Stats - when expanded should all activity behind in main view should be disabled DONE!
+Link current ball & quantities to adjustment process.
+End of frame occurs when all balls are potted.  Provide a message of sorts.
+Still issue when user fouls at same time as potting current ball.  More analysis needed!
+*/
 @implementation matchview 
 @synthesize joinedFrameResult;
 @synthesize frameNumber;
+@synthesize currentColour;
+@synthesize colourStateAtStartOfBreak;
+@synthesize colourQuantityAtStartOfBreak;
+
+@synthesize ballReplaced;
 enum scoreStatus { FrameScore, FrameHighestBreak, HighestBreak, FrameBallsPotted, BallsPotted };
 enum scoreStatus scoreState;
 enum IndicatorStyle {highlight, hide};
-
-
 
 #pragma mark -standard methods
 
@@ -106,38 +109,47 @@ enum IndicatorStyle {highlight, hide};
     self.buttonYellow.colour = @"Yellow";
     self.buttonYellow.foulPoints = 4;
     self.buttonYellow.pottedPoints = 2;
+    self.buttonYellow.quantity = 1;
     self.buttonYellow.imageNameLarge = @"ball_large_yellow02.png";
     self.buttonYellow.imageNameSmall = @"ball_small_yellow02.png";
     
     self.buttonGreen.colour = @"Green";
     self.buttonGreen.foulPoints = 4;
     self.buttonGreen.pottedPoints = 3;
+    self.buttonGreen.quantity = 1;
     self.buttonGreen.imageNameLarge = @"ball_large_green03.png";
     self.buttonGreen.imageNameSmall = @"ball_small_green03.png";
 
     self.buttonBrown.colour = @"Brown";
     self.buttonBrown.foulPoints = 4;
     self.buttonBrown.pottedPoints = 4;
+    self.buttonBrown.quantity = 1;
     self.buttonBrown.imageNameLarge = @"ball_large_brown04.png";
     self.buttonBrown.imageNameSmall = @"ball_small_brown04.png";
     
     self.buttonBlue.colour = @"Blue";
     self.buttonBlue.foulPoints = 5;
     self.buttonBlue.pottedPoints = 5;
+    self.buttonBlue.quantity = 1;
     self.buttonBlue.imageNameLarge = @"ball_large_blue05.png";
     self.buttonBlue.imageNameSmall = @"ball_small_blue05.png";
     
     self.buttonPink.colour = @"Pink";
     self.buttonPink.foulPoints = 6;
     self.buttonPink.pottedPoints = 6;
+    self.buttonPink.quantity = 1;
     self.buttonPink.imageNameLarge = @"ball_large_pink06.png";
     self.buttonPink.imageNameSmall = @"ball_small_pink06.png";
     
     self.buttonBlack.colour = @"Black";
     self.buttonBlack.foulPoints = 7;
     self.buttonBlack.pottedPoints = 7;
+    self.buttonBlack.quantity = 1;
     self.buttonBlack.imageNameLarge = @"ball_large_black07.png";
     self.buttonBlack.imageNameSmall = @"ball_small_black07.png";
+    
+    self.currentColour=1;
+
     
     UITapGestureRecognizer *selectPlayerOneTap = [[UITapGestureRecognizer alloc]
                                                   initWithTarget:self action:@selector(selectPlayerOneTap:)];
@@ -182,6 +194,8 @@ enum IndicatorStyle {highlight, hide};
     
     self.joinedFrameResult = [[NSMutableArray alloc] init];
     
+    
+    
 }
 
 -(void)swipeRightShowPlayersStats:(UISwipeGestureRecognizer *)gesture
@@ -190,19 +204,29 @@ enum IndicatorStyle {highlight, hide};
     self.navButtonNew.enabled=false;
     
     
-    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-    self.statNameLabelPlayer1.attributedText = [[NSAttributedString alloc] initWithString:self.textPlayerOneName.text attributes:underlineAttribute];
-    self.statNameLabelPlayer2.attributedText = [[NSAttributedString alloc] initWithString:self.textPlayerTwoName.text attributes:underlineAttribute];
+  //  NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+  //  self.statNameLabelPlayer1.attributedText = [[NSAttributedString alloc] initWithString:self.textPlayerOneName.text attributes:underlineAttribute];
+  //  self.statNameLabelPlayer2.attributedText = [[NSAttributedString alloc] initWithString:self.textPlayerTwoName.text attributes:underlineAttribute];
     
-    self.statContentLabelPlayer1.text = [self getBreakdown :self.textScorePlayer1];
+    
+    
+    self.statNameLabelPlayer1.Text = self.textPlayerOneName.text ;
+    self.statNameLabelPlayer2.Text = self.textPlayerTwoName.text ;
+    
+    
+    self.statContentLabelPlayer1.text = [self getBreakdown :self.textScorePlayer1 :@"\n"];
 
-    self.statContentLabelPlayer2.text = [self getBreakdown :self.textScorePlayer2];
+    self.statContentLabelPlayer2.text = [self getBreakdown :self.textScorePlayer2 :@"\n"];
     
     self.playerStatsPosition.constant=0;
+    
+    self.frameInfo.text = [self getFrameBoxInfo];
     
     [UIView animateWithDuration:0.5f animations:^{
         [self.PlayerStatsView layoutIfNeeded];
     }];
+    
+    self.disabledView.hidden=false;
     
 }
 
@@ -218,12 +242,13 @@ enum IndicatorStyle {highlight, hide};
 
 -(void)hidePlayersStats {
     
-    self.playerStatsPosition.constant=-198;
+    self.playerStatsPosition.constant=-298;
     [UIView animateWithDuration:0.5f animations:^{
         [self.PlayerStatsView layoutIfNeeded];
     }];
     self.navButtonNew.title  = @"New";
     self.navButtonNew.enabled=true;
+    self.disabledView.hidden=true;
     
 }
 
@@ -270,6 +295,8 @@ enum IndicatorStyle {highlight, hide};
 
 -(void)ballPotted:(ball*)pottedBall :(UILabel*) indicatorBall {
 
+    bool freeBall=false;
+    
     if (self.currentPlayersBreak.breakScore==0) {
     self.viewBreak.alpha = 0.0;
     [UIView animateWithDuration:0.5
@@ -280,52 +307,90 @@ enum IndicatorStyle {highlight, hide};
                      }
                      completion:nil
      ];
+     
+        self.buttonAdjust.hidden = true;
+        self.buttonClear.hidden = false;
+        
     }
     
+    
     if ([self.switchFoul isOn] ) {
-        
-        [self processCurrentUsersHighestBreak];
-  
-        
-        // if user is inside a break when they foul
-        if (self.currentPlayersBreak.breakScore>0) {
-            // not sure if the balls potted needs to be incremented here..
-            [self.currentPlayer incrementNbrBalls:1];
-            [self.currentPlayer setFrameScore:self.currentPlayersBreak.breakScore];
-            [self.currentPlayer.currentFrame incrementFrameBallsPotted];
-            [self clearIndicators :hide];
-        }
+        [self closeBreak];
         // add the foul points to opposing player
         [self.opposingPlayer setFoulScore:pottedBall.foulPoints];
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self.switchFoul setOn:false];
+        self.foulLabel.hidden=true;
         [self swapPlayers];
+        
     } else {
-        // it is a pot, so credit the current user
-        
-        
-        if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ] == true) {
-        
-            [self.currentPlayer incrementNbrBalls:1];
-            [self.currentPlayer.currentFrame incrementFrameBallsPotted];
-            //[pottedBall decreaseQty];
+
+        if (self.currentColour < pottedBall.pottedPoints && self.currentPlayersBreak.breakScore==0 ) {
+            // handle freeball scenario - free balls start the moment. Conditions - 1st pot of break.  ball potted greater than current 'live' ball
+
             pottedBall.potsInBreakCounter ++;
             indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+            if (self.currentColour==1) {
+                pottedBall = self.buttonRed;
+            } else if (self.currentColour==2) {
+                pottedBall = self.buttonYellow;
+            } else if (self.currentColour==3) {
+                pottedBall = self.buttonGreen;
+            } else if (self.currentColour==4) {
+                pottedBall = self.buttonBrown;
+            } else if (self.currentColour==5) {
+                pottedBall = self.buttonBlue;
+            } else if (self.currentColour==6) {
+                pottedBall = self.buttonPink;
+            }
+            freeBall=true;
+        } else if (self.currentPlayersBreak.breakScore==0) {
+            // save current ball state at beginning of break just in case user cancels break.
+            colourStateAtStartOfBreak = currentColour;
+            colourQuantityAtStartOfBreak = pottedBall.quantity;
+        }
+        
+        // it is a pot, so credit the current user
+        if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ] == true) {
+            [self.currentPlayer incrementNbrBalls:1];
+            [self.currentPlayer.currentFrame incrementFrameBallsPotted];
+            
+            if (pottedBall.quantity >= 1 && pottedBall.pottedPoints == 1 && freeBall == false) {
+                [pottedBall decreaseQty];
+                if (pottedBall.quantity == 0) {
+                    currentColour ++;
+                    self.ballReplaced=true;
+                }
+            } else if (pottedBall.pottedPoints == self.currentColour) {
+                
+                if (self.ballReplaced && pottedBall.pottedPoints == 2) {
+                    //Allow Yellow to be potted twice after final red.
+                    self.ballReplaced=false;
+                } else if (pottedBall.pottedPoints == 7 && (self.currentPlayer.currentFrame.frameScore + self.currentPlayersBreak.breakScore) == self.opposingPlayer.currentFrame.frameScore) {
+                    // Allow a respotted Black!
+                    
+                } else if (freeBall == false) {
+                    [pottedBall decreaseQty];
+                    self.currentColour ++;
+                }
+            } else if (pottedBall.pottedPoints != self.currentColour && self.currentColour == 2 && self.ballReplaced) {
+                self.ballReplaced=false;
+            }
+            if (freeBall==false) {
+                pottedBall.potsInBreakCounter ++;
+                indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+            }
             [self clearIndicators :highlight];
             [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
             indicatorBall.textColor = [UIColor whiteColor];
             indicatorBall.hidden = false;
         }
-        
+        [self.currentPlayer.currentFrame increaseFrameScore:self.currentPlayer.frameScore];
     }
-    
-    [self.currentPlayer.currentFrame increaseFrameScore:self.currentPlayer.frameScore];
-    
 }
 
 - (IBAction)redClicked:(id)sender {
     [self ballPotted:self.buttonRed :self.redIndicator];
-   
 }
 - (IBAction)yellowClicked:(id)sender {
     [self ballPotted:self.buttonYellow :self.yellowIndicator];
@@ -364,6 +429,9 @@ enum IndicatorStyle {highlight, hide};
         [self processCurrentUsersHighestBreak];
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self clearIndicators :hide];
+        self.ballReplaced=false;
+        self.buttonAdjust.hidden = false;
+        self.buttonClear.hidden = true;
     }
 }
 
@@ -569,7 +637,28 @@ enum IndicatorStyle {highlight, hide};
     self.frameNumber++;
     [self.textScorePlayer1 createFrame:(self.frameNumber)];
     [self.textScorePlayer2 createFrame:(self.frameNumber)];
+    [self resetBalls];
 }
+
+-(void)resetBalls {
+    self.buttonRed.enabled = true;
+    self.buttonRed.quantity = 15;
+    self.buttonYellow.enabled = true;
+    self.buttonYellow.quantity = 1;
+    self.buttonGreen.enabled = true;
+    self.buttonGreen.quantity = 1;
+    self.buttonBrown.enabled = true;
+    self.buttonBrown.quantity = 1;
+    self.buttonBlue.enabled = true;
+    self.buttonBlue.quantity = 1;
+    self.buttonPink.enabled = true;
+    self.buttonPink.quantity = 1;
+    self.buttonBlack.enabled = true;
+    self.buttonBlack.quantity = 1;
+    self.currentColour=1;
+    self.ballReplaced = false;
+}
+
 
 -(void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -581,29 +670,41 @@ enum IndicatorStyle {highlight, hide};
 }
 
 
-
-
 -(void) processMatchEnd {
     /* so first we present the winner with a congratulations message */
     NSString *alertMessage;
     NSString *titleMessage;
     if (self.labelScoreMatchPlayer1.matchScore > self.labelScoreMatchPlayer2.matchScore) {
         titleMessage = [NSString stringWithFormat:@"Congratulations %@",self.textPlayerOneName.text];
-        alertMessage = [NSString stringWithFormat:@"You won the match!\n %@ to %@\n\nNow send the results to anyone who may be interested.",self.labelScoreMatchPlayer1.text,self.labelScoreMatchPlayer2.text];
+        alertMessage = [NSString stringWithFormat:@"You won the match!\n %@ to %@\n\nNow Go send the results to anyone who may be interested.\n\nAlternatively press Cancel if you ended match by accident",self.labelScoreMatchPlayer1.text,self.labelScoreMatchPlayer2.text];
     } else if (self.labelScoreMatchPlayer1.matchScore < self.labelScoreMatchPlayer2.matchScore) {
         titleMessage = [NSString stringWithFormat:@"Congratulations %@",self.textPlayerTwoName.text];
-        alertMessage = [NSString stringWithFormat:@"You won the match!\n %@ to %@\n\nNow send the results to anyone who may be interested.",self.labelScoreMatchPlayer1.text,self.labelScoreMatchPlayer2.text];
+        alertMessage = [NSString stringWithFormat:@"You won the match!\n %@ to %@\n\nNow Go send the results to anyone who may be interested.\n\nAlternatively press Cancel if you ended match by accident",self.labelScoreMatchPlayer1.text,self.labelScoreMatchPlayer2.text];
 
     } else {
        titleMessage = @"Match tied";
-        alertMessage =[NSString stringWithFormat:@"Score was %@ to %@\n\nNow send the results to anyone who may be interested.",self.labelScoreMatchPlayer1.text,self.labelScoreMatchPlayer2.text];
+        alertMessage =[NSString stringWithFormat:@"Score was %@ to %@\n\nNow Go send the results to anyone who may be interested.\n\nAlternatively press Cancel if you ended match by accident",self.labelScoreMatchPlayer1.text,self.labelScoreMatchPlayer2.text];
     }
         
     
-    UIAlertView *alertEndScores = [[UIAlertView alloc] initWithTitle:titleMessage message:alertMessage delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    UIAlertView *alertEndScores = [[UIAlertView alloc] initWithTitle:titleMessage message:alertMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
     alertEndScores.alertViewStyle = UIAlertViewStyleDefault ;
+    [alertEndScores addButtonWithTitle:@"Go"];
     [alertEndScores show];
     
+    
+}
+
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [self endMatch];
+    }
+}
+
+
+-(void) endMatch {
+   
     /* next part attempts to compose an email and offer the user to load recipients & send an email */
     BOOL ok = [MFMailComposeViewController canSendMail];
     if (!ok) return;
@@ -615,7 +716,7 @@ enum IndicatorStyle {highlight, hide};
     
     MFMailComposeViewController* snookerScorerMailComposer = [MFMailComposeViewController new];
     snookerScorerMailComposer.mailComposeDelegate = self;
-    [snookerScorerMailComposer setSubject:[NSString stringWithFormat:@"SnookerScorer - Matchday :%@", [DateFormatter stringFromDate:[NSDate date]]]];
+    [snookerScorerMailComposer setSubject:[NSString stringWithFormat:@"Snooker Score Master - Matchday :%@", [DateFormatter stringFromDate:[NSDate date]]]];
     //[snookerScorerMailComposer setToRecipients:[NSArray arrayWithObjects:@"andrewglew@me.com", @"dho041@gmail.com", nil]];
     [snookerScorerMailComposer setMessageBody:body isHTML:YES];
     
@@ -635,6 +736,8 @@ enum IndicatorStyle {highlight, hide};
     self.textScorePlayer1.nbrOfBreaks=0;
     self.textScorePlayer1.sumOfBreaks=0;
     self.textScorePlayer1.currentFrame.matchScore=0;
+    [self.textScorePlayer1.playersBreaks removeAllObjects];
+    
 
     [self.textScorePlayer2.frames removeAllObjects];
     self.labelScoreMatchPlayer2.matchScore=0;
@@ -646,7 +749,7 @@ enum IndicatorStyle {highlight, hide};
     self.textScorePlayer2.nbrOfBreaks=0;
     self.textScorePlayer2.sumOfBreaks=0;
     self.textScorePlayer2.currentFrame.matchScore=0;
-    
+    [self.textScorePlayer2.playersBreaks removeAllObjects];
     self.frameNumber=1;
     [self.joinedFrameResult removeAllObjects];
     
@@ -655,6 +758,11 @@ enum IndicatorStyle {highlight, hide};
     
     self.textScorePlayer2.frameScore=0;
     self.textScorePlayer2.text=@"0";
+    
+    self.buttonAdjust.hidden = false;
+    self.buttonClear.hidden = true;
+    
+    [self resetBalls];
 }
 
 
@@ -686,7 +794,7 @@ enum IndicatorStyle {highlight, hide};
 
 
 
--(NSString*) getBreakdown :(player*) currentPlayerStats {
+-(NSString*) getBreakdown :(player*) currentPlayerStats :(NSString*) lineBreak {
     
     long breakValue;
     int counter8To9=0, counter10To19=0, counter20To29=0, counter30To39=0, counter40To49=0, counter50To59=0, counter60To69=0, counter70To79=0, counter80To89=0, counter90To99=0, counter100To109=0, counter110To119=0, counter120To129=0, counter130To139=0, counter140to147=0;
@@ -738,89 +846,97 @@ enum IndicatorStyle {highlight, hide};
     float avgPlayer = 0.0;
     
     avgPlayer = (float)currentPlayerStats.sumOfBreaks / (float)currentPlayerStats.nbrOfBreaks;
+    
+    if isnan(avgPlayer) {
+        avgPlayer=0.0;
+    }
+    
     NSString *dataAvgPlayer = [NSString stringWithFormat:@"Average Break = %0.2f", avgPlayer];
     
-    NSString *dataNbrOfPots = [NSString stringWithFormat:@"Number of Pots = %d\n", currentPlayerStats.nbrBallsPotted];
+    NSString *dataNbrOfPots = [NSString stringWithFormat:@"Number of Pots = %d%@", currentPlayerStats.nbrBallsPotted,lineBreak];
     
-    NSString *result = [NSString stringWithFormat:@"Highest Break = %ld\n%@\n%@\n",playersHighestBreak,dataAvgPlayer,dataNbrOfPots];
+    NSString *dataScoringVisits = [NSString stringWithFormat:@"Scoring Visits = %d%@", currentPlayerStats.nbrOfBreaks,lineBreak];
     
-    NSString *breakstats =@"";
+    
+    NSString *result = [NSString stringWithFormat:@"Highest Break = %ld%@%@%@%@%@%@",playersHighestBreak,lineBreak,dataAvgPlayer,lineBreak,dataNbrOfPots,dataScoringVisits,lineBreak];
+    
+    NSString *breakstats = @"";
     
     
     if (counter140to147 > 0) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 140 = %d\n",breakstats, counter140to147];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 140 = %d%@",breakstats, counter140to147,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter130To139 > 0) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 130 = %d\n",breakstats, counter130To139];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 130 = %d%@",breakstats, counter130To139,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter120To129 > 0) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 120 = %d\n",breakstats, counter120To129];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 120 = %d%@",breakstats, counter120To129,lineBreak];
         nbrOfRanges ++;
     }
     
     
     if (counter110To119 > 0) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 110 = %d\n",breakstats, counter110To119];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 110 = %d%@",breakstats, counter110To119,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter100To109 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 100 = %d\n",breakstats, counter100To109];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 100 = %d%@",breakstats, counter100To109,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter90To99 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 90 = %d\n",breakstats, counter90To99];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 90 = %d%@",breakstats, counter90To99,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter80To89 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 80 = %d\n",breakstats, counter80To89];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 80 = %d%@",breakstats, counter80To89,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter70To79 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 70 = %d\n",breakstats, counter70To79];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 70 = %d%@",breakstats, counter70To79,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter60To69 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 60 = %d\n",breakstats, counter60To69];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 60 = %d%@",breakstats, counter60To69,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter50To59 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 50 = %d\n",breakstats, counter50To59];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 50 = %d%@",breakstats, counter50To59,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter40To49 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 40 = %d\n",breakstats, counter40To49];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 40 = %d%@",breakstats, counter40To49,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter30To39 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 30 = %d\n",breakstats, counter30To39];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 30 = %d%@",breakstats, counter30To39,lineBreak];
         nbrOfRanges ++;
     }
   
     if (counter20To29 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 20 = %d\n",breakstats, counter20To29];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 20 = %d%@",breakstats, counter20To29,lineBreak];
         nbrOfRanges ++;
     }
     
     if (counter10To19 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 10 = %d\n",breakstats, counter10To19];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 10 = %d%@",breakstats, counter10To19,lineBreak];
         nbrOfRanges ++;
     }
     
     
     if (counter8To9 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        result = [NSString stringWithFormat:@"%@Breaks > 7 = %d\n",result, counter8To9];
+        breakstats = [NSString stringWithFormat:@"%@Breaks > 7 = %d%@",breakstats, counter8To9,lineBreak];
         nbrOfRanges ++;
     }
     
@@ -835,6 +951,64 @@ enum IndicatorStyle {highlight, hide};
 
 
 
+-(NSString*) getFrameBoxInfo {
+    NSString *data;
+    int pointsRemaining=0;
+    int currentBreak=0;
+    int frameScorePlayer1=0;
+    int frameScorePlayer2=0;
+    
+    
+    // How many points remaining?
+    for (int i = 7; i >= 1; i--)
+    {
+        if (i==1) {
+            pointsRemaining += (self.buttonRed.quantity * 8);
+        } else if (self.currentColour <= i) {
+            pointsRemaining += i;
+        } else {
+            i=1;
+        }
+    }
+    // get difference between players scores..
+    
+    currentBreak = self.currentPlayersBreak.breakScore;
+    frameScorePlayer1 = self.textScorePlayer1.frameScore;
+    frameScorePlayer2 = self.textScorePlayer2.frameScore;
+    
+    if (currentBreak>0) {
+        
+        if (self.currentPlayersBreak.currentBall.pottedPoints == 1) {
+            pointsRemaining += 7;
+        }
+        
+        if (self.currentPlayer == self.textScorePlayer1) {
+            frameScorePlayer1 += currentBreak;
+            
+        } else {
+            frameScorePlayer2 += currentBreak;
+        }
+    }
+    
+
+    
+    if (frameScorePlayer1 > frameScorePlayer2) {
+        // player one is winning
+        data = [NSString stringWithFormat:@"%d remaining. %@ is leading %@ by %d point(s)",pointsRemaining,self.textPlayerOneName.text,self.textPlayerTwoName.text, frameScorePlayer1 - frameScorePlayer2];
+        
+    } else if (frameScorePlayer2 > frameScorePlayer1) {
+        // player two is winning
+        data = [NSString stringWithFormat:@"%d remaining. %@ is leading %@ by %d point(s)",pointsRemaining,self.textPlayerTwoName.text,self.textPlayerOneName.text,frameScorePlayer2 - frameScorePlayer1];
+        
+    } else {
+        // players tied
+        data = [NSString stringWithFormat:@"%d remaining. %@ and %@ are level",pointsRemaining,self.textPlayerOneName.text,self.textPlayerTwoName.text];
+    }
+    
+    return data;
+}
+
+
 -(NSString*) composeMessage {
     
     NSString *matchheader = @"<h1>Match Statistics</h1>";
@@ -846,13 +1020,7 @@ enum IndicatorStyle {highlight, hide};
     
     matchheader = [NSString stringWithFormat:@"%@</br>Scores:%@</br></br>",matchheader,matchJoinedResults];
     
-    float avgPlayer;
-    avgPlayer = (float)self.textScorePlayer1.sumOfBreaks / (float)self.textScorePlayer1.nbrOfBreaks;
-    NSString *dataAvgPlayer1 = [NSString stringWithFormat:@"Average Break:%0.2f", avgPlayer];
-    avgPlayer = (float)self.textScorePlayer2.sumOfBreaks / (float)self.textScorePlayer2.nbrOfBreaks;
-    NSString *dataAvgPlayer2 = [NSString stringWithFormat:@"Average Break:%0.2f", avgPlayer];
-    
-    NSString *tableHeader = [NSString stringWithFormat: @"<table bgcolor='#F8F8FF' border=1 cellpadding='10'><tr><td width=50%%><h2>%@:%d</h2>%@</td><td width=50%%><h2>%@:%d</h2>%@</td></tr>",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.matchScore, dataAvgPlayer1, self.textPlayerTwoName.text, self.labelScoreMatchPlayer2.matchScore, dataAvgPlayer2];
+    NSString *tableHeader = [NSString stringWithFormat: @"<table bgcolor='#F8F8FF' border=0 cellpadding='10'><tr><td width=50%% valign='top'><h2>%@:%d</h2>%@</td><td width=50%% valign='top'><h2>%@:%d</h2>%@</td></tr>",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.matchScore, [self getBreakdown :self.textScorePlayer1 :@"</br>"], self.textPlayerTwoName.text, self.labelScoreMatchPlayer2.matchScore, [self getBreakdown :self.textScorePlayer2 :@"</br>"]];
     
     NSString *dataFrameHeader =@"";
     NSString *tableDetail = @"";
@@ -877,12 +1045,57 @@ enum IndicatorStyle {highlight, hide};
     return data;
 }
 
+
+-(ball*)findBall:(int)selectedBall {
+    if (selectedBall == 1) {
+        return self.buttonRed;
+    } else if (selectedBall == 2) {
+        return self.buttonYellow;
+    } else if (selectedBall == 3) {
+        return self.buttonGreen;
+    } else if (selectedBall == 4) {
+        return self.buttonBrown;
+    }else if (selectedBall == 5) {
+        return self.buttonBlue;
+    }else if (selectedBall == 6) {
+        return self.buttonPink;
+    }else {
+        return self.buttonBlack;
+    }
+}
+
 - (IBAction)clearClicked:(id)sender {
+    ball* currentBall;
+    
     if (self.currentPlayersBreak.breakScore > 0) {
+        
+        [self.currentPlayer setNbrBallsPotted:(self.currentPlayer.nbrBallsPotted - (int)self.currentPlayersBreak.pottedBalls.count)];
+   
+         self.currentPlayer.currentFrame.frameBallsPotted -= (int)self.currentPlayersBreak.pottedBalls.count;
+        
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self clearIndicators :hide];
+        
+
+        
+        // reset counters impacted!
+        for (int i = colourStateAtStartOfBreak; i <= currentColour; i++)
+        {
+            currentBall = [self findBall:i];
+            
+            if (i==1) {
+                currentBall.quantity=colourQuantityAtStartOfBreak;
+                currentBall.enabled = true;
+            } else {
+                currentBall.quantity=1;
+                currentBall.enabled = true;
+            }
+            
+        }
+        currentColour = colourStateAtStartOfBreak;
+        self.buttonAdjust.hidden = false;
+        self.buttonClear.hidden = true;
     }
-    
 }
 
 
@@ -896,6 +1109,7 @@ enum IndicatorStyle {highlight, hide};
         AdjustPointsViewController *controller = (AdjustPointsViewController *)segue.destinationViewController;
         controller.delegate = self;
         controller.sumOfPlayerFouls = self.currentPlayer.currentFrame.foulScore;
+        controller.ballIndex = self.buttonRed.quantity+self.buttonYellow.quantity+self.buttonGreen.quantity+self.buttonBrown.quantity+self.buttonBlue.quantity+self.buttonPink.quantity+self.buttonBlack.quantity;
         
         if (self.currentPlayer == self.textScorePlayer1) {
             controller.playerName = self.textPlayerOneName.text;
@@ -910,6 +1124,59 @@ enum IndicatorStyle {highlight, hide};
     [self.currentPlayer setFoulScore:selectedPoints];
 }
 
+
+- (void)addItemViewController:(AdjustPointsViewController *)controller didPickBallAdjust:(int)ballIndex {
+    ball* currentBall;
+    
+    
+    if (ballIndex > 6) {
+        currentColour = 1;
+        colourQuantityAtStartOfBreak = ballIndex - 6;
+        
+    } else {
+        currentColour = 8 - ballIndex;
+        colourQuantityAtStartOfBreak = 1;
+    }
+    
+    // disable all ball buttons
+    for (int i = 1; i <= 7; i++)
+    {
+        currentBall = [self findBall:i];
+        currentBall.enabled = false;
+        currentBall.quantity = 0;
+        
+    }
+    
+    // reset ball buttons required in reverse order!
+    for (int i = 7; i >= currentColour; i--)
+    {
+        currentBall = [self findBall:i];
+        if (i==1) {
+            currentBall.enabled = true;
+            currentBall.quantity = colourQuantityAtStartOfBreak;
+        } else {
+            currentBall.enabled = true;
+            currentBall.quantity = 1;
+        }
+    }
+}
+
+
+
+
+
+
+- (IBAction)switchChanged:(id)sender {
+    
+    if ([self.switchFoul isOn] ) {
+        self.foulLabel.hidden = false;
+        
+    } else {
+        self.foulLabel.hidden = true;
+    }
+    
+    
+}
 
 
 

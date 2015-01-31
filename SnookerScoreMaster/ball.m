@@ -89,7 +89,8 @@
     
     quantity--;
     if (quantity == 0) {
-        self.hidden = true;
+       // self.hidden = true;
+        self.enabled = false;
     }
 }
 

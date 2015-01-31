@@ -7,11 +7,22 @@
 //
 
 #import "AdjustPointsViewController.h"
+#import "ball.h"
 
 @interface AdjustPointsViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIPickerView *PointsPicker;
 @property (weak, nonatomic) IBOutlet UILabel *labelExplanation;
+
+@property (weak, nonatomic) IBOutlet UILabel *ballCounter;
+
+@property (weak, nonatomic) IBOutlet UIStepper *stepperBallAdjuster;
+@property (weak, nonatomic) IBOutlet UILabel *labelPointsRemaining;
+
+@property (weak, nonatomic) IBOutlet UIButton *ballImage;
+
+
+
 @end
 
 @implementation AdjustPointsViewController
@@ -26,9 +37,11 @@
     } else {
     self.labelExplanation.text = [NSString stringWithFormat:@"%@ has a total of %d foul points awarded.\nYou may  deduct this amount from the score.\nAlternatively you can increase this score.",self.playerName,self.sumOfPlayerFouls];
     }
+    
+    self.stepperBallAdjuster.value = self.ballIndex;
+    [self updateBallCounter];
         
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -59,11 +72,88 @@
 - (void)addItemViewController:(AdjustPointsViewController *)controller didPickDeduction:(int)selectedPoints {
 }
 
+- (void)addItemViewController:(AdjustPointsViewController *)controller didPickBallAdjust:(int)ballIndex {
+
+}
+
+
 - (IBAction)selectClicked:(id)sender {
     self.selectedValue = ( self.selectedValue - self.sumOfPlayerFouls);
     [self.delegate addItemViewController:self didPickDeduction:self.selectedValue];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)ballAdjustorClicked:(id)sender {
+    [self.delegate addItemViewController:self didPickBallAdjust:(int)self.stepperBallAdjuster.value ];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+
+-(void)updateBallCounter {
+    int ballRedAmount=0;
+    int ballColourIndex=0;
+    
+    NSString* ballImageName;
+    if (self.stepperBallAdjuster.value > 6) {
+        // its a red
+        
+        self.ballCounter.text =[NSString stringWithFormat:@"%.f",self.stepperBallAdjuster.value - 6.0];
+        ballRedAmount = self.stepperBallAdjuster.value - 6.0;
+        ballColourIndex = 1;
+        //ballImageName = @"ball_largex_red01.png";
+        ballImageName = @"red01";
+        
+    } else {
+        self.ballCounter.text =@"1";
+        // it's a colour
+        // black is actually equal to 1 so to get black we must have 8 and subtract.
+        ballColourIndex = 8 - self.stepperBallAdjuster.value;
+        
+        if (ballColourIndex == 2 ) {
+            ballImageName = @"yellow02";
+        } else if (ballColourIndex==3) {
+            ballImageName = @"green03";
+        } else if (ballColourIndex==4) {
+            ballImageName = @"brown04";
+        } else if (ballColourIndex==5) {
+            ballImageName = @"blue05";
+        } else if (ballColourIndex==6) {
+            ballImageName = @"pink06";
+        } else if (ballColourIndex==7) {
+            ballImageName = @"black07";
+        }
+    }
+    
+    UIImage *buttonImage = [UIImage imageNamed:[NSString stringWithFormat:@"ball_largex_%@.png",ballImageName ]];
+    [self.ballImage setImage:buttonImage forState:UIControlStateNormal];
+
+    int pointsRemaining=0;
+
+    for (int i = 7; i >= ballColourIndex; i--)
+    {
+        if (i==1) {
+            pointsRemaining += (ballRedAmount * 8);
+        } else {
+            pointsRemaining += i;
+        }
+    }
+    
+    self.labelPointsRemaining.text = [NSString stringWithFormat:@"%d Points Remaining",pointsRemaining];
+    if (pointsRemaining == 0) {
+        self.ballImage.enabled = false;
+        self.ballCounter.text = @"0";
+    } else {
+        self.ballImage.enabled = true;
+        
+    }
+}
+
+
+- (IBAction)stepperClicked:(id)sender {
+    [self updateBallCounter];
+}
+
 
 
 

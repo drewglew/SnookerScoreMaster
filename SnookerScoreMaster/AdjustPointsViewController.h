@@ -12,11 +12,13 @@
 
 @protocol AdjustPointsDelegate <NSObject>
 - (void)addItemViewController:(AdjustPointsViewController *)controller didPickDeduction:(int)selectedPoints;
+- (void)addItemViewController:(AdjustPointsViewController *)controller didPickBallAdjust:(int)ballIndex;
 @end
 
 @interface AdjustPointsViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 @property (nonatomic, weak) id <AdjustPointsDelegate> delegate;
 @property (assign) int sumOfPlayerFouls;
+@property (assign) int ballIndex;
 @property (assign) int selectedValue;
 @property (strong, nonatomic) NSString *playerName;
 @end

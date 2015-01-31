@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		960530D61A350CF5005F1AB6 /* snookerplayer4.png in Resources */ = {isa = PBXBuildFile; fileRef = 960530D51A350CF5005F1AB6 /* snookerplayer4.png */; };
+		9610D7021A2BC3C40097DDC3 /* 01_red_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D6FB1A2BC3C40097DDC3 /* 01_red_large.png */; };
+		9610D7031A2BC3C40097DDC3 /* 02_yellow_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D6FC1A2BC3C40097DDC3 /* 02_yellow_large.png */; };
+		9610D7041A2BC3C40097DDC3 /* 03_green_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D6FD1A2BC3C40097DDC3 /* 03_green_large.png */; };
+		9610D7051A2BC3C40097DDC3 /* 04_brown_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D6FE1A2BC3C40097DDC3 /* 04_brown_large.png */; };
+		9610D7061A2BC3C40097DDC3 /* 05_blue_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D6FF1A2BC3C40097DDC3 /* 05_blue_large.png */; };
+		9610D7071A2BC3C40097DDC3 /* 06_pink_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D7001A2BC3C40097DDC3 /* 06_pink_large.png */; };
+		9610D7081A2BC3C40097DDC3 /* 07_black_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D7011A2BC3C40097DDC3 /* 07_black_large.png */; };
 		969FC9B51A223EF3007EC93F /* statsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FC9B41A223EF3007EC93F /* statsViewController.m */; };
 		96CCF0591A214F7000FB7BDF /* ball_small_yellow02.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0521A214F7000FB7BDF /* ball_small_yellow02.png */; };
 		96CCF05A1A214F7000FB7BDF /* ball_small_green03.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0531A214F7000FB7BDF /* ball_small_green03.png */; };
@@ -15,7 +23,6 @@
 		96CCF05D1A214F7000FB7BDF /* ball_small_blue05.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0561A214F7000FB7BDF /* ball_small_blue05.png */; };
 		96CCF05E1A214F7000FB7BDF /* ball_small_pink06.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0571A214F7000FB7BDF /* ball_small_pink06.png */; };
 		96CCF05F1A214F7000FB7BDF /* ball_small_red01.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0581A214F7000FB7BDF /* ball_small_red01.png */; };
-		96CCF0611A21D63800FB7BDF /* snookerplayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0601A21D63800FB7BDF /* snookerplayer.png */; };
 		96D22D841A1FD58100E0ADE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22D831A1FD58100E0ADE3 /* main.m */; };
 		96D22D871A1FD58100E0ADE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22D861A1FD58100E0ADE3 /* AppDelegate.m */; };
 		96D22D8D1A1FD58100E0ADE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D22D8B1A1FD58100E0ADE3 /* Main.storyboard */; };
@@ -51,6 +58,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		960530D51A350CF5005F1AB6 /* snookerplayer4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snookerplayer4.png; sourceTree = "<group>"; };
+		9610D6FB1A2BC3C40097DDC3 /* 01_red_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_red_large.png; sourceTree = "<group>"; };
+		9610D6FC1A2BC3C40097DDC3 /* 02_yellow_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_yellow_large.png; sourceTree = "<group>"; };
+		9610D6FD1A2BC3C40097DDC3 /* 03_green_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03_green_large.png; sourceTree = "<group>"; };
+		9610D6FE1A2BC3C40097DDC3 /* 04_brown_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04_brown_large.png; sourceTree = "<group>"; };
+		9610D6FF1A2BC3C40097DDC3 /* 05_blue_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 05_blue_large.png; sourceTree = "<group>"; };
+		9610D7001A2BC3C40097DDC3 /* 06_pink_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 06_pink_large.png; sourceTree = "<group>"; };
+		9610D7011A2BC3C40097DDC3 /* 07_black_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 07_black_large.png; sourceTree = "<group>"; };
 		969FC9B31A223EF3007EC93F /* statsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statsViewController.h; sourceTree = "<group>"; };
 		969FC9B41A223EF3007EC93F /* statsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = statsViewController.m; sourceTree = "<group>"; };
 		96CCF0521A214F7000FB7BDF /* ball_small_yellow02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_yellow02.png; sourceTree = "<group>"; };
@@ -60,7 +75,6 @@
 		96CCF0561A214F7000FB7BDF /* ball_small_blue05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_blue05.png; sourceTree = "<group>"; };
 		96CCF0571A214F7000FB7BDF /* ball_small_pink06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_pink06.png; sourceTree = "<group>"; };
 		96CCF0581A214F7000FB7BDF /* ball_small_red01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_red01.png; sourceTree = "<group>"; };
-		96CCF0601A21D63800FB7BDF /* snookerplayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snookerplayer.png; sourceTree = "<group>"; };
 		96D22D7E1A1FD58100E0ADE3 /* SnookerScoreMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnookerScoreMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D22D821A1FD58100E0ADE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96D22D831A1FD58100E0ADE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -155,7 +169,7 @@
 				96D22DCB1A2073BC00E0ADE3 /* Reds-Triangle.png */,
 				96D22DB71A1FE94E00E0ADE3 /* cueball.png */,
 				96D22DA71A1FD5CD00E0ADE3 /* greenbaize_clear.jpg */,
-				96CCF0601A21D63800FB7BDF /* snookerplayer.png */,
+				960530D51A350CF5005F1AB6 /* snookerplayer4.png */,
 				96CCF0521A214F7000FB7BDF /* ball_small_yellow02.png */,
 				96CCF0531A214F7000FB7BDF /* ball_small_green03.png */,
 				96CCF0541A214F7000FB7BDF /* ball_small_brown04.png */,
@@ -170,6 +184,13 @@
 				96D22DAD1A1FDEFE00E0ADE3 /* ball_largex_green03.png */,
 				96D22DAE1A1FDEFE00E0ADE3 /* ball_largex_yellow02.png */,
 				96D22DAF1A1FDEFE00E0ADE3 /* ball_largex_red01.png */,
+				9610D6FB1A2BC3C40097DDC3 /* 01_red_large.png */,
+				9610D6FC1A2BC3C40097DDC3 /* 02_yellow_large.png */,
+				9610D6FD1A2BC3C40097DDC3 /* 03_green_large.png */,
+				9610D6FE1A2BC3C40097DDC3 /* 04_brown_large.png */,
+				9610D6FF1A2BC3C40097DDC3 /* 05_blue_large.png */,
+				9610D7001A2BC3C40097DDC3 /* 06_pink_large.png */,
+				9610D7011A2BC3C40097DDC3 /* 07_black_large.png */,
 				96D22D8E1A1FD58100E0ADE3 /* Images.xcassets */,
 				96D22D901A1FD58100E0ADE3 /* LaunchScreen.xib */,
 				96D22D811A1FD58100E0ADE3 /* Supporting Files */,
@@ -283,6 +304,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9610D7021A2BC3C40097DDC3 /* 01_red_large.png in Resources */,
+				9610D7051A2BC3C40097DDC3 /* 04_brown_large.png in Resources */,
 				96D22DB01A1FDEFE00E0ADE3 /* ball_largex_black07.png in Resources */,
 				96D22DB51A1FDEFE00E0ADE3 /* ball_largex_yellow02.png in Resources */,
 				96CCF05E1A214F7000FB7BDF /* ball_small_pink06.png in Resources */,
@@ -290,18 +313,23 @@
 				96D22D8D1A1FD58100E0ADE3 /* Main.storyboard in Resources */,
 				96D22DB31A1FDEFE00E0ADE3 /* ball_largex_brown04.png in Resources */,
 				96D22DCC1A2073BC00E0ADE3 /* Reds-Triangle.png in Resources */,
+				9610D7031A2BC3C40097DDC3 /* 02_yellow_large.png in Resources */,
 				96D22DB61A1FDEFE00E0ADE3 /* ball_largex_red01.png in Resources */,
+				9610D7071A2BC3C40097DDC3 /* 06_pink_large.png in Resources */,
+				9610D7041A2BC3C40097DDC3 /* 03_green_large.png in Resources */,
 				96CCF05B1A214F7000FB7BDF /* ball_small_brown04.png in Resources */,
+				9610D7081A2BC3C40097DDC3 /* 07_black_large.png in Resources */,
 				96D22DB81A1FE94E00E0ADE3 /* cueball.png in Resources */,
 				96D22DA81A1FD5CD00E0ADE3 /* greenbaize_clear.jpg in Resources */,
 				96D22DB21A1FDEFE00E0ADE3 /* ball_largex_blue05.png in Resources */,
+				960530D61A350CF5005F1AB6 /* snookerplayer4.png in Resources */,
 				96D22D921A1FD58100E0ADE3 /* LaunchScreen.xib in Resources */,
 				96D22D8F1A1FD58100E0ADE3 /* Images.xcassets in Resources */,
+				9610D7061A2BC3C40097DDC3 /* 05_blue_large.png in Resources */,
 				96CCF05A1A214F7000FB7BDF /* ball_small_green03.png in Resources */,
 				96CCF05C1A214F7000FB7BDF /* ball_small_black07.png in Resources */,
 				96CCF0591A214F7000FB7BDF /* ball_small_yellow02.png in Resources */,
 				96CCF05F1A214F7000FB7BDF /* ball_small_red01.png in Resources */,
-				96CCF0611A21D63800FB7BDF /* snookerplayer.png in Resources */,
 				96D22DB11A1FDEFE00E0ADE3 /* ball_largex_pink06.png in Resources */,
 				96CCF05D1A214F7000FB7BDF /* ball_small_blue05.png in Resources */,
 			);

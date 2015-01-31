@@ -14,15 +14,25 @@
 
 @interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate>  {
     int frameNumber;
+    int currentColour;
+    bool ballReplaced;
+    int colourStateAtStartOfBreak;
+    int colourQuantityAtStartOfBreak;
     statsViewController *statsVC;
     
 }
 @property (assign) int frameNumber;
+@property (assign) int currentColour;
+@property (assign) bool ballReplaced;
+@property (assign) int colourStateAtStartOfBreak;
+@property (assign) int colourQuantityAtStartOfBreak;
+
 @property (strong, nonatomic) NSMutableArray     *joinedFrameResult;
 /* https://www.youtube.com/watch?v=mdG6XpwwuwI */
 -(void)processCurrentUsersHighestBreak;
 -(NSString*) composePlayerStats :(frame*) currentFrame;
 -(void) processMatchEnd;
 -(void)endOfFrame;
+-(void)endMatch;
 @end
 
