@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelPointsRemaining;
 
 @property (weak, nonatomic) IBOutlet UIButton *ballImage;
+@property (weak, nonatomic) IBOutlet UIButton *selectPlayerButton;
 
 
 
@@ -40,6 +41,9 @@
     
     self.stepperBallAdjuster.value = self.ballIndex;
     [self updateBallCounter];
+    
+    //TODO
+    [self.selectPlayerButton  setTitle:[NSString stringWithFormat:@"Update %@'s Frame Score",self.playerName] forState:UIControlStateNormal];
         
 }
 

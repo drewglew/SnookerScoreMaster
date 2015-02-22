@@ -95,4 +95,15 @@
 }
 
 
+- (void)setEnabled:(BOOL)enabled {
+    [super setEnabled:enabled];
+    if (!enabled) {
+    [self setAlpha:0.4];
+    } else {
+    [self setAlpha:1.0];
+    }
+}
+
+
+
 @end

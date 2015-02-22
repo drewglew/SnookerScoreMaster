@@ -16,6 +16,7 @@
     int frameNumber;
     int currentColour;
     bool ballReplaced;
+    bool advancedCounting;
     int colourStateAtStartOfBreak;
     int colourQuantityAtStartOfBreak;
     statsViewController *statsVC;
@@ -24,6 +25,7 @@
 @property (assign) int frameNumber;
 @property (assign) int currentColour;
 @property (assign) bool ballReplaced;
+@property (assign) bool advancedCounting;
 @property (assign) int colourStateAtStartOfBreak;
 @property (assign) int colourQuantityAtStartOfBreak;
 

@@ -85,6 +85,7 @@ Still issue when user fouls at same time as potting current ball.  More analysis
 @synthesize colourQuantityAtStartOfBreak;
 
 @synthesize ballReplaced;
+@synthesize advancedCounting;
 enum scoreStatus { FrameScore, FrameHighestBreak, HighestBreak, FrameBallsPotted, BallsPotted };
 enum scoreStatus scoreState;
 enum IndicatorStyle {highlight, hide};
@@ -93,6 +94,35 @@ enum IndicatorStyle {highlight, hide};
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"showInstructions"]) {
+        [defaults setBool:YES forKey:@"showInstructions"];
+        [defaults setValue:@"Player 1" forKey:@"player1"];
+        [defaults setValue:@"Player 2" forKey:@"player2"];
+        [defaults setBool:YES forKey:@"advancedCounting"];
+    }
+    if ([defaults boolForKey:@"showInstructions"] == YES) {
+       [self performSegueWithIdentifier:@"segueToInstructions" sender:self];
+        
+        [defaults setBool:NO forKey:@"showInstructions"];
+        [defaults synchronize];
+    }
+    self.textPlayerOneName.text = [defaults stringForKey:@"player1"];
+    if (self.textPlayerOneName.text==nil) {
+     self.textPlayerOneName.text = @"Player 1";
+    }
+    self.textPlayerTwoName.text = [defaults stringForKey:@"player2"];
+    if (self.textPlayerTwoName.text==nil) {
+        self.textPlayerTwoName.text = @"Player 2";
+    }
+    self.advancedCounting = [defaults boolForKey:@"advancedCounting"];
+    if (!self.advancedCounting) {
+        self.frameInfo.hidden = true;
+    }
+    
     
     self.currentPlayer = self.textScorePlayer1;
     self.opposingPlayer = self.textScorePlayer2;
@@ -321,70 +351,91 @@ enum IndicatorStyle {highlight, hide};
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self.switchFoul setOn:false];
         self.foulLabel.hidden=true;
+        self.buttonAdjust.hidden = false;
+        self.buttonClear.hidden = true;
         [self swapPlayers];
         
     } else {
 
-        if (self.currentColour < pottedBall.pottedPoints && self.currentPlayersBreak.breakScore==0 ) {
+        if (self.advancedCounting) {
+        
+        
+            if (self.currentColour < pottedBall.pottedPoints && self.currentPlayersBreak.breakScore==0 ) {
             // handle freeball scenario - free balls start the moment. Conditions - 1st pot of break.  ball potted greater than current 'live' ball
 
-            pottedBall.potsInBreakCounter ++;
-            indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
-            if (self.currentColour==1) {
-                pottedBall = self.buttonRed;
-            } else if (self.currentColour==2) {
-                pottedBall = self.buttonYellow;
-            } else if (self.currentColour==3) {
-                pottedBall = self.buttonGreen;
-            } else if (self.currentColour==4) {
-                pottedBall = self.buttonBrown;
-            } else if (self.currentColour==5) {
-                pottedBall = self.buttonBlue;
-            } else if (self.currentColour==6) {
-                pottedBall = self.buttonPink;
-            }
-            freeBall=true;
-        } else if (self.currentPlayersBreak.breakScore==0) {
-            // save current ball state at beginning of break just in case user cancels break.
-            colourStateAtStartOfBreak = currentColour;
-            colourQuantityAtStartOfBreak = pottedBall.quantity;
-        }
-        
-        // it is a pot, so credit the current user
-        if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ] == true) {
-            [self.currentPlayer incrementNbrBalls:1];
-            [self.currentPlayer.currentFrame incrementFrameBallsPotted];
-            
-            if (pottedBall.quantity >= 1 && pottedBall.pottedPoints == 1 && freeBall == false) {
-                [pottedBall decreaseQty];
-                if (pottedBall.quantity == 0) {
-                    currentColour ++;
-                    self.ballReplaced=true;
-                }
-            } else if (pottedBall.pottedPoints == self.currentColour) {
-                
-                if (self.ballReplaced && pottedBall.pottedPoints == 2) {
-                    //Allow Yellow to be potted twice after final red.
-                    self.ballReplaced=false;
-                } else if (pottedBall.pottedPoints == 7 && (self.currentPlayer.currentFrame.frameScore + self.currentPlayersBreak.breakScore) == self.opposingPlayer.currentFrame.frameScore) {
-                    // Allow a respotted Black!
-                    
-                } else if (freeBall == false) {
-                    [pottedBall decreaseQty];
-                    self.currentColour ++;
-                }
-            } else if (pottedBall.pottedPoints != self.currentColour && self.currentColour == 2 && self.ballReplaced) {
-                self.ballReplaced=false;
-            }
-            if (freeBall==false) {
                 pottedBall.potsInBreakCounter ++;
                 indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+                if (self.currentColour==1) {
+                    pottedBall = self.buttonRed;
+                } else if (self.currentColour==2) {
+                    pottedBall = self.buttonYellow;
+                } else if (self.currentColour==3) {
+                    pottedBall = self.buttonGreen;
+                } else if (self.currentColour==4) {
+                    pottedBall = self.buttonBrown;
+                } else if (self.currentColour==5) {
+                    pottedBall = self.buttonBlue;
+                } else if (self.currentColour==6) {
+                    pottedBall = self.buttonPink;
+                }
+                freeBall=true;
+            } else if (self.currentPlayersBreak.breakScore==0) {
+                // save current ball state at beginning of break just in case user cancels break.
+                colourStateAtStartOfBreak = currentColour;
+                colourQuantityAtStartOfBreak = pottedBall.quantity;
             }
-            [self clearIndicators :highlight];
-            [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
-            indicatorBall.textColor = [UIColor whiteColor];
-            indicatorBall.hidden = false;
+        
+            // it is a pot, so credit the current user
+            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ] == true) {
+                [self.currentPlayer incrementNbrBalls:1];
+                [self.currentPlayer.currentFrame incrementFrameBallsPotted];
+            
+                if (pottedBall.quantity >= 1 && pottedBall.pottedPoints == 1 && freeBall == false) {
+                    [pottedBall decreaseQty];
+                    if (pottedBall.quantity == 0) {
+                        currentColour ++;
+                        self.ballReplaced=true;
+                    }
+                } else if (pottedBall.pottedPoints == self.currentColour) {
+                
+                    if (self.ballReplaced && pottedBall.pottedPoints == 2) {
+                        //Allow Yellow to be potted twice after final red.
+                        self.ballReplaced=false;
+                    } else if (pottedBall.pottedPoints == 7 && (self.currentPlayer.currentFrame.frameScore + self.currentPlayersBreak.breakScore) == self.opposingPlayer.currentFrame.frameScore) {
+                    // Allow a respotted Black!
+                    
+                    } else if (freeBall == false) {
+                        [pottedBall decreaseQty];
+                        self.currentColour ++;
+                    }
+                } else if (pottedBall.pottedPoints != self.currentColour && self.currentColour == 2 && self.ballReplaced) {
+                    self.ballReplaced=false;
+                }
+                if (freeBall==false) {
+                    pottedBall.potsInBreakCounter ++;
+                    indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+                }
+         
+                [self clearIndicators :highlight];
+                [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
+                indicatorBall.textColor = [UIColor whiteColor];
+                indicatorBall.hidden = false;
+            }
+            
+        } else {  // no advanced scoring
+            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ] == true) {
+                [self.currentPlayer incrementNbrBalls:1];
+                [self.currentPlayer.currentFrame incrementFrameBallsPotted];
+
+            
+                [self clearIndicators :highlight];
+                [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
+                indicatorBall.textColor = [UIColor whiteColor];
+                indicatorBall.hidden = false;
+            }
+                
         }
+            
         [self.currentPlayer.currentFrame increaseFrameScore:self.currentPlayer.frameScore];
     }
 }
@@ -853,91 +904,92 @@ enum IndicatorStyle {highlight, hide};
     
     NSString *dataAvgPlayer = [NSString stringWithFormat:@"Average Break = %0.2f", avgPlayer];
     
-    NSString *dataNbrOfPots = [NSString stringWithFormat:@"Number of Pots = %d%@", currentPlayerStats.nbrBallsPotted,lineBreak];
+    NSString *dataNbrOfPots = [NSString stringWithFormat:@"Nbr Pots/Scoring Visits = %d/%d%@", currentPlayerStats.nbrBallsPotted,currentPlayerStats.nbrOfBreaks,lineBreak];
     
-    NSString *dataScoringVisits = [NSString stringWithFormat:@"Scoring Visits = %d%@", currentPlayerStats.nbrOfBreaks,lineBreak];
-    
-    
-    NSString *result = [NSString stringWithFormat:@"Highest Break = %ld%@%@%@%@%@%@",playersHighestBreak,lineBreak,dataAvgPlayer,lineBreak,dataNbrOfPots,dataScoringVisits,lineBreak];
+    NSString *result = [NSString stringWithFormat:@"Highest Break = %ld%@%@%@%@%@",playersHighestBreak,lineBreak,dataAvgPlayer,lineBreak,dataNbrOfPots,lineBreak];
     
     NSString *breakstats = @"";
     
     
     if (counter140to147 > 0) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 140 = %d%@",breakstats, counter140to147,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 140 = %d%@",breakstats, counter140to147,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter130To139 > 0) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 130 = %d%@",breakstats, counter130To139,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 130 = %d%@",breakstats, counter130To139,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter120To129 > 0) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 120 = %d%@",breakstats, counter120To129,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 120 = %d%@",breakstats, counter120To129,@" /"];
         nbrOfRanges ++;
     }
     
     
     if (counter110To119 > 0) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 110 = %d%@",breakstats, counter110To119,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 110 = %d%@",breakstats, counter110To119,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter100To109 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 100 = %d%@",breakstats, counter100To109,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 100 = %d%@",breakstats, counter100To109,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter90To99 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 90 = %d%@",breakstats, counter90To99,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 90 = %d%@",breakstats, counter90To99,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter80To89 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 80 = %d%@",breakstats, counter80To89,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 80 = %d%@",breakstats, counter80To89,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter70To79 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 70 = %d%@",breakstats, counter70To79,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 70 = %d%@",breakstats, counter70To79,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter60To69 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 60 = %d%@",breakstats, counter60To69,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 60 = %d%@",breakstats, counter60To69,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter50To59 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 50 = %d%@",breakstats, counter50To59,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 50 = %d%@",breakstats, counter50To59,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter40To49 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 40 = %d%@",breakstats, counter40To49,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 40 = %d%@",breakstats, counter40To49,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter30To39 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 30 = %d%@",breakstats, counter30To39,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 30 = %d%@",breakstats, counter30To39,@" /"];
         nbrOfRanges ++;
     }
   
     if (counter20To29 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 20 = %d%@",breakstats, counter20To29,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 20 = %d%@",breakstats, counter20To29,@" /"];
         nbrOfRanges ++;
     }
     
     if (counter10To19 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 10 = %d%@",breakstats, counter10To19,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 10 = %d%@",breakstats, counter10To19,@" /"];
         nbrOfRanges ++;
     }
     
     
     if (counter8To9 > 0 && nbrOfRanges < maxNbrOfRanges) {
-        breakstats = [NSString stringWithFormat:@"%@Breaks > 7 = %d%@",breakstats, counter8To9,lineBreak];
+        breakstats = [NSString stringWithFormat:@"%@ > 7 = %d%@",breakstats, counter8To9,@" /"];
         nbrOfRanges ++;
+    }
+    
+    if ([breakstats length] > 0) {
+        breakstats = [breakstats substringToIndex:[breakstats length] - 1];
     }
     
     
@@ -945,7 +997,7 @@ enum IndicatorStyle {highlight, hide};
         breakstats = @"Player has not yet had any breaks of note!";
     }
     
-    return [NSString stringWithFormat:@"%@%@",result,breakstats];
+    return [NSString stringWithFormat:@"%@BREAKS:%@%@",result,breakstats,lineBreak];
 }
 
 
@@ -1089,6 +1141,7 @@ enum IndicatorStyle {highlight, hide};
             } else {
                 currentBall.quantity=1;
                 currentBall.enabled = true;
+                
             }
             
         }

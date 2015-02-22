@@ -16,6 +16,7 @@
 		9610D7071A2BC3C40097DDC3 /* 06_pink_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D7001A2BC3C40097DDC3 /* 06_pink_large.png */; };
 		9610D7081A2BC3C40097DDC3 /* 07_black_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D7011A2BC3C40097DDC3 /* 07_black_large.png */; };
 		969FC9B51A223EF3007EC93F /* statsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FC9B41A223EF3007EC93F /* statsViewController.m */; };
+		96CA1E131A99B797003E0822 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96CA1E121A99B797003E0822 /* Settings.bundle */; };
 		96CCF0591A214F7000FB7BDF /* ball_small_yellow02.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0521A214F7000FB7BDF /* ball_small_yellow02.png */; };
 		96CCF05A1A214F7000FB7BDF /* ball_small_green03.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0531A214F7000FB7BDF /* ball_small_green03.png */; };
 		96CCF05B1A214F7000FB7BDF /* ball_small_brown04.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0541A214F7000FB7BDF /* ball_small_brown04.png */; };
@@ -68,6 +69,7 @@
 		9610D7011A2BC3C40097DDC3 /* 07_black_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 07_black_large.png; sourceTree = "<group>"; };
 		969FC9B31A223EF3007EC93F /* statsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statsViewController.h; sourceTree = "<group>"; };
 		969FC9B41A223EF3007EC93F /* statsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = statsViewController.m; sourceTree = "<group>"; };
+		96CA1E121A99B797003E0822 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		96CCF0521A214F7000FB7BDF /* ball_small_yellow02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_yellow02.png; sourceTree = "<group>"; };
 		96CCF0531A214F7000FB7BDF /* ball_small_green03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_green03.png; sourceTree = "<group>"; };
 		96CCF0541A214F7000FB7BDF /* ball_small_brown04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_small_brown04.png; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				96D22D8E1A1FD58100E0ADE3 /* Images.xcassets */,
 				96D22D901A1FD58100E0ADE3 /* LaunchScreen.xib */,
 				96D22D811A1FD58100E0ADE3 /* Supporting Files */,
+				96CA1E121A99B797003E0822 /* Settings.bundle */,
 			);
 			path = SnookerScoreMaster;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				96D22DCC1A2073BC00E0ADE3 /* Reds-Triangle.png in Resources */,
 				9610D7031A2BC3C40097DDC3 /* 02_yellow_large.png in Resources */,
 				96D22DB61A1FDEFE00E0ADE3 /* ball_largex_red01.png in Resources */,
+				96CA1E131A99B797003E0822 /* Settings.bundle in Resources */,
 				9610D7071A2BC3C40097DDC3 /* 06_pink_large.png in Resources */,
 				9610D7041A2BC3C40097DDC3 /* 03_green_large.png in Resources */,
 				96CCF05B1A214F7000FB7BDF /* ball_small_brown04.png in Resources */,
