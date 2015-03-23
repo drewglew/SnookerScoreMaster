@@ -11,8 +11,10 @@
 #import "player.h"
 #import "AdjustPointsViewController.h"
 #import "statsViewController.h"
+#import "graphView.h"
+//#import "CorePlot-CocoaTouch.h"
 
-@interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate>  {
+@interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>  {
     int frameNumber;
     int currentColour;
     bool ballReplaced;
@@ -20,7 +22,7 @@
     int colourStateAtStartOfBreak;
     int colourQuantityAtStartOfBreak;
     statsViewController *statsVC;
-    
+    UIImagePickerController *imgPicker;
 }
 @property (assign) int frameNumber;
 @property (assign) int currentColour;
@@ -28,13 +30,16 @@
 @property (assign) bool advancedCounting;
 @property (assign) int colourStateAtStartOfBreak;
 @property (assign) int colourQuantityAtStartOfBreak;
-
+;
+@property (weak, nonatomic) IBOutlet graphView *frameGraphView;
+@property (nonatomic, retain) UIImagePickerController *imgPicker;
 @property (strong, nonatomic) NSMutableArray     *joinedFrameResult;
 /* https://www.youtube.com/watch?v=mdG6XpwwuwI */
--(void)processCurrentUsersHighestBreak;
+-(void) processCurrentUsersHighestBreak;
 -(NSString*) composePlayerStats :(frame*) currentFrame;
 -(void) processMatchEnd;
--(void)endOfFrame;
--(void)endMatch;
+-(void) endOfFrame;
+-(void) endMatch;
+
 @end
 

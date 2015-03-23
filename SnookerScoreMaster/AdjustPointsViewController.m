@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *ballImage;
 @property (weak, nonatomic) IBOutlet UIButton *selectPlayerButton;
 
+@property (weak, nonatomic) IBOutlet UIView *ballAdjustView;
+
 
 
 @end
@@ -29,6 +31,7 @@
 @implementation AdjustPointsViewController
 
 @synthesize selectedValue;
+@synthesize advancedCounting;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +40,12 @@
         self.labelExplanation.text = [NSString stringWithFormat:@"%@ has not received any foul points from the other player in this frame.\nYou may increase this players score however.",self.playerName];
     } else {
     self.labelExplanation.text = [NSString stringWithFormat:@"%@ has a total of %d foul points awarded.\nYou may  deduct this amount from the score.\nAlternatively you can increase this score.",self.playerName,self.sumOfPlayerFouls];
+    }
+    
+    if (self.advancedCounting) {
+        self.ballAdjustView.hidden = false;
+    } else {
+        self.ballAdjustView.hidden = true;
     }
     
     self.stepperBallAdjuster.value = self.ballIndex;

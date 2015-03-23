@@ -15,6 +15,9 @@
 		9610D7061A2BC3C40097DDC3 /* 05_blue_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D6FF1A2BC3C40097DDC3 /* 05_blue_large.png */; };
 		9610D7071A2BC3C40097DDC3 /* 06_pink_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D7001A2BC3C40097DDC3 /* 06_pink_large.png */; };
 		9610D7081A2BC3C40097DDC3 /* 07_black_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 9610D7011A2BC3C40097DDC3 /* 07_black_large.png */; };
+		9683B2371ABB5CC60032D235 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9683B2361ABB5CC60032D235 /* QuartzCore.framework */; };
+		9683B23B1ABB5F9F0032D235 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9683B23A1ABB5F9F0032D235 /* Accelerate.framework */; };
+		9683B2611ABB7A730032D235 /* graphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9683B2601ABB7A730032D235 /* graphView.m */; };
 		969FC9B51A223EF3007EC93F /* statsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FC9B41A223EF3007EC93F /* statsViewController.m */; };
 		96CA1E131A99B797003E0822 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96CA1E121A99B797003E0822 /* Settings.bundle */; };
 		96CCF0591A214F7000FB7BDF /* ball_small_yellow02.png in Resources */ = {isa = PBXBuildFile; fileRef = 96CCF0521A214F7000FB7BDF /* ball_small_yellow02.png */; };
@@ -67,6 +70,10 @@
 		9610D6FF1A2BC3C40097DDC3 /* 05_blue_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 05_blue_large.png; sourceTree = "<group>"; };
 		9610D7001A2BC3C40097DDC3 /* 06_pink_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 06_pink_large.png; sourceTree = "<group>"; };
 		9610D7011A2BC3C40097DDC3 /* 07_black_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 07_black_large.png; sourceTree = "<group>"; };
+		9683B2361ABB5CC60032D235 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9683B23A1ABB5F9F0032D235 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		9683B25F1ABB7A730032D235 /* graphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = graphView.h; path = ../graphView.h; sourceTree = "<group>"; };
+		9683B2601ABB7A730032D235 /* graphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = graphView.m; path = ../graphView.m; sourceTree = "<group>"; };
 		969FC9B31A223EF3007EC93F /* statsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statsViewController.h; sourceTree = "<group>"; };
 		969FC9B41A223EF3007EC93F /* statsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = statsViewController.m; sourceTree = "<group>"; };
 		96CA1E121A99B797003E0822 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -117,6 +124,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9683B23B1ABB5F9F0032D235 /* Accelerate.framework in Frameworks */,
+				9683B2371ABB5CC60032D235 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +142,8 @@
 		96D22D751A1FD58100E0ADE3 = {
 			isa = PBXGroup;
 			children = (
+				9683B23A1ABB5F9F0032D235 /* Accelerate.framework */,
+				9683B2361ABB5CC60032D235 /* QuartzCore.framework */,
 				96D22D801A1FD58100E0ADE3 /* SnookerScoreMaster */,
 				96D22D9A1A1FD58100E0ADE3 /* SnookerScoreMasterTests */,
 				96D22D7F1A1FD58100E0ADE3 /* Products */,
@@ -151,6 +162,8 @@
 		96D22D801A1FD58100E0ADE3 /* SnookerScoreMaster */ = {
 			isa = PBXGroup;
 			children = (
+				9683B25F1ABB7A730032D235 /* graphView.h */,
+				9683B2601ABB7A730032D235 /* graphView.m */,
 				96D22D851A1FD58100E0ADE3 /* AppDelegate.h */,
 				96D22D861A1FD58100E0ADE3 /* AppDelegate.m */,
 				96D22DB91A20679B00E0ADE3 /* AdjustPointsViewController.h */,
@@ -354,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96D22DC91A20679B00E0ADE3 /* player.m in Sources */,
+				9683B2611ABB7A730032D235 /* graphView.m in Sources */,
 				96D22DC61A20679B00E0ADE3 /* ball.m in Sources */,
 				96D22DCA1A20679B00E0ADE3 /* snookerbreak.m in Sources */,
 				96D22D871A1FD58100E0ADE3 /* AppDelegate.m in Sources */,
@@ -485,8 +499,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = SnookerScoreMaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SnookerScoreMaster",
+					"$(PROJECT_DIR)",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -496,8 +518,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = SnookerScoreMaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SnookerScoreMaster",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

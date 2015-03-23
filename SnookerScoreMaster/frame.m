@@ -42,6 +42,7 @@
     NSMutableArray *copiedData = [[self frameHighestBreakHistory] mutableCopyWithZone:zone];
     f.frameHighestBreakHistory = copiedData;
 
+
     return f;
 }
 

@@ -24,6 +24,7 @@
 @synthesize nbrOfBreaks;
 @synthesize sumOfBreaks;
 @synthesize playersBreaks;
+@synthesize playerIndex;
 
 
 

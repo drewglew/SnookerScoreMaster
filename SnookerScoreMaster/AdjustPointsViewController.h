@@ -21,4 +21,5 @@
 @property (assign) int ballIndex;
 @property (assign) int selectedValue;
 @property (strong, nonatomic) NSString *playerName;
+@property (assign) bool advancedCounting;
 @end

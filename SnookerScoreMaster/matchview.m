@@ -11,9 +11,11 @@
 #import "player.h"
 #import "frame.h"
 #import "snookerbreak.h"
+#import "graphView.h"
 
 
 @interface matchview ()
+
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *playerStatsPosition;
 @property (weak, nonatomic) IBOutlet ball *buttonRed;
@@ -58,6 +60,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonClear;
 @property (weak, nonatomic) IBOutlet UIButton *buttonAdjust;
 @property (weak, nonatomic) IBOutlet UIView *disabledView;
+@property (strong, nonatomic) IBOutlet UIView *mainView;
+@property (strong, nonatomic) NSMutableArray *frameData;
+//@property (weak, nonatomic) IBOutlet CPTGraphHostingView *hostView;
+@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statBoxHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statP1ContentHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statP2ContentHeightConstraint;
+
+
 @end
 
 
@@ -76,6 +88,8 @@ Player Stats - when expanded should all activity behind in main view should be d
 Link current ball & quantities to adjustment process.
 End of frame occurs when all balls are potted.  Provide a message of sorts.
 Still issue when user fouls at same time as potting current ball.  More analysis needed!
+
+ 
 */
 @implementation matchview 
 @synthesize joinedFrameResult;
@@ -83,8 +97,9 @@ Still issue when user fouls at same time as potting current ball.  More analysis
 @synthesize currentColour;
 @synthesize colourStateAtStartOfBreak;
 @synthesize colourQuantityAtStartOfBreak;
-
+@synthesize frameGraphView;
 @synthesize ballReplaced;
+@synthesize imgPicker;
 @synthesize advancedCounting;
 enum scoreStatus { FrameScore, FrameHighestBreak, HighestBreak, FrameBallsPotted, BallsPotted };
 enum scoreStatus scoreState;
@@ -92,12 +107,27 @@ enum IndicatorStyle {highlight, hide};
 
 #pragma mark -standard methods
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //self.imgPicker = [[UIImagePickerController alloc] init];
+    //self.imgPicker.allowsImageEditing = YES;
+    //self.imgPicker.delegate = self;
+    //self.imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+   
+    //[self presentViewController:self.imgPicker animated:YES completion:nil];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(orientationChanged:)
+     name:UIDeviceOrientationDidChangeNotification
+     object:[UIDevice currentDevice]];
+
     
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+       NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"showInstructions"]) {
         [defaults setBool:YES forKey:@"showInstructions"];
         [defaults setValue:@"Player 1" forKey:@"player1"];
@@ -123,6 +153,8 @@ enum IndicatorStyle {highlight, hide};
         self.frameInfo.hidden = true;
     }
     
+    self.textScorePlayer1.playerIndex = 1;
+    self.textScorePlayer2.playerIndex = 2;
     
     self.currentPlayer = self.textScorePlayer1;
     self.opposingPlayer = self.textScorePlayer2;
@@ -223,27 +255,123 @@ enum IndicatorStyle {highlight, hide};
     [self.textScorePlayer2 createFrame:(self.frameNumber)];
     
     self.joinedFrameResult = [[NSMutableArray alloc] init];
+
+    
+    [self.pointsLabel setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
+    [self.frameGraphView initFrameData];
+    
+    
+    //PlayerStatsView.frame.size.height
+    self.statViewWidthConstraint.constant = self.view.frame.size.width;
+    
+    self.playerStatsPosition.constant =  2 - self.view.frame.size.width;
+    
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+        self.statBoxHeightConstraint.constant = 30;
+        self.statP1ContentHeightConstraint.constant = 50;
+        self.statP2ContentHeightConstraint.constant = 50;
+    } else {
+        self.statBoxHeightConstraint.constant = 55;
+        self.statP1ContentHeightConstraint.constant = 100;
+        self.statP2ContentHeightConstraint.constant = 100;
+    }
     
     
     
 }
+
+- (void) orientationChanged:(NSNotification *)note
+{
+    UIDevice * device = note.object;
+    switch(device.orientation)
+    {
+        case UIDeviceOrientationPortrait:
+            /* start special animation */
+            [self.frameGraphView setNeedsDisplay];
+                self.statViewWidthConstraint.constant = self.view.frame.size.width;
+             if (self.playerStatsPosition.constant!=0) {
+                self.playerStatsPosition.constant =  2 - self.view.frame.size.width;
+             }
+
+            self.statBoxHeightConstraint.constant = 55;
+            self.statP1ContentHeightConstraint.constant = 100;
+            self.statP2ContentHeightConstraint.constant = 100;
+            
+            break;
+            
+        case UIDeviceOrientationPortraitUpsideDown:
+            /* start special animation */
+            [self.frameGraphView setNeedsDisplay];
+                self.statViewWidthConstraint.constant = self.view.frame.size.width;
+            if (self.playerStatsPosition.constant!=0) {
+                self.playerStatsPosition.constant =  2 - self.view.frame.size.width;
+            }
+            self.statBoxHeightConstraint.constant = 55;
+            self.statP1ContentHeightConstraint.constant = 100;
+            self.statP2ContentHeightConstraint.constant = 100;
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            [self.frameGraphView setNeedsDisplay];
+            self.statViewWidthConstraint.constant = self.view.frame.size.width;
+            if (self.playerStatsPosition.constant!=0) {
+                self.playerStatsPosition.constant =  2 - self.view.frame.size.width;
+            }
+            self.statBoxHeightConstraint.constant = 30;
+            self.statP1ContentHeightConstraint.constant = 50;
+            self.statP2ContentHeightConstraint.constant = 50;
+            break;
+            
+        case UIDeviceOrientationLandscapeRight:
+            [self.frameGraphView setNeedsDisplay];
+            self.statViewWidthConstraint.constant = self.view.frame.size.width;
+            if (self.playerStatsPosition.constant!=0) {
+                self.playerStatsPosition.constant =  2 - self.view.frame.size.width;
+            }
+            self.statBoxHeightConstraint.constant = 30;
+            self.statP1ContentHeightConstraint.constant = 50;
+            self.statP2ContentHeightConstraint.constant = 50;
+            break;
+            
+        default:
+            [self.frameGraphView setNeedsDisplay];
+                self.statViewWidthConstraint.constant = self.view.frame.size.width;
+             if (self.playerStatsPosition.constant!=0) {
+                self.playerStatsPosition.constant =  2 - self.view.frame.size.width;
+             }
+            self.statBoxHeightConstraint.constant = 55;
+            self.statP1ContentHeightConstraint.constant = 100;
+            self.statP2ContentHeightConstraint.constant = 100;
+            break;
+    };
+}
+
+
 
 -(void)swipeRightShowPlayersStats:(UISwipeGestureRecognizer *)gesture
 {
     self.navButtonNew.title  = @"";
     self.navButtonNew.enabled=false;
     
-    
-  //  NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-  //  self.statNameLabelPlayer1.attributedText = [[NSAttributedString alloc] initWithString:self.textPlayerOneName.text attributes:underlineAttribute];
-  //  self.statNameLabelPlayer2.attributedText = [[NSAttributedString alloc] initWithString:self.textPlayerTwoName.text attributes:underlineAttribute];
-    
+    int latestScorePlayer1=self.textScorePlayer1.frameScore;
+    int latestScorePlayer2=self.textScorePlayer2.frameScore;
+    int currentBreak = self.currentPlayersBreak.breakScore;
     
     
-    self.statNameLabelPlayer1.Text = self.textPlayerOneName.text ;
-    self.statNameLabelPlayer2.Text = self.textPlayerTwoName.text ;
     
-    
+    if (self.currentPlayer.playerIndex==1) {
+        latestScorePlayer1 += currentBreak;
+        self.frameGraphView.currentBreakPlayer1 = currentBreak;
+        self.frameGraphView.currentBreakPlayer2 = 0;
+    } else {
+        latestScorePlayer2 += currentBreak;
+        self.frameGraphView.currentBreakPlayer2 = currentBreak;
+        self.frameGraphView.currentBreakPlayer1 = 0;
+    }
+    self.statNameLabelPlayer1.Text =  [NSString stringWithFormat:@"%@\n%d",self.textPlayerOneName.text, latestScorePlayer1];
+   
+    self.statNameLabelPlayer2.Text = [NSString stringWithFormat:@"%@\n%d",self.textPlayerTwoName.text, latestScorePlayer2];
+   
     self.statContentLabelPlayer1.text = [self getBreakdown :self.textScorePlayer1 :@"\n"];
 
     self.statContentLabelPlayer2.text = [self getBreakdown :self.textScorePlayer2 :@"\n"];
@@ -257,12 +385,13 @@ enum IndicatorStyle {highlight, hide};
     }];
     
     self.disabledView.hidden=false;
-    
+    self.pointsLabel.hidden = false;
+    [self.frameGraphView setNeedsDisplay];
 }
 
 -(void)tapHidePlayersStats:(UISwipeGestureRecognizer *)gesture
 {
-    [self hidePlayersStats];
+ //   [self hidePlayersStats];
 }
 
 -(void)swipeLeftHidePlayersStats:(UISwipeGestureRecognizer *)gesture
@@ -272,18 +401,16 @@ enum IndicatorStyle {highlight, hide};
 
 -(void)hidePlayersStats {
     
-    self.playerStatsPosition.constant=-298;
+    self.playerStatsPosition.constant=-self.statViewWidthConstraint.constant+2;
     [UIView animateWithDuration:0.5f animations:^{
         [self.PlayerStatsView layoutIfNeeded];
     }];
     self.navButtonNew.title  = @"New";
     self.navButtonNew.enabled=true;
     self.disabledView.hidden=true;
+     self.pointsLabel.hidden = true;
     
 }
-
-
-
 
 
 
@@ -320,6 +447,10 @@ enum IndicatorStyle {highlight, hide};
 }
 
 
+
+
+
+
 // plan is to replace the above method ballClicked with this new one allowing us to
 // also log the balls potted along the way into an array that we can process.
 
@@ -348,6 +479,7 @@ enum IndicatorStyle {highlight, hide};
         [self closeBreak];
         // add the foul points to opposing player
         [self.opposingPlayer setFoulScore:pottedBall.foulPoints];
+        [self.frameGraphView addFrameData:self.opposingPlayer.playerIndex :pottedBall.foulPoints];
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self.switchFoul setOn:false];
         self.foulLabel.hidden=true;
@@ -426,16 +558,16 @@ enum IndicatorStyle {highlight, hide};
             if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ] == true) {
                 [self.currentPlayer incrementNbrBalls:1];
                 [self.currentPlayer.currentFrame incrementFrameBallsPotted];
-
-            
                 [self clearIndicators :highlight];
+                pottedBall.potsInBreakCounter ++;
+                indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+                
                 [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
                 indicatorBall.textColor = [UIColor whiteColor];
                 indicatorBall.hidden = false;
             }
                 
         }
-            
         [self.currentPlayer.currentFrame increaseFrameScore:self.currentPlayer.frameScore];
     }
 }
@@ -477,12 +609,15 @@ enum IndicatorStyle {highlight, hide};
         [self.currentPlayer setSumOfBreaks:self.currentPlayer.sumOfBreaks + self.currentPlayersBreak.breakScore];
         [self.currentPlayer setNbrOfBreaks:self.currentPlayer.nbrOfBreaks + 1];
         [self.currentPlayer addBreakScore:self.currentPlayersBreak.breakScore];
+        [self.frameGraphView addFrameData:self.currentPlayer.playerIndex :self.currentPlayersBreak.breakScore];
         [self processCurrentUsersHighestBreak];
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self clearIndicators :hide];
         self.ballReplaced=false;
         self.buttonAdjust.hidden = false;
         self.buttonClear.hidden = true;
+        self.frameGraphView.currentBreakPlayer1=0;
+        self.frameGraphView.currentBreakPlayer2=0;
     }
 }
 
@@ -689,7 +824,14 @@ enum IndicatorStyle {highlight, hide};
     [self.textScorePlayer1 createFrame:(self.frameNumber)];
     [self.textScorePlayer2 createFrame:(self.frameNumber)];
     [self resetBalls];
+    
+    //TODO - this is where we should show a popup view that will show the graph...
+    
+
+    //We would need to save the array someplace too.
+    [self.frameGraphView resetFrameData];
 }
+
 
 -(void)resetBalls {
     self.buttonRed.enabled = true;
@@ -718,6 +860,7 @@ enum IndicatorStyle {highlight, hide};
 
 - (IBAction)endOfMatchClicked:(id)sender {
     [self processMatchEnd];
+    
 }
 
 
@@ -742,7 +885,7 @@ enum IndicatorStyle {highlight, hide};
     alertEndScores.alertViewStyle = UIAlertViewStyleDefault ;
     [alertEndScores addButtonWithTitle:@"Go"];
     [alertEndScores show];
-    
+    [self.frameGraphView resetFrameData];
     
 }
 
@@ -1163,6 +1306,7 @@ enum IndicatorStyle {highlight, hide};
         controller.delegate = self;
         controller.sumOfPlayerFouls = self.currentPlayer.currentFrame.foulScore;
         controller.ballIndex = self.buttonRed.quantity+self.buttonYellow.quantity+self.buttonGreen.quantity+self.buttonBrown.quantity+self.buttonBlue.quantity+self.buttonPink.quantity+self.buttonBlack.quantity;
+        controller.advancedCounting = self.advancedCounting;
         
         if (self.currentPlayer == self.textScorePlayer1) {
             controller.playerName = self.textPlayerOneName.text;

@@ -26,7 +26,6 @@
 @property (assign) int frameHighestBreak;
 @property (assign) int frameBallsPotted;
 @property (assign) int foulScore;
-
 @property (strong, nonatomic) NSMutableArray *frameHighestBreakHistory;
 @property (strong, nonatomic) snookerbreak     *currentBreak;
 -(void)addBalltoBreak:(ball*) newpot ;
