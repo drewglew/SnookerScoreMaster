@@ -38,8 +38,6 @@ CGRect touchAreas[100];
 if (!self.frameData) {
     self.frameData = [[NSMutableArray alloc] init];
 }
-    self.visitNumberOfBalls = 10;
-    
 }
 
 -(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction {
@@ -47,14 +45,10 @@ if (!self.frameData) {
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
-    
-   // NSLocale* currentLocale = [NSLocale currentLocale];
-    //[[NSDate date] descriptionWithLocale:currentLocale];
-    
     NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
-    //[data setValue: [NSString stringWithFormat:@"%@",[[NSDate date] descriptionWithLocale:currentLocale]]   forKey:@"datestamp"];
+
     [data setValue: rightNow forKey:@"datestamp"];
-    [data setValue: [NSNumber numberWithInt:playerIndex] forKey:@"frameindex"];
+    [data setValue: [NSNumber numberWithInt:frameIndex] forKey:@"frameindex"];
     [data setValue: [NSNumber numberWithInt:playerIndex] forKey:@"player"];
     [data setValue: [NSNumber numberWithInt:points] forKey:@"points"];
     [data setValue: [NSNumber numberWithInt:isfoul] forKey:@"isfoul"];
@@ -69,15 +63,16 @@ if (!self.frameData) {
 }
 
 
--(int)getHighestBreakAmountInFrame:(int)playerIndex {
-
+-(int)getHighestBreakAmountInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int)frameIndex {
+    
     int highestBreak=0;
-    for (NSMutableArray *dataPoint in self.frameData) {
+    for (NSMutableArray *dataPoint in singleFrameData) {
         
         NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
         NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+        NSNumber *wantedFrame = [dataPoint valueForKeyPath:@"frameindex"];
         
-        if (playerIndex == [wantedPlayer intValue] && [wantedType intValue] == 0) {
+        if (playerIndex == [wantedPlayer intValue] && [wantedType intValue] == 0 && (frameIndex == [wantedFrame intValue] || frameIndex == 0)) {
             
             NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
             ballCollection = [dataPoint valueForKey:@"ballTransaction"];
@@ -94,19 +89,49 @@ if (!self.frameData) {
 }
 
 
--(NSMutableDictionary *)getHighestBreakBallsInFrame:(int)playerIndex {
+-(int)getAmountOfBallsPottedInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int)frameIndex {
+    
+    int totalBalls=0;
+    for (NSMutableArray *dataPoint in singleFrameData) {
+        NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
+        NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+        NSNumber *wantedFrame = [dataPoint valueForKeyPath:@"frameindex"];
+        if (playerIndex == [wantedPlayer intValue] && [wantedType intValue] == 0 && (frameIndex == [wantedFrame intValue] || frameIndex == 0 )) {
+            NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
+            ballCollection = [dataPoint valueForKey:@"ballTransaction"];
+            totalBalls += ballCollection.count;
+        }
+    }
+    return totalBalls;
+}
+
+-(int)getAmountOfVisitsInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex {
+    
+    int totalVisits=0;
+    for (NSMutableArray *dataPoint in singleFrameData) {
+        NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
+        NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+        if (playerIndex == [wantedPlayer intValue] && [wantedType intValue] == 0) {
+            totalVisits ++;
+        }
+    }
+    return totalVisits;
+}
+
+-(NSMutableDictionary *)getHighestBreakBallsInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex :(int)frameIndex {
     // This method returns a dictionary of the balls that were potted in the highest break
     // within the frame.
     int highestBreak=0;
     int ballsInBreak=0;
     NSMutableDictionary *balls;
     
-    for (NSMutableArray *dataPoint in self.frameData) {
+    for (NSMutableArray *dataPoint in singleFrameData) {
         
         NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
         NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+        NSNumber *wantedFrame = [dataPoint valueForKeyPath:@"frameindex"];
         
-        if (playerIndex == [wantedPlayer intValue] && [wantedType intValue] == 0) {
+        if (playerIndex == [wantedPlayer intValue] && [wantedType intValue] == 0  && (frameIndex == [wantedFrame intValue] || frameIndex == 0)) {
             
             NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
             ballCollection = [dataPoint valueForKey:@"ballTransaction"];
@@ -131,39 +156,67 @@ if (!self.frameData) {
 }
 
 
--(int)getPointsInFrame:(int)playerIndex {
+
+
+-(int)getPointsInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex {
     // get the players total accumunated points in frame
-    return [self getPointsByTypeInFrame:playerIndex :0] + [self getPointsByTypeInFrame:playerIndex :1];
+    return [self getPointsByTypeInFrame:(NSMutableArray*) singleFrameData :playerIndex :0 :0] + [self getPointsByTypeInFrame :(NSMutableArray*) singleFrameData :playerIndex :1 :0];
 }
 
--(int)getPointsByTypeInFrame:(int)playerIndex :(int)isfoul {
+-(int)getPointsInASingleFrame:(NSMutableArray*) singleFrameData :(int)playerIndex :(int)frameIndex {
+    return [self getPointsByTypeInFrame:(NSMutableArray*) singleFrameData :playerIndex :0 :frameIndex] + [self getPointsByTypeInFrame :(NSMutableArray*) singleFrameData :playerIndex :1 :frameIndex];
+    
+}
+
+-(int)getPointsByTypeInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex :(int)isfoul :(int)frameIndex {
     // This method is used to obtain either the potted points a player has made or the foul points a
     // player has received.
     
     int retValue=0;
-    for (NSMutableArray *dataPoint in self.frameData) {
-
-         NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
-         NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
- 
-         if (playerIndex == [wantedPlayer intValue] && isfoul == [wantedType intValue]) {
-         
-             NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
-             ballCollection = [dataPoint valueForKey:@"ballTransaction"];
+    for (NSMutableArray *dataPoint in singleFrameData) {
         
-             // this can be replaced by getBreakAmountFromBalls()
-             for (ball *ball in ballCollection) {
-                 if (isfoul ==0) {
-                     retValue+=ball.pottedPoints;
-                 } else {
-                     retValue+=ball.foulPoints;
-                 }
-             }
-             
-         }
-         
-     }
+        NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
+        NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+        NSNumber *wantedFrame = [dataPoint valueForKeyPath:@"frameindex"];
+        
+        if (playerIndex == [wantedPlayer intValue] && isfoul == [wantedType intValue] && (frameIndex == [wantedFrame intValue] || frameIndex == 0)) {
+            
+            NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
+            ballCollection = [dataPoint valueForKey:@"ballTransaction"];
+            
+            // this can be replaced by getBreakAmountFromBalls()
+            for (ball *ball in ballCollection) {
+                if (isfoul ==0) {
+                    retValue+=ball.pottedPoints;
+                } else {
+                    retValue+=ball.foulPoints;
+                }
+            }
+            
+        }
+        
+    }
     return retValue;
+}
+
+
+-(float)getAverageBreakAmountInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex {
+    int totalPottedPoints = 0;
+    int totalVisits = 0;
+    
+    totalPottedPoints = [self getPointsByTypeInFrame:singleFrameData :playerIndex :0 :0];
+    
+    totalVisits = [self getAmountOfVisitsInFrame:singleFrameData :playerIndex];
+    
+    float avgAmount = 0.0;
+    
+    avgAmount = (float)totalPottedPoints / (float)totalVisits;
+    
+    if isnan(avgAmount) {
+        avgAmount=0.0;
+    }
+    
+    return avgAmount;
 }
 
 
@@ -447,6 +500,10 @@ if (!self.frameData) {
     
     
 }
+
+
+
+
 
 
 

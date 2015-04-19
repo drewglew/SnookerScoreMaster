@@ -31,14 +31,13 @@
 @property (assign) bool advancedCounting;
 @property (assign) int colourStateAtStartOfBreak;
 @property (assign) int colourQuantityAtStartOfBreak;
-;
+@property (nonatomic, strong) NSMutableArray *matchData;
 
 @property (nonatomic, retain) UIImagePickerController *imgPicker;
 @property (strong, nonatomic) NSMutableArray     *joinedFrameResult;
 @property (weak, nonatomic) IBOutlet UICollectionView *visitBallGrid;
 /* https://www.youtube.com/watch?v=mdG6XpwwuwI */
 -(void) processCurrentUsersHighestBreak;
--(NSString*) composePlayerStats :(frame*) currentFrame;
 -(void) processMatchEnd;
 -(void) endOfFrame;
 -(void) endMatch;

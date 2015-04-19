@@ -8,6 +8,7 @@
 
 #import "player.h"
 #import "frame.h"
+#import "graphView.h"
 
 
 
@@ -52,6 +53,16 @@
         NSString *labelScore = [NSString stringWithFormat:@"%d",currentFrame.frameScore];
         self.text = labelScore;
 }
+
+//Added April 2015 - refactor.
+-(void)updateFrameScore:(int) value {
+    currentFrame.frameScore = value;
+    
+    NSString *labelScore = [NSString stringWithFormat:@"%d",currentFrame.frameScore];
+    self.text = labelScore;
+}
+
+
 
 
 -(void)setFoulScore:(int) value {

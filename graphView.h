@@ -37,10 +37,15 @@
 - (void) initFrameData;
 -(void) resetFrameData;
 -(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction;
--(int)getPointsByTypeInFrame:(int)playerIndex :(int)isfoul;
--(int)getPointsInFrame:(int)playerIndex;
+-(int)getPointsInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex;
 -(int)getBreakAmountFromBalls:(NSMutableArray*)balls :(NSNumber *)isfoul;
--(NSMutableDictionary *)getHighestBreakBallsInFrame:(int)playerIndex;
+-(int)getAmountOfVisitsInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex;
+-(float)getAverageBreakAmountInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex;
+-(int)getPointsByTypeInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex :(int)isfoul :(int)frameIndex;
+-(int)getPointsInASingleFrame:(NSMutableArray*) singleFrameData :(int)playerIndex :(int)frameIndex;
+-(int)getHighestBreakAmountInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int)frameIndex;
+-(NSMutableDictionary *)getHighestBreakBallsInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex :(int)frameIndex;
+-(int)getAmountOfBallsPottedInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int)frameIndex;
 
 #define kGraphHeight 275
 #define kDefaultGraphWidth 275

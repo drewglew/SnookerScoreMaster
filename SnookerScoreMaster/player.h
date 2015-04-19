@@ -40,6 +40,7 @@
 
 -(void)resetFrameScore:(int) value;
 -(void)addBreakScore:(int) value;
+-(void)updateFrameScore:(int) value;
 -(void)setHighestBreak:(int) value :(int) frameno :(NSMutableArray*) breakHistory;
 -(void)displayHighestBreak;
 -(void)displayBallsPotted;
