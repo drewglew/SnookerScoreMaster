@@ -14,7 +14,8 @@
 #import "graphView.h"
 //#import "CorePlot-CocoaTouch.h"
 
-@interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>  {
+
+@interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, graphViewDelegate> {
     int frameNumber;
     int currentColour;
     bool ballReplaced;
@@ -31,9 +32,10 @@
 @property (assign) int colourStateAtStartOfBreak;
 @property (assign) int colourQuantityAtStartOfBreak;
 ;
-@property (weak, nonatomic) IBOutlet graphView *frameGraphView;
+
 @property (nonatomic, retain) UIImagePickerController *imgPicker;
 @property (strong, nonatomic) NSMutableArray     *joinedFrameResult;
+@property (weak, nonatomic) IBOutlet UICollectionView *visitBallGrid;
 /* https://www.youtube.com/watch?v=mdG6XpwwuwI */
 -(void) processCurrentUsersHighestBreak;
 -(NSString*) composePlayerStats :(frame*) currentFrame;

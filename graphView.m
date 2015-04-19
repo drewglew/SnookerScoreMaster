@@ -9,12 +9,20 @@
 #import "graphView.h"
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
 
+
+
 @implementation graphView
 @synthesize frameData;
+@synthesize visitBallCollection;
+@synthesize visitPlayerIndex;
+@synthesize visitIsFoul;
 @synthesize scorePlayer1;
 @synthesize scorePlayer2;
 @synthesize currentBreakPlayer1;
 @synthesize currentBreakPlayer2;
+@synthesize visitNumberOfBalls;
+@synthesize timeStamp;
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -23,22 +31,34 @@
 }
 */
 
-//CGRect touchAreas[100];
+CGRect touchAreas[100];
 
 
 -(void) initFrameData {
 if (!self.frameData) {
     self.frameData = [[NSMutableArray alloc] init];
 }
+    self.visitNumberOfBalls = 10;
+    
 }
 
--(void)addFrameData:(int)playerIndex :(int)points {
+-(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction {
+    
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
+    
+   // NSLocale* currentLocale = [NSLocale currentLocale];
+    //[[NSDate date] descriptionWithLocale:currentLocale];
     
     NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
-    
+    //[data setValue: [NSString stringWithFormat:@"%@",[[NSDate date] descriptionWithLocale:currentLocale]]   forKey:@"datestamp"];
+    [data setValue: rightNow forKey:@"datestamp"];
+    [data setValue: [NSNumber numberWithInt:playerIndex] forKey:@"frameindex"];
     [data setValue: [NSNumber numberWithInt:playerIndex] forKey:@"player"];
     [data setValue: [NSNumber numberWithInt:points] forKey:@"points"];
-    
+    [data setValue: [NSNumber numberWithInt:isfoul] forKey:@"isfoul"];
+    [data setValue: [NSMutableArray arrayWithArray:breakTransaction] forKey:@"ballTransaction"];
     [self.frameData addObject:data];
     
     if (playerIndex==1) {
@@ -47,6 +67,122 @@ if (!self.frameData) {
         self.scorePlayer2+=points;
     }
 }
+
+
+-(int)getHighestBreakAmountInFrame:(int)playerIndex {
+
+    int highestBreak=0;
+    for (NSMutableArray *dataPoint in self.frameData) {
+        
+        NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
+        NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+        
+        if (playerIndex == [wantedPlayer intValue] && [wantedType intValue] == 0) {
+            
+            NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
+            ballCollection = [dataPoint valueForKey:@"ballTransaction"];
+            int totalBreak = 0;
+            for (ball *ball in ballCollection) {
+                totalBreak+=ball.pottedPoints;
+            }
+            if (totalBreak > highestBreak) {
+                highestBreak = totalBreak;
+            }
+        }
+    }
+    return highestBreak;
+}
+
+
+-(NSMutableDictionary *)getHighestBreakBallsInFrame:(int)playerIndex {
+    // This method returns a dictionary of the balls that were potted in the highest break
+    // within the frame.
+    int highestBreak=0;
+    int ballsInBreak=0;
+    NSMutableDictionary *balls;
+    
+    for (NSMutableArray *dataPoint in self.frameData) {
+        
+        NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
+        NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+        
+        if (playerIndex == [wantedPlayer intValue] && [wantedType intValue] == 0) {
+            
+            NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
+            ballCollection = [dataPoint valueForKey:@"ballTransaction"];
+            int totalBreak = 0;
+            for (ball *ball in ballCollection) {
+                totalBreak+=ball.pottedPoints;
+            }
+            if (totalBreak > highestBreak) {
+                // update highest break!
+                highestBreak = totalBreak;
+                balls = ballCollection;
+                ballsInBreak = (int)balls.count;
+            } else if (totalBreak == highestBreak && ballsInBreak > (int)ballCollection.count) {
+                // save the combination that has the most pots in it.
+                balls = ballCollection;
+                ballsInBreak = (int)balls.count;
+            }
+        }
+        
+    }
+    return balls;
+}
+
+
+-(int)getPointsInFrame:(int)playerIndex {
+    // get the players total accumunated points in frame
+    return [self getPointsByTypeInFrame:playerIndex :0] + [self getPointsByTypeInFrame:playerIndex :1];
+}
+
+-(int)getPointsByTypeInFrame:(int)playerIndex :(int)isfoul {
+    // This method is used to obtain either the potted points a player has made or the foul points a
+    // player has received.
+    
+    int retValue=0;
+    for (NSMutableArray *dataPoint in self.frameData) {
+
+         NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
+         NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+ 
+         if (playerIndex == [wantedPlayer intValue] && isfoul == [wantedType intValue]) {
+         
+             NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
+             ballCollection = [dataPoint valueForKey:@"ballTransaction"];
+        
+             // this can be replaced by getBreakAmountFromBalls()
+             for (ball *ball in ballCollection) {
+                 if (isfoul ==0) {
+                     retValue+=ball.pottedPoints;
+                 } else {
+                     retValue+=ball.foulPoints;
+                 }
+             }
+             
+         }
+         
+     }
+    return retValue;
+}
+
+
+-(int)getBreakAmountFromBalls:(NSMutableArray*)balls :(NSNumber *)isfoul {
+    int breakAmount = 0;
+    
+    for (ball *ball in balls) {
+        if ([isfoul intValue] == 0) {
+            breakAmount+=ball.pottedPoints;
+        } else {
+            breakAmount+=ball.foulPoints;
+        }
+    }
+    return breakAmount;
+}
+
+
+
+
 
 -(void)resetFrameData {
     [self.frameData removeAllObjects];
@@ -81,9 +217,9 @@ if (!self.frameData) {
         CGFloat locations[2] = {0.0, 1.0};
         colorspace = CGColorSpaceCreateDeviceRGB();
         
-        if (playerColour == [UIColor orangeColor]) {
-            CGFloat components[8] = {1.0, 0.5, 0.0, 0.31,  // Start color
-                1.0, 0.5, 0.0, 0.9}; // End color
+        if (playerColour == [UIColor redColor]) {
+            CGFloat components[8] = {1.0, 0.0, 0.0, 0.1,  // Start color
+                1.0, 0.0, 0.0, 0.5}; // End color
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
         } else {
             
@@ -164,7 +300,7 @@ if (!self.frameData) {
 
 -(void)plotPlayerMarkers:(CGContextRef)ctx :(int) playerIndex  :(UIColor*) playerColour :(float) scalePointsY :(float) scaleVisitsX {
     
-    CGContextSetLineWidth(ctx, 2.0);
+    CGContextSetLineWidth(ctx, 4.0);
     CGContextSetStrokeColorWithColor(ctx, [playerColour CGColor]);
     CGContextSetFillColorWithColor(ctx, [playerColour CGColor]);
     
@@ -181,6 +317,8 @@ if (!self.frameData) {
     
         if (pIndex == playerIndex) {
         
+            NSLog(@"%@",[dataPoint valueForKey:@"ballTransaction"]);
+            
             NSNumber *pointsValue=[dataPoint valueForKeyPath:@"points"];
             score += [pointsValue intValue];
         
@@ -190,29 +328,47 @@ if (!self.frameData) {
             plotPointsY = graphHeight - maxGraphHeight * plotPoints;
         
             CGRect rect = CGRectMake(plotVisitsX - kCircleRadius, plotPointsY - kCircleRadius, 2 * kCircleRadius, 2 * kCircleRadius);
-            //if (dataIndex<100) {
-            //    touchAreas[dataIndex] = rect;
-            //}
+            
+            if (dataIndex<100) {
+                touchAreas[dataIndex] = rect;
+            }
             CGContextAddEllipseInRect(ctx, rect);
         }
     }
     CGContextDrawPath(ctx, kCGPathFillStroke);
 }
 
-/*- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    NSLog(@"Touch x:%f, y:%f", point.x, point.y);
+    //NSLog(@"Touch x:%f, y:%f", point.x, point.y);
     for (int i = 0; i < 100; i++)
     {
         if (CGRectContainsPoint(touchAreas[i], point))
         {
+            // example.  need to obtain items ball count..
+            NSMutableArray *data = [self.frameData objectAtIndex:i-1];
+            
+            self.visitBallCollection = [data valueForKey:@"ballTransaction"];
+            self.visitPlayerIndex = (int)[data valueForKey:@"player"];
+            self.visitIsFoul = [data valueForKey:@"isfoul"];
+            self.timeStamp = [data valueForKey:@"datestamp"];
+            
+            self.visitNumberOfBalls=(int)self.visitBallCollection.count;
+            
+            [self.delegate reloadGrid];
+            
+            
+            self.visitBreakDown.hidden = false;
+            
+            
+        
             NSLog(@"Tapped a bar with index %d, value", i);
             break;
         }
     }
-}*/
+}
 
 - (void)drawLineGraphWithContext:(CGContextRef)ctx
 {
@@ -235,10 +391,10 @@ if (!self.frameData) {
     [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor greenColor] :scalePoints :scaleVisits];
     [self plotPlayerMarkers:ctx :1 :[UIColor greenColor] :scalePoints :scaleVisits];
     /* Player 2 plotting */
-    [self plotPlayerLines:false :ctx :2 :self.currentBreakPlayer2 :[UIColor orangeColor] :scalePoints :scaleVisits];
-    [self plotPlayerLines:true :ctx :2 :self.currentBreakPlayer2 :[UIColor orangeColor] :scalePoints :scaleVisits];
+    [self plotPlayerLines:false :ctx :2 :self.currentBreakPlayer2 :[UIColor redColor] :scalePoints :scaleVisits];
+    [self plotPlayerLines:true :ctx :2 :self.currentBreakPlayer2 :[UIColor redColor] :scalePoints :scaleVisits];
     
-    [self plotPlayerMarkers:ctx :2 :[UIColor orangeColor] :scalePoints :scaleVisits];
+    [self plotPlayerMarkers:ctx :2 :[UIColor redColor] :scalePoints :scaleVisits];
 }
 
 
@@ -247,7 +403,7 @@ if (!self.frameData) {
 - (void)drawRect:(CGRect)rect {
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.6);
+    CGContextSetLineWidth(context, 0.5);
     CGContextSetStrokeColorWithColor(context, [[UIColor lightGrayColor] CGColor]);
  
     CGFloat dash[] = {2.0, 2.0};
@@ -255,21 +411,33 @@ if (!self.frameData) {
     
     int graphBottom = self.frame.size.height;
     
+    NSUInteger frameDataEntries = self.frameData.count;
+    if (self.currentBreakPlayer1 + self.currentBreakPlayer2 > 0) {
+        frameDataEntries ++;
+    }
+
+    
+    float scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
+    if (scaleVisits==0) {
+        scaleVisits=50;
+    }
+
+    
     // How many lines?
-    int howMany = (self.frame.size.width - kOffsetX) + 11 / kStepX;
+    int howMany = (self.frame.size.width - kOffsetX) + 11 / scaleVisits;
     
     // Here the lines go
     for (int i = 0; i < howMany; i++)
     {
-        CGContextMoveToPoint(context, kOffsetX + i * kStepX, kGraphTop);
-        CGContextAddLineToPoint(context, kOffsetX + i * kStepX, graphBottom);
+        CGContextMoveToPoint(context, kOffsetX + i * scaleVisits, kGraphTop);
+        CGContextAddLineToPoint(context, kOffsetX + i * scaleVisits, graphBottom);
     }
     
-    int howManyHorizontal = (graphBottom - kGraphTop - kOffsetY) / kStepY;
+    int howManyHorizontal = (graphBottom - kGraphTop - kOffsetY) / scaleVisits;
     for (int i = 0; i <= howManyHorizontal; i++)
     {
-        CGContextMoveToPoint(context, kOffsetX, graphBottom - kOffsetY - i * kStepY);
-        CGContextAddLineToPoint(context, self.frame.size.width, graphBottom - kOffsetY - i * kStepY);
+        CGContextMoveToPoint(context, kOffsetX, graphBottom - kOffsetY - i * scaleVisits);
+        CGContextAddLineToPoint(context, self.frame.size.width, graphBottom - kOffsetY - i * scaleVisits);
     }
     
     CGContextStrokePath(context);

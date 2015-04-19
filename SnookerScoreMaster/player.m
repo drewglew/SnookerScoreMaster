@@ -176,6 +176,7 @@
     currentFrame.foulScore = 0;
     currentFrame.frameHighestBreak = 0;
     [currentFrame.frameHighestBreakHistory removeAllObjects];
+    [currentFrame.frameTransaction removeAllObjects];
     [currentFrame setFrameBallsPotted:0];
     breakScore = 0;
     NSString *labelScore = [NSString stringWithFormat:@"%d",currentFrame.frameScore];

@@ -10,7 +10,6 @@
 #import "snookerbreak.h"
 
 @interface frame : UILabel {
-
     int matchScore;
     int frameIndex;
     int frameScore;
@@ -18,6 +17,8 @@
     int frameBallsPotted;
     int foulScore;
     NSMutableArray *frameHighestBreakHistory;
+    NSMutableArray *frameTransaction;
+    
 }
 
 @property (assign) int matchScore;
@@ -27,6 +28,7 @@
 @property (assign) int frameBallsPotted;
 @property (assign) int foulScore;
 @property (strong, nonatomic) NSMutableArray *frameHighestBreakHistory;
+@property (strong, nonatomic) NSMutableArray *frameTransaction; //20150418
 @property (strong, nonatomic) snookerbreak     *currentBreak;
 -(void)addBalltoBreak:(ball*) newpot ;
 -(void)incrementMatchScore;

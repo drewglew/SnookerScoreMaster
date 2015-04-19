@@ -15,11 +15,16 @@
 @synthesize frameBallsPotted;
 @synthesize currentBreak;
 @synthesize frameHighestBreakHistory;
+@synthesize frameTransaction;
 @synthesize foulScore;
 
 
 - (id)init{
     if ((self = [super init])) {
+        if (!frameTransaction) {
+           frameTransaction = [[NSMutableArray alloc] init];
+        }
+        
         if (!frameHighestBreakHistory) {
             frameHighestBreakHistory = [[NSMutableArray alloc] init];
             currentBreak = [[snookerbreak alloc] init];
@@ -97,6 +102,7 @@
 }
 
 -(int)frameBallsPotted{
+    // should be able to get length of new transaction array
     return frameBallsPotted;
 }
 
