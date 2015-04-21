@@ -22,6 +22,9 @@
 @synthesize currentBreakPlayer2;
 @synthesize visitNumberOfBalls;
 @synthesize timeStamp;
+@synthesize visitPoints;
+@synthesize visitRef;
+@synthesize visitId;
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -40,13 +43,14 @@ if (!self.frameData) {
 }
 }
 
--(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction {
+-(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction :(int)matchTxId {
     
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
     NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
 
+    [data setValue: [NSNumber numberWithInt:matchTxId] forKey:@"matchTxId"];
     [data setValue: rightNow forKey:@"datestamp"];
     [data setValue: [NSNumber numberWithInt:frameIndex] forKey:@"frameindex"];
     [data setValue: [NSNumber numberWithInt:playerIndex] forKey:@"player"];
@@ -104,6 +108,49 @@ if (!self.frameData) {
     }
     return totalBalls;
 }
+
+
+-(NSString*) createResultsContent :(NSMutableArray*) singleFrameData :(NSString*) playerName1 :(NSString*) playerName2 {
+    
+    NSString *fileData = @"TxID,TxDate,Frame,PlayerID,IsFoul,BallColor,Points";
+    
+    for (NSMutableArray *dataPoint in singleFrameData) {
+        
+        NSNumber *wantedTxId = [dataPoint valueForKeyPath:@"matchTxId"];
+        NSString *wantedDateStamp = [dataPoint valueForKeyPath:@"datestamp"];
+        NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
+        NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+        NSNumber *wantedFrame = [dataPoint valueForKeyPath:@"frameindex"];
+  
+        NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
+        ballCollection = [dataPoint valueForKey:@"ballTransaction"];
+        
+        NSString *playerName;
+        if([wantedPlayer intValue]==1) {
+            playerName = playerName1;
+        } else {
+            playerName = playerName2;
+        }
+        
+        
+        for (ball *ball in ballCollection) {
+            int ballPoint;
+            if ([wantedType intValue]==1) {
+                ballPoint = ball.foulPoints;
+            } else {
+                ballPoint = ball.pottedPoints;
+            }
+            
+            fileData = [NSString stringWithFormat:@"%@\n%@,%@,%@,%@,%@,%@,%d",fileData, wantedTxId,wantedDateStamp,wantedFrame,playerName,wantedType,ball.colour,ballPoint];
+        }
+    }
+    return fileData;
+}
+
+
+
+
+
 
 -(int)getAmountOfVisitsInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex {
     
@@ -198,6 +245,11 @@ if (!self.frameData) {
     }
     return retValue;
 }
+
+
+
+
+
 
 
 -(float)getAverageBreakAmountInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex {
@@ -400,28 +452,31 @@ if (!self.frameData) {
     {
         if (CGRectContainsPoint(touchAreas[i], point))
         {
-            // example.  need to obtain items ball count..
-            NSMutableArray *data = [self.frameData objectAtIndex:i-1];
-            
-            self.visitBallCollection = [data valueForKey:@"ballTransaction"];
-            self.visitPlayerIndex = (int)[data valueForKey:@"player"];
-            self.visitIsFoul = [data valueForKey:@"isfoul"];
-            self.timeStamp = [data valueForKey:@"datestamp"];
-            
-            self.visitNumberOfBalls=(int)self.visitBallCollection.count;
-            
-            [self.delegate reloadGrid];
-            
-            
-            self.visitBreakDown.hidden = false;
-            
-            
-        
-            NSLog(@"Tapped a bar with index %d, value", i);
+            [self loadVisitWindow:i :TRUE];
             break;
         }
     }
 }
+
+-(void) loadVisitWindow:(int) visitIndex :(BOOL) fromGraph {
+    // example.  need to obtain items ball count..
+    NSMutableArray *data = [self.frameData objectAtIndex:visitIndex-1];
+    self.visitBallCollection = [data valueForKey:@"ballTransaction"];
+    self.visitNumberOfBalls = self.visitBallCollection.count;
+    self.visitPlayerIndex = [data valueForKey:@"player"];
+    self.visitIsFoul = [data valueForKey:@"isfoul"];
+    self.timeStamp = [data valueForKey:@"datestamp"];
+    self.visitPoints = [data valueForKey:@"points"];
+    self.visitRef = [NSString stringWithFormat:@"%d/%d",visitIndex,(int)self.frameData.count];
+    self.visitId = visitIndex;
+    if (fromGraph) {
+        [self.delegate reloadGrid];
+        self.visitBreakDown.hidden = false;
+    }
+    NSLog(@"Tapped a bar with index %d, value", visitIndex);
+}
+
+
 
 - (void)drawLineGraphWithContext:(CGContextRef)ctx
 {

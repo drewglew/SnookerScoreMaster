@@ -26,6 +26,7 @@
     UIImagePickerController *imgPicker;
 }
 @property (assign) int frameNumber;
+@property (assign) int matchTxId;
 @property (assign) int currentColour;
 @property (assign) bool ballReplaced;
 @property (assign) bool advancedCounting;

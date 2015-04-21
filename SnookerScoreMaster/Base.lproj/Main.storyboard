@@ -198,12 +198,21 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                             <action selector="switchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="AUL-J2-K34"/>
                                         </connections>
                                     </switch>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Km-uF-Tfd" userLabel="ClearUndo">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Km-uF-Tfd" userLabel="ClearUndo">
                                         <rect key="frame" x="12" y="58" width="37" height="30"/>
                                         <state key="normal" title="Undo">
                                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="heightClass=compact" misplaced="YES">
+                                            <rect key="frame" x="12" y="58" width="38" height="30"/>
+                                        </variation>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="12" y="58" width="38" height="30"/>
+                                        </variation>
+                                        <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="12" y="58" width="38" height="30"/>
+                                        </variation>
                                         <connections>
                                             <action selector="clearClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yAC-Yw-r10"/>
                                         </connections>
@@ -964,6 +973,12 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                             <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWC-oV-8ZR" userLabel="Player Stats">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.29999999999999966" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SSM3.png" translatesAutoresizingMaskIntoConstraints="NO" id="ROY-gr-f1O">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="147" y="0.0" width="148" height="600"/>
+                                        </variation>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdu-Ja-sd3" userLabel="margin">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1010,7 +1025,7 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8G-r7-gkj" userLabel="VisitBreakdownView">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visit Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcM-WI-him">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visit Details" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcM-WI-him">
                                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="AqO-9R-Enp"/>
@@ -1032,8 +1047,8 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fuF-YR-lVF">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HMx-LO-03v">
-                                                            <size key="itemSize" width="50" height="50"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="HMx-LO-03v">
+                                                            <size key="itemSize" width="75" height="75"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1043,17 +1058,23 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OWT-Ne-vfQ">
                                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                                <rect key="frame" x="8" y="8" width="34" height="34"/>
+                                                                            </variation>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" tag="103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEn-C8-oTK">
                                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
+                                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                                <rect key="frame" x="8" y="8" width="34" height="34"/>
+                                                                            </variation>
                                                                         </label>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1069,10 +1090,6 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                                                     <constraint firstItem="wEn-C8-oTK" firstAttribute="leading" secondItem="5VF-IW-pSc" secondAttribute="leadingMargin" id="zBT-Oj-nuh"/>
                                                                 </constraints>
                                                                 <variation key="default">
-                                                                    <mask key="subviews">
-                                                                        <exclude reference="OWT-Ne-vfQ"/>
-                                                                        <exclude reference="wEn-C8-oTK"/>
-                                                                    </mask>
                                                                     <mask key="constraints">
                                                                         <exclude reference="DpA-ZO-A72"/>
                                                                         <exclude reference="Sra-Oa-GL0"/>
@@ -1103,16 +1120,44 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                                             </collectionViewCell>
                                                         </cells>
                                                     </collectionView>
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="gcg-Hp-I9j">
+                                                        <rect key="frame" x="-47" y="-14" width="94" height="29"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="94" id="Vih-W2-lny"/>
+                                                            <constraint firstAttribute="height" constant="29" id="lbe-IA-sz2"/>
+                                                        </constraints>
+                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                            <mask key="constraints">
+                                                                <include reference="Vih-W2-lny"/>
+                                                                <include reference="lbe-IA-sz2"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <connections>
+                                                            <action selector="visitStepperClicked:" destination="BYZ-38-t0r" eventType="valueChanged" id="BNN-QS-3da"/>
+                                                        </connections>
+                                                    </stepper>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="7qe-jT-So0">
+                                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="fcM-WI-him" firstAttribute="leading" secondItem="r8G-r7-gkj" secondAttribute="leading" constant="5" id="0An-Uj-Viu"/>
-                                                    <constraint firstAttribute="bottom" secondItem="fuF-YR-lVF" secondAttribute="bottom" constant="5" id="9o5-EZ-Zzd"/>
+                                                    <constraint firstItem="gcg-Hp-I9j" firstAttribute="leading" secondItem="r8G-r7-gkj" secondAttribute="leading" constant="5" id="8Lp-eJ-PF9"/>
+                                                    <constraint firstItem="gcg-Hp-I9j" firstAttribute="top" secondItem="fuF-YR-lVF" secondAttribute="bottom" constant="5" id="8YI-F6-E3I"/>
+                                                    <constraint firstItem="7qe-jT-So0" firstAttribute="top" secondItem="fuF-YR-lVF" secondAttribute="bottom" constant="5" id="Bnb-gV-4Pl"/>
                                                     <constraint firstItem="fcM-WI-him" firstAttribute="top" secondItem="r8G-r7-gkj" secondAttribute="top" constant="5" id="HeN-7g-prz"/>
                                                     <constraint firstItem="fuF-YR-lVF" firstAttribute="leading" secondItem="r8G-r7-gkj" secondAttribute="leading" constant="5" id="JeS-P5-kG6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="7qe-jT-So0" secondAttribute="bottom" constant="5" id="Kr6-JL-xzG"/>
                                                     <constraint firstItem="fuF-YR-lVF" firstAttribute="top" secondItem="fcM-WI-him" secondAttribute="bottom" constant="5" id="LZe-yg-RNi"/>
                                                     <constraint firstAttribute="trailing" secondItem="fuF-YR-lVF" secondAttribute="trailing" constant="5" id="dWH-dd-VXF"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gcg-Hp-I9j" secondAttribute="bottom" constant="5" id="dkR-NI-Y1M"/>
+                                                    <constraint firstItem="7qe-jT-So0" firstAttribute="leading" secondItem="gcg-Hp-I9j" secondAttribute="trailing" constant="5" id="eNP-FZ-F7q"/>
                                                     <constraint firstAttribute="trailing" secondItem="fcM-WI-him" secondAttribute="trailing" constant="5" id="kth-nD-bvV"/>
+                                                    <constraint firstAttribute="trailing" secondItem="7qe-jT-So0" secondAttribute="trailing" constant="5" id="v7K-hf-r2B"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="subviews">
@@ -1123,7 +1168,6 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                                         <exclude reference="0An-Uj-Viu"/>
                                                         <exclude reference="HeN-7g-prz"/>
                                                         <exclude reference="kth-nD-bvV"/>
-                                                        <exclude reference="9o5-EZ-Zzd"/>
                                                         <exclude reference="JeS-P5-kG6"/>
                                                         <exclude reference="LZe-yg-RNi"/>
                                                         <exclude reference="dWH-dd-VXF"/>
@@ -1138,10 +1182,24 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                                         <include reference="0An-Uj-Viu"/>
                                                         <include reference="HeN-7g-prz"/>
                                                         <include reference="kth-nD-bvV"/>
-                                                        <include reference="9o5-EZ-Zzd"/>
                                                         <include reference="JeS-P5-kG6"/>
                                                         <include reference="LZe-yg-RNi"/>
                                                         <include reference="dWH-dd-VXF"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <mask key="subviews">
+                                                        <include reference="gcg-Hp-I9j"/>
+                                                        <include reference="7qe-jT-So0"/>
+                                                    </mask>
+                                                    <mask key="constraints">
+                                                        <include reference="8Lp-eJ-PF9"/>
+                                                        <include reference="8YI-F6-E3I"/>
+                                                        <include reference="dkR-NI-Y1M"/>
+                                                        <include reference="Bnb-gV-4Pl"/>
+                                                        <include reference="Kr6-JL-xzG"/>
+                                                        <include reference="eNP-FZ-F7q"/>
+                                                        <include reference="v7K-hf-r2B"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -1151,7 +1209,7 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                                    <rect key="frame" x="-3" y="175" width="31" height="11"/>
+                                                    <rect key="frame" x="260" y="189" width="30" height="12"/>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visits" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85y-hW-wY9" userLabel="Visit">
@@ -1161,9 +1219,9 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="r8G-r7-gkj" secondAttribute="bottom" constant="20" id="8MZ-Oe-Quo"/>
+                                            <constraint firstAttribute="bottom" secondItem="r8G-r7-gkj" secondAttribute="bottom" constant="40" id="8MZ-Oe-Quo"/>
                                             <constraint firstAttribute="centerX" secondItem="85y-hW-wY9" secondAttribute="centerX" id="ANI-pw-8Kg"/>
                                             <constraint firstItem="r8G-r7-gkj" firstAttribute="leading" secondItem="CQE-EF-50G" secondAttribute="leading" constant="20" id="AiR-4b-KBQ"/>
                                             <constraint firstAttribute="bottom" secondItem="85y-hW-wY9" secondAttribute="bottom" constant="2" id="bNT-w7-W7V"/>
@@ -1320,10 +1378,13 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                     <constraint firstItem="E50-4h-tA1" firstAttribute="leading" secondItem="aQk-tw-6ft" secondAttribute="trailing" constant="2" id="YQ4-up-NJZ"/>
                                     <constraint firstAttribute="trailing" secondItem="Hdu-Ja-sd3" secondAttribute="trailing" id="aS7-13-YUj"/>
                                     <constraint firstItem="CQE-EF-50G" firstAttribute="leading" secondItem="kWC-oV-8ZR" secondAttribute="leading" constant="5" id="aZA-9m-bMm"/>
+                                    <constraint firstItem="ROY-gr-f1O" firstAttribute="top" secondItem="kWC-oV-8ZR" secondAttribute="top" id="b95-Vu-ZaF"/>
                                     <constraint firstAttribute="bottom" secondItem="Hdu-Ja-sd3" secondAttribute="bottom" id="bqB-4e-E5T"/>
+                                    <constraint firstAttribute="bottom" secondItem="ROY-gr-f1O" secondAttribute="bottom" id="dUV-KL-Ju6"/>
                                     <constraint firstItem="3xy-CG-hOQ" firstAttribute="width" secondItem="UBN-U1-Jxy" secondAttribute="width" id="g6q-pf-Ppf"/>
                                     <constraint firstItem="AZC-8w-P3c" firstAttribute="top" secondItem="aQk-tw-6ft" secondAttribute="bottom" constant="2" id="gYK-Ep-BL5"/>
                                     <constraint firstItem="CQE-EF-50G" firstAttribute="top" secondItem="3xy-CG-hOQ" secondAttribute="bottom" constant="2" id="gnK-Qc-kum"/>
+                                    <constraint firstAttribute="trailing" secondItem="ROY-gr-f1O" secondAttribute="trailing" id="gzk-zS-ORQ"/>
                                     <constraint firstItem="Hdu-Ja-sd3" firstAttribute="leading" secondItem="UBN-U1-Jxy" secondAttribute="trailing" constant="2" id="haJ-Wp-n0e"/>
                                     <constraint firstItem="aQk-tw-6ft" firstAttribute="leading" secondItem="kWC-oV-8ZR" secondAttribute="leading" constant="2" id="htI-CT-bre"/>
                                     <constraint firstItem="3xy-CG-hOQ" firstAttribute="top" secondItem="kWC-oV-8ZR" secondAttribute="top" constant="2" id="iQ5-gn-9vH"/>
@@ -1333,6 +1394,7 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                     <constraint firstItem="E50-4h-tA1" firstAttribute="width" secondItem="aQk-tw-6ft" secondAttribute="width" id="pOJ-L1-g2P"/>
                                     <constraint firstItem="UBN-U1-Jxy" firstAttribute="leading" secondItem="3xy-CG-hOQ" secondAttribute="trailing" constant="2" id="sdW-6S-puu"/>
                                     <constraint firstItem="Hdu-Ja-sd3" firstAttribute="leading" secondItem="AZC-8w-P3c" secondAttribute="trailing" constant="2" id="wSV-Mh-DIf"/>
+                                    <constraint firstItem="ROY-gr-f1O" firstAttribute="leading" secondItem="kWC-oV-8ZR" secondAttribute="leading" id="whg-Bp-mzh"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -1349,32 +1411,37 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                         <exclude reference="O1h-ca-POq"/>
                                         <exclude reference="g6q-pf-Ppf"/>
                                         <exclude reference="iQ5-gn-9vH"/>
-                                        <exclude reference="3Jh-DI-bpe"/>
-                                        <exclude reference="91Y-6g-Tfi"/>
-                                        <exclude reference="RCg-YX-SfR"/>
-                                        <exclude reference="gYK-Ep-BL5"/>
-                                        <exclude reference="lv2-56-101"/>
+                                        <exclude reference="0gX-34-ZZN"/>
+                                        <exclude reference="97g-oI-7sN"/>
+                                        <exclude reference="QMk-uu-5VS"/>
+                                        <exclude reference="aZA-9m-bMm"/>
+                                        <exclude reference="gnK-Qc-kum"/>
+                                        <exclude reference="b95-Vu-ZaF"/>
+                                        <exclude reference="dUV-KL-Ju6"/>
+                                        <exclude reference="gzk-zS-ORQ"/>
+                                        <exclude reference="whg-Bp-mzh"/>
+                                        <exclude reference="LZl-Uj-oe4"/>
+                                        <exclude reference="sdW-6S-puu"/>
                                         <exclude reference="aS7-13-YUj"/>
                                         <exclude reference="bqB-4e-E5T"/>
                                         <exclude reference="haJ-Wp-n0e"/>
                                         <exclude reference="j4v-f4-2rI"/>
                                         <exclude reference="l55-bU-OTg"/>
                                         <exclude reference="wSV-Mh-DIf"/>
-                                        <exclude reference="LZl-Uj-oe4"/>
-                                        <exclude reference="sdW-6S-puu"/>
-                                        <exclude reference="0gX-34-ZZN"/>
-                                        <exclude reference="97g-oI-7sN"/>
-                                        <exclude reference="QMk-uu-5VS"/>
-                                        <exclude reference="aZA-9m-bMm"/>
-                                        <exclude reference="gnK-Qc-kum"/>
-                                        <exclude reference="YQ4-up-NJZ"/>
-                                        <exclude reference="pOJ-L1-g2P"/>
                                         <exclude reference="YLb-Nt-6Q6"/>
                                         <exclude reference="htI-CT-bre"/>
+                                        <exclude reference="YQ4-up-NJZ"/>
+                                        <exclude reference="pOJ-L1-g2P"/>
+                                        <exclude reference="3Jh-DI-bpe"/>
+                                        <exclude reference="91Y-6g-Tfi"/>
+                                        <exclude reference="RCg-YX-SfR"/>
+                                        <exclude reference="gYK-Ep-BL5"/>
+                                        <exclude reference="lv2-56-101"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="subviews">
+                                        <include reference="ROY-gr-f1O"/>
                                         <include reference="Hdu-Ja-sd3"/>
                                         <include reference="AZC-8w-P3c"/>
                                         <include reference="CQE-EF-50G"/>
@@ -1388,28 +1455,32 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                                         <include reference="O1h-ca-POq"/>
                                         <include reference="g6q-pf-Ppf"/>
                                         <include reference="iQ5-gn-9vH"/>
-                                        <include reference="3Jh-DI-bpe"/>
-                                        <include reference="91Y-6g-Tfi"/>
-                                        <include reference="RCg-YX-SfR"/>
-                                        <include reference="gYK-Ep-BL5"/>
-                                        <include reference="lv2-56-101"/>
+                                        <include reference="0gX-34-ZZN"/>
+                                        <include reference="97g-oI-7sN"/>
+                                        <include reference="QMk-uu-5VS"/>
+                                        <include reference="aZA-9m-bMm"/>
+                                        <include reference="gnK-Qc-kum"/>
+                                        <include reference="b95-Vu-ZaF"/>
+                                        <include reference="dUV-KL-Ju6"/>
+                                        <include reference="gzk-zS-ORQ"/>
+                                        <include reference="whg-Bp-mzh"/>
+                                        <include reference="LZl-Uj-oe4"/>
+                                        <include reference="sdW-6S-puu"/>
                                         <include reference="aS7-13-YUj"/>
                                         <include reference="bqB-4e-E5T"/>
                                         <include reference="haJ-Wp-n0e"/>
                                         <include reference="j4v-f4-2rI"/>
                                         <include reference="l55-bU-OTg"/>
                                         <include reference="wSV-Mh-DIf"/>
-                                        <include reference="LZl-Uj-oe4"/>
-                                        <include reference="sdW-6S-puu"/>
-                                        <include reference="0gX-34-ZZN"/>
-                                        <include reference="97g-oI-7sN"/>
-                                        <include reference="QMk-uu-5VS"/>
-                                        <include reference="aZA-9m-bMm"/>
-                                        <include reference="gnK-Qc-kum"/>
-                                        <include reference="YQ4-up-NJZ"/>
-                                        <include reference="pOJ-L1-g2P"/>
                                         <include reference="YLb-Nt-6Q6"/>
                                         <include reference="htI-CT-bre"/>
+                                        <include reference="YQ4-up-NJZ"/>
+                                        <include reference="pOJ-L1-g2P"/>
+                                        <include reference="3Jh-DI-bpe"/>
+                                        <include reference="91Y-6g-Tfi"/>
+                                        <include reference="RCg-YX-SfR"/>
+                                        <include reference="gYK-Ep-BL5"/>
+                                        <include reference="lv2-56-101"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=regular">
@@ -1619,6 +1690,7 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="PlayerStatsView" destination="kWC-oV-8ZR" id="fVi-9C-1dv"/>
+                        <outlet property="VisitPlayer" destination="7qe-jT-So0" id="0Cd-hV-MSs"/>
                         <outlet property="blackIndicator" destination="7yz-DB-QLU" id="B1Y-aJ-DHX"/>
                         <outlet property="blueIndicator" destination="d5S-jd-XMf" id="0Lz-P6-ya2"/>
                         <outlet property="brownIndicator" destination="WEw-rC-212" id="9xl-jc-YxN"/>
@@ -1659,6 +1731,7 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                         <outlet property="statP1ContentHeightConstraint" destination="fEe-9R-vsO" id="W5H-Ga-Zg2"/>
                         <outlet property="statP2ContentHeightConstraint" destination="qIJ-I1-2a9" id="HJ8-L7-R3d"/>
                         <outlet property="statViewWidthConstraint" destination="0CS-ir-Thw" id="Kww-fP-sbB"/>
+                        <outlet property="stepperVisit" destination="gcg-Hp-I9j" id="SWQ-I7-19t"/>
                         <outlet property="switchFoul" destination="CSu-LY-jYc" id="xR2-xB-54J"/>
                         <outlet property="textPlayerOneName" destination="1f3-cd-uep" id="kVb-1y-RaL"/>
                         <outlet property="textPlayerTwoName" destination="KJr-PJ-RIs" id="tQb-o2-geE"/>
@@ -1676,7 +1749,7 @@ Simplified player stats are available at anytime with a simple swipe left to rig
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1294.5" y="391"/>
+            <point key="canvasLocation" x="1294.5" y="390.75"/>
         </scene>
         <!--Adjust Points View Controller-->
         <scene sceneID="ypg-Ca-YhX">
@@ -1934,6 +2007,7 @@ Simplified player stats are available at anytime with a simple swipe left to rig
         </scene>
     </scenes>
     <resources>
+        <image name="SSM3.png" width="480" height="640"/>
         <image name="ball_largex_black07.png" width="640" height="640"/>
         <image name="ball_largex_blue05.png" width="640" height="640"/>
         <image name="ball_largex_brown04.png" width="640" height="640"/>

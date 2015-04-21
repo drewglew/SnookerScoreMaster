@@ -84,6 +84,10 @@
 @property (strong, nonatomic) UIAlertView *alertEndScores;
 @property (strong, nonatomic) UIAlertView *alertOkNotification;
 @property (strong, nonatomic) UIAlertView *alertUndoEntry;
+@property (weak, nonatomic) IBOutlet UIStepper *stepperVisit;
+@property (weak, nonatomic) IBOutlet UILabel *VisitPlayer;
+
+
 @end
 
 
@@ -116,6 +120,7 @@ Still issue when user fouls at same time as potting current ball.  More analysis
 @synthesize ballReplaced;
 @synthesize imgPicker;
 @synthesize advancedCounting;
+@synthesize matchTxId;
 enum scoreStatus { FrameScore, HighestBreak, BallsPotted, TotalVisits, AvgBreak };
 enum scoreStatus scoreState;
 enum IndicatorStyle {highlight, hide};
@@ -126,22 +131,14 @@ enum IndicatorStyle {highlight, hide};
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //self.imgPicker = [[UIImagePickerController alloc] init];
-    //self.imgPicker.allowsImageEditing = YES;
-    //self.imgPicker.delegate = self;
-    //self.imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-   
-    //[self presentViewController:self.imgPicker animated:YES completion:nil];
+    matchTxId = 0;
+
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(orientationChanged:)
      name:UIDeviceOrientationDidChangeNotification
      object:[UIDevice currentDevice]];
 
-    
-    
-    
        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"showInstructions"]) {
         [defaults setBool:YES forKey:@"showInstructions"];
@@ -325,6 +322,7 @@ enum IndicatorStyle {highlight, hide};
 
     self.visitBallGrid.dataSource = self;
     self.visitBallGrid.delegate = self;
+
     
     self.frameGraphView.delegate = self;
     
@@ -332,11 +330,37 @@ enum IndicatorStyle {highlight, hide};
 }
 
 -(void)reloadGrid {
-    [self.visitBallGrid reloadData];
+    
+    
+    self.stepperVisit.value = [frameGraphView visitId];
 
-    self.visitDetailsLable.text = [NSString stringWithFormat:@"Visit Details %@", [self.frameGraphView timeStamp] ];
+    NSString *playerName;
+    if ([[self.frameGraphView visitPlayerIndex] intValue] == 1) {
+        playerName = self.textPlayerOneName.text;
+    } else {
+        playerName = self.textPlayerTwoName.text;
+    }
+    
+    NSString *typeOfPoints;
+    if ([[self.frameGraphView visitIsFoul] intValue] == 0) {
+        typeOfPoints = @"potted";
+        self.visitBreakdownView.backgroundColor = [UIColor lightGrayColor];
+        
+    } else {
+        typeOfPoints = @"bonus";
+        self.visitBreakdownView.backgroundColor = [UIColor yellowColor];
+    }
+    
+    self.visitDetailsLable.text = [NSString stringWithFormat:@"%@ %@ %@ points", playerName, [self.frameGraphView visitPoints], typeOfPoints];
+    self.VisitPlayer.text = [NSString stringWithFormat:@"%@ : %@", [self.frameGraphView visitRef], [self.frameGraphView timeStamp]];
+    
+    //[self.visitBallGrid reloadItemsAtIndexPaths:[self.visitBallGrid indexPathsForVisibleItems]];
+    [self.visitBallGrid reloadData];
+   
     
 }
+
+
 
 - (void) orientationChanged:(NSNotification *)note
 {
@@ -391,14 +415,7 @@ enum IndicatorStyle {highlight, hide};
             break;
             
         default:
-            [self.frameGraphView setNeedsDisplay];
-                self.statViewWidthConstraint.constant = self.view.frame.size.width;
-             if (self.playerStatsPosition.constant!=0) {
-                self.playerStatsPosition.constant =  2 - self.view.frame.size.width;
-             }
-            self.statBoxHeightConstraint.constant = 55;
-            self.statP1ContentHeightConstraint.constant = 100;
-            self.statP2ContentHeightConstraint.constant = 100;
+            /* do nothing */
             break;
     };
 }
@@ -454,6 +471,8 @@ enum IndicatorStyle {highlight, hide};
     
     self.disabledView.hidden=false;
     self.pointsLabel.hidden = false;
+    self.stepperVisit.maximumValue = self.frameGraphView.frameData.count;
+    
     [self.frameGraphView setNeedsDisplay];
 }
 
@@ -527,11 +546,6 @@ enum IndicatorStyle {highlight, hide};
         [self.currentPlayer.currentFrame setFrameHighestBreak:[self.currentPlayersBreak breakScore] :self.frameNumber :self.currentPlayersBreak.pottedBalls];
     }
     
-    // we also need to add to the players frame transaction object.
-    
-    
-    
-    
 }
 
 
@@ -574,9 +588,8 @@ enum IndicatorStyle {highlight, hide};
         
         // send array to method for foul ball.
         
-
-        
-        [self.frameGraphView addFrameData:self.frameNumber :self.opposingPlayer.playerIndex :pottedBall.foulPoints :1 :foulBallArray];
+        self.matchTxId++;
+        [self.frameGraphView addFrameData:self.frameNumber :self.opposingPlayer.playerIndex :pottedBall.foulPoints :1 :foulBallArray :self.matchTxId];
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self.switchFoul setOn:false];
         self.foulLabel.hidden=true;
@@ -708,7 +721,8 @@ enum IndicatorStyle {highlight, hide};
         [self.currentPlayer setSumOfBreaks:self.currentPlayer.sumOfBreaks + self.currentPlayersBreak.breakScore];
         [self.currentPlayer setNbrOfBreaks:self.currentPlayer.nbrOfBreaks + 1];
         [self.currentPlayer addBreakScore:self.currentPlayersBreak.breakScore];
-        [self.frameGraphView addFrameData:self.frameNumber :self.currentPlayer.playerIndex :self.currentPlayersBreak.breakScore :0 :self.currentPlayersBreak.pottedBalls];
+        self.matchTxId ++;
+        [self.frameGraphView addFrameData:self.frameNumber :self.currentPlayer.playerIndex :self.currentPlayersBreak.breakScore :0 :self.currentPlayersBreak.pottedBalls :self.matchTxId];
         [self processCurrentUsersHighestBreak];
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self clearIndicators :hide];
@@ -1016,6 +1030,17 @@ enum IndicatorStyle {highlight, hide};
     BOOL ok = [MFMailComposeViewController canSendMail];
     if (!ok) return;
     
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"SSMResults.csv"];
+    [fileManager removeItemAtPath:filePath error:nil];
+    
+
+    NSError *error;
+    NSString *stringToWrite = [self.frameGraphView createResultsContent :self.matchData :self.textPlayerOneName.text :self.textPlayerTwoName.text];
+
+    [stringToWrite writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    
+    
     NSString *body = [self composeMessage];
     
     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
@@ -1026,6 +1051,13 @@ enum IndicatorStyle {highlight, hide};
     [snookerScorerMailComposer setSubject:[NSString stringWithFormat:@"Snooker Score Master - Matchday :%@", [DateFormatter stringFromDate:[NSDate date]]]];
     //[snookerScorerMailComposer setToRecipients:[NSArray arrayWithObjects:@"andrewglew@me.com", @"dho041@gmail.com", nil]];
     [snookerScorerMailComposer setMessageBody:body isHTML:YES];
+    
+    
+    
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    [snookerScorerMailComposer addAttachmentData:fileData
+                       mimeType:@"text/plain"
+                       fileName:@"SSMResults.csv"];
     
     [self presentViewController:snookerScorerMailComposer animated:YES completion:nil];
 
@@ -1071,7 +1103,8 @@ enum IndicatorStyle {highlight, hide};
     self.isButtonStateClear = false;
     
     [self.matchData removeAllObjects];
-
+    self.matchTxId=0;
+    
     [self resetBalls];
 }
 
@@ -1421,7 +1454,9 @@ enum IndicatorStyle {highlight, hide};
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+   
     return [self.frameGraphView visitNumberOfBalls];
+    //return 40;
     
 }
 
@@ -1430,17 +1465,12 @@ enum IndicatorStyle {highlight, hide};
     
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
-    
-    // missing foul detail and also player..
-    
-    if (self.frameGraphView.visitBallCollection.count >0) {
+
     
         UIImageView *collectionImageView = (UIImageView *)[cell viewWithTag:102];
         UILabel *ballLabel = (UILabel *)[cell viewWithTag:103];
         ball *selectedBall = [self.frameGraphView.visitBallCollection objectAtIndex:indexPath.row];
-
         NSNumber *isfoul = [self.frameGraphView visitIsFoul];
-        
         NSString *points;
         if ([isfoul intValue] == 0  ) {
             points = [NSString stringWithFormat:@"%d",selectedBall.pottedPoints];
@@ -1448,7 +1478,6 @@ enum IndicatorStyle {highlight, hide};
         else {
             points = [NSString stringWithFormat:@"%d",selectedBall.foulPoints];
         }
-        
         ballLabel.text = points;
         
         if (selectedBall.pottedPoints==1) {
@@ -1466,14 +1495,10 @@ enum IndicatorStyle {highlight, hide};
         } else {
         collectionImageView.image = [UIImage imageNamed:@"ball_largex_black07.png"];
         }
-        
-        
-
-    }
-    //cell.backgroundColor=[UIColor greenColor];
+    
+    
+    
     return cell;
-    
-    
 }
 
 
@@ -1547,22 +1572,20 @@ enum IndicatorStyle {highlight, hide};
                 visitPlayerName = self.textPlayerTwoName.text;
             }
             
-            
-            
             NSString *alertMessage;
             NSString *titleMessage;
             
             if ([visitIsFoul intValue] == 0) {
             
-            titleMessage = @"Undo Break";
+            titleMessage = @"Undo Action";
             
-            alertMessage = [NSString stringWithFormat:@"You can either undo %@'s entry of %d points or the whole frame if you want a rerack.  Alternatively you may wish to press cancel if this was a mistake.",visitPlayerName,  visitBreakAmount];
+            alertMessage = [NSString stringWithFormat:@"You can either undo %@'s Last Entry of %d points or Rerack the whole frame.  Perhaps you didn't mean to select this option  at all so Cancel is also available.",visitPlayerName,  visitBreakAmount];
             
             } else {
                 
                 titleMessage = @"Undo Foul";
                 
-                alertMessage = [NSString stringWithFormat:@"You can either undo the foul points of %d received by %@ or the whole frame if you want a rerack.  Alternatively you may wish to press cancel if this was a mistake.",visitBreakAmount,visitPlayerName];
+                alertMessage = [NSString stringWithFormat:@"You can either undo the foul points of %d %@ received as Last Entry or Rerack the whole frame.  Alternatively you may just want to Cancel if this was a mistake.",visitBreakAmount,visitPlayerName];
             }
             
             
@@ -1666,5 +1689,17 @@ enum IndicatorStyle {highlight, hide};
 
     return highestBreakInMatch;
 }
+
+- (IBAction)visitStepperClicked:(id)sender {
+    
+    if (self.stepperVisit.value>=1){
+        [self.frameGraphView loadVisitWindow:self.stepperVisit.value :FALSE];
+        [self reloadGrid];
+    }
+
+}
+
+
+
 
 @end
