@@ -16,9 +16,11 @@
 
 @interface graphView : UIView {
     NSMutableArray *frameData;
+    NSMutableArray *selectedFrameData;
 }
 @property (assign) id <graphViewDelegate> delegate;
 @property (strong, nonatomic) NSMutableArray *frameData;
+@property (strong, nonatomic) NSMutableArray *selectedFrameData;
 @property (assign) int scorePlayer1;
 @property (assign) NSUInteger visitNumberOfBalls;
 @property (assign) int scorePlayer2;
@@ -51,6 +53,7 @@
 -(int)getAmountOfBallsPottedInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int)frameIndex;
 -(void) loadVisitWindow:(int) visitIndex :(BOOL) fromGraph;
 -(NSString*) createResultsContent :(NSMutableArray*) singleFrameData :(NSString*) playerName1 :(NSString*) playerName2;
+-(NSMutableArray*) getSelectedFrameData :(NSMutableArray*) singleFrameData :(int)frameIndex;
 
 
 #define kGraphHeight 275

@@ -10,9 +10,13 @@
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
 
 
+/* TODO next - created new array selectedFrameData that will for all likes and purposes contain the 
+ source for the graph and other supporting items shown in the playerstats */
+
 
 @implementation graphView
 @synthesize frameData;
+@synthesize selectedFrameData;
 @synthesize visitBallCollection;
 @synthesize visitPlayerIndex;
 @synthesize visitIsFoul;
@@ -40,6 +44,7 @@ CGRect touchAreas[100];
 -(void) initFrameData {
 if (!self.frameData) {
     self.frameData = [[NSMutableArray alloc] init];
+    self.selectedFrameData = [[NSMutableArray alloc] init];
 }
 }
 
@@ -59,11 +64,27 @@ if (!self.frameData) {
     [data setValue: [NSMutableArray arrayWithArray:breakTransaction] forKey:@"ballTransaction"];
     [self.frameData addObject:data];
     
-    if (playerIndex==1) {
+    /*if (playerIndex==1) {
         self.scorePlayer1+=points;
     } else {
         self.scorePlayer2+=points;
+    }*/
+    
+}
+
+-(NSMutableArray*) getSelectedFrameData :(NSMutableArray*) singleFrameData :(int)frameIndex {
+    NSMutableArray *selectedFrame = [[NSMutableArray alloc] init];
+    
+    for (NSMutableArray *dataPoint in singleFrameData) {
+    
+        NSNumber *wantedFrame = [dataPoint valueForKeyPath:@"frameindex"];
+        if ([wantedFrame intValue] == frameIndex ) {
+            [selectedFrame addObject:dataPoint];
+        } else if ([wantedFrame intValue] > frameIndex) {
+            break;
+        }
     }
+    return selectedFrame;
 }
 
 
@@ -210,6 +231,10 @@ if (!self.frameData) {
     return [self getPointsByTypeInFrame:(NSMutableArray*) singleFrameData :playerIndex :0 :0] + [self getPointsByTypeInFrame :(NSMutableArray*) singleFrameData :playerIndex :1 :0];
 }
 
+
+
+
+
 -(int)getPointsInASingleFrame:(NSMutableArray*) singleFrameData :(int)playerIndex :(int)frameIndex {
     return [self getPointsByTypeInFrame:(NSMutableArray*) singleFrameData :playerIndex :0 :frameIndex] + [self getPointsByTypeInFrame :(NSMutableArray*) singleFrameData :playerIndex :1 :frameIndex];
     
@@ -324,7 +349,7 @@ if (!self.frameData) {
         
         if (playerColour == [UIColor redColor]) {
             CGFloat components[8] = {1.0, 0.0, 0.0, 0.1,  // Start color
-                1.0, 0.0, 0.0, 0.5}; // End color
+                1.0, 0.0, 0.0, 0.9}; // End color
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
         } else {
             
@@ -342,7 +367,7 @@ if (!self.frameData) {
     CGContextBeginPath(ctx);
     CGContextMoveToPoint(ctx, plotVisitsX, plotPointsY);
     /* run through player 1 and player 2 shared data array picking out only selected players data */
-    for (NSMutableArray *dataPoint in self.frameData) {
+    for (NSMutableArray *dataPoint in self.selectedFrameData) {
         dataIndex ++;
         NSNumber *scoreNbr=[dataPoint valueForKeyPath:@"player"];
         int pIndex = [scoreNbr intValue];
@@ -415,7 +440,7 @@ if (!self.frameData) {
     float plotPointsY=0.0f;     // maintains Y position of line
     int score=0; // variable used to store visit point value.
     int dataIndex = 0;
-    for (NSMutableArray *dataPoint in self.frameData) {
+    for (NSMutableArray *dataPoint in self.selectedFrameData) {
         dataIndex ++;
         NSNumber *pointsValue=[dataPoint valueForKeyPath:@"player"];
         int pIndex = [pointsValue intValue];
@@ -460,14 +485,14 @@ if (!self.frameData) {
 
 -(void) loadVisitWindow:(int) visitIndex :(BOOL) fromGraph {
     // example.  need to obtain items ball count..
-    NSMutableArray *data = [self.frameData objectAtIndex:visitIndex-1];
+    NSMutableArray *data = [self.selectedFrameData objectAtIndex:visitIndex-1];
     self.visitBallCollection = [data valueForKey:@"ballTransaction"];
     self.visitNumberOfBalls = self.visitBallCollection.count;
     self.visitPlayerIndex = [data valueForKey:@"player"];
     self.visitIsFoul = [data valueForKey:@"isfoul"];
     self.timeStamp = [data valueForKey:@"datestamp"];
     self.visitPoints = [data valueForKey:@"points"];
-    self.visitRef = [NSString stringWithFormat:@"%d/%d",visitIndex,(int)self.frameData.count];
+    self.visitRef = [NSString stringWithFormat:@"%d/%d",visitIndex,(int)self.selectedFrameData.count];
     self.visitId = visitIndex;
     if (fromGraph) {
         [self.delegate reloadGrid];
@@ -489,11 +514,14 @@ if (!self.frameData) {
     }
     float scalePoints = 1.0f/maxScore;
     /* assist with scale of graph - width */
-    NSUInteger frameDataEntries = self.frameData.count;
+    NSUInteger frameDataEntries = self.selectedFrameData.count;
     if (self.currentBreakPlayer1 + self.currentBreakPlayer2 > 0) {
         frameDataEntries ++;
     }
-    float scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
+    float scaleVisits=0.0;
+    if (frameDataEntries>0) {
+        scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
+    }
     /* Player 1 plotting */
     [self plotPlayerLines:false :ctx :1 :self.currentBreakPlayer1 :[UIColor greenColor] :scalePoints :scaleVisits];
     [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor greenColor] :scalePoints :scaleVisits];
@@ -519,13 +547,16 @@ if (!self.frameData) {
     
     int graphBottom = self.frame.size.height;
     
-    NSUInteger frameDataEntries = self.frameData.count;
+    NSUInteger frameDataEntries = self.selectedFrameData.count;
     if (self.currentBreakPlayer1 + self.currentBreakPlayer2 > 0) {
         frameDataEntries ++;
     }
 
+    float scaleVisits = 0.0;
+    if (frameDataEntries>0) {
+        scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
+    }
     
-    float scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
     if (scaleVisits==0) {
         scaleVisits=50;
     }
