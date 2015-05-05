@@ -16,6 +16,7 @@
 @synthesize colour;
 @synthesize imageNameSmall;
 @synthesize potsInBreakCounter;
+@synthesize timeStamp;
 
 -(id)init {
     if (self = [super init])  {

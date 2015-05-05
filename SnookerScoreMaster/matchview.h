@@ -15,7 +15,7 @@
 //#import "CorePlot-CocoaTouch.h"
 
 
-@interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, graphViewDelegate> {
+@interface matchview : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, graphViewDelegate> {
     int frameNumber;
     int currentColour;
     bool ballReplaced;
@@ -23,7 +23,6 @@
     int colourStateAtStartOfBreak;
     int colourQuantityAtStartOfBreak;
     statsViewController *statsVC;
-    UIImagePickerController *imgPicker;
 }
 @property (assign) int frameNumber;
 @property (assign) int matchTxId;
@@ -34,7 +33,7 @@
 @property (assign) int colourQuantityAtStartOfBreak;
 @property (nonatomic, strong) NSMutableArray *matchData;
 
-@property (nonatomic, retain) UIImagePickerController *imgPicker;
+
 @property (strong, nonatomic) NSMutableArray     *joinedFrameResult;
 @property (weak, nonatomic) IBOutlet UICollectionView *visitBallGrid;
 /* https://www.youtube.com/watch?v=mdG6XpwwuwI */

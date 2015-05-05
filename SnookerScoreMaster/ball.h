@@ -16,7 +16,7 @@
     NSString *colour;
     NSString *imageNameSmall;
     NSString *imageNameLarge;
-    
+    NSString *timeStamp;
 }
 
 @property (assign) int pottedPoints;
@@ -26,6 +26,7 @@
 @property (nonatomic) NSString *colour;
 @property (nonatomic) NSString *imageNameSmall;
 @property (nonatomic) NSString *imageNameLarge;
+@property (nonatomic) NSString *timeStamp;
 
 -(void)decreaseQty;
 @end

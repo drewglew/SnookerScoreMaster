@@ -89,6 +89,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *frameRefLabel;
 @property (weak, nonatomic) IBOutlet UIStepper *frameStepper;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *visitBreakTopConstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *blurBackground;
 
 
 @end
@@ -121,7 +122,6 @@ Still issue when user fouls at same time as potting current ball.  More analysis
 @synthesize colourQuantityAtStartOfBreak;
 @synthesize frameGraphView;
 @synthesize ballReplaced;
-@synthesize imgPicker;
 @synthesize advancedCounting;
 @synthesize matchTxId;
 enum scoreStatus { FrameScore, HighestBreak, BallsPotted, TotalVisits, AvgBreak };
@@ -175,55 +175,55 @@ enum IndicatorStyle {highlight, hide};
     self.opposingPlayer = self.textScorePlayer2;
 
     //TODO fix foulPoints so they use default value in ball object
-    self.buttonRed.colour = @"Red";
+    self.buttonRed.colour = @"RED";
     self.buttonRed.foulPoints = 4;
     self.buttonRed.pottedPoints = 1;
     self.buttonRed.quantity = 15;
-    self.buttonRed.imageNameLarge = @"ball_large_red01.png";
-    self.buttonRed.imageNameSmall = @"ball_small_red01.png";
+    self.buttonRed.imageNameLarge = @"red01_500x500.png";
+    self.buttonRed.imageNameSmall = @"red01_25x25.png";
     
     
-    self.buttonYellow.colour = @"Yellow";
+    self.buttonYellow.colour = @"YELLOW";
     self.buttonYellow.foulPoints = 4;
     self.buttonYellow.pottedPoints = 2;
     self.buttonYellow.quantity = 1;
-    self.buttonYellow.imageNameLarge = @"ball_large_yellow02.png";
-    self.buttonYellow.imageNameSmall = @"ball_small_yellow02.png";
+    self.buttonYellow.imageNameLarge = @"yellow02_500x500.png";
+    self.buttonYellow.imageNameSmall = @"yellow02_25x25.png";
     
-    self.buttonGreen.colour = @"Green";
+    self.buttonGreen.colour = @"GREEN";
     self.buttonGreen.foulPoints = 4;
     self.buttonGreen.pottedPoints = 3;
     self.buttonGreen.quantity = 1;
-    self.buttonGreen.imageNameLarge = @"ball_large_green03.png";
-    self.buttonGreen.imageNameSmall = @"ball_small_green03.png";
+    self.buttonGreen.imageNameLarge = @"green03_500x500.png";
+    self.buttonGreen.imageNameSmall = @"green03_25x25.png";
 
-    self.buttonBrown.colour = @"Brown";
+    self.buttonBrown.colour = @"BROWN";
     self.buttonBrown.foulPoints = 4;
     self.buttonBrown.pottedPoints = 4;
     self.buttonBrown.quantity = 1;
-    self.buttonBrown.imageNameLarge = @"ball_large_brown04.png";
-    self.buttonBrown.imageNameSmall = @"ball_small_brown04.png";
+    self.buttonBrown.imageNameLarge = @"brown04_500x500.png";
+    self.buttonBrown.imageNameSmall = @"brown04_25x25.png";
     
-    self.buttonBlue.colour = @"Blue";
+    self.buttonBlue.colour = @"BLUE";
     self.buttonBlue.foulPoints = 5;
     self.buttonBlue.pottedPoints = 5;
     self.buttonBlue.quantity = 1;
-    self.buttonBlue.imageNameLarge = @"ball_large_blue05.png";
-    self.buttonBlue.imageNameSmall = @"ball_small_blue05.png";
+    self.buttonBlue.imageNameLarge = @"blue05_500x500.png";
+    self.buttonBlue.imageNameSmall = @"blue05_25x25.png";
     
-    self.buttonPink.colour = @"Pink";
+    self.buttonPink.colour = @"PINK";
     self.buttonPink.foulPoints = 6;
     self.buttonPink.pottedPoints = 6;
     self.buttonPink.quantity = 1;
-    self.buttonPink.imageNameLarge = @"ball_large_pink06.png";
-    self.buttonPink.imageNameSmall = @"ball_small_pink06.png";
+    self.buttonPink.imageNameLarge = @"pink06_500x500.png";
+    self.buttonPink.imageNameSmall = @"pink06_25x25.png";
     
-    self.buttonBlack.colour = @"Black";
+    self.buttonBlack.colour = @"BLACK";
     self.buttonBlack.foulPoints = 7;
     self.buttonBlack.pottedPoints = 7;
     self.buttonBlack.quantity = 1;
-    self.buttonBlack.imageNameLarge = @"ball_large_black07.png";
-    self.buttonBlack.imageNameSmall = @"ball_small_black07.png";
+    self.buttonBlack.imageNameLarge = @"black07_500x500.png";
+    self.buttonBlack.imageNameSmall = @"black07_25x25.png";
     
     self.currentColour=1;
 
@@ -324,9 +324,14 @@ enum IndicatorStyle {highlight, hide};
 
     
     self.frameGraphView.delegate = self;
-    
     self.isButtonStateClear = false;
+    
 }
+
+
+
+
+
 
 -(void)reloadGrid {
     
@@ -420,16 +425,45 @@ enum IndicatorStyle {highlight, hide};
             /* do nothing */
             break;
     };
+    
+    if (self.navButtonEnd.enabled==false) {
+       [self setBlurredImage];
+    };
+    
 }
 
 
+-(void)setBlurredImage {
+    for (UIView *view in [self.blurBackground subviews])
+    {
+        [view removeFromSuperview];
+    }
+    
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    self.blurBackground.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    // show image
+    //self.blurBackground.image = image;
+    
+    // create effect
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    
+    // add effect to an effect view
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blur];
+    effectView.frame = self.blurBackground.frame;
+    // add the effect view to the image view
+    [self.blurBackground addSubview:effectView];
+    
+    
+}
 
 -(void)swipeRightShowPlayersStats:(UISwipeGestureRecognizer *)gesture
 {
-    // I AM HERE - INCLUDED selectedFrameData, but must now change output parts inside frameGraph
-    // so that is tuned into using this specialized data array instead of the single one.
-    // perhaps some of the code available here will be used directly in the stepper clicked block???
-    
+
+    [self setBlurredImage];
     
     self.navButtonNew.title  = @"";
     self.navButtonNew.enabled=false;
@@ -444,7 +478,8 @@ enum IndicatorStyle {highlight, hide};
     self.frameGraphView.scorePlayer1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :1];
     self.frameGraphView.scorePlayer2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :2];
     
-    self.frameRefLabel.text = [NSString stringWithFormat:@"%d",self.frameNumber];
+    self.frameRefLabel.text = [NSString stringWithFormat:@"frame %d",self.frameNumber];
+    
     
     self.frameStepper.maximumValue = self.frameNumber;
     self.frameStepper.value = self.frameNumber;
@@ -463,9 +498,9 @@ enum IndicatorStyle {highlight, hide};
         }
     }
     
-    self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@:%d",self.textPlayerOneName.text, self.frameGraphView.scorePlayer1 ];
+    self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@: %d",self.textPlayerOneName.text, self.frameGraphView.scorePlayer1 ];
     
-    self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@:%d",self.textPlayerTwoName.text, self.frameGraphView.scorePlayer2 ];
+    self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@: %d",self.textPlayerTwoName.text, self.frameGraphView.scorePlayer2 ];
     
 
     self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
@@ -518,6 +553,12 @@ enum IndicatorStyle {highlight, hide};
     self.disabledView.hidden=true;
     self.pointsLabel.hidden = true;
     
+    // clean up of any stray subviews required
+    for (UIView *view in [self.blurBackground subviews])
+    {
+        [view removeFromSuperview];
+    }
+    
 }
 
 
@@ -567,43 +608,60 @@ enum IndicatorStyle {highlight, hide};
 
     bool freeBall=false;
     
+  /*  NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
+    pottedBall.timeStamp = rightNow;
+  */
+    //this is wrong, must copy instance and add that copied version to break
+    
     if (self.currentPlayersBreak.breakScore==0) {
-    self.viewBreak.alpha = 0.0;
-    [UIView animateWithDuration:0.5
+        self.buttonAdjust.hidden = true;
+        [self.buttonClear setTitle:@"Clear" forState:UIControlStateNormal];
+        self.isButtonStateClear = true;
+        
+        self.viewBreak.alpha = 0.0;
+        [UIView animateWithDuration:0.5
                           delay:0.0
-                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveEaseIn
+                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveLinear
                      animations:^{
                          self.viewBreak.alpha = 1.0;
                      }
                      completion:nil
-     ];
+         ];
      
-        self.buttonAdjust.hidden = true;
-        [self.buttonClear setTitle:@"Clear" forState:UIControlStateNormal];
-        self.isButtonStateClear = true;
+
         
     }
     
     
     if ([self.switchFoul isOn] ) {
+        [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
+        
         NSMutableArray *foulBallArray = [[NSMutableArray alloc] init];
         foulBallArray = [NSMutableArray arrayWithObjects:pottedBall, nil];
+        NSMutableArray *foulBallTimeArray = [[NSMutableArray alloc] init];
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
+        
+        foulBallTimeArray = [NSMutableArray arrayWithObjects:rightNow, nil];
+        
         
         [self closeBreak];
         // add the foul points to opposing player
         [self.opposingPlayer setFoulScore:pottedBall.foulPoints];
-        
-        // send array to method for foul ball.
+
         
         self.matchTxId++;
-        [self.frameGraphView addFrameData:self.frameNumber :self.opposingPlayer.playerIndex :pottedBall.foulPoints :1 :foulBallArray :self.matchTxId];
+        [self.frameGraphView addFrameData:self.frameNumber :self.opposingPlayer.playerIndex :pottedBall.foulPoints :1 :foulBallArray :self.matchTxId :foulBallTimeArray];
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self.switchFoul setOn:false];
         self.foulLabel.hidden=true;
         self.buttonAdjust.hidden = false;
-        [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
+        
+        
         self.isButtonStateClear = false;
-        //self.buttonClear.hidden = true;
         [self swapPlayers];
         
     } else {
@@ -637,7 +695,7 @@ enum IndicatorStyle {highlight, hide};
             }
         
             // it is a pot, so credit the current user
-            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ] == true) {
+            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall :self.viewBreak] == true) {
                 [self.currentPlayer incrementNbrBalls:1];
                 [self.currentPlayer.currentFrame incrementFrameBallsPotted];
             
@@ -674,7 +732,7 @@ enum IndicatorStyle {highlight, hide};
             }
             
         } else {  // no advanced scoring
-            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall ] == true) {
+            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall :self.viewBreak] == true) {
                 [self.currentPlayer incrementNbrBalls:1];
                 [self.currentPlayer.currentFrame incrementFrameBallsPotted];
                 [self clearIndicators :highlight];
@@ -725,19 +783,18 @@ enum IndicatorStyle {highlight, hide};
 -(void)closeBreak {
     /* set counter variables and clear break */
     if (self.currentPlayersBreak.breakScore > 0) {
+        [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
+        self.isButtonStateClear = false;
+        self.buttonAdjust.hidden = false;
         [self.currentPlayer setSumOfBreaks:self.currentPlayer.sumOfBreaks + self.currentPlayersBreak.breakScore];
         [self.currentPlayer setNbrOfBreaks:self.currentPlayer.nbrOfBreaks + 1];
         [self.currentPlayer addBreakScore:self.currentPlayersBreak.breakScore];
         self.matchTxId ++;
-        [self.frameGraphView addFrameData:self.frameNumber :self.currentPlayer.playerIndex :self.currentPlayersBreak.breakScore :0 :self.currentPlayersBreak.pottedBalls :self.matchTxId];
+        [self.frameGraphView addFrameData:self.frameNumber :self.currentPlayer.playerIndex :self.currentPlayersBreak.breakScore :0 :self.currentPlayersBreak.pottedBalls :self.matchTxId :self.currentPlayersBreak.pottedBallTimeStamps];
         [self processCurrentUsersHighestBreak];
         [self.currentPlayersBreak clearBreak:self.imagePottedBall];
         [self clearIndicators :hide];
         self.ballReplaced=false;
-        self.buttonAdjust.hidden = false;
-        [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
-        self.isButtonStateClear = false;
-        //self.buttonClear.hidden = true;
         self.frameGraphView.currentBreakPlayer1=0;
         self.frameGraphView.currentBreakPlayer2=0;
     }
@@ -941,10 +998,12 @@ enum IndicatorStyle {highlight, hide};
 }
 
 -(void)endOfFrame {
+    bool ignoreEndOfFrame = false;
+    
     [self closeBreak];
     
-    [self.matchData addObjectsFromArray:[self.frameGraphView frameData]];
     
+
 
     if (self.textScorePlayer1.frameScore > self.textScorePlayer2.frameScore) {
         [self.labelScoreMatchPlayer1 incrementMatchScore];
@@ -952,30 +1011,37 @@ enum IndicatorStyle {highlight, hide};
         [self.labelScoreMatchPlayer2 incrementMatchScore];
     } else {
         /* do nothing. game tied so no winner yet! */
+        ignoreEndOfFrame = true;
     }
     
-    int playerPoints1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView frameData] :1];
-    int playerPoints2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView frameData] :2];
-    /* reset new frame scores for each player */
-    if ([self.joinedFrameResult count] == 0) {
-        self.joinedFrameResult = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%03d/%03d",playerPoints1, playerPoints2], nil];
-    } else {
-        [self.joinedFrameResult addObject:[NSString stringWithFormat:@"%03d/%03d  ",playerPoints1,playerPoints2]];
-    }
+    if (ignoreEndOfFrame == false) {
+        
+        [self.matchData addObjectsFromArray:[self.frameGraphView frameData]];
+        
+        
+        int playerPoints1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView frameData] :1];
+        int playerPoints2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView frameData] :2];
+        /* reset new frame scores for each player */
+        if ([self.joinedFrameResult count] == 0) {
+            self.joinedFrameResult = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%03d/%03d",playerPoints1, playerPoints2], nil];
+        } else {
+            [self.joinedFrameResult addObject:[NSString stringWithFormat:@"%03d/%03d  ",playerPoints1,playerPoints2]];
+        }
     
-    [self.textScorePlayer1 resetFrameScore:0];
-    [self.textScorePlayer2 resetFrameScore:0];
-    [self selectPlayerOne];
-    self.frameNumber++;
-    [self.textScorePlayer1 createFrame:(self.frameNumber)];
-    [self.textScorePlayer2 createFrame:(self.frameNumber)];
-    [self resetBalls];
+        [self.textScorePlayer1 resetFrameScore:0];
+        [self.textScorePlayer2 resetFrameScore:0];
+        [self selectPlayerOne];
+        self.frameNumber++;
+        [self.textScorePlayer1 createFrame:(self.frameNumber)];
+        [self.textScorePlayer2 createFrame:(self.frameNumber)];
+        [self resetBalls];
     
-    //TODO - this is where we should show a popup view that will show the graph...
-    
+        //TODO - this is where we should show a popup view that will show the graph...
 
-    //We would need to save the array someplace too.
-    [self.frameGraphView resetFrameData];
+        //We would need to save the array someplace too.
+        [self.frameGraphView resetFrameData];
+        
+    }
 }
 
 
@@ -1125,7 +1191,7 @@ enum IndicatorStyle {highlight, hide};
 
 -(NSString*) composePlayerStatsForFrame :(int) playerIndex :(int)frameIndex  {
     
-    NSString *hiBreakPlayer = [NSString stringWithFormat:@"</br>Highest Break: %d</br>",[self.frameGraphView getHighestBreakAmountInFrame:self.matchData :playerIndex :frameIndex]];
+    NSString *hiBreakPlayer = [NSString stringWithFormat:@"</br>Highest Break: %d</br></br>",[self.frameGraphView getHighestBreakAmountInFrame:self.matchData :playerIndex :frameIndex]];
     
     NSString *bonusPoints = [NSString stringWithFormat:@"</br>Bonus Points: %d",[self.frameGraphView getPointsByTypeInFrame:self.matchData :playerIndex :1 :frameIndex ]];
     
@@ -1140,14 +1206,16 @@ enum IndicatorStyle {highlight, hide};
         
         NSString *base64String = [imageData base64EncodedStringWithOptions:0 ];
         NSString *ballImageData = [NSString stringWithFormat:@"<img src='data:image/png;base64,%@'>",base64String];
-        hiBreakBallsPlayer = [NSString stringWithFormat:@"%@%@->",hiBreakBallsPlayer, ballObj.colour];
-        hiBreakBallsImagePlayer = [NSString stringWithFormat:@"%@%@",hiBreakBallsImagePlayer, ballImageData];
+        hiBreakBallsPlayer = [NSString stringWithFormat:@"%@%@ &rarr; ",hiBreakBallsPlayer, ballObj.colour];
+        hiBreakBallsImagePlayer = [NSString stringWithFormat:@"%@%@&nbsp",hiBreakBallsImagePlayer, ballImageData];
     }
 
-    NSString *ballsPotted = [NSString stringWithFormat:@"</br>Total Pots: %d</br>", [self.frameGraphView getAmountOfBallsPottedInFrame:self.matchData :playerIndex :frameIndex] ];
+    NSString *ballsPotted = [NSString stringWithFormat:@"Total Pots: %d</br>", [self.frameGraphView getAmountOfBallsPottedInFrame:self.matchData :playerIndex :frameIndex] ];
     
-    NSString *dataPlayer = [NSString stringWithFormat:@"%@%@%@%@%@END)%@",ballsPotted, PottedPoints, bonusPoints, hiBreakPlayer, hiBreakBallsPlayer,hiBreakBallsImagePlayer];
+    NSString *dataPlayer = [NSString stringWithFormat:@"%@%@%@%@%@END)</br>%@",ballsPotted, PottedPoints, bonusPoints, hiBreakPlayer, hiBreakBallsPlayer,hiBreakBallsImagePlayer];
     return dataPlayer;
+    
+    // TODO vertical align the potted ball images by adding new row. (could mean splitting this function into 2.)
 }
 
 
@@ -1317,7 +1385,7 @@ enum IndicatorStyle {highlight, hide};
     
     matchheader = [NSString stringWithFormat:@"%@</br>Scores:%@</br></br>",matchheader,matchJoinedResults];
     
-    NSString *tableHeader = [NSString stringWithFormat: @"<table bgcolor='#F8F8FF' border=0 cellpadding='10'><tr><td width=50%% valign='top'><h2>%@:%d</h2>%@</td><td width=50%% valign='top'><h2>%@:%d</h2>%@</td></tr>",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.matchScore,
+    NSString *tableHeader = [NSString stringWithFormat: @"<table width=100%% bgcolor='#F8F8FF' border=0 cellpadding='10'><tr bgcolor='#D32525' ><td width=50%% valign='top'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td><td width=50%% valign='top'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td></tr>",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.matchScore,
         [self getFrameBreakdown :1 :self.matchData :@"</br>" :-1], self.textPlayerTwoName.text, self.labelScoreMatchPlayer2.matchScore, [self getFrameBreakdown :2 :self.matchData :@"</br>" :-1]];
     
     NSString *dataFrameHeader =@"";
@@ -1328,9 +1396,9 @@ enum IndicatorStyle {highlight, hide};
     NSString *scorePlayer2;
     
     for (int frameIndex = 0; frameIndex < self.frameNumber - 1; frameIndex++) {
-        dataFrameHeader = [NSString stringWithFormat:@"<tr><td><h3>Frame no%d</h3></td><td></td></tr>",frameIndex+1];
-        scorePlayer1 = [NSString stringWithFormat:@"Score: %d</br>",[self.frameGraphView getPointsInASingleFrame:self.matchData :1 :frameIndex+1]];
-        scorePlayer2 = [NSString stringWithFormat:@"Score: %d</br>",[self.frameGraphView getPointsInASingleFrame:self.matchData :2 :frameIndex+1]];
+        dataFrameHeader = [NSString stringWithFormat:@"<tr bgcolor='#951A1A'><td><h3><font color='#FFFFFF'>Frame %d</font></h3></td><td></td></tr>",frameIndex+1];
+        scorePlayer1 = [NSString stringWithFormat:@"<h4>Score: %d</h4>",[self.frameGraphView getPointsInASingleFrame:self.matchData :1 :frameIndex+1]];
+        scorePlayer2 = [NSString stringWithFormat:@"<h4>Score: %d</h4>",[self.frameGraphView getPointsInASingleFrame:self.matchData :2 :frameIndex+1]];
 
         dataPlayer1 = [self composePlayerStatsForFrame:1 :frameIndex+1];
         dataPlayer2 = [self composePlayerStatsForFrame:2 :frameIndex+1];
@@ -1456,7 +1524,7 @@ enum IndicatorStyle {highlight, hide};
         self.statPlayer1item=1;
     }
     
-        self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView frameData] :@"\n" :self.statPlayer1item];
+        self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
     
 }
 
@@ -1467,7 +1535,7 @@ enum IndicatorStyle {highlight, hide};
     if (self.statPlayer2item==5) {
         self.statPlayer2item=1;
     }
-        self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView frameData] :@"\n" :self.statPlayer2item];
+        self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
     }
 
 
@@ -1504,19 +1572,19 @@ enum IndicatorStyle {highlight, hide};
         ballLabel.text = points;
         
         if (selectedBall.pottedPoints==1) {
-            collectionImageView.image = [UIImage imageNamed:@"ball_largex_red01.png"];
+            collectionImageView.image = [UIImage imageNamed:@"red01_500x500.png"];
         } else if (selectedBall.pottedPoints==2) {
-            collectionImageView.image = [UIImage imageNamed:@"ball_largex_yellow02.png"];
+            collectionImageView.image = [UIImage imageNamed:@"yellow02_500x500.png"];
         } else if (selectedBall.pottedPoints==3) {
-            collectionImageView.image = [UIImage imageNamed:@"ball_largex_green03.png"];
+            collectionImageView.image = [UIImage imageNamed:@"green03_500x500.png"];
         } else if (selectedBall.pottedPoints==4) {
-            collectionImageView.image = [UIImage imageNamed:@"ball_largex_brown04.png"];
+            collectionImageView.image = [UIImage imageNamed:@"brown04_500x500.png"];
         } else if (selectedBall.pottedPoints==5) {
-            collectionImageView.image = [UIImage imageNamed:@"ball_largex_blue05.png"];
+            collectionImageView.image = [UIImage imageNamed:@"blue05_500x500.png"];
         } else if (selectedBall.pottedPoints==6) {
-            collectionImageView.image = [UIImage imageNamed:@"ball_largex_pink06.png"];
+            collectionImageView.image = [UIImage imageNamed:@"pink06_500x500.png"];
         } else {
-        collectionImageView.image = [UIImage imageNamed:@"ball_largex_black07.png"];
+        collectionImageView.image = [UIImage imageNamed:@"black07_500x500.png"];
         }
     
     
@@ -1531,6 +1599,10 @@ enum IndicatorStyle {highlight, hide};
     if (self.isButtonStateClear) {
         // Clear current break process - some updates needed here perhaps...?
         if (self.currentPlayersBreak.breakScore > 0) {
+            self.buttonAdjust.hidden = false;
+            [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
+            self.isButtonStateClear = false;
+            
             
             [self.currentPlayer setNbrBallsPotted:(self.currentPlayer.nbrBallsPotted - (int)self.currentPlayersBreak.pottedBalls.count)];
             
@@ -1555,10 +1627,6 @@ enum IndicatorStyle {highlight, hide};
                 
             }
             currentColour = colourStateAtStartOfBreak;
-            self.buttonAdjust.hidden = false;
-            [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
-            self.isButtonStateClear = false;
-            //self.buttonClear.hidden = true;
         }
         
     } else {
@@ -1644,6 +1712,7 @@ enum IndicatorStyle {highlight, hide};
             // now we need to tidy up!!
             [self.textScorePlayer1 updateFrameScore:0];
             [self.textScorePlayer2 updateFrameScore:0];
+            [self resetBalls];
             [self selectPlayerOne];
             
         }
@@ -1721,7 +1790,7 @@ enum IndicatorStyle {highlight, hide};
 
 - (IBAction)frameStepper:(id)sender {
     
-    self.frameRefLabel.text = [NSString stringWithFormat:@"%0.0f",self.frameStepper.value];
+    self.frameRefLabel.text = [NSString stringWithFormat:@"frame %0.0f",self.frameStepper.value];
     
     [self.frameGraphView.selectedFrameData removeAllObjects];
     if ((int)self.frameStepper.value != self.frameNumber) {
@@ -1748,9 +1817,9 @@ enum IndicatorStyle {highlight, hide};
         }
     }
     
-    self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@:%d",self.textPlayerOneName.text, self.frameGraphView.scorePlayer1 ];
+    self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@: %d",self.textPlayerOneName.text, self.frameGraphView.scorePlayer1 ];
     
-    self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@:%d",self.textPlayerTwoName.text, self.frameGraphView.scorePlayer2 ];
+    self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@: %d",self.textPlayerTwoName.text, self.frameGraphView.scorePlayer2 ];
     
     self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
     self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];

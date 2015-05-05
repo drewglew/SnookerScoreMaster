@@ -29,6 +29,7 @@
 @property (assign) int visitId;
 @property (weak, nonatomic) UIView *visitBreakDown;
 @property (strong, nonatomic) NSMutableArray *visitBallCollection;
+@property (strong, nonatomic) NSMutableArray *potTimeStampCollection;
 @property (assign) NSNumber *visitPlayerIndex;
 @property (assign) NSNumber *visitIsFoul;
 @property (assign) NSNumber *visitPoints;
@@ -41,7 +42,7 @@
 - (void)drawRect:(CGRect)rect;
 - (void) initFrameData;
 -(void) resetFrameData;
--(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction :(int)matchTxId;
+-(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction :(int)matchTxId :(NSMutableArray*) breakTimeStampTransaction;
 -(int)getPointsInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex;
 -(int)getBreakAmountFromBalls:(NSMutableArray*)balls :(NSNumber *)isfoul;
 -(int)getAmountOfVisitsInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex;

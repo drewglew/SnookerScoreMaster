@@ -21,10 +21,11 @@
 @property (assign) int highestBreakFrameNo;
 @property (assign) int nbrBallsPotted;
 @property (nonatomic, strong) NSMutableArray *pottedBalls;
+@property (nonatomic, strong) NSMutableArray *pottedBallTimeStamps;
 @property (strong, nonatomic) ball     *currentBall;
 -(void)clearBreak:(UIImageView*) imageCueBall;
 
--(bool)incrementScore:(ball*) pottedball :(UIImageView*) imagePottedBall ;
+-(bool)incrementScore:(ball*) pottedball :(UIImageView*) imagePottedBall :(UIView*) breakView ;
 
 -(void)incrementScore:(ball*) pottedball;
 

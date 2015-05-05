@@ -16,12 +16,14 @@
 @synthesize nbrBallsPotted;
 @synthesize currentBall;
 @synthesize pottedBalls;
+@synthesize pottedBallTimeStamps;
 
 - (id)init{
     if ((self = [super init])) {
         if (!currentBall) {
             currentBall = [[ball alloc] init];
             self.pottedBalls = [[NSMutableArray alloc] init];
+            self.pottedBallTimeStamps = [[NSMutableArray alloc] init];
         }
     }
     return self;
@@ -54,7 +56,7 @@
 
 
 // used by ViewController
--(bool)incrementScore:(ball*) pottedball :(UIImageView*) imagePottedBall {
+-(bool)incrementScore:(ball*) pottedball :(UIImageView*) imagePottedBall :(UIView*) breakView {
     
     // here we can validate the number of reds left on the table??
     
@@ -76,19 +78,52 @@
         if (breakScore > highestBreak) {
             highestBreak = breakScore;
         }
-    
+        
+        
+        UIImage * toImage = [UIImage imageNamed:currentBall.imageNameLarge];
+        [UIView transitionWithView:breakView
+                          duration:0.5f
+                           options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            imagePottedBall.image = toImage;
+                        } completion:nil];
+        
+        
+        /*
+        breakView.alpha = 0.0;
+        [UIView animateWithDuration:0.5
+                              delay:0.0
+                            options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             imagePottedBall.image = [UIImage imageNamed:currentBall.imageNameLarge];
+                             breakView.alpha = 1.0;
+                         }
+                         completion:nil
+         ];
+        */
+        //20150504 new amendment START
+        
+
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
+        //20150504 new amendment END
+        
         if ([self.pottedBalls count] == 0) {
             self.pottedBalls = [NSMutableArray arrayWithObjects:currentBall, nil];
+            self.pottedBallTimeStamps  = [NSMutableArray arrayWithObjects:rightNow, nil];
         } else {
             [self.pottedBalls addObject:pottedball];
+            [self.pottedBallTimeStamps addObject:rightNow];
         }
-    
-    
+
         NSString *labelScore = [NSString stringWithFormat:@"%d",self.breakScore];
         self.text = labelScore;
         return true;
     }
 }
+
+
 
 /* used by the frame object */
 -(void)incrementScore:(ball*) pottedball {
@@ -120,6 +155,8 @@
 -(void)clearBreak:(UIImageView*) imageCueBall {
     breakScore = 0;
     [self.pottedBalls removeAllObjects];
+    [self.pottedBallTimeStamps removeAllObjects];
+    
     self.hidden = true;
     imageCueBall.hidden = true;
 }

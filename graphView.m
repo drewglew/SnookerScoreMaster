@@ -18,6 +18,7 @@
 @synthesize frameData;
 @synthesize selectedFrameData;
 @synthesize visitBallCollection;
+@synthesize potTimeStampCollection;
 @synthesize visitPlayerIndex;
 @synthesize visitIsFoul;
 @synthesize scorePlayer1;
@@ -48,7 +49,7 @@ if (!self.frameData) {
 }
 }
 
--(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction :(int)matchTxId {
+-(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction :(int)matchTxId :(NSMutableArray*) breakTimeStampTransaction {
     
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -56,20 +57,15 @@ if (!self.frameData) {
     NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
 
     [data setValue: [NSNumber numberWithInt:matchTxId] forKey:@"matchTxId"];
-    [data setValue: rightNow forKey:@"datestamp"];
+    [data setValue: rightNow forKey:@"endbreakdatestamp"];
     [data setValue: [NSNumber numberWithInt:frameIndex] forKey:@"frameindex"];
     [data setValue: [NSNumber numberWithInt:playerIndex] forKey:@"player"];
     [data setValue: [NSNumber numberWithInt:points] forKey:@"points"];
     [data setValue: [NSNumber numberWithInt:isfoul] forKey:@"isfoul"];
     [data setValue: [NSMutableArray arrayWithArray:breakTransaction] forKey:@"ballTransaction"];
+    [data setValue: [NSMutableArray arrayWithArray:breakTimeStampTransaction] forKey:@"pottedBallTimeStamp"];
     [self.frameData addObject:data];
-    
-    /*if (playerIndex==1) {
-        self.scorePlayer1+=points;
-    } else {
-        self.scorePlayer2+=points;
-    }*/
-    
+
 }
 
 -(NSMutableArray*) getSelectedFrameData :(NSMutableArray*) singleFrameData :(int)frameIndex {
@@ -133,12 +129,12 @@ if (!self.frameData) {
 
 -(NSString*) createResultsContent :(NSMutableArray*) singleFrameData :(NSString*) playerName1 :(NSString*) playerName2 {
     
-    NSString *fileData = @"TxID,TxDate,Frame,PlayerID,IsFoul,BallColor,Points";
+    NSString *fileData = @"TxID,BreakEndDT,Frame,PlayerID,IsFoul,BallColor,Points,PotDT";
     
     for (NSMutableArray *dataPoint in singleFrameData) {
         
         NSNumber *wantedTxId = [dataPoint valueForKeyPath:@"matchTxId"];
-        NSString *wantedDateStamp = [dataPoint valueForKeyPath:@"datestamp"];
+        NSString *wantedDateStamp = [dataPoint valueForKeyPath:@"endbreakdatestamp"];
         NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
         NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
         NSNumber *wantedFrame = [dataPoint valueForKeyPath:@"frameindex"];
@@ -146,15 +142,24 @@ if (!self.frameData) {
         NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
         ballCollection = [dataPoint valueForKey:@"ballTransaction"];
         
+        NSMutableArray  *potDTCollection = [[NSMutableArray alloc] init];
+        potDTCollection = [dataPoint valueForKey:@"pottedBallTimeStamp"];
+        
+        NSString *potTimeStamp;
+        
         NSString *playerName;
-        if([wantedPlayer intValue]==1) {
+        if([wantedPlayer intValue] == 1) {
             playerName = playerName1;
         } else {
             playerName = playerName2;
         }
         
+        int potIndex = 0;
         
         for (ball *ball in ballCollection) {
+            
+            potTimeStamp = [potDTCollection objectAtIndex:(NSUInteger)potIndex];
+            
             int ballPoint;
             if ([wantedType intValue]==1) {
                 ballPoint = ball.foulPoints;
@@ -162,8 +167,12 @@ if (!self.frameData) {
                 ballPoint = ball.pottedPoints;
             }
             
-            fileData = [NSString stringWithFormat:@"%@\n%@,%@,%@,%@,%@,%@,%d",fileData, wantedTxId,wantedDateStamp,wantedFrame,playerName,wantedType,ball.colour,ballPoint];
+            fileData = [NSString stringWithFormat:@"%@\n%@,%@,%@,%@,%@,%@,%d,%@",fileData, wantedTxId,wantedDateStamp,wantedFrame,playerName,wantedType,ball.colour,ballPoint,potTimeStamp];
+            
+            potIndex ++;
+            
         }
+        
     }
     return fileData;
 }
@@ -347,14 +356,16 @@ if (!self.frameData) {
         CGFloat locations[2] = {0.0, 1.0};
         colorspace = CGColorSpaceCreateDeviceRGB();
         
-        if (playerColour == [UIColor redColor]) {
-            CGFloat components[8] = {1.0, 0.0, 0.0, 0.1,  // Start color
-                1.0, 0.0, 0.0, 0.9}; // End color
+        if (playerIndex == 2) {
+            CGFloat components[8] = {209.0f/255.0f, 0.0, 0.0, 0.1,  // Start color
+                209.0f/255.0f, 0.0, 0.0, 0.9}; // End color
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
         } else {
             
-            CGFloat components[8] = {0.0, 1.0, 0.0, 0.1,  // Start color
-                0.0, 1.0, 0.0, 0.9}; // End color
+            //[UIColor colorWithRed:29.0f/255.0f green:148.0f/255.0f blue:14.0f/255.0f alpha:1.0f]
+            
+            CGFloat components[8] = {29.0f/255.0f, 148.0f/255.0f, 4.0f/255.0f, 0.1,  // Start color
+                29.0f/255.0f, 148.0f/255.0f, 4.0f/255.0f, 0.9}; // End color
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
         }
         startPoint.x = kOffsetX;
@@ -487,10 +498,11 @@ if (!self.frameData) {
     // example.  need to obtain items ball count..
     NSMutableArray *data = [self.selectedFrameData objectAtIndex:visitIndex-1];
     self.visitBallCollection = [data valueForKey:@"ballTransaction"];
+    self.potTimeStampCollection = [data valueForKey:@"pottedBallTimeStamp"];
     self.visitNumberOfBalls = self.visitBallCollection.count;
     self.visitPlayerIndex = [data valueForKey:@"player"];
     self.visitIsFoul = [data valueForKey:@"isfoul"];
-    self.timeStamp = [data valueForKey:@"datestamp"];
+    self.timeStamp = [data valueForKey:@"endbreakdatestamp"];
     self.visitPoints = [data valueForKey:@"points"];
     self.visitRef = [NSString stringWithFormat:@"%d/%d",visitIndex,(int)self.selectedFrameData.count];
     self.visitId = visitIndex;
@@ -523,14 +535,14 @@ if (!self.frameData) {
         scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
     }
     /* Player 1 plotting */
-    [self plotPlayerLines:false :ctx :1 :self.currentBreakPlayer1 :[UIColor greenColor] :scalePoints :scaleVisits];
-    [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor greenColor] :scalePoints :scaleVisits];
-    [self plotPlayerMarkers:ctx :1 :[UIColor greenColor] :scalePoints :scaleVisits];
+    [self plotPlayerLines:false :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:148.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:148.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    [self plotPlayerMarkers:ctx :1 :[UIColor colorWithRed:29.0f/255.0f green:148.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
     /* Player 2 plotting */
-    [self plotPlayerLines:false :ctx :2 :self.currentBreakPlayer2 :[UIColor redColor] :scalePoints :scaleVisits];
-    [self plotPlayerLines:true :ctx :2 :self.currentBreakPlayer2 :[UIColor redColor] :scalePoints :scaleVisits];
+    [self plotPlayerLines:false :ctx :2 :self.currentBreakPlayer2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    [self plotPlayerLines:true :ctx :2 :self.currentBreakPlayer2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
     
-    [self plotPlayerMarkers:ctx :2 :[UIColor redColor] :scalePoints :scaleVisits];
+    [self plotPlayerMarkers:ctx :2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
 }
 
 
@@ -540,7 +552,7 @@ if (!self.frameData) {
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0.5);
-    CGContextSetStrokeColorWithColor(context, [[UIColor lightGrayColor] CGColor]);
+    CGContextSetStrokeColorWithColor(context, [[UIColor blackColor] CGColor]);
  
     CGFloat dash[] = {2.0, 2.0};
     CGContextSetLineDash(context, 0.0, dash, 2);
