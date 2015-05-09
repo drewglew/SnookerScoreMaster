@@ -12,7 +12,7 @@
 #import "frame.h"
 #import "snookerbreak.h"
 #import "graphView.h"
-
+#import "NSData+Base64.h"
 
 @interface matchview ()
 
@@ -428,7 +428,14 @@ enum IndicatorStyle {highlight, hide};
     
     if (self.navButtonEnd.enabled==false) {
        [self setBlurredImage];
-    };
+    } else {
+        // clean up of any stray subviews required
+        for (UIView *view in [self.blurBackground subviews])
+        {
+            [view removeFromSuperview];
+        }
+    }
+    
     
 }
 
@@ -444,12 +451,12 @@ enum IndicatorStyle {highlight, hide};
     self.blurBackground.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+
     
-    // show image
-    //self.blurBackground.image = image;
+    
     
     // create effect
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     
     // add effect to an effect view
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blur];
@@ -537,6 +544,8 @@ enum IndicatorStyle {highlight, hide};
 -(void)swipeLeftHidePlayersStats:(UISwipeGestureRecognizer *)gesture
 {
     [self hidePlayersStats];
+    
+
 }
 
 -(void)hidePlayersStats {
@@ -553,11 +562,7 @@ enum IndicatorStyle {highlight, hide};
     self.disabledView.hidden=true;
     self.pointsLabel.hidden = true;
     
-    // clean up of any stray subviews required
-    for (UIView *view in [self.blurBackground subviews])
-    {
-        [view removeFromSuperview];
-    }
+
     
 }
 
@@ -1200,12 +1205,22 @@ enum IndicatorStyle {highlight, hide};
     NSString *hiBreakBallsPlayer = @"(";
     NSString *hiBreakBallsImagePlayer  = @"</br>";
     
+    
+    
+    
+//16  SnookerScoreMaster            	0x1000580c4 0x100030000 + 164036
+    
+    
+    
     for (ball *ballObj in [self.frameGraphView getHighestBreakBallsInFrame:self.matchData :playerIndex :frameIndex]) {
+        
+
+        
         UIImage *emailImage = [UIImage imageNamed:ballObj.imageNameSmall];
         NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(emailImage)];
-        
         NSString *base64String = [imageData base64EncodedStringWithOptions:0 ];
         NSString *ballImageData = [NSString stringWithFormat:@"<img src='data:image/png;base64,%@'>",base64String];
+        
         hiBreakBallsPlayer = [NSString stringWithFormat:@"%@%@ &rarr; ",hiBreakBallsPlayer, ballObj.colour];
         hiBreakBallsImagePlayer = [NSString stringWithFormat:@"%@%@&nbsp",hiBreakBallsImagePlayer, ballImageData];
     }
@@ -1385,7 +1400,7 @@ enum IndicatorStyle {highlight, hide};
     
     matchheader = [NSString stringWithFormat:@"%@</br>Scores:%@</br></br>",matchheader,matchJoinedResults];
     
-    NSString *tableHeader = [NSString stringWithFormat: @"<table width=100%% bgcolor='#F8F8FF' border=0 cellpadding='10'><tr bgcolor='#D32525' ><td width=50%% valign='top'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td><td width=50%% valign='top'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td></tr>",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.matchScore,
+    NSString *tableHeader = [NSString stringWithFormat: @"<table style='table-layout:fixed' width=100%% bgcolor='#F8F8FF' border=0 cellpadding='10'><tr bgcolor='#D32525' ><td width=50%% valign='top'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td><td width=50%% valign='top'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td></tr>",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.matchScore,
         [self getFrameBreakdown :1 :self.matchData :@"</br>" :-1], self.textPlayerTwoName.text, self.labelScoreMatchPlayer2.matchScore, [self getFrameBreakdown :2 :self.matchData :@"</br>" :-1]];
     
     NSString *dataFrameHeader =@"";

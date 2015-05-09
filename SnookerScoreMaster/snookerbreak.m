@@ -88,19 +88,6 @@
                             imagePottedBall.image = toImage;
                         } completion:nil];
         
-        
-        /*
-        breakView.alpha = 0.0;
-        [UIView animateWithDuration:0.5
-                              delay:0.0
-                            options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             imagePottedBall.image = [UIImage imageNamed:currentBall.imageNameLarge];
-                             breakView.alpha = 1.0;
-                         }
-                         completion:nil
-         ];
-        */
         //20150504 new amendment START
         
 

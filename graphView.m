@@ -364,8 +364,8 @@ if (!self.frameData) {
             
             //[UIColor colorWithRed:29.0f/255.0f green:148.0f/255.0f blue:14.0f/255.0f alpha:1.0f]
             
-            CGFloat components[8] = {29.0f/255.0f, 148.0f/255.0f, 4.0f/255.0f, 0.1,  // Start color
-                29.0f/255.0f, 148.0f/255.0f, 4.0f/255.0f, 0.9}; // End color
+            CGFloat components[8] = {29.0f/255.0f, 100.0f/255.0f, 4.0f/255.0f, 0.1,  // Start color
+                29.0f/255.0f, 100.0f/255.0f, 4.0f/255.0f, 0.9}; // End color
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
         }
         startPoint.x = kOffsetX;
@@ -535,9 +535,9 @@ if (!self.frameData) {
         scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
     }
     /* Player 1 plotting */
-    [self plotPlayerLines:false :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:148.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:148.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    [self plotPlayerMarkers:ctx :1 :[UIColor colorWithRed:29.0f/255.0f green:148.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    [self plotPlayerLines:false :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    [self plotPlayerMarkers:ctx :1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
     /* Player 2 plotting */
     [self plotPlayerLines:false :ctx :2 :self.currentBreakPlayer2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
     [self plotPlayerLines:true :ctx :2 :self.currentBreakPlayer2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];

@@ -138,7 +138,7 @@
         }
     }
     
-    UIImage *buttonImage = [UIImage imageNamed:[NSString stringWithFormat:@"ball_largex_%@.png",ballImageName ]];
+    UIImage *buttonImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_500x500.png",ballImageName ]];
     [self.ballImage setImage:buttonImage forState:UIControlStateNormal];
 
     int pointsRemaining=0;
