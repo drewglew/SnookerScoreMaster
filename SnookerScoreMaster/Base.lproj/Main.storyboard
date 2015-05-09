@@ -265,22 +265,36 @@ Once the match is completed make sure the final frame scores are logged by closi
                                         <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="onTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="thumbTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="11" y="4" width="52" height="31"/>
+                                        </variation>
                                         <connections>
                                             <action selector="switchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="AUL-J2-K34"/>
                                         </connections>
                                     </switch>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Km-uF-Tfd" userLabel="ClearUndo">
                                         <rect key="frame" x="12" y="58" width="37" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="ue6-Ww-wfl"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Undo">
                                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="ue6-Ww-wfl"/>
+                                            </mask>
+                                        </variation>
                                         <variation key="heightClass=compact" misplaced="YES">
                                             <rect key="frame" x="12" y="58" width="38" height="30"/>
                                         </variation>
                                         <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="12" y="58" width="38" height="30"/>
+                                            <rect key="frame" x="16" y="50" width="70" height="30"/>
+                                            <mask key="constraints">
+                                                <include reference="ue6-Ww-wfl"/>
+                                            </mask>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
                                             <rect key="frame" x="12" y="58" width="38" height="30"/>
@@ -291,14 +305,25 @@ Once the match is completed make sure the final frame scores are logged by closi
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snw-xa-VfU">
                                         <rect key="frame" x="8" y="85" width="44" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="eJM-hB-Fvf"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Adjust">
                                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="eJM-hB-Fvf"/>
+                                            </mask>
+                                        </variation>
                                         <variation key="widthClass=compact" misplaced="YES">
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <rect key="frame" x="0.0" y="96" width="70" height="44"/>
+                                            <mask key="constraints">
+                                                <include reference="eJM-hB-Fvf"/>
+                                            </mask>
                                         </variation>
                                         <connections>
                                             <segue destination="igg-oy-Wbg" kind="show" identifier="showAdjustNumberPicker" id="g5j-5J-uK7"/>
@@ -306,8 +331,22 @@ Once the match is completed make sure the final frame scores are logged by closi
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Foul" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcf-md-cih">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="p3b-OR-7sF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="p3b-OR-7sF"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="11" y="4" width="38" height="31"/>
+                                            <mask key="constraints">
+                                                <include reference="p3b-OR-7sF"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                     <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0ie-m5-kVx" userLabel="DisabledView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -319,7 +358,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="8Km-uF-Tfd" firstAttribute="top" secondItem="CSu-LY-jYc" secondAttribute="bottom" constant="15" id="KG4-qq-Yb6"/>
+                                    <constraint firstItem="8Km-uF-Tfd" firstAttribute="top" secondItem="CSu-LY-jYc" secondAttribute="bottom" constant="25" id="KG4-qq-Yb6"/>
                                     <constraint firstItem="zcf-md-cih" firstAttribute="height" secondItem="CSu-LY-jYc" secondAttribute="height" id="MUd-id-1Ky"/>
                                     <constraint firstItem="zcf-md-cih" firstAttribute="centerY" secondItem="CSu-LY-jYc" secondAttribute="centerY" id="TnQ-1h-r27"/>
                                     <constraint firstAttribute="bottom" secondItem="Snw-xa-VfU" secondAttribute="bottom" constant="4" id="ah7-uz-LHb"/>

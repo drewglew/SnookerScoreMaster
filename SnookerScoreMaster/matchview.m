@@ -136,6 +136,17 @@ enum IndicatorStyle {highlight, hide};
     
     matchTxId = 0;
 
+    
+    [[self.buttonClear layer] setBorderWidth:1.0f];
+    [[self.buttonClear layer] setBorderColor:[UIColor orangeColor].CGColor];
+    self.buttonClear.layer.cornerRadius = 4.0f;
+    
+    [[self.buttonAdjust layer] setBorderWidth:1.0f];
+    [[self.buttonAdjust layer] setBorderColor:[UIColor orangeColor].CGColor];
+    self.buttonAdjust.layer.cornerRadius = 4.0f;
+    
+    
+    
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(orientationChanged:)
