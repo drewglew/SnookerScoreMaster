@@ -7,6 +7,7 @@
 //
 @protocol graphViewDelegate
 -(void)reloadGrid;
+-(void)displayMatchPoint :(int)pointsPlayer1 :(int)pointsPlayer2 :(int)playerIndex :(int)frameRef;
 @end
 
 #import <UIKit/UIKit.h>
@@ -30,11 +31,16 @@
 @property (weak, nonatomic) UIView *visitBreakDown;
 @property (strong, nonatomic) NSMutableArray *visitBallCollection;
 @property (strong, nonatomic) NSMutableArray *potTimeStampCollection;
+@property (strong, nonatomic) NSMutableArray *matchFramePoints;
 @property (assign) NSNumber *visitPlayerIndex;
 @property (assign) NSNumber *visitIsFoul;
 @property (assign) NSNumber *visitPoints;
 @property (nonatomic) NSString *visitRef;
 @property (nonatomic) NSString *timeStamp;
+@property (assign) bool matchStatistics;
+@property (assign) int numberOfFrames;
+@property (assign) int matchMaxPoints;
+
 
 @property (weak, nonatomic) UICollectionView *visitBallGrid;
 
@@ -55,7 +61,8 @@
 -(void) loadVisitWindow:(int) visitIndex :(BOOL) fromGraph;
 -(NSString*) createResultsContent :(NSMutableArray*) singleFrameData :(NSString*) playerName1 :(NSString*) playerName2;
 -(NSMutableArray*) getSelectedFrameData :(NSMutableArray*) singleFrameData :(int)frameIndex;
-
+-(int)getAmountOfBallsByColorPottedInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int) wantedBall;
+-(void)initMatchData;
 
 #define kGraphHeight 275
 #define kDefaultGraphWidth 275

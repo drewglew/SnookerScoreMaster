@@ -18,6 +18,7 @@
 @synthesize frameData;
 @synthesize selectedFrameData;
 @synthesize visitBallCollection;
+@synthesize matchFramePoints;
 @synthesize potTimeStampCollection;
 @synthesize visitPlayerIndex;
 @synthesize visitIsFoul;
@@ -30,6 +31,9 @@
 @synthesize visitPoints;
 @synthesize visitRef;
 @synthesize visitId;
+@synthesize matchStatistics;
+@synthesize numberOfFrames;
+@synthesize matchMaxPoints;
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -46,8 +50,45 @@ CGRect touchAreas[100];
 if (!self.frameData) {
     self.frameData = [[NSMutableArray alloc] init];
     self.selectedFrameData = [[NSMutableArray alloc] init];
+    self.matchFramePoints = [[NSMutableArray alloc] init];
 }
 }
+
+
+-(void)initMatchData {
+    
+    [self.matchFramePoints removeAllObjects];
+    
+    self.matchMaxPoints=0;
+    
+    for (int frameIndex = 1; frameIndex <= self.numberOfFrames; frameIndex++)
+    {
+        NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+        if (frameIndex==self.numberOfFrames) {
+            // add currentbreak to last frame if it exists
+            [data setValue:[NSNumber numberWithInt:[self getPointsInASingleFrame:[self selectedFrameData] :1 :frameIndex]+self.currentBreakPlayer1] forKey:@"player1"];
+            
+            [data setValue:[NSNumber numberWithInt:[self getPointsInASingleFrame:[self selectedFrameData] :2 :frameIndex]+self.currentBreakPlayer2] forKey:@"player2"];
+        } else {
+            [data setValue:[NSNumber numberWithInt:[self getPointsInASingleFrame:[self selectedFrameData] :1 :frameIndex]] forKey:@"player1"];
+            
+            [data setValue:[NSNumber numberWithInt:[self getPointsInASingleFrame:[self selectedFrameData] :2 :frameIndex]] forKey:@"player2"];
+        }
+        
+        if ([[data valueForKeyPath:@"player1"] intValue] > self.matchMaxPoints) {
+            self.matchMaxPoints = [[data valueForKeyPath:@"player1"] intValue];
+        }
+        
+        if ([[data valueForKeyPath:@"player2"] intValue] > self.matchMaxPoints) {
+            self.matchMaxPoints = [[data valueForKeyPath:@"player2"] intValue];
+        }
+        [self.matchFramePoints addObject:data];
+    }
+    self.matchMaxPoints ++;
+}
+
+
+
 
 -(void)addFrameData:(int)frameIndex :(int)playerIndex :(int)points :(int)isfoul :(NSMutableArray*) breakTransaction :(int)matchTxId :(NSMutableArray*) breakTimeStampTransaction {
     
@@ -108,6 +149,35 @@ if (!self.frameData) {
     }
     return highestBreak;
 }
+
+
+
+
+
+-(int)getAmountOfBallsByColorPottedInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int) wantedBall {
+    
+    int totalPotsOfWantedBall=0;
+    for (NSMutableArray *dataPoint in singleFrameData) {
+        NSNumber *wantedPlayer = [dataPoint valueForKeyPath:@"player"];
+        NSNumber *wantedType = [dataPoint valueForKeyPath:@"isfoul"];
+        
+        if (playerIndex == [wantedPlayer intValue] && [wantedType intValue] == 0) {
+            NSMutableDictionary *ballCollection = [[NSMutableDictionary alloc] init];
+            ballCollection = [dataPoint valueForKey:@"ballTransaction"];
+            int ballPoint;
+            
+            for (ball *ball in ballCollection) {
+                ballPoint = ball.pottedPoints;
+                if (ballPoint==wantedBall) {
+                    totalPotsOfWantedBall ++;
+                }
+            }
+            
+        }
+    }
+    return totalPotsOfWantedBall;
+}
+
 
 
 -(int)getAmountOfBallsPottedInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int)frameIndex {
@@ -488,11 +558,52 @@ if (!self.frameData) {
     {
         if (CGRectContainsPoint(touchAreas[i], point))
         {
-            [self loadVisitWindow:i :TRUE];
+            
+            if (self.matchStatistics) {
+                [self updateStatBox:i :TRUE];
+            } else {
+                [self loadVisitWindow:i :TRUE];
+            }
             break;
         }
     }
 }
+
+
+-(void) updateStatBox:(int) pointerIndex :(BOOL) fromGraph {
+
+ 
+    int realPointer=pointerIndex;
+
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] init];;
+    int pointsPlayer1;
+    int pointsPlayer2;
+    int playerIndex;
+ 
+    if (pointerIndex > self.numberOfFrames) {
+        realPointer -= (self.numberOfFrames + 1);
+        data = [self.matchFramePoints objectAtIndex:realPointer];
+        playerIndex = 2;
+        realPointer++;
+    } else {
+        data = [self.matchFramePoints objectAtIndex:realPointer-1];
+        playerIndex = 1;
+    }
+    pointsPlayer1 = [[data valueForKeyPath:@"player1"] intValue];
+    pointsPlayer2 = [[data valueForKeyPath:@"player2"] intValue];
+
+    
+ 
+    [self.delegate displayMatchPoint :pointsPlayer1 :pointsPlayer2 :playerIndex :realPointer];
+    
+    
+    
+    //need to delegate update of box
+    NSLog(@"Tapped a match stat with index %d, value", pointerIndex);
+}
+
+
+
 
 -(void) loadVisitWindow:(int) visitIndex :(BOOL) fromGraph {
     // example.  need to obtain items ball count..
@@ -546,6 +657,173 @@ if (!self.frameData) {
 }
 
 
+
+
+
+- (void)drawMatchLineGraphWithContext:(CGContextRef)ctx
+{
+    /* assist with scale of graph - height */
+    /*
+    NSMutableArray *matchPoints = [[NSMutableArray alloc] init];
+
+    int maxScore=0;
+    
+    for (int frameIndex = 1; frameIndex <= self.numberOfFrames; frameIndex++)
+    {
+        NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+        if (frameIndex==self.numberOfFrames) {
+            // add currentbreak to last frame if it exists
+            [data setValue:[NSNumber numberWithInt:[self getPointsInASingleFrame:[self selectedFrameData] :1 :frameIndex]+self.currentBreakPlayer1] forKey:@"player1"];
+            
+            [data setValue:[NSNumber numberWithInt:[self getPointsInASingleFrame:[self selectedFrameData] :2 :frameIndex]+self.currentBreakPlayer2] forKey:@"player2"];
+        } else {
+            [data setValue:[NSNumber numberWithInt:[self getPointsInASingleFrame:[self selectedFrameData] :1 :frameIndex]] forKey:@"player1"];
+         
+            [data setValue:[NSNumber numberWithInt:[self getPointsInASingleFrame:[self selectedFrameData] :2 :frameIndex]] forKey:@"player2"];
+        }
+        
+        if ([[data valueForKeyPath:@"player1"] intValue] > maxScore) {
+            maxScore = [[data valueForKeyPath:@"player1"] intValue];
+        }
+
+        if ([[data valueForKeyPath:@"player2"] intValue] > maxScore) {
+            maxScore = [[data valueForKeyPath:@"player2"] intValue];
+        }
+        [matchPoints addObject:data];
+    }
+    
+    maxScore ++;
+*/
+    float scalePoints = 1.0f/self.matchMaxPoints;
+    /* assist with scale of graph - width */
+    NSUInteger frameDataEntries = self.matchFramePoints.count;
+
+
+    float scaleFrames=0.0;
+    if (frameDataEntries>0) {
+        scaleFrames = ((int)self.frame.size.width - 5) / frameDataEntries;
+    }
+    
+    
+    
+    // Player 1 plotting
+    [self plotMatchPlayerLines:false :ctx :1 :self.matchFramePoints :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames];
+    /*
+     
+    [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    */
+    
+    int touchIndex = 0;
+    
+    touchIndex = [self plotMatchPlayerMarkers:ctx :self.matchFramePoints :1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
+
+    
+    // Player 2 plotting
+    [self plotMatchPlayerLines:false :ctx :2 :self.matchFramePoints :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames];
+    /*
+    [self plotPlayerLines:true :ctx :2 :self.currentBreakPlayer2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    
+    */
+    touchIndex = [self plotMatchPlayerMarkers:ctx :self.matchFramePoints :2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
+    
+}
+
+
+-(int)plotMatchPlayerMarkers:(CGContextRef)ctx :(NSMutableArray*) matchData :(int) playerIndex  :(UIColor*) playerColour :(float) scalePointsY :(float) scaleFramesX :(int)touchIndex {
+    
+    CGContextSetLineWidth(ctx, 4.0);
+    CGContextSetStrokeColorWithColor(ctx, [playerColour CGColor]);
+    CGContextSetFillColorWithColor(ctx, [playerColour CGColor]);
+    int columnX = 0;
+    int touchID = touchIndex;
+    int graphHeight = self.frame.size.height;
+    int maxGraphHeight = graphHeight - kOffsetY;
+    float plotFramesX=0.0f;     // maintains X position of line
+    float plotPointsY=0.0f;     // maintains Y position of line
+    int score=0; // variable used to store visit point value.
+    for (NSMutableArray *dataPoint in matchData) {
+        columnX ++;
+        touchID++;
+        NSNumber *pointsValue;
+        if (playerIndex==1) {
+            pointsValue=[dataPoint valueForKeyPath:@"player1"];
+        } else {
+            pointsValue=[dataPoint valueForKeyPath:@"player2"];
+        }
+    
+        score = [pointsValue intValue];
+            
+        float plotPoints = scalePointsY * score;
+            
+        plotFramesX = kOffsetX + columnX * scaleFramesX;
+        plotPointsY = graphHeight - maxGraphHeight * plotPoints;
+            
+        CGRect rect = CGRectMake(plotFramesX - kCircleRadius, plotPointsY - kCircleRadius, 2 * kCircleRadius, 2 * kCircleRadius);
+            
+        if (touchID<100) {
+            touchAreas[touchID] = rect;
+        }
+        CGContextAddEllipseInRect(ctx, rect);
+    }
+    CGContextDrawPath(ctx, kCGPathFillStroke);
+    
+    return touchID;
+}
+
+
+
+
+
+-(void)plotMatchPlayerLines:(bool)fillGraph :(CGContextRef)ctx :(int) playerIndex :(NSMutableArray*) matchData  :(UIColor*) playerColour :(float) scalePointsY :(float) scaleFramesX {
+    
+    CGContextSetLineWidth(ctx, 2.0);
+    CGContextSetStrokeColorWithColor(ctx, [playerColour CGColor]);
+    //CGContextSetFillColorWithColor(ctx, [playerColour CGColor]);
+    
+    int graphHeight = self.frame.size.height;
+    int maxGraphHeight = graphHeight - kOffsetY;
+    int score=0;
+    int dataIndex = 0; // incremental index to plot
+    
+    float plotFramesX=0.0f;
+    float plotPointsY=0.0f + graphHeight;
+
+    CGColorSpaceRef colorspace;
+
+    colorspace = CGColorSpaceCreateDeviceRGB();
+ 
+    /* first part is to draw the lines of data actually logged */
+    CGContextBeginPath(ctx);
+    CGContextMoveToPoint(ctx, plotFramesX, plotPointsY);
+    /* run through player 1 and player 2 shared data array picking out only selected players data */
+    for (NSMutableArray *dataPoint in matchData) {
+        dataIndex ++;
+        
+        NSNumber *pointsValue;
+        if (playerIndex==1) {
+            pointsValue=[dataPoint valueForKeyPath:@"player1"];
+        } else {
+            pointsValue=[dataPoint valueForKeyPath:@"player2"];
+        }
+        
+        score = [pointsValue intValue];
+        
+        float plotPoints = scalePointsY * score;
+        plotFramesX = kOffsetX + dataIndex * scaleFramesX;
+        plotPointsY = graphHeight - maxGraphHeight * plotPoints;
+        CGContextAddLineToPoint(ctx, plotFramesX ,plotPointsY );
+        
+        
+    }
+    
+    CGContextDrawPath(ctx, kCGPathStroke);
+}
+
+
+
+
+
+
 //TODO scale the amount of lines drawn with the dynamic resized graph
 
 - (void)drawRect:(CGRect)rect {
@@ -559,43 +837,81 @@ if (!self.frameData) {
     
     int graphBottom = self.frame.size.height;
     
-    NSUInteger frameDataEntries = self.selectedFrameData.count;
-    if (self.currentBreakPlayer1 + self.currentBreakPlayer2 > 0) {
-        frameDataEntries ++;
-    }
+    
+    if (self.matchStatistics == false) {
+    
+        NSUInteger frameDataEntries = self.selectedFrameData.count;
+        if (self.currentBreakPlayer1 + self.currentBreakPlayer2 > 0) {
+            frameDataEntries ++;
+        }
 
-    float scaleVisits = 0.0;
-    if (frameDataEntries>0) {
-        scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
-    }
+        float scaleVisits = 0.0;
+        if (frameDataEntries>0) {
+            scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
+        }
     
-    if (scaleVisits==0) {
-        scaleVisits=50;
-    }
-
-    
-    // How many lines?
-    int howMany = (self.frame.size.width - kOffsetX) + 11 / scaleVisits;
-    
-    // Here the lines go
-    for (int i = 0; i < howMany; i++)
-    {
-        CGContextMoveToPoint(context, kOffsetX + i * scaleVisits, kGraphTop);
-        CGContextAddLineToPoint(context, kOffsetX + i * scaleVisits, graphBottom);
-    }
-    
-    int howManyHorizontal = (graphBottom - kGraphTop - kOffsetY) / scaleVisits;
-    for (int i = 0; i <= howManyHorizontal; i++)
-    {
-        CGContextMoveToPoint(context, kOffsetX, graphBottom - kOffsetY - i * scaleVisits);
-        CGContextAddLineToPoint(context, self.frame.size.width, graphBottom - kOffsetY - i * scaleVisits);
-    }
-    
-    CGContextStrokePath(context);
-    CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
-    [self drawLineGraphWithContext:context];
+        if (scaleVisits==0) {
+            scaleVisits=50;
+        }
 
     
+        // How many lines?
+        int howMany = (self.frame.size.width - kOffsetX) + 11 / scaleVisits;
+    
+        // Here the lines go
+        for (int i = 0; i < howMany; i++)
+        {
+            CGContextMoveToPoint(context, kOffsetX + i * scaleVisits, kGraphTop);
+            CGContextAddLineToPoint(context, kOffsetX + i * scaleVisits, graphBottom);
+        }
+    
+        int howManyHorizontal = (graphBottom - kGraphTop - kOffsetY) / scaleVisits;
+        for (int i = 0; i <= howManyHorizontal; i++)
+        {
+            CGContextMoveToPoint(context, kOffsetX, graphBottom - kOffsetY - i * scaleVisits);
+            CGContextAddLineToPoint(context, self.frame.size.width, graphBottom - kOffsetY - i * scaleVisits    );
+        }
+    
+        CGContextStrokePath(context);
+        CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
+        [self drawLineGraphWithContext:context];
+
+    } else {
+        // do match statistic data!
+
+        float scaleFrames = 0.0;
+        if (self.numberOfFrames>0) {
+            scaleFrames = ((int)self.frame.size.width - 5) / self.numberOfFrames;
+        }
+        
+        if (scaleFrames==0) {
+            scaleFrames=10;
+        }
+        
+        // How many lines?
+        int howMany = (self.frame.size.width - kOffsetX) + 11 / scaleFrames;
+        
+        // Here the lines go
+        for (int i = 0; i < howMany; i++)
+        {
+            CGContextMoveToPoint(context, kOffsetX + i * scaleFrames, kGraphTop);
+            CGContextAddLineToPoint(context, kOffsetX + i * scaleFrames, graphBottom);
+        }
+
+        
+        int howManyHorizontal = (graphBottom - kGraphTop - kOffsetY) / scaleFrames;
+        for (int i = 0; i <= howManyHorizontal; i++)
+        {
+            CGContextMoveToPoint(context, kOffsetX, graphBottom - kOffsetY - i * scaleFrames);
+            CGContextAddLineToPoint(context, self.frame.size.width, graphBottom - kOffsetY - i * scaleFrames    );
+        }
+
+        
+        CGContextStrokePath(context);
+        CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
+        [self drawMatchLineGraphWithContext:context];
+        
+    }
     
 }
 
