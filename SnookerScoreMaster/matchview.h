@@ -12,6 +12,7 @@
 #import "AdjustPointsViewController.h"
 #import "statsViewController.h"
 #import "graphView.h"
+#import <sqlite3.h>
 //#import "CorePlot-CocoaTouch.h"
 
 
@@ -32,7 +33,9 @@
 @property (assign) int colourStateAtStartOfBreak;
 @property (assign) int colourQuantityAtStartOfBreak;
 @property (nonatomic, strong) NSMutableArray *matchData;
-
+@property (strong, nonatomic) NSString *databasePath;
+@property (strong, nonatomic) NSMutableArray *frameStartDate;
+@property (nonatomic) sqlite3 *contactDB;
 
 @property (strong, nonatomic) NSMutableArray     *joinedFrameResult;
 @property (weak, nonatomic) IBOutlet UICollectionView *visitBallGrid;

@@ -1,11 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7703" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="i47-Tx-fHO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="i47-Tx-fHO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="AvenirNext.ttc">
+            <string>AvenirNext-Heavy</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-DemiBold</string>
+            <string>AvenirNext-DemiBold</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-DemiBold</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Regular</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="bT3-df-JDh">
@@ -166,18 +205,38 @@ Once the match is completed make sure the final frame scores are logged by closi
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-D7-AyH" userLabel="PlayersBreak">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white00_500x500.png" translatesAutoresizingMaskIntoConstraints="NO" id="vPY-GV-iZp">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white00_500x500.png" translatesAutoresizingMaskIntoConstraints="NO" id="vPY-GV-iZp">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <textField hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="000" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xAt-sD-702" customClass="snookerbreak">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="medal-bronze.png" translatesAutoresizingMaskIntoConstraints="NO" id="e6s-Ea-Db0" userLabel="Medal">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="37L-dJ-kyy"/>
+                                            <constraint firstAttribute="height" constant="100" id="Rbd-HJ-qTx"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="37L-dJ-kyy"/>
+                                                <exclude reference="Rbd-HJ-qTx"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="163" y="151" width="75" height="100"/>
+                                            <mask key="constraints">
+                                                <include reference="37L-dJ-kyy"/>
+                                                <include reference="Rbd-HJ-qTx"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                    <textField clipsSubviews="YES" contentMode="scaleAspectFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Start" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xAt-sD-702" customClass="snookerbreak">
                                         <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="xAt-sD-702" secondAttribute="height" multiplier="1:1" id="InL-MI-g03"/>
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="50"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -185,19 +244,19 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact">
-                                            <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="60"/>
                                             <mask key="constraints">
                                                 <include reference="InL-MI-g03"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="134"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="134"/>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=compact">
-                                            <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="50"/>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="90"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="90"/>
                                         </variation>
                                     </textField>
                                 </subviews>
@@ -208,13 +267,16 @@ Once the match is completed make sure the final frame scores are logged by closi
                                     <constraint firstItem="xAt-sD-702" firstAttribute="top" secondItem="BVk-D7-AyH" secondAttribute="top" constant="5" id="DaC-Ie-vBK"/>
                                     <constraint firstAttribute="trailing" secondItem="xAt-sD-702" secondAttribute="trailing" constant="5" id="Fif-Qs-1sG"/>
                                     <constraint firstAttribute="width" secondItem="BVk-D7-AyH" secondAttribute="height" multiplier="1:1" id="Rgb-I7-7F7"/>
+                                    <constraint firstAttribute="trailing" secondItem="e6s-Ea-Db0" secondAttribute="trailing" constant="10" id="VFG-LF-VKo"/>
                                     <constraint firstItem="vPY-GV-iZp" firstAttribute="leading" secondItem="BVk-D7-AyH" secondAttribute="leading" id="WEv-pr-Qoh"/>
+                                    <constraint firstItem="e6s-Ea-Db0" firstAttribute="top" secondItem="BVk-D7-AyH" secondAttribute="top" constant="10" id="ayV-Fl-QDg"/>
                                     <constraint firstAttribute="bottom" secondItem="xAt-sD-702" secondAttribute="bottom" constant="5" id="faO-hN-OBd"/>
                                     <constraint firstAttribute="trailing" secondItem="vPY-GV-iZp" secondAttribute="trailing" id="hBG-uq-P6q"/>
                                     <constraint firstItem="xAt-sD-702" firstAttribute="leading" secondItem="BVk-D7-AyH" secondAttribute="leading" constant="5" id="uKs-To-AeP"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
+                                        <exclude reference="e6s-Ea-Db0"/>
                                         <exclude reference="xAt-sD-702"/>
                                     </mask>
                                     <mask key="constraints">
@@ -223,6 +285,8 @@ Once the match is completed make sure the final frame scores are logged by closi
                                         <exclude reference="Fif-Qs-1sG"/>
                                         <exclude reference="faO-hN-OBd"/>
                                         <exclude reference="uKs-To-AeP"/>
+                                        <exclude reference="VFG-LF-VKo"/>
+                                        <exclude reference="ayV-Fl-QDg"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact">
@@ -237,29 +301,31 @@ Once the match is completed make sure the final frame scores are logged by closi
                                         <include reference="uKs-To-AeP"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="5" y="260" width="406" height="406"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="vPY-GV-iZp"/>
+                                        <include reference="e6s-Ea-Db0"/>
                                         <include reference="xAt-sD-702"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="Rgb-I7-7F7"/>
-                                        <include reference="DaC-Ie-vBK"/>
-                                        <include reference="Fif-Qs-1sG"/>
-                                        <include reference="faO-hN-OBd"/>
-                                        <include reference="uKs-To-AeP"/>
                                         <include reference="0Lg-9B-06K"/>
                                         <include reference="8yq-nO-iKC"/>
                                         <include reference="WEv-pr-Qoh"/>
                                         <include reference="hBG-uq-P6q"/>
+                                        <include reference="DaC-Ie-vBK"/>
+                                        <include reference="Fif-Qs-1sG"/>
+                                        <include reference="faO-hN-OBd"/>
+                                        <include reference="uKs-To-AeP"/>
+                                        <include reference="VFG-LF-VKo"/>
+                                        <include reference="ayV-Fl-QDg"/>
                                     </mask>
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bMN-0i-vgX" userLabel="Option Panel">
                                 <rect key="frame" x="354" y="64" width="60" height="123"/>
                                 <subviews>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CSu-LY-jYc">
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CSu-LY-jYc">
                                         <rect key="frame" x="6" y="19" width="51" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -277,7 +343,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="ue6-Ww-wfl"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                         <state key="normal" title="Undo">
                                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -303,12 +369,12 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             <action selector="clearClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yAC-Yw-r10"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snw-xa-VfU">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snw-xa-VfU">
                                         <rect key="frame" x="8" y="85" width="44" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="eJM-hB-Fvf"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                         <state key="normal" title="Adjust">
                                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -319,7 +385,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact" misplaced="YES">
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                             <rect key="frame" x="0.0" y="96" width="70" height="44"/>
                                             <mask key="constraints">
                                                 <include reference="eJM-hB-Fvf"/>
@@ -334,7 +400,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="p3b-OR-7sF"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -342,13 +408,13 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="11" y="4" width="38" height="31"/>
+                                            <rect key="frame" x="10" y="-6" width="50" height="31"/>
                                             <mask key="constraints">
                                                 <include reference="p3b-OR-7sF"/>
                                             </mask>
                                         </variation>
                                     </label>
-                                    <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0ie-m5-kVx" userLabel="DisabledView">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ie-m5-kVx" userLabel="DisabledView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <variation key="widthClass=compact" fixedFrame="YES">
@@ -416,7 +482,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zbo-VC-TiV" userLabel="Scoreboard">
                                 <rect key="frame" x="150" y="30" width="300" height="250"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.64999999999999969" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYA-NU-Nb7" userLabel="Background">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYA-NU-Nb7" userLabel="Background">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -431,7 +497,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                     <constraint firstAttribute="height" constant="45" id="bBl-sM-8CX"/>
                                                 </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
@@ -449,10 +515,10 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                 <rect key="frame" x="18" y="143" width="97" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                                 <variation key="widthClass=compact" misplaced="YES">
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
                                                     <rect key="frame" x="0.0" y="97" width="92" height="30"/>
                                                 </variation>
                                                 <connections>
@@ -464,7 +530,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="F5T-3s-Mb8"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="28"/>
                                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="default">
@@ -472,8 +538,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                         <exclude reference="F5T-3s-Mb8"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="15" width="92" height="40"/>
+                                                <variation key="widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="F5T-3s-Mb8"/>
                                                     </mask>
@@ -481,11 +546,11 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="frames" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OD7-Js-gfU">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="9"/>
                                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="60" width="92" height="11"/>
+                                                    <rect key="frame" x="0.0" y="50" width="93" height="11"/>
                                                 </variation>
                                             </label>
                                         </subviews>
@@ -506,7 +571,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             <constraint firstAttribute="trailing" secondItem="1f3-cd-uep" secondAttribute="trailing" id="gY8-lM-EFf"/>
                                             <constraint firstAttribute="trailing" secondItem="OD7-Js-gfU" secondAttribute="trailing" id="ggj-3K-6mV"/>
                                             <constraint firstItem="1f3-cd-uep" firstAttribute="leading" secondItem="R0F-HB-Q9S" secondAttribute="leading" id="hHz-EE-FZj"/>
-                                            <constraint firstItem="0D0-Se-inD" firstAttribute="top" secondItem="R0F-HB-Q9S" secondAttribute="top" constant="15" id="qP2-xI-G0m">
+                                            <constraint firstItem="0D0-Se-inD" firstAttribute="top" secondItem="R0F-HB-Q9S" secondAttribute="top" constant="5" id="qP2-xI-G0m">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="0.0"/>
                                                 <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
                                             </constraint>
@@ -568,7 +633,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                     <constraint firstAttribute="height" constant="45" id="5Ag-In-QZy"/>
                                                 </constraints>
                                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
@@ -586,10 +651,10 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                 <rect key="frame" x="18" y="143" width="97" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                                 <variation key="widthClass=compact" misplaced="YES">
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
                                                     <rect key="frame" x="0.0" y="97" width="93" height="30"/>
                                                 </variation>
                                                 <connections>
@@ -602,7 +667,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="6Aq-eF-sZE"/>
                                                     <constraint firstAttribute="height" constant="40" id="Ybp-tp-xYi"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="28"/>
                                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="default">
@@ -611,8 +676,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                         <exclude reference="Ybp-tp-xYi"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="15" width="93" height="40"/>
+                                                <variation key="widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="6Aq-eF-sZE"/>
                                                         <include reference="Ybp-tp-xYi"/>
@@ -621,11 +685,11 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="frames" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDq-k6-abz">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="9"/>
                                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="60" width="93" height="11"/>
+                                                    <rect key="frame" x="0.0" y="50" width="92" height="11"/>
                                                 </variation>
                                             </label>
                                         </subviews>
@@ -650,7 +714,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             <constraint firstItem="TNl-HB-zef" firstAttribute="leading" secondItem="9aT-Oa-ens" secondAttribute="leading" id="bqn-NY-KYQ"/>
                                             <constraint firstItem="YDq-k6-abz" firstAttribute="leading" secondItem="9aT-Oa-ens" secondAttribute="leading" id="kAn-1x-bbo"/>
                                             <constraint firstAttribute="trailing" secondItem="TNl-HB-zef" secondAttribute="trailing" id="kB3-Ka-cgR"/>
-                                            <constraint firstItem="YQS-rQ-uz2" firstAttribute="top" secondItem="9aT-Oa-ens" secondAttribute="top" constant="15" id="oPM-kv-TDv">
+                                            <constraint firstItem="YQS-rQ-uz2" firstAttribute="top" secondItem="9aT-Oa-ens" secondAttribute="top" constant="5" id="oPM-kv-TDv">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="0.0"/>
                                                 <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
                                             </constraint>
@@ -794,9 +858,12 @@ Once the match is completed make sure the final frame scores are logged by closi
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TH7-8b-1E9" userLabel="RedCounter">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="4" width="9" height="17"/>
+                                        </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5I-b0-aFU" userLabel="Yellow" customClass="ball">
                                         <rect key="frame" x="45" y="13" width="45" height="45"/>
@@ -878,39 +945,57 @@ Once the match is completed make sure the final frame scores are logged by closi
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-I6-Kz7" userLabel="YellowCounter">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="47" y="4" width="9" height="17"/>
+                                        </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPb-vB-xSH" userLabel="GreenCounter">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="93" y="4" width="9" height="17"/>
+                                        </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEw-rC-212" userLabel="BrownCounter">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="139" y="4" width="9" height="17"/>
+                                        </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5S-jd-XMf" userLabel="BlueCounter">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="185" y="4" width="9" height="17"/>
+                                        </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2x-gm-eHF" userLabel="PinkCounter">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="233" y="4" width="9" height="17"/>
+                                        </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yz-DB-QLU" userLabel="BlackCounter">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="280" y="4" width="9" height="17"/>
+                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1064,6 +1149,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.89999999999999991" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ROY-gr-f1O">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdu-Ja-sd3" userLabel="margin">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1080,13 +1166,13 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points remaining 147, Player One is 38 points behind" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZC-8w-P3c" userLabel="StatBox">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points remaining 147, Player One is 38 points behind" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZC-8w-P3c" userLabel="StatBox">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="ZYq-UH-z43"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="widthClass=compact">
                                             <mask key="constraints">
@@ -1097,16 +1183,16 @@ Once the match is completed make sure the final frame scores are logged by closi
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQE-EF-50G" userLabel="Graph View" customClass="graphView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="frame 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVT-W8-Msm">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="frame 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVT-W8-Msm">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="7IA-Cl-FGj"/>
-                                                    <constraint firstAttribute="height" constant="25" id="ly1-u4-g42"/>
+                                                    <constraint firstAttribute="width" constant="250" id="7IA-Cl-FGj"/>
+                                                    <constraint firstAttribute="height" constant="100" id="ly1-u4-g42"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                                     <mask key="constraints">
                                                         <include reference="7IA-Cl-FGj"/>
                                                         <include reference="ly1-u4-g42"/>
@@ -1144,8 +1230,8 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="AqO-9R-Enp"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                         <variation key="widthClass=compact">
                                                             <mask key="constraints">
@@ -1155,7 +1241,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                     </label>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fuF-YR-lVF">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="HMx-LO-03v">
                                                             <size key="itemSize" width="75" height="75"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1170,7 +1256,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                                     <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OWT-Ne-vfQ">
+                                                                        <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OWT-Ne-vfQ">
                                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                             <variation key="widthClass=compact" misplaced="YES">
                                                                                 <rect key="frame" x="8" y="8" width="34" height="34"/>
@@ -1181,7 +1267,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" tag="103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEn-C8-oTK">
                                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <variation key="widthClass=compact" misplaced="YES">
@@ -1238,7 +1324,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                             <constraint firstAttribute="width" constant="94" id="Vih-W2-lny"/>
                                                             <constraint firstAttribute="height" constant="29" id="lbe-IA-sz2"/>
                                                         </constraints>
-                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <variation key="heightClass=regular-widthClass=compact">
                                                             <mask key="constraints">
                                                                 <include reference="Vih-W2-lny"/>
@@ -1251,12 +1337,12 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                     </stepper>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="7qe-jT-So0">
                                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="fcM-WI-him" firstAttribute="leading" secondItem="r8G-r7-gkj" secondAttribute="leading" constant="5" id="0An-Uj-Viu"/>
                                                     <constraint firstItem="gcg-Hp-I9j" firstAttribute="leading" secondItem="r8G-r7-gkj" secondAttribute="leading" constant="5" id="8Lp-eJ-PF9"/>
@@ -1314,7 +1400,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             </view>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRm-yz-vBg">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
@@ -1329,9 +1415,12 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visits" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85y-hW-wY9" userLabel="Visit">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="132" y="511" width="27" height="12"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1374,13 +1463,13 @@ Once the match is completed make sure the final frame scores are logged by closi
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UBN-U1-Jxy" userLabel="player2Name">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="32"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3xy-CG-hOQ" userLabel="player1Name">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="32"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQk-tw-6ft" userLabel="player1view">
@@ -1388,13 +1477,13 @@ Once the match is completed make sure the final frame scores are logged by closi
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IWS-gM-V39">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.1151484079" green="0.58209493889999997" blue="0.05653730773" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.1151484079" green="0.58209493889999997" blue="0.05653730773" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="IWS-gM-V39" firstAttribute="top" secondItem="aQk-tw-6ft" secondAttribute="top" constant="2" id="Zsn-jM-IvY"/>
                                             <constraint firstAttribute="height" constant="75" id="fEe-9R-vsO"/>
@@ -1420,13 +1509,12 @@ Once the match is completed make sure the final frame scores are logged by closi
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HI8-58-Kye">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.81870589719999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.98823535439999999" green="0.26666668059999998" blue="0.011764707040000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" red="0.81960784313725488" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="HI8-58-Kye" secondAttribute="trailing" constant="2" id="Xzw-ZM-B2A"/>
                                             <constraint firstAttribute="bottom" secondItem="HI8-58-Kye" secondAttribute="bottom" constant="2" id="Zqv-5A-4Cy"/>
@@ -1727,6 +1815,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                     <connections>
                         <outlet property="PlayerStatsView" destination="kWC-oV-8ZR" id="fVi-9C-1dv"/>
                         <outlet property="VisitPlayer" destination="7qe-jT-So0" id="0Cd-hV-MSs"/>
+                        <outlet property="ballCollectionView" destination="7pL-yv-TMP" id="Z0L-UA-uQK"/>
                         <outlet property="blackIndicator" destination="7yz-DB-QLU" id="B1Y-aJ-DHX"/>
                         <outlet property="blueIndicator" destination="d5S-jd-XMf" id="0Lz-P6-ya2"/>
                         <outlet property="blurBackground" destination="ROY-gr-f1O" id="bvX-Xw-1SE"/>
@@ -1749,12 +1838,14 @@ Once the match is completed make sure the final frame scores are logged by closi
                         <outlet property="frameStepper" destination="375-0k-ktL" id="vKp-rf-ZHs"/>
                         <outlet property="greenIndicator" destination="KPb-vB-xSH" id="CwS-LT-IGR"/>
                         <outlet property="imagePottedBall" destination="vPY-GV-iZp" id="vLT-Kp-Zfn"/>
+                        <outlet property="imageViewMedal" destination="e6s-Ea-Db0" id="pHN-mc-IQ9"/>
                         <outlet property="labelScoreMatchPlayer1" destination="0D0-Se-inD" id="XHd-aD-zOC"/>
                         <outlet property="labelScoreMatchPlayer2" destination="YQS-rQ-uz2" id="1n6-tF-WXw"/>
                         <outlet property="labelXaxis" destination="85y-hW-wY9" id="yfu-Gc-hMm"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="01O-2m-V2K"/>
                         <outlet property="navButtonEnd" destination="hUl-gN-88C" id="0vW-LF-F0p"/>
                         <outlet property="navButtonNew" destination="MqU-Az-QiH" id="y6m-uc-xY1"/>
+                        <outlet property="optionPanelView" destination="bMN-0i-vgX" id="u7m-I0-fl2"/>
                         <outlet property="pinkIndicator" destination="k2x-gm-eHF" id="tPf-7L-pbF"/>
                         <outlet property="playerStatsPosition" destination="Ubf-nQ-NcV" id="gQv-A8-BE8"/>
                         <outlet property="pointsLabel" destination="lRm-yz-vBg" id="Y3l-6z-pfg"/>
@@ -1866,7 +1957,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             <constraint firstAttribute="width" constant="45" id="M4x-jW-Ztq"/>
                                             <constraint firstAttribute="height" constant="45" id="WxJ-Nz-XTR"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="37"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="37"/>
                                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1875,9 +1966,12 @@ Once the match is completed make sure the final frame scores are logged by closi
                                         <constraints>
                                             <constraint firstAttribute="width" constant="275" id="g4x-d7-2IJ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="25" y="5" width="275" height="15"/>
+                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1913,7 +2007,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="bJT-Je-ao4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
@@ -1936,7 +2030,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                     <constraint firstAttribute="height" constant="30" id="Mrb-qg-2Fg"/>
                                     <constraint firstAttribute="width" constant="300" id="nef-0h-acw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                 <state key="normal" title="Select">
                                     <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -2062,6 +2156,7 @@ Once the match is completed make sure the final frame scores are logged by closi
         <image name="brown04_500x500.png" width="500" height="500"/>
         <image name="green03_500x500.png" width="500" height="500"/>
         <image name="greenbaize_clear.jpg" width="334" height="500"/>
+        <image name="medal-bronze.png" width="171" height="298"/>
         <image name="pink06_500x500.png" width="500" height="500"/>
         <image name="red01_500x500.png" width="500" height="500"/>
         <image name="white00_500x500.png" width="500" height="500"/>

@@ -27,10 +27,13 @@
 		965173AC1AFAAD8F00B2522B /* red01_25x25.png in Resources */ = {isa = PBXBuildFile; fileRef = 965173A61AFAAD8F00B2522B /* red01_25x25.png */; };
 		965173AD1AFAAD8F00B2522B /* yellow02_25x25.png in Resources */ = {isa = PBXBuildFile; fileRef = 965173A71AFAAD8F00B2522B /* yellow02_25x25.png */; };
 		965173B01AFB2B5000B2522B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 965173AF1AFB2B5000B2522B /* NSData+Base64.m */; };
+		965D282B1B0B8C5D00EB0147 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965D282A1B0B8C5D00EB0147 /* CoreData.framework */; };
+		965D282F1B0B8E5600EB0147 /* SnookerScoreMaster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 965D282D1B0B8E5600EB0147 /* SnookerScoreMaster.xcdatamodeld */; };
 		9683B2371ABB5CC60032D235 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9683B2361ABB5CC60032D235 /* QuartzCore.framework */; };
 		9683B23B1ABB5F9F0032D235 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9683B23A1ABB5F9F0032D235 /* Accelerate.framework */; };
 		9683B2611ABB7A730032D235 /* graphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9683B2601ABB7A730032D235 /* graphView.m */; };
 		969FC9B51A223EF3007EC93F /* statsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FC9B41A223EF3007EC93F /* statsViewController.m */; };
+		96AD26FE1B33576000A53569 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AD26FD1B33576000A53569 /* libsqlite3.tbd */; };
 		96CA1E131A99B797003E0822 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96CA1E121A99B797003E0822 /* Settings.bundle */; };
 		96D22D841A1FD58100E0ADE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22D831A1FD58100E0ADE3 /* main.m */; };
 		96D22D871A1FD58100E0ADE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22D861A1FD58100E0ADE3 /* AppDelegate.m */; };
@@ -47,6 +50,9 @@
 		96D22DC91A20679B00E0ADE3 /* player.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22DC21A20679B00E0ADE3 /* player.m */; };
 		96D22DCA1A20679B00E0ADE3 /* snookerbreak.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22DC41A20679B00E0ADE3 /* snookerbreak.m */; };
 		96D22DCC1A2073BC00E0ADE3 /* Reds-Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D22DCB1A2073BC00E0ADE3 /* Reds-Triangle.png */; };
+		96E8822B1B3EF329003474EC /* medal-gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E882281B3EF329003474EC /* medal-gold.png */; };
+		96E8822C1B3EF329003474EC /* medal-bronze.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E882291B3EF329003474EC /* medal-bronze.png */; };
+		96E8822D1B3EF329003474EC /* medal-silver.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E8822A1B3EF329003474EC /* medal-silver.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,12 +87,16 @@
 		965173A71AFAAD8F00B2522B /* yellow02_25x25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow02_25x25.png; sourceTree = "<group>"; };
 		965173AE1AFB2B5000B2522B /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		965173AF1AFB2B5000B2522B /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		965D282A1B0B8C5D00EB0147 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		965D282E1B0B8E5600EB0147 /* SnookerScoreMaster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SnookerScoreMaster.xcdatamodel; sourceTree = "<group>"; };
+		965D28301B0B90E400EB0147 /* SnookerScoreMaster-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SnookerScoreMaster-Prefix.pch"; sourceTree = "<group>"; };
 		9683B2361ABB5CC60032D235 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9683B23A1ABB5F9F0032D235 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		9683B25F1ABB7A730032D235 /* graphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = graphView.h; path = ../graphView.h; sourceTree = "<group>"; };
 		9683B2601ABB7A730032D235 /* graphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = graphView.m; path = ../graphView.m; sourceTree = "<group>"; };
 		969FC9B31A223EF3007EC93F /* statsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statsViewController.h; sourceTree = "<group>"; };
 		969FC9B41A223EF3007EC93F /* statsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = statsViewController.m; sourceTree = "<group>"; };
+		96AD26FD1B33576000A53569 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = text; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		96CA1E121A99B797003E0822 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		96D22D7E1A1FD58100E0ADE3 /* SnookerScoreMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnookerScoreMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D22D821A1FD58100E0ADE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -114,6 +124,9 @@
 		96D22DC31A20679B00E0ADE3 /* snookerbreak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = snookerbreak.h; sourceTree = "<group>"; };
 		96D22DC41A20679B00E0ADE3 /* snookerbreak.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = snookerbreak.m; sourceTree = "<group>"; };
 		96D22DCB1A2073BC00E0ADE3 /* Reds-Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reds-Triangle.png"; sourceTree = "<group>"; };
+		96E882281B3EF329003474EC /* medal-gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medal-gold.png"; sourceTree = "<group>"; };
+		96E882291B3EF329003474EC /* medal-bronze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medal-bronze.png"; sourceTree = "<group>"; };
+		96E8822A1B3EF329003474EC /* medal-silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medal-silver.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +134,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96AD26FE1B33576000A53569 /* libsqlite3.tbd in Frameworks */,
+				965D282B1B0B8C5D00EB0147 /* CoreData.framework in Frameworks */,
 				9683B23B1ABB5F9F0032D235 /* Accelerate.framework in Frameworks */,
 				9683B2371ABB5CC60032D235 /* QuartzCore.framework in Frameworks */,
 			);
@@ -139,6 +154,8 @@
 		96D22D751A1FD58100E0ADE3 = {
 			isa = PBXGroup;
 			children = (
+				96AD26FD1B33576000A53569 /* libsqlite3.tbd */,
+				965D282A1B0B8C5D00EB0147 /* CoreData.framework */,
 				9683B23A1ABB5F9F0032D235 /* Accelerate.framework */,
 				9683B2361ABB5CC60032D235 /* QuartzCore.framework */,
 				96D22D801A1FD58100E0ADE3 /* SnookerScoreMaster */,
@@ -183,6 +200,9 @@
 				965173AF1AFB2B5000B2522B /* NSData+Base64.m */,
 				969FC9B31A223EF3007EC93F /* statsViewController.h */,
 				969FC9B41A223EF3007EC93F /* statsViewController.m */,
+				96E882281B3EF329003474EC /* medal-gold.png */,
+				96E882291B3EF329003474EC /* medal-bronze.png */,
+				96E8822A1B3EF329003474EC /* medal-silver.png */,
 				96D22DCB1A2073BC00E0ADE3 /* Reds-Triangle.png */,
 				96D22DB71A1FE94E00E0ADE3 /* cueball.png */,
 				96D22DA71A1FD5CD00E0ADE3 /* greenbaize_clear.jpg */,
@@ -206,6 +226,8 @@
 				96D22D901A1FD58100E0ADE3 /* LaunchScreen.xib */,
 				96D22D811A1FD58100E0ADE3 /* Supporting Files */,
 				96CA1E121A99B797003E0822 /* Settings.bundle */,
+				965D282D1B0B8E5600EB0147 /* SnookerScoreMaster.xcdatamodeld */,
+				965D28301B0B90E400EB0147 /* SnookerScoreMaster-Prefix.pch */,
 			);
 			path = SnookerScoreMaster;
 			sourceTree = "<group>";
@@ -323,6 +345,7 @@
 				9651739D1AFAAD7600B2522B /* brown04_500x500.png in Resources */,
 				96D22D8D1A1FD58100E0ADE3 /* Main.storyboard in Resources */,
 				965173AC1AFAAD8F00B2522B /* red01_25x25.png in Resources */,
+				96E8822D1B3EF329003474EC /* medal-silver.png in Resources */,
 				965173A91AFAAD8F00B2522B /* brown04_25x25.png in Resources */,
 				96D22DCC1A2073BC00E0ADE3 /* Reds-Triangle.png in Resources */,
 				9651739F1AFAAD7600B2522B /* pink06_500x500.png in Resources */,
@@ -332,6 +355,7 @@
 				963B462C1AE597F50061B685 /* SSM2.png in Resources */,
 				9613F4881AF7EE3E007C17FE /* black07_500x500.png in Resources */,
 				965173AA1AFAAD8F00B2522B /* green03_25x25.png in Resources */,
+				96E8822C1B3EF329003474EC /* medal-bronze.png in Resources */,
 				96D22DB81A1FE94E00E0ADE3 /* cueball.png in Resources */,
 				96D22DA81A1FD5CD00E0ADE3 /* greenbaize_clear.jpg in Resources */,
 				9651739E1AFAAD7600B2522B /* green03_500x500.png in Resources */,
@@ -340,6 +364,7 @@
 				96D22D921A1FD58100E0ADE3 /* LaunchScreen.xib in Resources */,
 				965173AD1AFAAD8F00B2522B /* yellow02_25x25.png in Resources */,
 				96D22D8F1A1FD58100E0ADE3 /* Images.xcassets in Resources */,
+				96E8822B1B3EF329003474EC /* medal-gold.png in Resources */,
 				965173A11AFAAD7600B2522B /* yellow02_500x500.png in Resources */,
 				9613F48E1AF7EE3E007C17FE /* white00_500x500.png in Resources */,
 			);
@@ -367,6 +392,7 @@
 				96D22D871A1FD58100E0ADE3 /* AppDelegate.m in Sources */,
 				96D22DC81A20679B00E0ADE3 /* matchview.m in Sources */,
 				96D22DC71A20679B00E0ADE3 /* frame.m in Sources */,
+				965D282F1B0B8E5600EB0147 /* SnookerScoreMaster.xcdatamodeld in Sources */,
 				96D22DC51A20679B00E0ADE3 /* AdjustPointsViewController.m in Sources */,
 				96D22D841A1FD58100E0ADE3 /* main.m in Sources */,
 				969FC9B51A223EF3007EC93F /* statsViewController.m in Sources */,
@@ -493,6 +519,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "SnookerScoreMaster/SnookerScoreMaster-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = SnookerScoreMaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -512,6 +539,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "SnookerScoreMaster/SnookerScoreMaster-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = SnookerScoreMaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -591,6 +619,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		965D282D1B0B8E5600EB0147 /* SnookerScoreMaster.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				965D282E1B0B8E5600EB0147 /* SnookerScoreMaster.xcdatamodel */,
+			);
+			currentVersion = 965D282E1B0B8E5600EB0147 /* SnookerScoreMaster.xcdatamodel */;
+			path = SnookerScoreMaster.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 96D22D761A1FD58100E0ADE3 /* Project object */;
 }

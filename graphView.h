@@ -10,6 +10,8 @@
 -(void)displayMatchPoint :(int)pointsPlayer1 :(int)pointsPlayer2 :(int)playerIndex :(int)frameRef;
 @end
 
+// icons from http://commons.wikimedia.org/wiki/SMirC
+
 #import <UIKit/UIKit.h>
 #import "ball.h"
 #import "matchview.h"
@@ -63,6 +65,7 @@
 -(NSMutableArray*) getSelectedFrameData :(NSMutableArray*) singleFrameData :(int)frameIndex;
 -(int)getAmountOfBallsByColorPottedInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int) wantedBall;
 -(void)initMatchData;
+-(NSString *)getTotalFrameTime:(NSMutableArray*)frameStartDates :(int) frameIndex;
 
 #define kGraphHeight 275
 #define kDefaultGraphWidth 275

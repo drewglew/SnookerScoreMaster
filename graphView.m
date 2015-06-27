@@ -48,6 +48,9 @@ CGRect touchAreas[100];
 
 -(void) initFrameData {
 if (!self.frameData) {
+    //NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:self];
+    
+    
     self.frameData = [[NSMutableArray alloc] init];
     self.selectedFrameData = [[NSMutableArray alloc] init];
     self.matchFramePoints = [[NSMutableArray alloc] init];
@@ -106,6 +109,8 @@ if (!self.frameData) {
     [data setValue: [NSMutableArray arrayWithArray:breakTransaction] forKey:@"ballTransaction"];
     [data setValue: [NSMutableArray arrayWithArray:breakTimeStampTransaction] forKey:@"pottedBallTimeStamp"];
     [self.frameData addObject:data];
+    
+    //[NSKeyedArchiver archivedDataWithRootObject:self.frameData];
 
 }
 
@@ -354,6 +359,44 @@ if (!self.frameData) {
 
 
 
+/* --------- */
+
+-(NSString *)getTotalFrameTime:(NSMutableArray*) frameStartDates :(int) frameIndex {
+
+    NSString *firstEntry;
+    NSString *lastEntry;
+    
+    if (frameStartDates.count==0) {
+        return @"00:00";
+    }
+   
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    firstEntry = [NSString stringWithFormat:@"%@", [frameStartDates objectAtIndex:frameIndex-1]];
+    
+    if (frameIndex == frameStartDates.count) {
+        lastEntry = [dateFormatter stringFromDate:[NSDate date]];
+    } else {
+        lastEntry = [NSString stringWithFormat:@"%@", [frameStartDates objectAtIndex:frameIndex]];
+    }
+    
+    NSDate *dateFirstEntry = [[NSDate alloc] init];
+    NSDate *dateLastEntry = [[NSDate alloc] init];
+    // voila!
+    dateFirstEntry = [dateFormatter dateFromString:firstEntry];
+    dateLastEntry = [dateFormatter dateFromString:lastEntry];
+                 
+    NSTimeInterval interval = [dateLastEntry timeIntervalSinceDate:dateFirstEntry];
+    int hours = (int)interval / 3600;             // integer division to get the hours part
+    int minutes = (interval - (hours*3600)) / 60; // interval minus hours part (in seconds) divided by 60 yields minutes
+    return [NSString stringWithFormat:@"%d:%02d", hours, minutes];
+
+}
+
+
+
+
 
 
 -(float)getAverageBreakAmountInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex {
@@ -434,8 +477,8 @@ if (!self.frameData) {
             
             //[UIColor colorWithRed:29.0f/255.0f green:148.0f/255.0f blue:14.0f/255.0f alpha:1.0f]
             
-            CGFloat components[8] = {29.0f/255.0f, 100.0f/255.0f, 4.0f/255.0f, 0.1,  // Start color
-                29.0f/255.0f, 100.0f/255.0f, 4.0f/255.0f, 0.9}; // End color
+            CGFloat components[8] = {0.0f/255.0f, 0.0f/255.0f, 205.0f/255.0f, 0.1,  // Start color
+                0.0f/255.0f, 0.0f/255.0f, 205.0f/255.0f, 0.9}; // End color
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
         }
         startPoint.x = kOffsetX;
@@ -607,21 +650,30 @@ if (!self.frameData) {
 
 -(void) loadVisitWindow:(int) visitIndex :(BOOL) fromGraph {
     // example.  need to obtain items ball count..
-    NSMutableArray *data = [self.selectedFrameData objectAtIndex:visitIndex-1];
+    
+    int index = visitIndex;
+    if (self.selectedFrameData.count < visitIndex) {
+        index = (int)self.selectedFrameData.count;
+    }
+    
+    NSMutableArray *data = [self.selectedFrameData objectAtIndex:index-1];
     self.visitBallCollection = [data valueForKey:@"ballTransaction"];
     self.potTimeStampCollection = [data valueForKey:@"pottedBallTimeStamp"];
     self.visitNumberOfBalls = self.visitBallCollection.count;
     self.visitPlayerIndex = [data valueForKey:@"player"];
+    
     self.visitIsFoul = [data valueForKey:@"isfoul"];
     self.timeStamp = [data valueForKey:@"endbreakdatestamp"];
     self.visitPoints = [data valueForKey:@"points"];
-    self.visitRef = [NSString stringWithFormat:@"%d/%d",visitIndex,(int)self.selectedFrameData.count];
-    self.visitId = visitIndex;
+
+    self.visitRef = [NSString stringWithFormat:@"%d/%d",index,(int)self.selectedFrameData.count];
+    self.visitId = index;
+
     if (fromGraph) {
         [self.delegate reloadGrid];
         self.visitBreakDown.hidden = false;
     }
-    NSLog(@"Tapped a bar with index %d, value", visitIndex);
+    NSLog(@"Tapped a bar with index %d, value", index);
 }
 
 
@@ -646,13 +698,12 @@ if (!self.frameData) {
         scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
     }
     /* Player 1 plotting */
-    [self plotPlayerLines:false :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    [self plotPlayerMarkers:ctx :1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    [self plotPlayerLines:false :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:205.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:205.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
+    [self plotPlayerMarkers:ctx :1 :[UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:205.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
     /* Player 2 plotting */
     [self plotPlayerLines:false :ctx :2 :self.currentBreakPlayer2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
     [self plotPlayerLines:true :ctx :2 :self.currentBreakPlayer2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    
     [self plotPlayerMarkers:ctx :2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
 }
 
@@ -705,9 +756,8 @@ if (!self.frameData) {
     }
     
     
-    
     // Player 1 plotting
-    [self plotMatchPlayerLines:false :ctx :1 :self.matchFramePoints :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames];
+    [self plotMatchPlayerLines:false :ctx :1 :self.matchFramePoints :[UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:205.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames];
     /*
      
     [self plotPlayerLines:true :ctx :1 :self.currentBreakPlayer1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
@@ -715,7 +765,7 @@ if (!self.frameData) {
     
     int touchIndex = 0;
     
-    touchIndex = [self plotMatchPlayerMarkers:ctx :self.matchFramePoints :1 :[UIColor colorWithRed:29.0f/255.0f green:100.0f/255.0f blue:14.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
+    touchIndex = [self plotMatchPlayerMarkers:ctx :self.matchFramePoints :1 :[UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:205.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
 
     
     // Player 2 plotting
