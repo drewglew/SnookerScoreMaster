@@ -31,6 +31,7 @@
 @property (assign) int currentBreakPlayer2;
 @property (assign) int visitId;
 @property (weak, nonatomic) UIView *visitBreakDown;
+@property (strong, nonatomic) UIImage *graphPNG;
 @property (strong, nonatomic) NSMutableArray *visitBallCollection;
 @property (strong, nonatomic) NSMutableArray *potTimeStampCollection;
 @property (strong, nonatomic) NSMutableArray *matchFramePoints;
@@ -40,6 +41,7 @@
 @property (nonatomic) NSString *visitRef;
 @property (nonatomic) NSString *timeStamp;
 @property (assign) bool matchStatistics;
+@property (assign) bool printGraph;
 @property (assign) int numberOfFrames;
 @property (assign) int matchMaxPoints;
 
@@ -66,6 +68,8 @@
 -(int)getAmountOfBallsByColorPottedInFrame:(NSMutableArray*) singleFrameData  :(int)playerIndex :(int) wantedBall;
 -(void)initMatchData;
 -(NSString *)getTotalFrameTime:(NSMutableArray*)frameStartDates :(int) frameIndex;
+- (UIImage *) imageWithView:(graphView *)view;
+-(void) setPrint :(BOOL) enabled;
 
 #define kGraphHeight 275
 #define kDefaultGraphWidth 275

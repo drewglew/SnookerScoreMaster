@@ -31,6 +31,7 @@
 @synthesize visitPoints;
 @synthesize visitRef;
 @synthesize visitId;
+@synthesize printGraph;
 @synthesize matchStatistics;
 @synthesize numberOfFrames;
 @synthesize matchMaxPoints;
@@ -46,11 +47,13 @@
 CGRect touchAreas[100];
 
 
+-(void) setPrint :(BOOL) enabled{
+    printGraph = enabled;
+}
+
 -(void) initFrameData {
 if (!self.frameData) {
     //NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:self];
-    
-    
     self.frameData = [[NSMutableArray alloc] init];
     self.selectedFrameData = [[NSMutableArray alloc] init];
     self.matchFramePoints = [[NSMutableArray alloc] init];
@@ -61,7 +64,6 @@ if (!self.frameData) {
 -(void)initMatchData {
     
     [self.matchFramePoints removeAllObjects];
-    
     self.matchMaxPoints=0;
     
     for (int frameIndex = 1; frameIndex <= self.numberOfFrames; frameIndex++)
@@ -529,7 +531,7 @@ if (!self.frameData) {
             CGContextSetLineWidth(ctx, 2.0);
             CGContextMoveToPoint(ctx, plotVisitsX, plotPointsY);
             /* turn dash on! */
-            CGFloat dash[] = {2.0, 2.0};
+            CGFloat dash[] = {5.0, 5.0};
             CGContextSetLineDash(ctx, 0.0, dash, 2);
         
             dataIndex ++;
@@ -878,11 +880,15 @@ if (!self.frameData) {
 
 - (void)drawRect:(CGRect)rect {
     
+    if (self.printGraph) {
+        [self initMatchData];
+    }
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0.5);
-    CGContextSetStrokeColorWithColor(context, [[UIColor blackColor] CGColor]);
+    CGContextSetStrokeColorWithColor(context, [[UIColor grayColor] CGColor]);
  
-    CGFloat dash[] = {2.0, 2.0};
+    CGFloat dash[] = {1.0, 1.0};
     CGContextSetLineDash(context, 0.0, dash, 2);
     
     int graphBottom = self.frame.size.height;
@@ -961,11 +967,22 @@ if (!self.frameData) {
         CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
         [self drawMatchLineGraphWithContext:context];
         
+        //self.graphPNG = [self imageWithView :self];
     }
     
 }
 
-
+- (UIImage *) imageWithView:(graphView *)view
+{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
 
 
 

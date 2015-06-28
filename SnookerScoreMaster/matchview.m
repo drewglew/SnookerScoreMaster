@@ -20,109 +20,90 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *playerStatsPosition;
 @property (weak, nonatomic) IBOutlet ball *buttonRed;
-@property (weak, nonatomic) IBOutlet UILabel *redIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonYellow;
-@property (weak, nonatomic) IBOutlet UILabel *yellowIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonGreen;
-@property (weak, nonatomic) IBOutlet UILabel *greenIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonBrown;
-@property (weak, nonatomic) IBOutlet UILabel *brownIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonBlue;
-@property (weak, nonatomic) IBOutlet UILabel *blueIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonPink;
-@property (weak, nonatomic) IBOutlet UILabel *pinkIndicator;
 @property (weak, nonatomic) IBOutlet ball *buttonBlack;
-@property (weak, nonatomic) IBOutlet UILabel *blackIndicator;
 @property (weak, nonatomic) IBOutlet player *textScorePlayer1;
 @property (weak, nonatomic) IBOutlet player *textScorePlayer2;
+@property (weak, nonatomic) IBOutlet frame *labelScoreMatchPlayer1;
+@property (weak, nonatomic) IBOutlet frame *labelScoreMatchPlayer2;
+@property (weak, nonatomic) IBOutlet snookerbreak *currentPlayersBreak;
+@property (weak, nonatomic) IBOutlet graphView *frameGraphView;
 @property (strong, nonatomic) player    *currentPlayer;
 @property (strong, nonatomic) player    *opposingPlayer;
+
+@property (weak, nonatomic) IBOutlet UILabel *redIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *yellowIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *greenIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *brownIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *blueIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *pinkIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *blackIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *foulLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statNameLabelPlayer1;
+@property (weak, nonatomic) IBOutlet UILabel *statNameLabelPlayer2;
+@property (weak, nonatomic) IBOutlet UILabel *statContentLabelPlayer1;
+@property (weak, nonatomic) IBOutlet UILabel *statContentLabelPlayer2;
+@property (weak, nonatomic) IBOutlet UILabel *frameInfo;
+@property (weak, nonatomic) IBOutlet UILabel *visitDetailsLable;
+@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *VisitPlayer;
+@property (weak, nonatomic) IBOutlet UILabel *frameRefLabel;
+@property (weak, nonatomic) IBOutlet UILabel *labelXaxis;
 @property (weak, nonatomic) IBOutlet UITextField *textPlayerOneName;
 @property (weak, nonatomic) IBOutlet UITextField *textPlayerTwoName;
 @property (weak, nonatomic) IBOutlet UIView *viewScorePlayer1;
 @property (weak, nonatomic) IBOutlet UIView *viewScorePlayer2;
-@property (weak, nonatomic) IBOutlet frame *labelScoreMatchPlayer1;
-@property (weak, nonatomic) IBOutlet frame *labelScoreMatchPlayer2;
 @property (weak, nonatomic) IBOutlet UIView *viewBreak;
-@property (weak, nonatomic) IBOutlet UISwitch *switchFoul;
-@property (weak, nonatomic) IBOutlet UILabel *foulLabel;
-@property (weak, nonatomic) IBOutlet snookerbreak *currentPlayersBreak;
-@property (weak, nonatomic) IBOutlet UILabel *labelStatePlayer1;
-@property (weak, nonatomic) IBOutlet UILabel *labelStatePlayer2;
-@property (weak, nonatomic) IBOutlet UIImageView *imagePottedBall;
-@property (nonatomic) UIDynamicAnimator *animator;
-@property (weak, nonatomic) IBOutlet UILabel *statContentLabelPlayer1;
 @property (weak, nonatomic) IBOutlet UIView *statContentP1View;
-
-@property (weak, nonatomic) IBOutlet UILabel *statNameLabelPlayer1;
-@property (weak, nonatomic) IBOutlet UILabel *statNameLabelPlayer2;
-@property (weak, nonatomic) IBOutlet UILabel *statContentLabelPlayer2;
 @property (weak, nonatomic) IBOutlet UIView *statContentP2View;
-
-
 @property (weak, nonatomic) IBOutlet UIView *PlayerStatsView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *navButtonNew;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *navButtonEnd;
-
-@property (weak, nonatomic) IBOutlet UILabel *frameInfo;
-@property (weak, nonatomic) IBOutlet UIButton *buttonClear;
-@property (weak, nonatomic) IBOutlet UIButton *buttonAdjust;
+@property (weak, nonatomic) IBOutlet UIView *visitBreakdownView;
+@property (weak, nonatomic) IBOutlet UIView *ballCollectionView;
+@property (weak, nonatomic) IBOutlet UIView *optionPanelView;
 @property (weak, nonatomic) IBOutlet UIView *disabledView;
 @property (strong, nonatomic) IBOutlet UIView *mainView;
-@property (strong, nonatomic) NSMutableArray *frameData;
-@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *blurBackground;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewMedal;
+@property (weak, nonatomic) IBOutlet UIImageView *imagePottedBall;
+@property (weak, nonatomic) IBOutlet UISwitch *switchFoul;
+@property (weak, nonatomic) IBOutlet UIStepper *stepperVisit;
+@property (weak, nonatomic) IBOutlet UIStepper *frameStepper;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *navButtonNew;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *navButtonEnd;
+@property (weak, nonatomic) IBOutlet UIButton *buttonClear;
+@property (weak, nonatomic) IBOutlet UIButton *buttonAdjust;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statBoxHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statP1ContentHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statP2ContentHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *visitBreakTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailingMedalPosition;
+
+@property (strong, nonatomic) NSMutableArray *frameData;
+@property (nonatomic) NSString *emailPlayer1;
+@property (nonatomic) NSString *emailPlayer2;
+@property (nonatomic) NSString *medalName;
 @property (assign) int statPlayer1item;
 @property (assign) int statPlayer2item;
 @property (assign) int visitBallCount;
-@property (assign) bool isButtonStateClear;
-@property (assign) bool isMatchStarted;
 @property (assign) int medalCurrentPlayerBreak;
 @property (assign) int medalOpposingPlayerBreak;
 @property (assign) int medalCurrentPlayerBreakInThisFrame;
 @property (assign) int medalOpposingPlayerBreakInThisFrame;
-@property (weak, nonatomic) IBOutlet UIView *visitBreakdownView;
-@property (weak, nonatomic) IBOutlet graphView *frameGraphView;
-@property (weak, nonatomic) IBOutlet UILabel *visitDetailsLable;
+@property (assign) int noOfGraphsInEmail;
+@property (assign) bool isButtonStateClear;
+@property (assign) bool isMatchStarted;
+@property (assign) bool embedImagesInHTML;
 @property (strong, nonatomic) UIAlertView *alertEndScores;
 @property (strong, nonatomic) UIAlertView *alertOkNotification;
 @property (strong, nonatomic) UIAlertView *alertUndoEntry;
-@property (weak, nonatomic) IBOutlet UIStepper *stepperVisit;
-@property (weak, nonatomic) IBOutlet UILabel *VisitPlayer;
-@property (weak, nonatomic) IBOutlet UILabel *frameRefLabel;
-@property (weak, nonatomic) IBOutlet UIStepper *frameStepper;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *visitBreakTopConstraint;
-@property (weak, nonatomic) IBOutlet UIImageView *blurBackground;
-@property (weak, nonatomic) IBOutlet UILabel *labelXaxis;
-@property (weak, nonatomic) IBOutlet UIView *ballCollectionView;
-@property (weak, nonatomic) IBOutlet UIView *optionPanelView;
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewMedal;
-
-
+@property (nonatomic) UIDynamicAnimator *animator;
 @end
 
-
-/*
-
- DONE
-Added control to disable colours as frame progresses
-Provide difference in players score and compare against expected amount left on table.
-Allow freeballs
-Handle tied frames and respotted black
-
-TODO
-CLear button - only visible/enabled when user is actually on a break
-Adjust button - only visibale/enabled when user is not on a break
-Player Stats - when expanded should all activity behind in main view should be disabled DONE!
-Link current ball & quantities to adjustment process.
-End of frame occurs when all balls are potted.  Provide a message of sorts.
-Still issue when user fouls at same time as potting current ball.  More analysis needed!
-
- 
-*/
 @implementation matchview 
 @synthesize joinedFrameResult;
 @synthesize frameNumber;
@@ -139,10 +120,9 @@ enum scoreStatus { FrameScore, HighestBreak, BallsPotted, TotalVisits, AvgBreak 
 enum scoreStatus scoreState;
 enum IndicatorStyle {highlight, hide};
 
-#pragma mark -standard methods
+#pragma mark - Standard
 
-
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
     
     matchTxId = 0;
@@ -172,7 +152,11 @@ enum IndicatorStyle {highlight, hide};
         [defaults setBool:YES forKey:@"showInstructions"];
         [defaults setValue:@"Player 1" forKey:@"player1"];
         [defaults setValue:@"Player 2" forKey:@"player2"];
+        [defaults setValue:@"email@player1" forKey:@"emailPlayer1"];
+        [defaults setValue:@"email@player2" forKey:@"emailPlayer2"];
         [defaults setBool:YES forKey:@"advancedCounting"];
+        [defaults setBool:YES forKey:@"embedImages"];
+        [defaults setValue:@"7" forKey:@"noOfGraphs"];
     }
     if ([defaults boolForKey:@"showInstructions"] == YES) {
        [self performSegueWithIdentifier:@"segueToInstructions" sender:self];
@@ -180,6 +164,8 @@ enum IndicatorStyle {highlight, hide};
         [defaults setBool:NO forKey:@"showInstructions"];
         [defaults synchronize];
     }
+    
+    
     self.textPlayerOneName.text = [defaults stringForKey:@"player1"];
     if (self.textPlayerOneName.text==nil) {
      self.textPlayerOneName.text = @"Player 1";
@@ -188,11 +174,16 @@ enum IndicatorStyle {highlight, hide};
     if (self.textPlayerTwoName.text==nil) {
         self.textPlayerTwoName.text = @"Player 2";
     }
+    self.emailPlayer1 = [defaults stringForKey:@"emailPlayer1"];
+    self.emailPlayer2 = [defaults stringForKey:@"emailPlayer2"];
     self.advancedCounting = [defaults boolForKey:@"advancedCounting"];
     if (!self.advancedCounting) {
         self.frameInfo.hidden = true;
     }
     
+    self.embedImagesInHTML = [defaults boolForKey:@"embedImages"];
+
+    self.noOfGraphsInEmail = [[defaults valueForKey:@"noOfGraphs"] intValue];
     self.textScorePlayer1.playerIndex = 1;
     self.textScorePlayer2.playerIndex = 2;
     
@@ -352,104 +343,34 @@ enum IndicatorStyle {highlight, hide};
     self.isButtonStateClear = false;
     
 }
-
--(void)displayMatchPoint :(int)pointsPlayer1 :(int)pointsPlayer2 :(int)playerIndex :(int)frameRef {
-    int diff = 0;
+-(void)viewWillAppear :(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    NSArray  *framedetail = [NSArray arrayWithObjects:@"first",@"second",@"third",@"fourth",@"fifth",@"sixth",@"7th",@"8th",@"9th",@"10th",@"11th",@"12th",@"13th",@"14",@"15th",@"16th",@"17th",@"18th",@"19th",@"20th",@"21st",@"22nd",@"23rd",@"24th",@"25th",@"26th",@"27th",@"28th",@"29th",@"30th",@"31st",@"32nd",@"33rd",@"34th",@"final",nil];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.tintColor = [UIColor orangeColor];
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
     
-    NSString *frameReference;
-    if (frameRef>35) {
-        frameReference = [NSString stringWithFormat:@"In frame %d",frameRef];
-    } else {
-        frameReference = [NSString stringWithFormat:@"In the %@ frame",[framedetail objectAtIndex:frameRef-1]];
-    }
-
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     
-    if (playerIndex==1) {
- 
-        if (pointsPlayer1>pointsPlayer2) {
-            diff = pointsPlayer1 - pointsPlayer2;
-            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nwhich is %d points ahead of %@",frameReference, self.textPlayerOneName.text, pointsPlayer1,diff,self.textPlayerTwoName.text];
-        } else if (pointsPlayer1<pointsPlayer2) {
-            diff = pointsPlayer2 - pointsPlayer1;
-            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nwhich is %d points behind %@",frameReference, self.textPlayerOneName.text,pointsPlayer1,diff,self.textPlayerTwoName.text];
-            
-        } else {
-           self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nthe same as %@",frameReference, self.textPlayerOneName.text, pointsPlayer1,self.textPlayerTwoName.text];
-        }
-
-    } else {
-        if (pointsPlayer2>pointsPlayer1) {
-            diff = pointsPlayer2 - pointsPlayer1;
-            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nwhich is %d points ahead of %@",frameReference,self.textPlayerTwoName.text, pointsPlayer2,diff,self.textPlayerOneName.text];
-        } else if (pointsPlayer2<pointsPlayer1) {
-            diff = pointsPlayer1 - pointsPlayer2;
-            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nwhich is %d points behind %@",frameReference,self.textPlayerTwoName.text,pointsPlayer2,diff,self.textPlayerOneName.text];
-            
-        } else {
-            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nthe same as %@",frameReference, self.textPlayerTwoName.text, pointsPlayer2,self.textPlayerOneName.text];
-        }
-    }
 }
-
-
 -(BOOL)prefersStatusBarHidden{
     return YES;
 }
-
--(void)reloadGrid {
-    
-    self.frameStepper.enabled=false;
-    self.stepperVisit.value = [frameGraphView visitId];
-
-    NSString *playerName;
-    if ([[self.frameGraphView visitPlayerIndex] intValue] == 1) {
-        playerName = self.textPlayerOneName.text;
-        //self.visitBreakdownView.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:205.0f/255.0f alpha:1.0f];
-    } else {
-        playerName = self.textPlayerTwoName.text;
-        //self.visitBreakdownView.backgroundColor = [UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
-    }
-    
-    NSString *typeOfPoints;
-    
-
-    
-    
-    if ([[self.frameGraphView visitIsFoul] intValue] == 0) {
-        typeOfPoints = @"potted";
-        self.visitBreakdownView.backgroundColor = [UIColor darkGrayColor];
-        
-    } else {
-        typeOfPoints = @"bonus";
-        self.visitBreakdownView.backgroundColor = [UIColor orangeColor];
-    }
-    
-    self.visitDetailsLable.text = [NSString stringWithFormat:@"%@ %@ %@ points", playerName, [self.frameGraphView visitPoints], typeOfPoints];
-    self.VisitPlayer.text = [NSString stringWithFormat:@"%@ : %@", [self.frameGraphView visitRef], [self.frameGraphView timeStamp]];
-    
-    //[self.visitBallGrid reloadItemsAtIndexPaths:[self.visitBallGrid indexPathsForVisibleItems]];
-    [self.visitBallGrid reloadData];
-   
-    
-}
-
-
-
-- (void) orientationChanged:(NSNotification *)note
-{
+-(void)orientationChanged:(NSNotification *)note {
     UIDevice * device = note.object;
     switch(device.orientation)
     {
         case UIDeviceOrientationPortrait:
             /* start special animation */
             [self.frameGraphView setNeedsDisplay];
-                self.statViewWidthConstraint.constant = self.view.frame.size.width;
-             if (self.playerStatsPosition.constant!=0) {
+            self.statViewWidthConstraint.constant = self.view.frame.size.width;
+            if (self.playerStatsPosition.constant!=0) {
                 self.playerStatsPosition.constant =  2 - self.view.frame.size.width;
-             }
-
+            }
+            
             self.statBoxHeightConstraint.constant = 55;
             self.statP1ContentHeightConstraint.constant = 100;
             self.statP2ContentHeightConstraint.constant = 100;
@@ -459,7 +380,7 @@ enum IndicatorStyle {highlight, hide};
         case UIDeviceOrientationPortraitUpsideDown:
             /* start special animation */
             [self.frameGraphView setNeedsDisplay];
-                self.statViewWidthConstraint.constant = self.view.frame.size.width;
+            self.statViewWidthConstraint.constant = self.view.frame.size.width;
             if (self.playerStatsPosition.constant!=0) {
                 self.playerStatsPosition.constant =  2 - self.view.frame.size.width;
             }
@@ -496,21 +417,81 @@ enum IndicatorStyle {highlight, hide};
             /* do nothing */
             break;
     };
-    /*
-    if (self.navButtonEnd.enabled==false) {
-       [self setBlurredImage];
+}
+-(void)displayMatchPoint :(int)pointsPlayer1 :(int)pointsPlayer2 :(int)playerIndex :(int)frameRef {
+    /* text displayed when match statistics are required */
+    int diff = 0;
+    
+    NSArray  *framedetail = [NSArray arrayWithObjects:@"first",@"second",@"third",@"fourth",@"fifth",@"sixth",@"7th",@"8th",@"9th",@"10th",@"11th",@"12th",@"13th",@"14",@"15th",@"16th",@"17th",@"18th",@"19th",@"20th",@"21st",@"22nd",@"23rd",@"24th",@"25th",@"26th",@"27th",@"28th",@"29th",@"30th",@"31st",@"32nd",@"33rd",@"34th",@"final",nil];
+    
+    NSString *frameReference;
+    if (frameRef>35) {
+        frameReference = [NSString stringWithFormat:@"In frame %d",frameRef];
     } else {
-        // clean up of any stray subviews required
-        for (UIView *view in [self.blurBackground subviews])
-        {
-            [view removeFromSuperview];
+        frameReference = [NSString stringWithFormat:@"In the %@ frame",[framedetail objectAtIndex:frameRef-1]];
+    }
+    if (playerIndex==1) {
+ 
+        if (pointsPlayer1>pointsPlayer2) {
+            diff = pointsPlayer1 - pointsPlayer2;
+            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nwhich is %d points ahead of %@",frameReference, self.textPlayerOneName.text, pointsPlayer1,diff,self.textPlayerTwoName.text];
+        } else if (pointsPlayer1<pointsPlayer2) {
+            diff = pointsPlayer2 - pointsPlayer1;
+            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nwhich is %d points behind %@",frameReference, self.textPlayerOneName.text,pointsPlayer1,diff,self.textPlayerTwoName.text];
+            
+        } else {
+           self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nthe same as %@",frameReference, self.textPlayerOneName.text, pointsPlayer1,self.textPlayerTwoName.text];
+        }
+
+    } else {
+        if (pointsPlayer2>pointsPlayer1) {
+            diff = pointsPlayer2 - pointsPlayer1;
+            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nwhich is %d points ahead of %@",frameReference,self.textPlayerTwoName.text, pointsPlayer2,diff,self.textPlayerOneName.text];
+        } else if (pointsPlayer2<pointsPlayer1) {
+            diff = pointsPlayer1 - pointsPlayer2;
+            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nwhich is %d points behind %@",frameReference,self.textPlayerTwoName.text,pointsPlayer2,diff,self.textPlayerOneName.text];
+            
+        } else {
+            self.frameInfo.text = [NSString stringWithFormat:@"%@ %@ scored %d\nthe same as %@",frameReference, self.textPlayerTwoName.text, pointsPlayer2,self.textPlayerOneName.text];
         }
     }
-    */
+}
+-(void)reloadGrid {
+    
+    self.frameStepper.enabled=false;
+    self.stepperVisit.value = [frameGraphView visitId];
+
+    NSString *playerName;
+    if ([[self.frameGraphView visitPlayerIndex] intValue] == 1) {
+        playerName = self.textPlayerOneName.text;
+        //self.visitBreakdownView.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:205.0f/255.0f alpha:1.0f];
+    } else {
+        playerName = self.textPlayerTwoName.text;
+        //self.visitBreakdownView.backgroundColor = [UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
+    }
+    
+    NSString *typeOfPoints;
+    
+
+    
+    
+    if ([[self.frameGraphView visitIsFoul] intValue] == 0) {
+        typeOfPoints = @"potted";
+        self.visitBreakdownView.backgroundColor = [UIColor darkGrayColor];
+        
+    } else {
+        typeOfPoints = @"bonus";
+        self.visitBreakdownView.backgroundColor = [UIColor orangeColor];
+    }
+    
+    self.visitDetailsLable.text = [NSString stringWithFormat:@"%@ %@ %@ points", playerName, [self.frameGraphView visitPoints], typeOfPoints];
+    self.VisitPlayer.text = [NSString stringWithFormat:@"%@ : %@", [self.frameGraphView visitRef], [self.frameGraphView timeStamp]];
+    
+    //[self.visitBallGrid reloadItemsAtIndexPaths:[self.visitBallGrid indexPathsForVisibleItems]];
+    [self.visitBallGrid reloadData];
+   
     
 }
-
-
 -(void)setBlurredImage {
     for (UIView *view in [self.blurBackground subviews])
     {
@@ -537,152 +518,14 @@ enum IndicatorStyle {highlight, hide};
     
     
 }
-
--(void)swipeRightShowPlayersStats:(UISwipeGestureRecognizer *)gesture
-{
-
-    self.frameGraphView.numberOfFrames = self.frameNumber;
-   // [self setBlurredImage];
-    
-    self.navButtonNew.title  = @"";
-    self.navButtonNew.enabled=false;
-    self.navButtonEnd.title  = @"";
-    self.navButtonEnd.enabled=false;
-    
-    self.frameGraphView.matchStatistics=false;
-    
-    // reset selectedFrameData EVERY time view is shown
-    [self.frameGraphView.selectedFrameData removeAllObjects];
-    [self.frameGraphView.selectedFrameData addObjectsFromArray:[self.frameGraphView frameData]];
-    
-
-    self.frameGraphView.scorePlayer1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :1];
-    self.frameGraphView.scorePlayer2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :2];
-
-    self.frameRefLabel.text = [NSString stringWithFormat:@"frame %d\ntime %@",self.frameNumber, [self.frameGraphView getTotalFrameTime:self.frameStartDate :self.frameNumber]];
-    
-    
-    self.frameStepper.maximumValue = self.frameNumber;
-    self.frameStepper.value = self.frameNumber;
-    
-    self.frameGraphView.currentBreakPlayer2 = 0;
-    self.frameGraphView.currentBreakPlayer1 = 0;
-    if ((int)self.frameStepper.value == self.frameNumber) {
-        int currentBreak = self.currentPlayersBreak.breakScore;
-        
-        if (self.currentPlayer.playerIndex==1) {
-            self.frameGraphView.scorePlayer1 += currentBreak;
-            self.frameGraphView.currentBreakPlayer1 = currentBreak;
-        } else {
-            self.frameGraphView.scorePlayer2  += currentBreak;
-            self.frameGraphView.currentBreakPlayer2 = currentBreak;
-        }
-    }
-    
-    self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@: %d",self.textPlayerOneName.text, self.frameGraphView.scorePlayer1 ];
-    
-    self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@: %d",self.textPlayerTwoName.text, self.frameGraphView.scorePlayer2 ];
-    
-    
-
-    self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
-    self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
-    
-    self.playerStatsPosition.constant=0;
-    
-    self.frameInfo.text = [self getFrameBoxInfo];
-    
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.PlayerStatsView layoutIfNeeded];
-    }];
-    
-    self.disabledView.hidden=false;
-    self.pointsLabel.hidden = false;
-    self.stepperVisit.maximumValue = self.frameGraphView.selectedFrameData.count;
-    
-    
-    [self.frameGraphView setNeedsDisplay];
-    
-    
-    
-}
-
--(void)tapHidePlayersStats:(UISwipeGestureRecognizer *)gesture
-{
- //   [self hidePlayersStats];
-}
-
--(void)tapHideVisitData :(UISwipeGestureRecognizer *)gesture
-{
-    self.visitBreakdownView.hidden=true;
-    self.frameStepper.enabled=true;
-}
-
-
--(void)swipeLeftHidePlayersStats:(UISwipeGestureRecognizer *)gesture
-{
-    [self hidePlayersStats];
-    
-
-}
-
--(void)hidePlayersStats {
-    
-    self.playerStatsPosition.constant=-self.statViewWidthConstraint.constant+2;
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.PlayerStatsView layoutIfNeeded];
-    }];
-    self.navButtonNew.title  = @"New";
-    self.navButtonNew.enabled=true;
-    self.navButtonEnd.title  = @"End";
-    self.navButtonEnd.enabled=true;
-    
-    self.disabledView.hidden=true;
-    self.pointsLabel.hidden = true;
-    
-
-    
-}
-
-
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.tintColor = [UIColor orangeColor];
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
-    
-}
-
-
-- (void)didReceiveMemoryWarning {
+-(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Medal
 
-#pragma mark -user defined
-
--(void)processCurrentUsersHighestBreak {
-    // if break that has just completed is higher than players highest break in match, save it.
-    if ( [self.currentPlayer highestBreak] < [self.currentPlayersBreak breakScore] ) {
-        [self.currentPlayer setHighestBreak:[self.currentPlayersBreak breakScore] :self.frameNumber :self.currentPlayersBreak.pottedBalls];
-    }
-    // if break is the highest for current player in frame save it to the frame object.
-    if (self.currentPlayer.currentFrame.frameHighestBreak < [self.currentPlayersBreak breakScore]) {
-        [self.currentPlayer.currentFrame setFrameHighestBreak:[self.currentPlayersBreak breakScore] :self.frameNumber :self.currentPlayersBreak.pottedBalls];
-    }
-    
-}
-
-
--(void) setMedalCounters {
+-(void)setMedalCounters {
 
 self.medalCurrentPlayerBreak = [self.frameGraphView getHighestBreakAmountInFrame:matchData :self.currentPlayer.playerIndex :0];
 
@@ -693,207 +536,44 @@ self.medalCurrentPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakAm
 self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakAmountInFrame:[self.frameGraphView frameData] :self.opposingPlayer.playerIndex :self.frameNumber];
 
 }
-
-
--(void) displayMedal {
-    
+-(void)displayMedal {
     if (self.currentPlayersBreak.breakScore > self.medalCurrentPlayerBreak &&  self.currentPlayersBreak.breakScore > self.medalOpposingPlayerBreak  && self.currentPlayersBreak.breakScore > self.medalCurrentPlayerBreakInThisFrame && self.currentPlayersBreak.breakScore > self.medalOpposingPlayerBreakInThisFrame  ) {
         //show gold medal
-        self.imageViewMedal.image = [UIImage imageNamed:@"medal-gold.png"];
-        self.imageViewMedal.hidden=false;
-        
+        [self animateMedal:@"medal-gold.png"];
     } else if (self.currentPlayersBreak.breakScore > self.medalCurrentPlayerBreak  && self.currentPlayersBreak.breakScore > self.medalCurrentPlayerBreakInThisFrame) {
         //show silver medal
-        self.imageViewMedal.image = [UIImage imageNamed:@"medal-silver.png"];
-        self.imageViewMedal.hidden=false;
+        [self animateMedal:@"medal-silver.png"];
     } else {
-        
         if (self.currentPlayersBreak.breakScore > self.medalCurrentPlayerBreakInThisFrame) {
             //show bronze medal
-            self.imageViewMedal.image = [UIImage imageNamed:@"medal-bronze.png"];
-            self.imageViewMedal.hidden=false;
+            [self animateMedal:@"medal-bronze.png"];
         } else {
             // make sure it's hidden
-            self.imageViewMedal.hidden=true;
+            self.imageViewMedal.alpha=0.0f;
+            self.medalName = @"";
         }
     }
 }
-
-
-// plan is to replace the above method ballClicked with this new one allowing us to
-// also log the balls potted along the way into an array that we can process.
-
--(void)ballPotted:(ball*)pottedBall :(UILabel*) indicatorBall {
-
-    bool freeBall=false;
-    
-  /*  NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
-    pottedBall.timeStamp = rightNow;
-  */
-    //this is wrong, must copy instance and add that copied version to break
-    
-    if (self.currentPlayersBreak.breakScore==0) {
-        self.buttonAdjust.hidden = true;
-        [self.buttonClear setTitle:@"Clear" forState:UIControlStateNormal];
-        self.isButtonStateClear = true;
-        [self setMedalCounters];
-        
-        self.viewBreak.alpha = 0.0;
-        [UIView animateWithDuration:0.5
-                          delay:0.0
-                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         self.viewBreak.alpha = 1.0;
-                     }
-                     completion:nil
-         ];
-    }
-    
-    if ([self.switchFoul isOn] ) {
-        [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
-        
-        NSMutableArray *foulBallArray = [[NSMutableArray alloc] init];
-        foulBallArray = [NSMutableArray arrayWithObjects:pottedBall, nil];
-        NSMutableArray *foulBallTimeArray = [[NSMutableArray alloc] init];
-        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
-        
-        foulBallTimeArray = [NSMutableArray arrayWithObjects:rightNow, nil];
-        
-        
-        [self closeBreak];
-        // add the foul points to opposing player
-        [self.opposingPlayer setFoulScore:pottedBall.foulPoints];
-
-        
-        self.matchTxId++;
-        [self.frameGraphView addFrameData:self.frameNumber :self.opposingPlayer.playerIndex :pottedBall.foulPoints :1 :foulBallArray :self.matchTxId :foulBallTimeArray];
-        [self.currentPlayersBreak clearBreak:self.imagePottedBall];
-        [self.switchFoul setOn:false];
-        self.foulLabel.hidden=true;
-        self.buttonAdjust.hidden = false;
-        
-        
-        self.isButtonStateClear = false;
-        [self swapPlayers];
-        
-    } else {
-
-        if (self.advancedCounting) {
-        
-        
-            if (self.currentColour < pottedBall.pottedPoints && self.currentPlayersBreak.breakScore==0 ) {
-            // handle freeball scenario - free balls start the moment. Conditions - 1st pot of break.  ball potted greater than current 'live' ball
-
-                pottedBall.potsInBreakCounter ++;
-                indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
-                if (self.currentColour==1) {
-                    pottedBall = self.buttonRed;
-                } else if (self.currentColour==2) {
-                    pottedBall = self.buttonYellow;
-                } else if (self.currentColour==3) {
-                    pottedBall = self.buttonGreen;
-                } else if (self.currentColour==4) {
-                    pottedBall = self.buttonBrown;
-                } else if (self.currentColour==5) {
-                    pottedBall = self.buttonBlue;
-                } else if (self.currentColour==6) {
-                    pottedBall = self.buttonPink;
-                }
-                freeBall=true;
-            } else if (self.currentPlayersBreak.breakScore==0) {
-                // save current ball state at beginning of break just in case user cancels break.
-                colourStateAtStartOfBreak = currentColour;
-                colourQuantityAtStartOfBreak = pottedBall.quantity;
-            }
-        
-            // it is a pot, so credit the current user
-            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall :self.viewBreak] == true) {
-                [self.currentPlayer incrementNbrBalls:1];
-                [self.currentPlayer.currentFrame incrementFrameBallsPotted];
-            
-                if (pottedBall.quantity >= 1 && pottedBall.pottedPoints == 1 && freeBall == false) {
-                    [pottedBall decreaseQty];
-                    if (pottedBall.quantity == 0) {
-                        currentColour ++;
-                        self.ballReplaced=true;
-                    }
-                } else if (pottedBall.pottedPoints == self.currentColour) {
-                
-                    if (self.ballReplaced && pottedBall.pottedPoints == 2) {
-                        //Allow Yellow to be potted twice after final red.
-                        self.ballReplaced=false;
-                    } else if (pottedBall.pottedPoints == 7 && (self.currentPlayer.currentFrame.frameScore + self.currentPlayersBreak.breakScore) == self.opposingPlayer.currentFrame.frameScore) {
-                    // Allow a respotted Black!
-                    
-                    } else if (freeBall == false) {
-                        [pottedBall decreaseQty];
-                        self.currentColour ++;
-                    }
-                } else if (pottedBall.pottedPoints != self.currentColour && self.currentColour == 2 && self.ballReplaced) {
-                    self.ballReplaced=false;
-                }
-                if (freeBall==false) {
-                    pottedBall.potsInBreakCounter ++;
-                    indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
-                }
-         
-                [self clearIndicators :highlight];
-                [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
-                indicatorBall.textColor = [UIColor whiteColor];
-                indicatorBall.hidden = false;
-            }
-            
-        } else {  // no advanced scoring
-            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall :self.viewBreak] == true) {
-                [self.currentPlayer incrementNbrBalls:1];
-                [self.currentPlayer.currentFrame incrementFrameBallsPotted];
-                [self clearIndicators :highlight];
-                pottedBall.potsInBreakCounter ++;
-                indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
-                
-                [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
-                indicatorBall.textColor = [UIColor whiteColor];
-                indicatorBall.hidden = false;
-            }
-                
-        }
-        
-        [self displayMedal];
-        [self.currentPlayer.currentFrame increaseFrameScore:self.currentPlayer.frameScore];
+-(void)animateMedal :(NSString*)medalName {
+    /* controls animation of all medals */
+    float medalAdjust = 25.0f;
+    if (![self.medalName isEqualToString:medalName]) {
+        self.imageViewMedal.alpha=0.0f;
+        self.imageViewMedal.image = [UIImage imageNamed:medalName];
+        self.trailingMedalPosition.constant =- medalAdjust;
+        [self.view layoutIfNeeded];
+        self.medalName = medalName;
+        self.trailingMedalPosition.constant =+ medalAdjust;
+        [UIView animateWithDuration:1.5f animations:^{
+            self.imageViewMedal.alpha=1.0f;
+            [self.view layoutIfNeeded];
+        }];
     }
 }
 
+#pragma mark - Break
 
-
-- (IBAction)redClicked:(id)sender {
-    [self ballPotted:self.buttonRed :self.redIndicator];
-}
-- (IBAction)yellowClicked:(id)sender {
-    [self ballPotted:self.buttonYellow :self.yellowIndicator];
-}
-- (IBAction)greenClicked:(id)sender {
-    [self ballPotted:self.buttonGreen :self.greenIndicator];
-}
-- (IBAction)brownClicked:(id)sender {
-    [self ballPotted:self.buttonBrown :self.brownIndicator];
-}
-- (IBAction)blueClicked:(id)sender {
-    [self ballPotted:self.buttonBlue :self.blueIndicator];
-}
-- (IBAction)pinkClicked:(id)sender {
-    [self ballPotted:self.buttonPink :self.pinkIndicator];
-}
-- (IBAction)blackClicked:(id)sender {
-    [self ballPotted:self.buttonBlack :self.blackIndicator];
-}
-
-
--(void)endBreakTap:(UITapGestureRecognizer *)gesture
-{
+-(void)endBreakTap:(UITapGestureRecognizer *)gesture {
     if (self.isMatchStarted) {
         /* add break score to users frame total and hide the cueball */
         [self closeBreak];
@@ -910,7 +590,6 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         
     }
 }
-
 -(void)closeBreak {
     /* set counter variables and clear break */
     if (self.currentPlayersBreak.breakScore > 0) {
@@ -928,158 +607,39 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         self.ballReplaced=false;
         self.frameGraphView.currentBreakPlayer1=0;
         self.frameGraphView.currentBreakPlayer2=0;
-        self.imageViewMedal.hidden=true;
+        self.imageViewMedal.alpha=0.0f;
+        self.medalName = @"";
+            }
+}
+-(void)processCurrentUsersHighestBreak {
+    // if break that has just completed is higher than players highest break in match, save it.
+    if ( [self.currentPlayer highestBreak] < [self.currentPlayersBreak breakScore] ) {
+        [self.currentPlayer setHighestBreak:[self.currentPlayersBreak breakScore] :self.frameNumber :self.currentPlayersBreak.pottedBalls];
     }
-}
-
-
--(void)clearIndicators :(enum IndicatorStyle) indicator {
-    
-    if (indicator == hide) {
-        [self resetIndicator:self.buttonRed :self.redIndicator];
-        [self resetIndicator:self.buttonYellow :self.yellowIndicator];
-        [self resetIndicator:self.buttonGreen :self.greenIndicator];
-        [self resetIndicator:self.buttonBrown :self.brownIndicator];
-        [self resetIndicator:self.buttonBlue :self.blueIndicator];
-        [self resetIndicator:self.buttonPink :self.pinkIndicator];
-        [self resetIndicator:self.buttonBlack :self.blackIndicator];
-    } else if (indicator == highlight) {
-        [self resetIndicatorStyle:self.redIndicator];
-        [self resetIndicatorStyle:self.yellowIndicator];
-        [self resetIndicatorStyle:self.greenIndicator];
-        [self resetIndicatorStyle:self.brownIndicator];
-        [self resetIndicatorStyle:self.blueIndicator];
-        [self resetIndicatorStyle:self.pinkIndicator];
-        [self resetIndicatorStyle:self.blackIndicator];
-    }
-}
-
--(void)resetIndicator :(ball*)pottedBall :(UILabel*) indicatorBall {
-    pottedBall.potsInBreakCounter = 0;
-    indicatorBall.hidden=true;
-}
-
--(void)resetIndicatorStyle :(UILabel*) indicatorBall {
-    [indicatorBall setFont:[UIFont systemFontOfSize:14]];
-    indicatorBall.textColor = [UIColor orangeColor];
-}
-
-
--(void)swapPlayers {
-    /* switch the player in focus to the other */
-    
-    if (self.currentPlayer == self.textScorePlayer1) {
-        self.currentPlayer = self.textScorePlayer2;
-        self.opposingPlayer = self.textScorePlayer1;
-        [self.textPlayerTwoName setTextColor:[UIColor whiteColor]];
-        [self.textPlayerOneName setTextColor:[UIColor orangeColor]];
-    } else {
-        self.currentPlayer = self.textScorePlayer1;
-        self.opposingPlayer = self.textScorePlayer2;
-        [self.textPlayerTwoName setTextColor:[UIColor orangeColor]];
-        [self.textPlayerOneName setTextColor:[UIColor whiteColor]];
-    }
-    [self.currentPlayer setTextColor:[UIColor whiteColor]];
-    [self.opposingPlayer setTextColor:[UIColor orangeColor]];
-    /* enum to control the stats view */
-    scoreState = FrameScore;
-    
-    
-    self.labelStatePlayer1.text = @"";
-    self.labelStatePlayer2.text = @"";
-}
-
-
-
-
-
-
-
--(void)selectPlayerOneTap:(UITapGestureRecognizer *)gesture
-{
-    
-    
-    Boolean modified = false;
-    NSString *labelScore;
-    
-    if (self.textScorePlayer1 == self.opposingPlayer) {
-        [self selectPlayerOne];
-        modified = true;
-        labelScore = [NSString stringWithFormat:@"%d",self.opposingPlayer.currentFrame.frameScore];
-        self.textScorePlayer2.text = labelScore;
-    }
-}
-
--(void)selectPlayerOne {
-    self.currentPlayer = self.textScorePlayer1;
-    self.opposingPlayer = self.textScorePlayer2;
-
-    [self.currentPlayer setTextColor:[UIColor whiteColor]];
-    [self.opposingPlayer setTextColor:[UIColor orangeColor]];
-    [self.textPlayerOneName setTextColor:[UIColor whiteColor]];
-    [self.textPlayerTwoName setTextColor:[UIColor orangeColor]];
-    
-    scoreState = FrameScore;
-    self.labelStatePlayer1.text = @"";
-    self.labelStatePlayer2.text = @"";
-    [self setMedalCounters];
-    [self displayMedal];
-    
-}
-
-
--(void)selectPlayerTwoTap:(UITapGestureRecognizer *)gesture
-{
-   Boolean modified = false;
-    NSString *labelScore;
-    
-    if (self.textScorePlayer2 == self.opposingPlayer) {
-        [self selectPlayerTwo];
-        modified = true;
-        labelScore = [NSString stringWithFormat:@"%d",self.opposingPlayer.currentFrame.frameScore];
-        self.textScorePlayer1.text = labelScore;
-        
+    // if break is the highest for current player in frame save it to the frame object.
+    if (self.currentPlayer.currentFrame.frameHighestBreak < [self.currentPlayersBreak breakScore]) {
+        [self.currentPlayer.currentFrame setFrameHighestBreak:[self.currentPlayersBreak breakScore] :self.frameNumber :self.currentPlayersBreak.pottedBalls];
     }
     
+}
+-(float)getAverageBreakAmountInMatch :(int)playerIndex {
+    int totalPottedPoints = 0;
+    int totalVisits = 0;
     
+    totalPottedPoints = [self.frameGraphView getPointsByTypeInFrame:self.matchData :playerIndex :0 :0] + [self.frameGraphView getPointsByTypeInFrame:[self.frameGraphView frameData] :playerIndex :0 :0];
     
+    totalVisits = [self.frameGraphView getAmountOfVisitsInFrame:self.matchData :playerIndex] + [self.frameGraphView getAmountOfVisitsInFrame:[self.frameGraphView frameData] :playerIndex];
+    
+    float avgAmount = 0.0;
+    avgAmount = (float)totalPottedPoints / (float)totalVisits;
+    
+    if isnan(avgAmount) {
+        avgAmount=0.0;
+    }
+    return avgAmount;
 }
 
-
--(void)selectPlayerTwo {
-    self.currentPlayer = self.textScorePlayer2;
-    self.opposingPlayer = self.textScorePlayer1;
-
-    [self.currentPlayer setTextColor:[UIColor whiteColor]];
-    [self.opposingPlayer setTextColor:[UIColor orangeColor]];
-    [self.textPlayerTwoName setTextColor:[UIColor whiteColor]];
-    [self.textPlayerOneName setTextColor:[UIColor orangeColor]];
-
-    scoreState = FrameScore;
-    self.labelStatePlayer1.text = @"";
-    self.labelStatePlayer2.text = @"";
-    [self setMedalCounters];
-    [self displayMedal];
-}
-
-- (IBAction)dismissPlayerOneKB:(id)sender {
-    [self.textPlayerOneName becomeFirstResponder];
-    [self.textPlayerOneName resignFirstResponder];
-}
-
-- (IBAction)dismissPlayerTwoKB:(id)sender {
-    [self.textPlayerTwoName becomeFirstResponder];
-    [self.textPlayerTwoName resignFirstResponder];
-}
-
-- (IBAction)newFrameClicked:(id)sender {
-    [self endOfFrame];
-}
-
-+ (NSString *)formatValue:(int)value forDigits:(int)zeros {
-    NSString *format = [NSString stringWithFormat:@"%%0%dd", zeros];
-    return [NSString stringWithFormat:format,value];
-}
+#pragma mark - Frame handling
 
 -(void)endOfFrame {
     bool ignoreEndOfFrame = false;
@@ -1108,7 +668,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         } else {
             [self.joinedFrameResult addObject:[NSString stringWithFormat:@"%03d/%03d  ",playerPoints1,playerPoints2]];
         }
-    
+        
         [self.textScorePlayer1 resetFrameScore:0];
         [self.textScorePlayer2 resetFrameScore:0];
         [self selectPlayerOne];
@@ -1117,14 +677,112 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         [self.textScorePlayer2 createFrame:(self.frameNumber)];
         [self resetBalls];
         [self addFrameStartDate];
-    
+        
         //We would need to save the array someplace too.
         [self.frameGraphView resetFrameData];
         
     }
 }
+-(NSString *)getFrameBoxInfo {
+    /* frame specific detail that is shared in the statistics part */
+    NSString *data;
+    int pointsRemaining=0;
+    int currentBreak=0;
+    int frameScorePlayer1=0;
+    int frameScorePlayer2=0;
+    
+    // How many points remaining?
+    for (int i = 7; i >= 1; i--)
+    {
+        if (i==1) {
+            pointsRemaining += (self.buttonRed.quantity * 8);
+        } else if (self.currentColour <= i) {
+            pointsRemaining += i;
+        } else {
+            i=1;
+        }
+    }
+    // get difference between players scores..
+    currentBreak = self.currentPlayersBreak.breakScore;
+    
+    frameScorePlayer1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData]:1];
+    frameScorePlayer2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData]:2];
+    
+    if (currentBreak>0) {
+        
+        if (self.currentPlayersBreak.currentBall.pottedPoints == 1) {
+            pointsRemaining += 7;
+        }
+        
+        if (self.currentPlayer == self.textScorePlayer1) {
+            frameScorePlayer1 += currentBreak;
+            
+        } else {
+            frameScorePlayer2 += currentBreak;
+        }
+    }
+    
+    if (frameScorePlayer1 > frameScorePlayer2) {
+        // player one is winning/won
+        
+        if ((int)self.frameStepper.value == self.frameNumber) {
+            data = [NSString stringWithFormat:@"%d remaining. %@ is leading %@ by %d point(s)",pointsRemaining,self.textPlayerOneName.text,self.textPlayerTwoName.text, frameScorePlayer1 - frameScorePlayer2];
+        } else {
+            data = [NSString stringWithFormat:@"%@ beat %@ by %d point(s)",self.textPlayerOneName.text,self.textPlayerTwoName.text, frameScorePlayer1 - frameScorePlayer2];
+        }
+        
+    } else if (frameScorePlayer2 > frameScorePlayer1) {
+        // player two is winning/won
+        if ((int)self.frameStepper.value == self.frameNumber) {
+            data = [NSString stringWithFormat:@"%d remaining. %@ is leading %@ by %d point(s)",pointsRemaining,self.textPlayerTwoName.text,self.textPlayerOneName.text, frameScorePlayer2 - frameScorePlayer1];
+        } else {
+            data = [NSString stringWithFormat:@"%@ beat %@ by %d point(s)",self.textPlayerTwoName.text,self.textPlayerOneName.text, frameScorePlayer2 - frameScorePlayer1];
+        }
+        
+    } else {
+        // players tied
+        data = [NSString stringWithFormat:@"%d remaining. %@ and %@ are level",pointsRemaining,self.textPlayerOneName.text,self.textPlayerTwoName.text];
+    }
+    
+    return data;
+}
+-(void)addFrameStartDate {
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
+    [self.frameStartDate addObject:rightNow];
+}
 
+#pragma mark - 7 Balls button group
 
+-(void)clearIndicators :(enum IndicatorStyle) indicator {
+    
+    if (indicator == hide) {
+        [self resetIndicator:self.buttonRed :self.redIndicator];
+        [self resetIndicator:self.buttonYellow :self.yellowIndicator];
+        [self resetIndicator:self.buttonGreen :self.greenIndicator];
+        [self resetIndicator:self.buttonBrown :self.brownIndicator];
+        [self resetIndicator:self.buttonBlue :self.blueIndicator];
+        [self resetIndicator:self.buttonPink :self.pinkIndicator];
+        [self resetIndicator:self.buttonBlack :self.blackIndicator];
+    } else if (indicator == highlight) {
+        [self resetIndicatorStyle:self.redIndicator];
+        [self resetIndicatorStyle:self.yellowIndicator];
+        [self resetIndicatorStyle:self.greenIndicator];
+        [self resetIndicatorStyle:self.brownIndicator];
+        [self resetIndicatorStyle:self.blueIndicator];
+        [self resetIndicatorStyle:self.pinkIndicator];
+        [self resetIndicatorStyle:self.blackIndicator];
+    }
+}
+-(void)resetIndicator :(ball*)pottedBall :(UILabel*) indicatorBall {
+    pottedBall.potsInBreakCounter = 0;
+    indicatorBall.hidden=true;
+}
+-(void)resetIndicatorStyle :(UILabel*) indicatorBall {
+    [indicatorBall setFont:[UIFont systemFontOfSize:14]];
+    indicatorBall.textColor = [UIColor orangeColor];
+}
 -(void)resetBalls {
     self.buttonRed.enabled = true;
     self.buttonRed.quantity = 15;
@@ -1143,20 +801,553 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     self.currentColour=1;
     self.ballReplaced = false;
 }
-
-
--(void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-    [self dismissViewControllerAnimated:YES completion:nil];
+-(void)ballPotted:(ball*)pottedBall :(UILabel*) indicatorBall {
+    
+    bool freeBall=false;
+    
+    /*  NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+     NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
+     pottedBall.timeStamp = rightNow;
+     */
+    //this is wrong, must copy instance and add that copied version to break
+    
+    if (self.currentPlayersBreak.breakScore==0) {
+        self.buttonAdjust.hidden = true;
+        [self.buttonClear setTitle:@"Clear" forState:UIControlStateNormal];
+        self.isButtonStateClear = true;
+        [self setMedalCounters];
+        
+        self.viewBreak.alpha = 0.0;
+        [UIView animateWithDuration:0.5
+                              delay:0.0
+                            options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.viewBreak.alpha = 1.0;
+                         }
+                         completion:nil
+         ];
+    }
+    
+    if ([self.switchFoul isOn] ) {
+        [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
+        
+        NSMutableArray *foulBallArray = [[NSMutableArray alloc] init];
+        foulBallArray = [NSMutableArray arrayWithObjects:pottedBall, nil];
+        NSMutableArray *foulBallTimeArray = [[NSMutableArray alloc] init];
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
+        
+        foulBallTimeArray = [NSMutableArray arrayWithObjects:rightNow, nil];
+        
+        
+        [self closeBreak];
+        // add the foul points to opposing player
+        [self.opposingPlayer setFoulScore:pottedBall.foulPoints];
+        
+        
+        self.matchTxId++;
+        [self.frameGraphView addFrameData:self.frameNumber :self.opposingPlayer.playerIndex :pottedBall.foulPoints :1 :foulBallArray :self.matchTxId :foulBallTimeArray];
+        [self.currentPlayersBreak clearBreak:self.imagePottedBall];
+        [self.switchFoul setOn:false];
+        self.foulLabel.hidden=true;
+        self.buttonAdjust.hidden = false;
+        
+        
+        self.isButtonStateClear = false;
+        [self swapPlayers];
+        
+    } else {
+        
+        if (self.advancedCounting) {
+            
+            
+            if (self.currentColour < pottedBall.pottedPoints && self.currentPlayersBreak.breakScore==0 ) {
+                // handle freeball scenario - free balls start the moment. Conditions - 1st pot of break.  ball potted greater than current 'live' ball
+                
+                pottedBall.potsInBreakCounter ++;
+                indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+                if (self.currentColour==1) {
+                    pottedBall = self.buttonRed;
+                } else if (self.currentColour==2) {
+                    pottedBall = self.buttonYellow;
+                } else if (self.currentColour==3) {
+                    pottedBall = self.buttonGreen;
+                } else if (self.currentColour==4) {
+                    pottedBall = self.buttonBrown;
+                } else if (self.currentColour==5) {
+                    pottedBall = self.buttonBlue;
+                } else if (self.currentColour==6) {
+                    pottedBall = self.buttonPink;
+                }
+                freeBall=true;
+            } else if (self.currentPlayersBreak.breakScore==0) {
+                // save current ball state at beginning of break just in case user cancels break.
+                colourStateAtStartOfBreak = currentColour;
+                colourQuantityAtStartOfBreak = pottedBall.quantity;
+            }
+            
+            // it is a pot, so credit the current user
+            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall :self.viewBreak] == true) {
+                [self.currentPlayer incrementNbrBalls:1];
+                [self.currentPlayer.currentFrame incrementFrameBallsPotted];
+                
+                if (pottedBall.quantity >= 1 && pottedBall.pottedPoints == 1 && freeBall == false) {
+                    [pottedBall decreaseQty];
+                    if (pottedBall.quantity == 0) {
+                        currentColour ++;
+                        self.ballReplaced=true;
+                    }
+                } else if (pottedBall.pottedPoints == self.currentColour) {
+                    
+                    if (self.ballReplaced && pottedBall.pottedPoints == 2) {
+                        //Allow Yellow to be potted twice after final red.
+                        self.ballReplaced=false;
+                    } else if (pottedBall.pottedPoints == 7 && (self.currentPlayer.currentFrame.frameScore + self.currentPlayersBreak.breakScore) == self.opposingPlayer.currentFrame.frameScore) {
+                        // Allow a respotted Black!
+                        
+                    } else if (freeBall == false) {
+                        [pottedBall decreaseQty];
+                        self.currentColour ++;
+                    }
+                } else if (pottedBall.pottedPoints != self.currentColour && self.currentColour == 2 && self.ballReplaced) {
+                    self.ballReplaced=false;
+                }
+                if (freeBall==false) {
+                    pottedBall.potsInBreakCounter ++;
+                    indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+                }
+                
+                [self clearIndicators :highlight];
+                [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
+                indicatorBall.textColor = [UIColor whiteColor];
+                indicatorBall.hidden = false;
+            }
+            
+        } else {  // no advanced scoring
+            if ([self.currentPlayersBreak incrementScore:pottedBall :self.imagePottedBall :self.viewBreak] == true) {
+                [self.currentPlayer incrementNbrBalls:1];
+                [self.currentPlayer.currentFrame incrementFrameBallsPotted];
+                [self clearIndicators :highlight];
+                pottedBall.potsInBreakCounter ++;
+                indicatorBall.text = [NSString stringWithFormat:@"%d",pottedBall.potsInBreakCounter];
+                
+                [indicatorBall setFont:[UIFont boldSystemFontOfSize:14]];
+                indicatorBall.textColor = [UIColor whiteColor];
+                indicatorBall.hidden = false;
+            }
+            
+        }
+        
+        [self displayMedal];
+        [self.currentPlayer.currentFrame increaseFrameScore:self.currentPlayer.frameScore];
+    }
+}
+- (IBAction)redClicked:(id)sender {
+    [self ballPotted:self.buttonRed :self.redIndicator];
+}
+- (IBAction)yellowClicked:(id)sender {
+    [self ballPotted:self.buttonYellow :self.yellowIndicator];
+}
+- (IBAction)greenClicked:(id)sender {
+    [self ballPotted:self.buttonGreen :self.greenIndicator];
+}
+- (IBAction)brownClicked:(id)sender {
+    [self ballPotted:self.buttonBrown :self.brownIndicator];
+}
+- (IBAction)blueClicked:(id)sender {
+    [self ballPotted:self.buttonBlue :self.blueIndicator];
+}
+- (IBAction)pinkClicked:(id)sender {
+    [self ballPotted:self.buttonPink :self.pinkIndicator];
+}
+- (IBAction)blackClicked:(id)sender {
+    [self ballPotted:self.buttonBlack :self.blackIndicator];
+}
+-(ball*)findBall:(int)selectedBall {
+    if (selectedBall == 1) {
+        return self.buttonRed;
+    } else if (selectedBall == 2) {
+        return self.buttonYellow;
+    } else if (selectedBall == 3) {
+        return self.buttonGreen;
+    } else if (selectedBall == 4) {
+        return self.buttonBrown;
+    }else if (selectedBall == 5) {
+        return self.buttonBlue;
+    }else if (selectedBall == 6) {
+        return self.buttonPink;
+    }else {
+        return self.buttonBlack;
+    }
 }
 
+#pragma mark - Player (keyboard/swapping etc)
 
-- (IBAction)endOfMatchClicked:(id)sender {
-    [self processMatchEnd];
+-(void)swapPlayers {
+    /* switch the player in focus to the other */
+    
+    if (self.currentPlayer == self.textScorePlayer1) {
+        self.currentPlayer = self.textScorePlayer2;
+        self.opposingPlayer = self.textScorePlayer1;
+        [self.textPlayerTwoName setTextColor:[UIColor whiteColor]];
+        [self.textPlayerOneName setTextColor:[UIColor orangeColor]];
+    } else {
+        self.currentPlayer = self.textScorePlayer1;
+        self.opposingPlayer = self.textScorePlayer2;
+        [self.textPlayerTwoName setTextColor:[UIColor orangeColor]];
+        [self.textPlayerOneName setTextColor:[UIColor whiteColor]];
+    }
+    [self.currentPlayer setTextColor:[UIColor whiteColor]];
+    [self.opposingPlayer setTextColor:[UIColor orangeColor]];
+    /* enum to control the stats view */
+    scoreState = FrameScore;
+
+}
+-(void)selectPlayerOneTap:(UITapGestureRecognizer *)gesture {
+    
+    
+    Boolean modified = false;
+    NSString *labelScore;
+    
+    if (self.textScorePlayer1 == self.opposingPlayer) {
+        [self selectPlayerOne];
+        modified = true;
+        labelScore = [NSString stringWithFormat:@"%d",self.opposingPlayer.currentFrame.frameScore];
+        self.textScorePlayer2.text = labelScore;
+    }
+}
+-(void)selectPlayerOne {
+    self.currentPlayer = self.textScorePlayer1;
+    self.opposingPlayer = self.textScorePlayer2;
+
+    [self.currentPlayer setTextColor:[UIColor whiteColor]];
+    [self.opposingPlayer setTextColor:[UIColor orangeColor]];
+    [self.textPlayerOneName setTextColor:[UIColor whiteColor]];
+    [self.textPlayerTwoName setTextColor:[UIColor orangeColor]];
+    
+    scoreState = FrameScore;
+    [self setMedalCounters];
+    [self displayMedal];
+    
+}
+-(void)selectPlayerTwoTap:(UITapGestureRecognizer *)gesture {
+   Boolean modified = false;
+    NSString *labelScore;
+    
+    if (self.textScorePlayer2 == self.opposingPlayer) {
+        [self selectPlayerTwo];
+        modified = true;
+        labelScore = [NSString stringWithFormat:@"%d",self.opposingPlayer.currentFrame.frameScore];
+        self.textScorePlayer1.text = labelScore;
+        
+    }
+    
+    
+    
+}
+-(void)selectPlayerTwo {
+    self.currentPlayer = self.textScorePlayer2;
+    self.opposingPlayer = self.textScorePlayer1;
+    [self.currentPlayer setTextColor:[UIColor whiteColor]];
+    [self.opposingPlayer setTextColor:[UIColor orangeColor]];
+    [self.textPlayerTwoName setTextColor:[UIColor whiteColor]];
+    [self.textPlayerOneName setTextColor:[UIColor orangeColor]];
+    scoreState = FrameScore;
+    [self setMedalCounters];
+    [self displayMedal];
+}
+-(IBAction)dismissPlayerOneKB:(id)sender {
+    [self.textPlayerOneName becomeFirstResponder];
+    [self.textPlayerOneName resignFirstResponder];
+}
+-(IBAction)dismissPlayerTwoKB:(id)sender {
+    [self.textPlayerTwoName becomeFirstResponder];
+    [self.textPlayerTwoName resignFirstResponder];
+}
+-(IBAction)newFrameClicked:(id)sender {
+    [self endOfFrame];
+}
+
+#pragma mark - Statistics
+
+-(void)selectStatPlayerOneTap:(UITapGestureRecognizer *)gesture {
+    self.statPlayer1item++;
+    if (self.statPlayer1item==6) {
+        self.statPlayer1item=1;
+    }
+    
+    self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
+    
+}
+-(void)selectStatPlayerTwoTap:(UITapGestureRecognizer *)gesture {
+    self.statPlayer2item++;
+    if (self.statPlayer2item==6) {
+        self.statPlayer2item=1;
+    }
+    self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
+}
+-(IBAction)visitStepperClicked:(id)sender {
+    
+    if (self.stepperVisit.value>=1){
+        [self.frameGraphView loadVisitWindow:self.stepperVisit.value :FALSE];
+        [self reloadGrid];
+    }
+    
+}
+-(IBAction)frameStepper:(id)sender {
+    [self.frameGraphView setPrint:false];
+    
+    if (self.frameStepper.value==0.0f) {
+        
+        self.frameGraphView.matchStatistics=true;
+        
+        self.labelXaxis.text = @"frame";
+        self.pointsLabel.text = @"count";
+        
+        self.frameRefLabel.text = @"match statistics";
+        
+        [self.frameGraphView.selectedFrameData removeAllObjects];
+        [self.frameGraphView.selectedFrameData addObjectsFromArray:self.matchData];
+        [self.frameGraphView.selectedFrameData addObjectsFromArray:[self.frameGraphView frameData]];
+        
+        [self.frameGraphView initMatchData];
+        
+        
+        // player name and match score
+        self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@: %@",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.text ];
+        
+        self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@: %@",self.textPlayerTwoName.text, self.labelScoreMatchPlayer2.text ];
+        
+        // and the score selection detail
+        self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
+        self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
+        
+        self.playerStatsPosition.constant=0;
+        
+        self.frameInfo.text = @"";
+        
+        [self.frameGraphView setNeedsDisplay];
+        
+    } else {
+        self.frameGraphView.matchStatistics=false;
+        
+        
+        self.labelXaxis.text = @"visit";
+        self.pointsLabel.text = @"points";
+        
+        [self.frameGraphView.selectedFrameData removeAllObjects];
+        if ((int)self.frameStepper.value != self.frameNumber) {
+            [self.frameGraphView.selectedFrameData addObjectsFromArray: [self.frameGraphView getSelectedFrameData :self.matchData :(int)self.frameStepper.value]];
+        } else {
+            [self.frameGraphView.selectedFrameData addObjectsFromArray: [self.frameGraphView frameData]];
+        }
+        
+        self.frameRefLabel.text = [NSString stringWithFormat:@"frame %0.0f\ntime %@",self.frameStepper.value, [self.frameGraphView getTotalFrameTime:self.frameStartDate :(int)self.frameStepper.value]];
+        
+        
+        self.frameGraphView.scorePlayer1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :1];
+        self.frameGraphView.scorePlayer2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :2];
+        
+        self.frameGraphView.currentBreakPlayer2 = 0;
+        self.frameGraphView.currentBreakPlayer1 = 0;
+        if ((int)self.frameStepper.value == self.frameNumber) {
+            int currentBreak = self.currentPlayersBreak.breakScore;
+            
+            if (self.currentPlayer.playerIndex==1) {
+                self.frameGraphView.scorePlayer1 += currentBreak;
+                self.frameGraphView.currentBreakPlayer1 = currentBreak;
+            } else {
+                self.frameGraphView.scorePlayer2  += currentBreak;
+                self.frameGraphView.currentBreakPlayer2 = currentBreak;
+            }
+        }
+        
+        self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@: %d",self.textPlayerOneName.text, self.frameGraphView.scorePlayer1 ];
+        
+        self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@: %d",self.textPlayerTwoName.text, self.frameGraphView.scorePlayer2 ];
+        
+        self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
+        self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
+        
+        self.playerStatsPosition.constant=0;
+        
+        self.frameInfo.text = [self getFrameBoxInfo];
+        
+        [UIView animateWithDuration:0.5f animations:^{
+            [self.PlayerStatsView layoutIfNeeded];
+        }];
+        
+        self.stepperVisit.maximumValue = self.frameGraphView.selectedFrameData.count;
+        
+        [self.frameGraphView setNeedsDisplay];
+        
+    }
+    
+}
+-(UIImage *)printGraph :(int)frameIndex {
+    
+    [self.frameGraphView setPrint:true];
+    self.frameStepper.hidden=true;
+    
+    UIImage *image;
+    self.frameGraphView.numberOfFrames = self.frameNumber;
+    
+    [self.frameRefLabel setFont:[UIFont fontWithName:@"Avenir Next" size:12]];
+    
+    if (frameIndex==0) {
+        self.labelXaxis.text = @"frame";
+        self.pointsLabel.text = @"count";
+        self.frameGraphView.matchStatistics=true;
+        [self.frameGraphView.selectedFrameData removeAllObjects];
+        [self.frameGraphView.selectedFrameData addObjectsFromArray:self.matchData];
+        self.frameRefLabel.text = @"match\nstatistics";
+        
+    } else {
+        self.labelXaxis.text = @"visit";
+        self.pointsLabel.text = @"points";
+        self.frameGraphView.matchStatistics=false;
+        [self.frameGraphView.selectedFrameData removeAllObjects];
+        [self.frameGraphView.selectedFrameData addObjectsFromArray: [self.frameGraphView getSelectedFrameData :self.matchData :frameIndex]];
+        self.frameGraphView.scorePlayer1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :1];
+        self.frameGraphView.scorePlayer2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :2];
+        self.frameRefLabel.text = [NSString stringWithFormat:@"frame %d\ntime %@",frameIndex, [self.frameGraphView getTotalFrameTime:self.frameStartDate :frameIndex]];
+        
+    }
+    [self.frameGraphView setNeedsDisplay];
+    image = [self.frameGraphView imageWithView :self.frameGraphView];
+    return image;
+}
+-(void)swipeRightShowPlayersStats:(UISwipeGestureRecognizer *)gesture {
+    [self.frameGraphView setPrint:false];
+    self.frameGraphView.numberOfFrames = self.frameNumber;
+    // [self setBlurredImage];
+    
+    self.navButtonNew.title  = @"";
+    self.navButtonNew.enabled=false;
+    self.navButtonEnd.title  = @"";
+    self.navButtonEnd.enabled=false;
+    
+    self.frameGraphView.matchStatistics=false;
+    self.frameStepper.hidden=false;
+    
+    // reset selectedFrameData EVERY time view is shown
+    [self.frameGraphView.selectedFrameData removeAllObjects];
+    [self.frameGraphView.selectedFrameData addObjectsFromArray:[self.frameGraphView frameData]];
+    
+    
+    self.frameGraphView.scorePlayer1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :1];
+    self.frameGraphView.scorePlayer2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :2];
+    
+    [self.frameRefLabel setFont:[UIFont fontWithName:@"Avenir Next" size:25]];
+    self.frameRefLabel.text = [NSString stringWithFormat:@"frame %d\ntime %@",self.frameNumber, [self.frameGraphView getTotalFrameTime:self.frameStartDate :self.frameNumber]];
+    
+    
+    self.frameStepper.maximumValue = self.frameNumber;
+    self.frameStepper.value = self.frameNumber;
+    
+    self.frameGraphView.currentBreakPlayer2 = 0;
+    self.frameGraphView.currentBreakPlayer1 = 0;
+    if ((int)self.frameStepper.value == self.frameNumber) {
+        int currentBreak = self.currentPlayersBreak.breakScore;
+        
+        if (self.currentPlayer.playerIndex==1) {
+            self.frameGraphView.scorePlayer1 += currentBreak;
+            self.frameGraphView.currentBreakPlayer1 = currentBreak;
+        } else {
+            self.frameGraphView.scorePlayer2  += currentBreak;
+            self.frameGraphView.currentBreakPlayer2 = currentBreak;
+        }
+    }
+    
+    self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@: %d",self.textPlayerOneName.text, self.frameGraphView.scorePlayer1 ];
+    self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@: %d",self.textPlayerTwoName.text, self.frameGraphView.scorePlayer2 ];
+    self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
+    self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
+    self.playerStatsPosition.constant=0;
+    self.frameInfo.text = [self getFrameBoxInfo];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.PlayerStatsView layoutIfNeeded];
+    }];
+    
+    self.disabledView.hidden=false;
+    self.pointsLabel.hidden = false;
+    self.stepperVisit.maximumValue = self.frameGraphView.selectedFrameData.count;
+    [self.frameGraphView setNeedsDisplay];
+}
+-(void)tapHidePlayersStats:(UISwipeGestureRecognizer *)gesture {
+    //   [self hidePlayersStats];
+}
+-(void)tapHideVisitData :(UISwipeGestureRecognizer *)gesture {
+    self.visitBreakdownView.hidden=true;
+    self.frameStepper.enabled=true;
+}
+-(void)swipeLeftHidePlayersStats:(UISwipeGestureRecognizer *)gesture {
+    [self hidePlayersStats];
+    
+    
+}
+-(void)hidePlayersStats {
+    
+    self.playerStatsPosition.constant=-self.statViewWidthConstraint.constant+2;
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.PlayerStatsView layoutIfNeeded];
+    }];
+    self.navButtonNew.title  = @"New";
+    self.navButtonNew.enabled=true;
+    self.navButtonEnd.title  = @"End";
+    self.navButtonEnd.enabled=true;
+    
+    self.disabledView.hidden=true;
+    self.pointsLabel.hidden = true;
+    
+    
     
 }
 
+#pragma mark - Match
 
--(void) processMatchEnd {
+-(int)getMatchVisits :(int)playerIndex {
+    int totalVisits = 0;
+    //match array
+    totalVisits = [self.frameGraphView getAmountOfVisitsInFrame:self.matchData :playerIndex];
+    // current frame array
+    totalVisits += [self.frameGraphView getAmountOfVisitsInFrame:[self.frameGraphView frameData] :playerIndex];
+    return totalVisits;
+}
+-(int)getMatchBallsPotted :(int)playerIndex {
+    int totalBallsPotted = 0;
+    //match array
+    totalBallsPotted = [self.frameGraphView getAmountOfBallsPottedInFrame:self.matchData :playerIndex :0];
+    // current frame array
+    totalBallsPotted += [self.frameGraphView getAmountOfBallsPottedInFrame:[self.frameGraphView frameData] :playerIndex :0];
+    return totalBallsPotted;
+}
+-(int)getMatchHighestBreak :(int)playerIndex {
+    int highestBreakInMatch = 0;
+    //match array
+    
+    int highestBreakInFrame = [self.frameGraphView getHighestBreakAmountInFrame:self.matchData :playerIndex :0];
+    
+    if (highestBreakInFrame > highestBreakInMatch) {
+        highestBreakInMatch = highestBreakInFrame;
+    }
+    // current frame array
+    int highestBreakInCurrentFrame = [self.frameGraphView getHighestBreakAmountInFrame:[self.frameGraphView frameData] :playerIndex :0];
+    
+    if (highestBreakInCurrentFrame > highestBreakInMatch) {
+        highestBreakInMatch = highestBreakInCurrentFrame;
+    }
+    
+    return highestBreakInMatch;
+}
+-(IBAction)endOfMatchClicked:(id)sender {
+    [self processMatchEnd];
+    
+}
+-(void)processMatchEnd {
     /* so first we present the winner with a congratulations message */
     NSString *alertMessage;
     NSString *titleMessage;
@@ -1166,12 +1357,12 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     } else if (self.labelScoreMatchPlayer1.matchScore < self.labelScoreMatchPlayer2.matchScore) {
         titleMessage = [NSString stringWithFormat:@"Congratulations %@",self.textPlayerTwoName.text];
         alertMessage = [NSString stringWithFormat:@"You won the match!\n %@ to %@\n\nNow Go send the results to anyone who may be interested.\n\nAlternatively press Cancel if you ended match by accident",self.labelScoreMatchPlayer1.text,self.labelScoreMatchPlayer2.text];
-
+        
     } else {
-       titleMessage = @"Match tied";
+        titleMessage = @"Match tied";
         alertMessage =[NSString stringWithFormat:@"Score was %@ to %@\n\nNow Go send the results to anyone who may be interested.\n\nAlternatively press Cancel if you ended match by accident",self.labelScoreMatchPlayer1.text,self.labelScoreMatchPlayer2.text];
     }
-        
+    
     
     self.alertEndScores = [[UIAlertView alloc] initWithTitle:titleMessage message:alertMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
     self.alertEndScores.alertViewStyle = UIAlertViewStyleDefault ;
@@ -1180,12 +1371,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     [self.frameGraphView resetFrameData];
     
 }
-
-
-
-
--(void) endMatch {
-   
+-(void)endMatch {
     /* next part attempts to compose an email and offer the user to load recipients & send an email */
     BOOL ok = [MFMailComposeViewController canSendMail];
     if (!ok) return;
@@ -1194,10 +1380,10 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"SSMResults.csv"];
     [fileManager removeItemAtPath:filePath error:nil];
     
-
+    
     NSError *error;
     NSString *stringToWrite = [self.frameGraphView createResultsContent :self.matchData :self.textPlayerOneName.text :self.textPlayerTwoName.text];
-
+    
     [stringToWrite writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
     
     
@@ -1209,18 +1395,29 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     MFMailComposeViewController* snookerScorerMailComposer = [MFMailComposeViewController new];
     snookerScorerMailComposer.mailComposeDelegate = self;
     [snookerScorerMailComposer setSubject:[NSString stringWithFormat:@"Snooker Score Master - Matchday :%@", [DateFormatter stringFromDate:[NSDate date]]]];
-    //[snookerScorerMailComposer setToRecipients:[NSArray arrayWithObjects:@"andrewglew@me.com", @"dho041@gmail.com", nil]];
+    
+    [snookerScorerMailComposer setToRecipients:[NSArray arrayWithObjects:self.emailPlayer1, self.emailPlayer2, nil]];
+    
     [snookerScorerMailComposer setMessageBody:body isHTML:YES];
+    
+    
+    /* 20150627 new block! */
+    for (int frameIndex = 0; frameIndex < self.frameNumber && frameIndex <= self.noOfGraphsInEmail; frameIndex++) {
+        NSData *data = UIImagePNGRepresentation([self printGraph:frameIndex]);
+        [snookerScorerMailComposer addAttachmentData:data
+                                            mimeType:@"image/png"
+                                            fileName:[NSString stringWithFormat:@"frame%d.png",frameIndex]];
+    }
     
     
     
     NSData *fileData = [NSData dataWithContentsOfFile:filePath];
     [snookerScorerMailComposer addAttachmentData:fileData
-                       mimeType:@"text/plain"
-                       fileName:@"SSMResults.csv"];
+                                        mimeType:@"text/plain"
+                                        fileName:@"SSMResults.csv"];
     
     [self presentViewController:snookerScorerMailComposer animated:YES completion:nil];
-
+    
     /* this long winded part resets the application */
     [self.textScorePlayer1 resetFrameScore:0];
     [self.textScorePlayer2 resetFrameScore:0];
@@ -1237,7 +1434,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     self.textScorePlayer1.currentFrame.matchScore=0;
     [self.textScorePlayer1.playersBreaks removeAllObjects];
     
-
+    
     [self.textScorePlayer2.frames removeAllObjects];
     self.labelScoreMatchPlayer2.matchScore=0;
     self.labelScoreMatchPlayer2.text = @"0";
@@ -1276,11 +1473,14 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     self.ballCollectionView.hidden = true;
     self.optionPanelView.hidden = true;
     [self.frameStartDate removeAllObjects];
-
 }
 
+#pragma mark - Email message construction
 
--(NSString*) composePlayerStatsForFrame :(int) playerIndex :(int)frameIndex  {
+-(void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(NSString*)composePlayerStatsForFrame :(int) playerIndex :(int)frameIndex  {
     
     NSString *hiBreakPlayer = [NSString stringWithFormat:@"</br>Highest Break: %d</br></br>",[self.frameGraphView getHighestBreakAmountInFrame:self.matchData :playerIndex :frameIndex]];
     
@@ -1288,16 +1488,19 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     
     NSString *PottedPoints = [NSString stringWithFormat:@"</br>Potted Points: %d ",[self.frameGraphView getPointsByTypeInFrame:self.matchData :playerIndex :0 :frameIndex ]];
     
-    NSString *hiBreakBallsPlayer = @"(";
-    NSString *hiBreakBallsImagePlayer  = @"</br>";
+    
+    NSString *hiBreakBallsPlayer;
+    NSString *hiBreakBallsStringFormat;
     
     
-    
-    
-//16  SnookerScoreMaster            	0x1000580c4 0x100030000 + 164036
-    
-    
-    
+    if (self.embedImagesInHTML) {
+        hiBreakBallsPlayer = @"</br>";
+        hiBreakBallsStringFormat = @"%@%@%@%@</br>%@";
+    } else {
+        hiBreakBallsPlayer = @"(";
+        hiBreakBallsStringFormat = @"%@%@%@%@%@END)";
+    }
+ 
     for (ball *ballObj in [self.frameGraphView getHighestBreakBallsInFrame:self.matchData :playerIndex :frameIndex]) {
         
 
@@ -1307,20 +1510,28 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         NSString *base64String = [imageData base64EncodedStringWithOptions:0 ];
         NSString *ballImageData = [NSString stringWithFormat:@"<img src='data:image/png;base64,%@'>",base64String];
         
-        hiBreakBallsPlayer = [NSString stringWithFormat:@"%@%@ &rarr; ",hiBreakBallsPlayer, ballObj.colour];
-        hiBreakBallsImagePlayer = [NSString stringWithFormat:@"%@%@&nbsp",hiBreakBallsImagePlayer, ballImageData];
+        if (self.embedImagesInHTML) {
+            hiBreakBallsPlayer = [NSString stringWithFormat:@"%@%@&nbsp",hiBreakBallsPlayer, ballImageData];
+        } else {
+            hiBreakBallsPlayer = [NSString stringWithFormat:@"%@%@ &rarr; ",hiBreakBallsPlayer, ballObj.colour];
+        }
+
     }
 
     NSString *ballsPotted = [NSString stringWithFormat:@"Total Pots: %d</br>", [self.frameGraphView getAmountOfBallsPottedInFrame:self.matchData :playerIndex :frameIndex] ];
     
-    NSString *dataPlayer = [NSString stringWithFormat:@"%@%@%@%@%@END)</br>%@",ballsPotted, PottedPoints, bonusPoints, hiBreakPlayer, hiBreakBallsPlayer,hiBreakBallsImagePlayer];
+    NSString *dataPlayer;
+    if (self.embedImagesInHTML) {
+        dataPlayer = [NSString stringWithFormat:hiBreakBallsStringFormat,ballsPotted, PottedPoints, bonusPoints, hiBreakPlayer, hiBreakBallsPlayer];
+    } else {
+        dataPlayer = [NSString stringWithFormat:hiBreakBallsStringFormat,ballsPotted, PottedPoints, bonusPoints, hiBreakPlayer, hiBreakBallsPlayer];
+    }
+    
     return dataPlayer;
     
     // TODO vertical align the potted ball images by adding new row. (could mean splitting this function into 2.)
 }
-
-
--(NSString*) getFrameBreakdown :(int)playerIndex :(NSMutableArray*) frameData :(NSString*) lineBreak :(int)item {
+-(NSString*)getFrameBreakdown :(int)playerIndex :(NSMutableArray*) frameData :(NSString*) lineBreak :(int)item {
     // refactored April 2015
     
     if (item==0) {
@@ -1430,78 +1641,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     
     return [NSString stringWithFormat:@"%@BREAKS:%@%@",result,breakstats,lineBreak];
 }
-
-
-
-
-
--(NSString*) getFrameBoxInfo {
-    NSString *data;
-    int pointsRemaining=0;
-    int currentBreak=0;
-    int frameScorePlayer1=0;
-    int frameScorePlayer2=0;
-    
-    
-    // How many points remaining?
-    for (int i = 7; i >= 1; i--)
-    {
-        if (i==1) {
-            pointsRemaining += (self.buttonRed.quantity * 8);
-        } else if (self.currentColour <= i) {
-            pointsRemaining += i;
-        } else {
-            i=1;
-        }
-    }
-    // get difference between players scores..
-    
-    currentBreak = self.currentPlayersBreak.breakScore;
-
-    frameScorePlayer1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData]:1];
-    frameScorePlayer2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData]:2];
-    
-    if (currentBreak>0) {
-        
-        if (self.currentPlayersBreak.currentBall.pottedPoints == 1) {
-            pointsRemaining += 7;
-        }
-        
-        if (self.currentPlayer == self.textScorePlayer1) {
-            frameScorePlayer1 += currentBreak;
-            
-        } else {
-            frameScorePlayer2 += currentBreak;
-        }
-    }
-    
-    if (frameScorePlayer1 > frameScorePlayer2) {
-        // player one is winning/won
-        
-        if ((int)self.frameStepper.value == self.frameNumber) {
-            data = [NSString stringWithFormat:@"%d remaining. %@ is leading %@ by %d point(s)",pointsRemaining,self.textPlayerOneName.text,self.textPlayerTwoName.text, frameScorePlayer1 - frameScorePlayer2];
-        } else {
-            data = [NSString stringWithFormat:@"%@ beat %@ by %d point(s)",self.textPlayerOneName.text,self.textPlayerTwoName.text, frameScorePlayer1 - frameScorePlayer2];
-        }
-        
-    } else if (frameScorePlayer2 > frameScorePlayer1) {
-        // player two is winning/won
-        if ((int)self.frameStepper.value == self.frameNumber) {
-            data = [NSString stringWithFormat:@"%d remaining. %@ is leading %@ by %d point(s)",pointsRemaining,self.textPlayerTwoName.text,self.textPlayerOneName.text, frameScorePlayer2 - frameScorePlayer1];
-        } else {
-            data = [NSString stringWithFormat:@"%@ beat %@ by %d point(s)",self.textPlayerTwoName.text,self.textPlayerOneName.text, frameScorePlayer2 - frameScorePlayer1];
-        }
-        
-    } else {
-        // players tied
-        data = [NSString stringWithFormat:@"%d remaining. %@ and %@ are level",pointsRemaining,self.textPlayerOneName.text,self.textPlayerTwoName.text];
-    }
-    
-    return data;
-}
-
-
--(NSString*) composeMessage {
+-(NSString*)composeMessage {
     
     NSString *matchheader = @"<h1>Match Statistics</h1>";
     NSString *matchJoinedResults =@"";
@@ -1512,7 +1652,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     
     matchheader = [NSString stringWithFormat:@"%@</br>Scores:%@</br></br>",matchheader,matchJoinedResults];
     
-    NSString *tableHeader = [NSString stringWithFormat: @"<table style='table-layout:fixed' width=100%% bgcolor='#F8F8FF' border=0 cellpadding='10'><tr bgcolor='#D32525' ><td width=50%% valign='top'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td><td width=50%% valign='top'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td></tr>",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.matchScore,
+    NSString *tableHeader = [NSString stringWithFormat: @"<table style='table-layout:fixed' width=100%% bgcolor='#F8F8FF' border=0 cellpadding='10'><tr><td width=50%% valign='top' bgcolor='#0000CD'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td>   <td width=50%% valign='top' bgcolor='#D32525'><h2><font color='#FFFFFF'>%@: %d</font></h2><font color='#FFFFFF'>%@</font></td></tr>",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.matchScore,
         [self getFrameBreakdown :1 :self.matchData :@"</br>" :-1], self.textPlayerTwoName.text, self.labelScoreMatchPlayer2.matchScore, [self getFrameBreakdown :2 :self.matchData :@"</br>" :-1]];
     
     NSString *dataFrameHeader =@"";
@@ -1533,40 +1673,22 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         
         
         tableDetail = [NSString stringWithFormat:@"%@%@<tr><td>%@</td><td>%@</td></tr><tr><td valign='top'>%@</td><td valign='top'>%@</td></tr>", tableDetail,dataFrameHeader,scorePlayer1,scorePlayer2,dataPlayer1,dataPlayer2];
+        
+ 
+        
+        
+        
+        
     }
     NSString *tableFooter = @"</table>";
     NSString *data = [NSString stringWithFormat:@"%@%@%@%@",matchheader, tableHeader, tableDetail, tableFooter];
     return data;
 }
 
-
-
-
--(ball*)findBall:(int)selectedBall {
-    if (selectedBall == 1) {
-        return self.buttonRed;
-    } else if (selectedBall == 2) {
-        return self.buttonYellow;
-    } else if (selectedBall == 3) {
-        return self.buttonGreen;
-    } else if (selectedBall == 4) {
-        return self.buttonBrown;
-    }else if (selectedBall == 5) {
-        return self.buttonBlue;
-    }else if (selectedBall == 6) {
-        return self.buttonPink;
-    }else {
-        return self.buttonBlack;
-    }
-}
-
-
-
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"showAdjustNumberPicker"]){
@@ -1584,13 +1706,12 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     }
 }
 
+#pragma mark - Delegate functions
 
-- (void)addItemViewController:(AdjustPointsViewController *)controller didPickDeduction:(int)selectedPoints {
+-(void)addItemViewController:(AdjustPointsViewController *)controller didPickDeduction:(int)selectedPoints {
     [self.currentPlayer setFoulScore:selectedPoints];
 }
-
-
-- (void)addItemViewController:(AdjustPointsViewController *)controller didPickBallAdjust:(int)ballIndex {
+-(void)addItemViewController:(AdjustPointsViewController *)controller didPickBallAdjust:(int)ballIndex {
     ball* currentBall;
     
     
@@ -1626,12 +1747,9 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     }
 }
 
+#pragma mark - Option Box items
 
-
-
-
-
-- (IBAction)switchChanged:(id)sender {
+-(IBAction)switchChanged:(id)sender {
     
     if ([self.switchFoul isOn] ) {
         self.foulLabel.hidden = false;
@@ -1642,44 +1760,116 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     
     
 }
-
-
-
--(void)selectStatPlayerOneTap:(UITapGestureRecognizer *)gesture
-{
-    self.statPlayer1item++;
-    if (self.statPlayer1item==6) {
-        self.statPlayer1item=1;
+-(IBAction)clearClicked:(id)sender {
+    ball* currentBall;
+    
+    if (self.isButtonStateClear) {
+        // Clear current break process - some updates needed here perhaps...?
+        if (self.currentPlayersBreak.breakScore > 0) {
+            self.buttonAdjust.hidden = false;
+            [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
+            self.isButtonStateClear = false;
+            
+            
+            [self.currentPlayer setNbrBallsPotted:(self.currentPlayer.nbrBallsPotted - (int)self.currentPlayersBreak.pottedBalls.count)];
+            
+            self.currentPlayer.currentFrame.frameBallsPotted -= (int)self.currentPlayersBreak.pottedBalls.count;
+            
+            [self.currentPlayersBreak clearBreak:self.imagePottedBall];
+            [self clearIndicators :hide];
+            
+            // reset counters impacted!
+            for (int i = colourStateAtStartOfBreak; i <= currentColour; i++)
+            {
+                currentBall = [self findBall:i];
+                
+                if (i==1) {
+                    currentBall.quantity=colourQuantityAtStartOfBreak;
+                    currentBall.enabled = true;
+                } else {
+                    currentBall.quantity=1;
+                    currentBall.enabled = true;
+                    
+                }
+                
+            }
+            currentColour = colourStateAtStartOfBreak;
+        }
+        
+        self.imageViewMedal.alpha=0.0f;
+        self.medalName = @"";
+        
+    } else {
+        // undo last entry
+        
+        
+        if (self.frameGraphView.frameData.count == 0 ) {
+            // nothing to do!
+            
+            
+            NSString *alertMessage;
+            NSString *titleMessage;
+            
+            titleMessage = @"Nothing to do!";
+            alertMessage = @"No entries to undo in current frame";
+            
+            self.alertOkNotification = [[UIAlertView alloc] initWithTitle:titleMessage message:alertMessage delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            self.alertOkNotification.alertViewStyle = UIAlertViewStyleDefault ;
+            [self.alertOkNotification show];
+            
+        } else {
+            NSMutableDictionary *lastEntryData = [[NSMutableDictionary alloc] init];
+            lastEntryData = [self.frameGraphView.frameData objectAtIndex:self.frameGraphView.frameData.count - 1];
+            NSString *visitPlayerName;
+            NSNumber *visitPlayerIndex = [lastEntryData valueForKey:@"player"];
+            NSNumber *visitIsFoul = [lastEntryData valueForKey:@"isfoul"];
+            //NSString *visitTimeStamp = [lastEntryData valueForKey:@"datestamp"];
+            
+            int visitBreakAmount = [self.frameGraphView getBreakAmountFromBalls:[lastEntryData valueForKey:@"ballTransaction"] :visitIsFoul] ;
+            
+            if ([visitPlayerIndex intValue]==1) {
+                visitPlayerName = self.textPlayerOneName.text;
+            } else {
+                visitPlayerName = self.textPlayerTwoName.text;
+            }
+            
+            NSString *alertMessage;
+            NSString *titleMessage;
+            
+            if ([visitIsFoul intValue] == 0) {
+                
+                titleMessage = @"Undo Action";
+                
+                alertMessage = [NSString stringWithFormat:@"You can either undo %@'s Last Entry of %d points or Rerack the whole frame.  Perhaps you didn't mean to select this option  at all so Cancel is also available.",visitPlayerName,  visitBreakAmount];
+                
+            } else {
+                
+                titleMessage = @"Undo Foul";
+                
+                alertMessage = [NSString stringWithFormat:@"You can either undo the foul points of %d %@ received as Last Entry or Rerack the whole frame.  Alternatively you may just want to Cancel if this was a mistake.",visitBreakAmount,visitPlayerName];
+            }
+            
+            
+            
+            self.alertUndoEntry = [[UIAlertView alloc] initWithTitle:titleMessage message:alertMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Last Entry", @"Rerack", nil];
+            self.alertUndoEntry.alertViewStyle = UIAlertViewStyleDefault ;
+            [self.alertUndoEntry show];
+        }
+        
     }
-    
-        self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
-    
 }
 
-
--(void)selectStatPlayerTwoTap:(UITapGestureRecognizer *)gesture
-{
-    self.statPlayer2item++;
-    if (self.statPlayer2item==6) {
-        self.statPlayer2item=1;
-    }
-        self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
-    }
-
-
+#pragma mark - CollectionView handling
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
    
     return [self.frameGraphView visitNumberOfBalls];
     //return 40;
     
 }
-
-
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
@@ -1721,107 +1911,13 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
 }
 
 
-- (IBAction)clearClicked:(id)sender {
-    ball* currentBall;
-    
-    if (self.isButtonStateClear) {
-        // Clear current break process - some updates needed here perhaps...?
-        if (self.currentPlayersBreak.breakScore > 0) {
-            self.buttonAdjust.hidden = false;
-            [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
-            self.isButtonStateClear = false;
-            
-            
-            [self.currentPlayer setNbrBallsPotted:(self.currentPlayer.nbrBallsPotted - (int)self.currentPlayersBreak.pottedBalls.count)];
-            
-            self.currentPlayer.currentFrame.frameBallsPotted -= (int)self.currentPlayersBreak.pottedBalls.count;
-            
-            [self.currentPlayersBreak clearBreak:self.imagePottedBall];
-            [self clearIndicators :hide];
-            
-            // reset counters impacted!
-            for (int i = colourStateAtStartOfBreak; i <= currentColour; i++)
-            {
-                currentBall = [self findBall:i];
-                
-                if (i==1) {
-                    currentBall.quantity=colourQuantityAtStartOfBreak;
-                    currentBall.enabled = true;
-                } else {
-                    currentBall.quantity=1;
-                    currentBall.enabled = true;
-                    
-                }
-                
-            }
-            currentColour = colourStateAtStartOfBreak;
-        }
-        
-        self.imageViewMedal.hidden=true;
-        
-    } else {
-        // undo last entry
-        
-        
-        if (self.frameGraphView.frameData.count == 0 ) {
-                // nothing to do!
-            
-            
-            NSString *alertMessage;
-            NSString *titleMessage;
+#pragma mark - other
 
-            titleMessage = @"Nothing to do!";
-            alertMessage = @"No entries to undo in current frame";
-            
-            self.alertOkNotification = [[UIAlertView alloc] initWithTitle:titleMessage message:alertMessage delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            self.alertOkNotification.alertViewStyle = UIAlertViewStyleDefault ;
-            [self.alertOkNotification show];
-            
-        } else {
-            NSMutableDictionary *lastEntryData = [[NSMutableDictionary alloc] init];
-            lastEntryData = [self.frameGraphView.frameData objectAtIndex:self.frameGraphView.frameData.count - 1];
-            NSString *visitPlayerName;
-            NSNumber *visitPlayerIndex = [lastEntryData valueForKey:@"player"];
-            NSNumber *visitIsFoul = [lastEntryData valueForKey:@"isfoul"];
-            //NSString *visitTimeStamp = [lastEntryData valueForKey:@"datestamp"];
-            
-            int visitBreakAmount = [self.frameGraphView getBreakAmountFromBalls:[lastEntryData valueForKey:@"ballTransaction"] :visitIsFoul] ;
-            
-            if ([visitPlayerIndex intValue]==1) {
-                visitPlayerName = self.textPlayerOneName.text;
-            } else {
-                visitPlayerName = self.textPlayerTwoName.text;
-            }
-            
-            NSString *alertMessage;
-            NSString *titleMessage;
-            
-            if ([visitIsFoul intValue] == 0) {
-            
-            titleMessage = @"Undo Action";
-            
-            alertMessage = [NSString stringWithFormat:@"You can either undo %@'s Last Entry of %d points or Rerack the whole frame.  Perhaps you didn't mean to select this option  at all so Cancel is also available.",visitPlayerName,  visitBreakAmount];
-            
-            } else {
-                
-                titleMessage = @"Undo Foul";
-                
-                alertMessage = [NSString stringWithFormat:@"You can either undo the foul points of %d %@ received as Last Entry or Rerack the whole frame.  Alternatively you may just want to Cancel if this was a mistake.",visitBreakAmount,visitPlayerName];
-            }
-            
-            
-            
-            self.alertUndoEntry = [[UIAlertView alloc] initWithTitle:titleMessage message:alertMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Last Entry", @"Rerack", nil];
-            self.alertUndoEntry.alertViewStyle = UIAlertViewStyleDefault ;
-            [self.alertUndoEntry show];
-        }
-        
-    }
++(NSString *)formatValue:(int)value forDigits:(int)zeros {
+    NSString *format = [NSString stringWithFormat:@"%%0%dd", zeros];
+    return [NSString stringWithFormat:format,value];
 }
-
-
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (alertView == self.alertEndScores) {
         if (buttonIndex == 1) {
             [self endMatch];
@@ -1835,7 +1931,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
             [self.textScorePlayer1 updateFrameScore:[self.frameGraphView getPointsInFrame:[self.frameGraphView frameData]:1]];
             [self.textScorePlayer2 updateFrameScore:[self.frameGraphView getPointsInFrame:[self.frameGraphView frameData]:2]];
             [self selectPlayerOne];
-
+            
         } else if (buttonIndex == 2) {
             //rerack!
             [self.frameGraphView.frameData removeAllObjects];
@@ -1848,175 +1944,5 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         }
     }
 }
-
-
--(int)getMatchVisits :(int)playerIndex {
-    int totalVisits = 0;
-    //match array
-    totalVisits = [self.frameGraphView getAmountOfVisitsInFrame:self.matchData :playerIndex];
-    // current frame array
-    totalVisits += [self.frameGraphView getAmountOfVisitsInFrame:[self.frameGraphView frameData] :playerIndex];
-    return totalVisits;
-}
-
-
-
--(int)getMatchBallsPotted :(int)playerIndex {
-    int totalBallsPotted = 0;
-    //match array
-    totalBallsPotted = [self.frameGraphView getAmountOfBallsPottedInFrame:self.matchData :playerIndex :0];
-    // current frame array
-    totalBallsPotted += [self.frameGraphView getAmountOfBallsPottedInFrame:[self.frameGraphView frameData] :playerIndex :0];
-    return totalBallsPotted;
-}
-
-
-
--(float)getAverageBreakAmountInMatch :(int)playerIndex {
-    int totalPottedPoints = 0;
-    int totalVisits = 0;
-    
-    totalPottedPoints = [self.frameGraphView getPointsByTypeInFrame:self.matchData :playerIndex :0 :0] + [self.frameGraphView getPointsByTypeInFrame:[self.frameGraphView frameData] :playerIndex :0 :0];
-    
-    totalVisits = [self.frameGraphView getAmountOfVisitsInFrame:self.matchData :playerIndex] + [self.frameGraphView getAmountOfVisitsInFrame:[self.frameGraphView frameData] :playerIndex];
-    
-    float avgAmount = 0.0;
-    avgAmount = (float)totalPottedPoints / (float)totalVisits;
-
-    if isnan(avgAmount) {
-        avgAmount=0.0;
-    }
-    return avgAmount;
-}
-
-
--(int)getMatchHighestBreak :(int)playerIndex {
-    int highestBreakInMatch = 0;
-    //match array
-
-    int highestBreakInFrame = [self.frameGraphView getHighestBreakAmountInFrame:self.matchData :playerIndex :0];
-        
-    if (highestBreakInFrame > highestBreakInMatch) {
-        highestBreakInMatch = highestBreakInFrame;
-    }
-    // current frame array
-    int highestBreakInCurrentFrame = [self.frameGraphView getHighestBreakAmountInFrame:[self.frameGraphView frameData] :playerIndex :0];
-    
-    if (highestBreakInCurrentFrame > highestBreakInMatch) {
-        highestBreakInMatch = highestBreakInCurrentFrame;
-    }
-
-    return highestBreakInMatch;
-}
-
-- (IBAction)visitStepperClicked:(id)sender {
-    
-    if (self.stepperVisit.value>=1){
-        [self.frameGraphView loadVisitWindow:self.stepperVisit.value :FALSE];
-        [self reloadGrid];
-    }
-
-}
-
-- (IBAction)frameStepper:(id)sender {
-    
-    
-    
-    if (self.frameStepper.value==0.0f) {
-       
-        self.frameGraphView.matchStatistics=true;
-        
-        self.labelXaxis.text = @"frame";
-        self.pointsLabel.text = @"count";
-        
-        self.frameRefLabel.text = @"match statistics";
-        
-        [self.frameGraphView.selectedFrameData removeAllObjects];
-        [self.frameGraphView.selectedFrameData addObjectsFromArray:self.matchData];
-        [self.frameGraphView.selectedFrameData addObjectsFromArray:[self.frameGraphView frameData]];
-
-        [self.frameGraphView initMatchData];
-        
-        
-        // player name and match score
-        self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@: %@",self.textPlayerOneName.text, self.labelScoreMatchPlayer1.text ];
-        
-        self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@: %@",self.textPlayerTwoName.text, self.labelScoreMatchPlayer2.text ];
-        
-        // and the score selection detail
-        self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
-        self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
-        
-        self.playerStatsPosition.constant=0;
-        
-        self.frameInfo.text = @"";
-        
-        [self.frameGraphView setNeedsDisplay];
-       
-    } else {
-        self.frameGraphView.matchStatistics=false;
-
-    
-        self.labelXaxis.text = @"visit";
-        self.pointsLabel.text = @"points";
-        
-        [self.frameGraphView.selectedFrameData removeAllObjects];
-        if ((int)self.frameStepper.value != self.frameNumber) {
-            [self.frameGraphView.selectedFrameData addObjectsFromArray: [self.frameGraphView getSelectedFrameData :self.matchData :(int)self.frameStepper.value]];
-        } else {
-            [self.frameGraphView.selectedFrameData addObjectsFromArray: [self.frameGraphView frameData]];
-        }
-    
-        self.frameRefLabel.text = [NSString stringWithFormat:@"frame %0.0f\ntime %@",self.frameStepper.value, [self.frameGraphView getTotalFrameTime:self.frameStartDate :(int)self.frameStepper.value]];
-        
-   
-        self.frameGraphView.scorePlayer1 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :1];
-        self.frameGraphView.scorePlayer2 = [self.frameGraphView getPointsInFrame:[self.frameGraphView selectedFrameData] :2];
-    
-        self.frameGraphView.currentBreakPlayer2 = 0;
-        self.frameGraphView.currentBreakPlayer1 = 0;
-            if ((int)self.frameStepper.value == self.frameNumber) {
-                int currentBreak = self.currentPlayersBreak.breakScore;
-
-                if (self.currentPlayer.playerIndex==1) {
-                    self.frameGraphView.scorePlayer1 += currentBreak;
-                    self.frameGraphView.currentBreakPlayer1 = currentBreak;
-                } else {
-                    self.frameGraphView.scorePlayer2  += currentBreak;
-                    self.frameGraphView.currentBreakPlayer2 = currentBreak;
-                }
-            }
-    
-        self.statNameLabelPlayer1.text =  [NSString stringWithFormat:@"%@: %d",self.textPlayerOneName.text, self.frameGraphView.scorePlayer1 ];
-    
-        self.statNameLabelPlayer2.text = [NSString stringWithFormat:@"%@: %d",self.textPlayerTwoName.text, self.frameGraphView.scorePlayer2 ];
-    
-        self.statContentLabelPlayer1.text = [self getFrameBreakdown :1 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer1item];
-        self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
-    
-        self.playerStatsPosition.constant=0;
-    
-        self.frameInfo.text = [self getFrameBoxInfo];
-    
-        [UIView animateWithDuration:0.5f animations:^{
-            [self.PlayerStatsView layoutIfNeeded];
-        }];
-
-        self.stepperVisit.maximumValue = self.frameGraphView.selectedFrameData.count;
-        [self.frameGraphView setNeedsDisplay];
-    
-    }
-    
-}
-
-
--(void)addFrameStartDate {
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *rightNow = [dateFormatter stringFromDate:[NSDate date]];
-    [self.frameStartDate addObject:rightNow];
-}
-
-
 
 @end
