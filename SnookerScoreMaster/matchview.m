@@ -13,6 +13,7 @@
 #import "snookerbreak.h"
 #import "graphView.h"
 #import "NSData+Base64.h"
+#import <iAd/iAd.h>
 
 
 @interface matchview ()
@@ -554,20 +555,23 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         }
     }
 }
--(void)animateMedal :(NSString*)medalName {
+-(void)animateMedal :(NSString*)medal {
     /* controls animation of all medals */
     float medalAdjust = 25.0f;
-    if (![self.medalName isEqualToString:medalName]) {
+    if (![self.medalName isEqualToString:medal]) {
+        self.medalName = medal;
         self.imageViewMedal.alpha=0.0f;
-        self.imageViewMedal.image = [UIImage imageNamed:medalName];
+        self.imageViewMedal.image = [UIImage imageNamed:medal];
         self.trailingMedalPosition.constant =- medalAdjust;
         [self.view layoutIfNeeded];
-        self.medalName = medalName;
         self.trailingMedalPosition.constant =+ medalAdjust;
-        [UIView animateWithDuration:1.5f animations:^{
+        [UIView animateWithDuration:1.0f animations:^{
             self.imageViewMedal.alpha=1.0f;
             [self.view layoutIfNeeded];
-        }];
+        } completion:^(BOOL finished){
+            nil;
+        }
+        ];
     }
 }
 
@@ -818,15 +822,15 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         self.isButtonStateClear = true;
         [self setMedalCounters];
         
-        self.viewBreak.alpha = 0.0;
-        [UIView animateWithDuration:0.5
+        self.viewBreak.alpha = 1.0;
+        /*[UIView animateWithDuration:0.5
                               delay:0.0
                             options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveLinear
                          animations:^{
                              self.viewBreak.alpha = 1.0;
                          }
                          completion:nil
-         ];
+         ];*/
     }
     
     if ([self.switchFoul isOn] ) {
@@ -1074,7 +1078,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
 
 -(void)selectStatPlayerOneTap:(UITapGestureRecognizer *)gesture {
     self.statPlayer1item++;
-    if (self.statPlayer1item==6) {
+    if (self.statPlayer1item==7) {
         self.statPlayer1item=1;
     }
     
@@ -1083,7 +1087,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
 }
 -(void)selectStatPlayerTwoTap:(UITapGestureRecognizer *)gesture {
     self.statPlayer2item++;
-    if (self.statPlayer2item==6) {
+    if (self.statPlayer2item==7) {
         self.statPlayer2item=1;
     }
     self.statContentLabelPlayer2.text = [self getFrameBreakdown :2 :[self.frameGraphView selectedFrameData] :@"\n" :self.statPlayer2item];
@@ -1106,7 +1110,10 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         self.labelXaxis.text = @"frame";
         self.pointsLabel.text = @"count";
         
-        self.frameRefLabel.text = @"match statistics";
+        
+        
+        self.frameRefLabel.text = [NSString stringWithFormat:@"match statistics\ntotal time %@", [self.frameGraphView getTotalFrameTime:self.frameStartDate :0]];
+        
         
         [self.frameGraphView.selectedFrameData removeAllObjects];
         [self.frameGraphView.selectedFrameData addObjectsFromArray:self.matchData];
@@ -1465,7 +1472,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     [self resetBalls];
     
     
-    self.imagePottedBall.image = [UIImage imageNamed:@"white00_500x500.png"];
+    self.imagePottedBall.image = [UIImage imageNamed:@"Reds-Triangle.png"];
     self.currentPlayersBreak.text = @"Start";
     self.currentPlayersBreak.hidden = false;
     self.imagePottedBall.hidden = false;
@@ -1533,9 +1540,16 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
 }
 -(NSString*)getFrameBreakdown :(int)playerIndex :(NSMutableArray*) frameData :(NSString*) lineBreak :(int)item {
     // refactored April 2015
+    NSString *nameOfPlayer;
+    if (playerIndex==1) {
+        nameOfPlayer = self.textPlayerOneName.text;
+    } else {
+        nameOfPlayer = self.textPlayerTwoName.text;
+    }
+    
     
     if (item==0) {
-        return @"Tap to view statistics for player!";
+        return [NSString stringWithFormat:@"Tap to view %@'s statistics!", nameOfPlayer];
     }
     
     NSString *dataAvgPlayer = [NSString stringWithFormat:@"Average Break = %0.2f", [self.frameGraphView getAverageBreakAmountInFrame:frameData :playerIndex]];
@@ -1550,6 +1564,19 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     if (item==2) {
         return dataNbrOfPots;
     }
+    
+    
+    NSString *superStat = [NSString stringWithFormat:@"Point Builder = %0.2f%%", [self.frameGraphView getSSMStatInFrame:frameData :playerIndex]];
+    
+    // so number of balls potted / total potted points
+    
+    if (item==3) {
+        return superStat;
+    }
+    
+    
+    
+    
     
     /* count the number of colours that have been potted */
     NSString *ballStats=@"";
@@ -1571,7 +1598,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         ballStats = @"no colours potted";
     }
     
-    if (item==3) {
+    if (item==4) {
         return ballStats;
     }
     
@@ -1579,7 +1606,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
     /* highest break data */
     NSString *dataHighestBreak = [NSString stringWithFormat:@"Highest Break = %d",[self.frameGraphView getHighestBreakAmountInFrame:frameData :playerIndex :0]];
     
-    if (item==4) {
+    if (item==5) {
         return dataHighestBreak;
     }
     
@@ -1632,7 +1659,7 @@ self.medalOpposingPlayerBreakInThisFrame = [self.frameGraphView getHighestBreakA
         breakstats = @"Player has not yet had any breaks of note!";
     }
     
-    if (item==5) {
+    if (item==6) {
         return breakstats;
     }
     

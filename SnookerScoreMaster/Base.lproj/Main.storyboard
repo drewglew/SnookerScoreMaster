@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="i47-Tx-fHO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="i47-Tx-fHO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AvenirNext.ttc">
-            <string>AvenirNext-Heavy</string>
+            <string>AvenirNext-Regular</string>
+            <string>AvenirNext-Medium</string>
             <string>AvenirNext-Regular</string>
             <string>AvenirNext-Regular</string>
             <string>AvenirNext-DemiBold</string>
@@ -67,31 +68,27 @@
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28K-B7-XKy">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1rK-hu-SgL">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="1rK-hu-SgL">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.1644071691" alpha="1" colorSpace="calibratedRGB"/>
-                                                <string key="text">- I n s t r u c t i o n s -  Players names can be changed by clicking directly on them.  It is also possible to change the default names in the App settings option. 
-When potting balls click the appropriate coloured ball.  The cueball keeps count of the current break. when a break is over make sure the player who made the break is highlighted (white text) and click the cue ball to give the player the break points.
+                                                <string key="text">- I n s t r u c t i o n s -  Players names can be changed by clicking directly on them.  It is also possible to change the default names (&amp; email addresses) in the App settings option. 
+When potting balls click the appropriate coloured ball.  The large 'break ball' keeps count of the current break. When a break is done make sure the player who made the break is highlighted (white text) and click the break ball to give that player the points.
 
-If you make a mistake before submitting the break; tap the 'clear' break button.  It will cancel the current break.  If you make a mistake after accepting the break you can Undo
+If you make a mistake before submitting the break; tap the 'clear' break button.  It will cancel the current break.  If you make a mistake after accepting the break you can always 'Undo'.
 
-Fouls are added by turning the toggle on, selecting the player who fouled and lastly clicking the colour to denote the points for the opposing player.  It is possible for fouls to end breaks of course. This is also supported.
+Fouls are added by turning the toggle on, selecting the player who fouled and lastly clicking the colour to denote the points for the opposing player.  It is possible for fouls to end a break. This is also supported.
 
-Additional points or fouls can be adjusted with the 'Adjust' points button.    Within settings; the app has some configurations available. One is the ability to add 'Advanced couinting'.  If this option is enabled, Also on the 'Adjust' view is the ability to change the number of colours remaining on the table.  Just select +/- and click on the ball to set the counter accordingly.
+Additional points or fouls can be changed with the 'Adjust' points button.    Within settings; the app has some configurations available. One is the ability to add 'Advanced counting'.  If this option is enabled, on the 'Adjust' view you have the chance to change the number of colours remaining on the table.  Just select +/- and click on the ball to set the counter accordingly.
 
-Match stats can be shown by tapping the highlighted player score number.  
+Swipping from left to right displays the Frame Stat view.  Pressing a 'visit' data point opens a visual of the balls potted on that occassion. Pressing +/- within view allows you to walk through the frame.  Pressing anywhere on this visual will close it instantly.
+ If advanced counting is enabled the number of points left on the table is also displayed at the foot of the screen. 
+Using +/- on the frame stat view you can roll through past frames as well as the current one. The last graph is based on complete Match information. Swipping back right to left will close this view and you will return to the scoreboard.
 
-Swipping left to right displays the Frame Stat view.  Now pressing a 'visit' data point opens a window that provides a visual of the balls potted on that visit. Pressing +/- allows you to walk through the frame.  Pressing anywhere on this window will close it instantly.
-
-Using +/- on the frame stat view you can roll through past frames as well as the current one, swipping back will close this view and return you back to the scoreboard.
-
-If advanced counting is enabled the number of points left on the table is also displayed here.
-
-Once the match is completed make sure the final frame scores are logged by closing the frame (New) and then tap 'End' to end the match.  An email screen will be pre-populated with the stats to share.
- To display these instructions again, set the settings option for Snooker Score Master to Show Instructions!    HAPPY SNOOKER-ING!
+Once the match is completed make sure the final frame scores are logged by closing the frame (New) and then tap 'End' to close the match.  An email screen will be pre-populated with the stats to share.  Pictures of the statistics (the quantity determined by App settings) are attached along with a data file. 
+ To display these instructions again, set the settings option for Snooker Score Master to 'Show Instructions'.    HAPPY SNOOKER-ING!
 
 </string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact" misplaced="YES">
@@ -105,7 +102,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             <constraint firstAttribute="trailing" secondItem="1rK-hu-SgL" secondAttribute="trailing" id="Xxg-NX-PZx"/>
                                             <constraint firstItem="1rK-hu-SgL" firstAttribute="leading" secondItem="28K-B7-XKy" secondAttribute="leading" id="p1J-lz-Zpt"/>
                                             <constraint firstItem="1rK-hu-SgL" firstAttribute="top" secondItem="28K-B7-XKy" secondAttribute="top" id="qda-kT-PI6"/>
-                                            <constraint firstAttribute="height" constant="1700" id="rjL-7Q-IzF"/>
+                                            <constraint firstAttribute="height" constant="2100" id="rjL-7Q-IzF"/>
                                         </constraints>
                                         <variation key="widthClass=compact" misplaced="YES">
                                             <rect key="frame" x="8" y="8" width="1633" height="700"/>
@@ -205,7 +202,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-D7-AyH" userLabel="PlayersBreak">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white00_500x500.png" translatesAutoresizingMaskIntoConstraints="NO" id="vPY-GV-iZp">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Reds-Triangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="vPY-GV-iZp">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
@@ -235,7 +232,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             <constraint firstAttribute="width" secondItem="xAt-sD-702" secondAttribute="height" multiplier="1:1" id="InL-MI-g03"/>
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="50"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="50"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -243,19 +240,19 @@ Once the match is completed make sure the final frame scores are logged by closi
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact">
-                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="60"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="60"/>
                                             <mask key="constraints">
                                                 <include reference="InL-MI-g03"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
-                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="134"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="134"/>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=compact">
-                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="50"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="50"/>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=regular">
-                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="90"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="90"/>
                                         </variation>
                                     </textField>
                                 </subviews>
@@ -1224,7 +1221,7 @@ Once the match is completed make sure the final frame scores are logged by closi
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OWT-Ne-vfQ">
@@ -2116,6 +2113,7 @@ Once the match is completed make sure the final frame scores are logged by closi
         </scene>
     </scenes>
     <resources>
+        <image name="Reds-Triangle.png" width="600" height="276"/>
         <image name="SSMballs - 1.png" width="263" height="428"/>
         <image name="ball_largex_red01.png" width="640" height="640"/>
         <image name="black07_500x500.png" width="500" height="500"/>
@@ -2125,7 +2123,6 @@ Once the match is completed make sure the final frame scores are logged by closi
         <image name="greenbaize_clear.jpg" width="334" height="500"/>
         <image name="pink06_500x500.png" width="500" height="500"/>
         <image name="red01_500x500.png" width="500" height="500"/>
-        <image name="white00_500x500.png" width="500" height="500"/>
         <image name="yellow02_500x500.png" width="500" height="500"/>
     </resources>
 </document>

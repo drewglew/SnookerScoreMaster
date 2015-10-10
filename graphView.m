@@ -375,14 +375,23 @@ if (!self.frameData) {
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
-    firstEntry = [NSString stringWithFormat:@"%@", [frameStartDates objectAtIndex:frameIndex-1]];
     
-    if (frameIndex == frameStartDates.count) {
+    
+    if (frameIndex==0) {
+        firstEntry = [NSString stringWithFormat:@"%@", [frameStartDates objectAtIndex:0]];
         lastEntry = [dateFormatter stringFromDate:[NSDate date]];
     } else {
-        lastEntry = [NSString stringWithFormat:@"%@", [frameStartDates objectAtIndex:frameIndex]];
-    }
     
+        firstEntry = [NSString stringWithFormat:@"%@", [frameStartDates objectAtIndex:frameIndex-1]];
+    
+        if (frameIndex == frameStartDates.count) {
+            lastEntry = [dateFormatter stringFromDate:[NSDate date]];
+        } else {
+            lastEntry = [NSString stringWithFormat:@"%@", [frameStartDates objectAtIndex:frameIndex]];
+        }
+    
+    }
+        
     NSDate *dateFirstEntry = [[NSDate alloc] init];
     NSDate *dateLastEntry = [[NSDate alloc] init];
     // voila!
@@ -390,14 +399,19 @@ if (!self.frameData) {
     dateLastEntry = [dateFormatter dateFromString:lastEntry];
                  
     NSTimeInterval interval = [dateLastEntry timeIntervalSinceDate:dateFirstEntry];
-    int hours = (int)interval / 3600;             // integer division to get the hours part
-    int minutes = (interval - (hours*3600)) / 60; // interval minus hours part (in seconds) divided by 60 yields minutes
-    return [NSString stringWithFormat:@"%d:%02d", hours, minutes];
+
+    return [self stringFromTimeInterval :interval];
 
 }
 
 
-
+- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
+    NSInteger ti = (NSInteger)interval;
+    NSInteger seconds = ti % 60;
+    NSInteger minutes = (ti / 60) % 60;
+    NSInteger hours = (ti / 3600);
+    return [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hours, (long)minutes, (long)seconds];
+}
 
 
 
@@ -416,6 +430,56 @@ if (!self.frameData) {
     if isnan(avgAmount) {
         avgAmount=0.0;
     }
+    
+    return avgAmount;
+}
+
+
+-(float)getSSMStatInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex {
+    int totalPottedPoints = 0;
+    int totalPots = 0;
+    
+    totalPottedPoints = [self getPointsByTypeInFrame:singleFrameData :playerIndex :0 :0];
+    totalPots = [self getAmountOfBallsPottedInFrame:singleFrameData :playerIndex :0];
+    
+    float avgAmount = 0.0;
+    
+    //there is a total number of points (including active break) that current player has potted already.
+    //to add there are a total number of balls remaining on the table.
+    
+    //int nbrOfReds = [self getAmountOfBallsByColorPottedInFrame :singleFrameData :1 :1] +
+    //[self getAmountOfBallsByColorPottedInFrame :singleFrameData :2 :1]
+    //;
+    
+    
+    
+    
+    // so player has 10 points + 16 in active break
+    // there are actually only 5 reds and all the colours left, give max points possibly scored (this must be passed)
+    // 8*10 = 80
+    // (26/80) * 100 is the value needed!
+    
+    // challenge is when getting stats for whole match.
+    
+    
+    
+    avgAmount = (float)totalPottedPoints/(float)totalPots;
+    
+    //avgAmount = ((float)totalPottedPoints / 147.0f) * 100;
+    
+    if isnan(avgAmount) {
+        avgAmount=0.0;
+    } else {
+        avgAmount = (avgAmount / 4.08f) * 100;
+        if (avgAmount > 100.0f) {
+            avgAmount = 100.0f;
+        }
+        
+    }
+
+    
+    
+    
     
     return avgAmount;
 }

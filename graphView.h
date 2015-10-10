@@ -70,6 +70,7 @@
 -(NSString *)getTotalFrameTime:(NSMutableArray*)frameStartDates :(int) frameIndex;
 - (UIImage *) imageWithView:(graphView *)view;
 -(void) setPrint :(BOOL) enabled;
+-(float)getSSMStatInFrame:(NSMutableArray*) singleFrameData :(int)playerIndex;
 
 #define kGraphHeight 275
 #define kDefaultGraphWidth 275
