@@ -1,9 +1,9 @@
 //
 //  main.m
-//  SnookerScoreMaster
+//  SnookerScoreLite
 //
-//  Created by andrew glew on 21/11/2014.
-//  Copyright (c) 2014 andrew glew. All rights reserved.
+//  Created by andrew glew on 22/07/2015.
+//  Copyright (c) 2015 andrew glew. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

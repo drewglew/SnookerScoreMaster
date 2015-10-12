@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="SSM3.png" translatesAutoresizingMaskIntoConstraints="NO" id="anB-dN-bN5">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.1151484079" green="0.58209493889999997" blue="0.05653730773" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxG-eS-yFx" userLabel="Shading">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014-2015 andrew glew. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                            <rect key="frame" x="117" y="448" width="247" height="12"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="267.5" id="bXX-SI-0Ix"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
+                            <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="bXX-SI-0Ix"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="bXX-SI-0Ix"/>
+                                </mask>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="fcH-Hg-0nE"/>
+                        <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="oD3-bb-Fd2"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="8ie-xW-0ye"/>
+                        </mask>
+                        <mask key="constraints">
+                            <exclude reference="fcH-Hg-0nE"/>
+                            <exclude reference="oD3-bb-Fd2"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="subviews">
+                            <include reference="8ie-xW-0ye"/>
+                        </mask>
+                        <mask key="constraints">
+                            <include reference="fcH-Hg-0nE"/>
+                            <include reference="oD3-bb-Fd2"/>
+                        </mask>
+                    </variation>
+                </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="SNOOKER SCORE MASTER" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
+                    <rect key="frame" x="20" y="61" width="440" height="200"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
+                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="118" y="136" width="243" height="208.5"/>
+                    </variation>
+                </label>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="nxG-eS-yFx" secondAttribute="trailing" id="567-eM-hp2"/>
+                <constraint firstItem="nxG-eS-yFx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5yt-ik-ptU"/>
+                <constraint firstAttribute="bottom" secondItem="anB-dN-bN5" secondAttribute="bottom" id="6AC-sM-VQ1"/>
+                <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="9V6-kg-hDa"/>
+                <constraint firstItem="anB-dN-bN5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9pV-cN-q5j"/>
+                <constraint firstAttribute="trailing" secondItem="anB-dN-bN5" secondAttribute="trailing" id="H0U-xz-m9a"/>
+                <constraint firstItem="anB-dN-bN5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="O1T-MH-6jT"/>
+                <constraint firstAttribute="centerY" secondItem="kId-c2-rCX" secondAttribute="centerY" id="PDz-5I-tHd"/>
+                <constraint firstItem="nxG-eS-yFx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QlW-Fh-qcD"/>
+                <constraint firstAttribute="bottom" secondItem="nxG-eS-yFx" secondAttribute="bottom" id="s2A-qB-buj"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="nxG-eS-yFx"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="6AC-sM-VQ1"/>
+                    <exclude reference="9pV-cN-q5j"/>
+                    <exclude reference="H0U-xz-m9a"/>
+                    <exclude reference="O1T-MH-6jT"/>
+                    <exclude reference="9V6-kg-hDa"/>
+                    <exclude reference="PDz-5I-tHd"/>
+                    <exclude reference="567-eM-hp2"/>
+                    <exclude reference="5yt-ik-ptU"/>
+                    <exclude reference="QlW-Fh-qcD"/>
+                    <exclude reference="s2A-qB-buj"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="nxG-eS-yFx"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="6AC-sM-VQ1"/>
+                    <include reference="9pV-cN-q5j"/>
+                    <include reference="H0U-xz-m9a"/>
+                    <include reference="O1T-MH-6jT"/>
+                    <include reference="9V6-kg-hDa"/>
+                    <include reference="PDz-5I-tHd"/>
+                    <include reference="567-eM-hp2"/>
+                    <include reference="5yt-ik-ptU"/>
+                    <include reference="QlW-Fh-qcD"/>
+                    <include reference="s2A-qB-buj"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="548" y="455"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="SSM3.png" width="480" height="640"/>
+    </resources>
+</document>
