@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A35C1911BCD901F00B89BD2 /* Archived-En.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A35C1901BCD901F00B89BD2 /* Archived-En.png */; settings = {ASSET_TAGS = (); }; };
 		3A6172DB1BC9616E004B9198 /* gameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6172C81BC9616E004B9198 /* gameVC.m */; settings = {ASSET_TAGS = (); }; };
 		3A6172DC1BC9616E004B9198 /* adjustVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6172CA1BC9616E004B9198 /* adjustVC.m */; settings = {ASSET_TAGS = (); }; };
 		3A6172DD1BC9616E004B9198 /* statsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6172CC1BC9616E004B9198 /* statsViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -76,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A35C1901BCD901F00B89BD2 /* Archived-En.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Archived-En.png"; sourceTree = "<group>"; };
 		3A6172C71BC9616E004B9198 /* gameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gameVC.h; sourceTree = "<group>"; };
 		3A6172C81BC9616E004B9198 /* gameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gameVC.m; sourceTree = "<group>"; };
 		3A6172C91BC9616E004B9198 /* adjustVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjustVC.h; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 		3AE520971BC960FD00D08517 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3A35C1901BCD901F00B89BD2 /* Archived-En.png */,
 				3AE5207A1BC960FD00D08517 /* close-black.png */,
 				3AE5207B1BC960FD00D08517 /* tweet_orange64x64.png */,
 				3AE5207C1BC960FD00D08517 /* black_07_small.png */,
@@ -484,6 +487,7 @@
 				3AE520A21BC960FD00D08517 /* close-black.png in Resources */,
 				96D22D8F1A1FD58100E0ADE3 /* Images.xcassets in Resources */,
 				3AE520AA1BC960FD00D08517 /* yellow_02_small.png in Resources */,
+				3A35C1911BCD901F00B89BD2 /* Archived-En.png in Resources */,
 				3AE520B51BC960FD00D08517 /* close-orange.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

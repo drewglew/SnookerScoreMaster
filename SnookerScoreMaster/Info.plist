@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeName</key>
-			<string>Snooker Score Master Match Document</string>
+			<string>Snooker Score Master Match Data</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>CFBundleTypeRole</key>
@@ -18,7 +18,7 @@
 		</dict>
 	</array>
 	<key>CFBundleDisplayName</key>
-	<string></string>
+	<string>Snooker Score Master</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -29,7 +29,7 @@
 			<key>UTTypeIdentifier</key>
 			<string>com.drewbysoft.ssmmatch.ssm</string>
 			<key>UTTypeDescription</key>
-			<string>Snooker Score Master Match Document</string>
+			<string>SSM Match Data</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
