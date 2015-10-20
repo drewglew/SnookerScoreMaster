@@ -1515,7 +1515,7 @@
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
-                                        <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="3xy-CG-hOQ" userLabel="player1Name">
@@ -1523,7 +1523,7 @@
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
-                                        <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.20000000000000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQk-tw-6ft" userLabel="player1view">
@@ -1534,12 +1534,11 @@
                                                 <animations/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.20000000000000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="IWS-gM-V39" firstAttribute="top" secondItem="aQk-tw-6ft" secondAttribute="top" constant="2" id="Zsn-jM-IvY"/>
                                             <constraint firstAttribute="height" constant="65" id="fEe-9R-vsO"/>
@@ -1568,7 +1567,6 @@
                                                 <animations/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -1826,7 +1824,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="QZH-gG-l81"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                         <variation key="default">
@@ -2249,9 +2247,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="200" y="300" width="200" height="200"/>
-                                </variation>
                             </view>
                             <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SoA-cO-ODd" userLabel="HelpView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -2524,37 +2519,37 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <exclude reference="SoA-cO-ODd"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="GKh-Yw-hie"/>
-                                <exclude reference="J6z-2y-aUd"/>
-                                <exclude reference="Ubf-nQ-NcV"/>
-                                <exclude reference="7Be-a7-j6H"/>
-                                <exclude reference="gUK-21-Ma4"/>
-                                <exclude reference="tbm-rD-kXE"/>
+                                <exclude reference="MuV-ZI-E5R"/>
+                                <exclude reference="iXe-CP-uVq"/>
+                                <exclude reference="OM0-OJ-nB6"/>
+                                <exclude reference="hNy-2Y-jqf"/>
+                                <exclude reference="Gke-Ex-3kD"/>
+                                <exclude reference="nYx-XL-deK"/>
                                 <exclude reference="fdD-j1-j85"/>
                                 <exclude reference="tz0-Do-SR5"/>
                                 <exclude reference="zMQ-zA-Hg0"/>
-                                <exclude reference="O5Y-VE-LYZ"/>
-                                <exclude reference="rNg-Y3-ptu"/>
-                                <exclude reference="Gke-Ex-3kD"/>
-                                <exclude reference="nYx-XL-deK"/>
-                                <exclude reference="OM0-OJ-nB6"/>
-                                <exclude reference="hNy-2Y-jqf"/>
+                                <exclude reference="eLD-FQ-wEH"/>
+                                <exclude reference="ePT-jE-TbF"/>
+                                <exclude reference="jCa-Wi-wGD"/>
                                 <exclude reference="0R4-lL-Pd6"/>
                                 <exclude reference="9yg-br-nxu"/>
                                 <exclude reference="BJR-ah-0vc"/>
                                 <exclude reference="z2e-Ak-sml"/>
-                                <exclude reference="MuV-ZI-E5R"/>
-                                <exclude reference="iXe-CP-uVq"/>
-                                <exclude reference="eLD-FQ-wEH"/>
-                                <exclude reference="ePT-jE-TbF"/>
-                                <exclude reference="jCa-Wi-wGD"/>
-                                <exclude reference="Zey-w6-xvE"/>
+                                <exclude reference="7Be-a7-j6H"/>
+                                <exclude reference="gUK-21-Ma4"/>
+                                <exclude reference="tbm-rD-kXE"/>
+                                <exclude reference="GKh-Yw-hie"/>
+                                <exclude reference="J6z-2y-aUd"/>
+                                <exclude reference="Ubf-nQ-NcV"/>
+                                <exclude reference="O5Y-VE-LYZ"/>
+                                <exclude reference="rNg-Y3-ptu"/>
                                 <exclude reference="BlV-Mi-iN2"/>
                                 <exclude reference="bcq-dF-0yx"/>
                                 <exclude reference="34H-Ws-oPB"/>
                                 <exclude reference="8NW-8H-3vV"/>
                                 <exclude reference="D4z-5K-W7N"/>
                                 <exclude reference="ZKp-oj-ZiC"/>
+                                <exclude reference="Zey-w6-xvE"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -2582,34 +2577,34 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <include reference="SoA-cO-ODd"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="GKh-Yw-hie"/>
-                                <include reference="J6z-2y-aUd"/>
-                                <include reference="Ubf-nQ-NcV"/>
-                                <include reference="7Be-a7-j6H"/>
-                                <include reference="gUK-21-Ma4"/>
-                                <include reference="tbm-rD-kXE"/>
+                                <include reference="MuV-ZI-E5R"/>
+                                <include reference="iXe-CP-uVq"/>
+                                <include reference="OM0-OJ-nB6"/>
+                                <include reference="hNy-2Y-jqf"/>
+                                <include reference="Gke-Ex-3kD"/>
+                                <include reference="nYx-XL-deK"/>
                                 <include reference="fdD-j1-j85"/>
                                 <include reference="tz0-Do-SR5"/>
                                 <include reference="zMQ-zA-Hg0"/>
-                                <include reference="O5Y-VE-LYZ"/>
-                                <include reference="rNg-Y3-ptu"/>
-                                <include reference="Gke-Ex-3kD"/>
-                                <include reference="nYx-XL-deK"/>
-                                <include reference="OM0-OJ-nB6"/>
-                                <include reference="hNy-2Y-jqf"/>
-                                <include reference="0R4-lL-Pd6"/>
-                                <include reference="z2e-Ak-sml"/>
-                                <include reference="MuV-ZI-E5R"/>
-                                <include reference="iXe-CP-uVq"/>
                                 <include reference="eLD-FQ-wEH"/>
                                 <include reference="ePT-jE-TbF"/>
                                 <include reference="jCa-Wi-wGD"/>
-                                <include reference="Zey-w6-xvE"/>
+                                <include reference="0R4-lL-Pd6"/>
+                                <include reference="z2e-Ak-sml"/>
+                                <include reference="7Be-a7-j6H"/>
+                                <include reference="gUK-21-Ma4"/>
+                                <include reference="tbm-rD-kXE"/>
+                                <include reference="GKh-Yw-hie"/>
+                                <include reference="J6z-2y-aUd"/>
+                                <include reference="Ubf-nQ-NcV"/>
+                                <include reference="O5Y-VE-LYZ"/>
+                                <include reference="rNg-Y3-ptu"/>
                                 <include reference="BlV-Mi-iN2"/>
                                 <include reference="34H-Ws-oPB"/>
                                 <include reference="8NW-8H-3vV"/>
                                 <include reference="D4z-5K-W7N"/>
                                 <include reference="ZKp-oj-ZiC"/>
+                                <include reference="Zey-w6-xvE"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -2622,10 +2617,10 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <include reference="kWC-oV-8ZR"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="9yg-br-nxu"/>
                                 <include reference="GKh-Yw-hie"/>
                                 <include reference="J6z-2y-aUd"/>
                                 <include reference="Ubf-nQ-NcV"/>
-                                <include reference="9yg-br-nxu"/>
                             </mask>
                         </variation>
                     </view>
@@ -2660,6 +2655,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                         <outlet property="buttonNew" destination="ibx-9o-5vh" id="TZs-yd-BMp"/>
                         <outlet property="buttonPink" destination="PuL-tE-UcR" id="GDi-7z-YDr"/>
                         <outlet property="buttonRed" destination="EZE-8n-Ejo" id="rbs-jh-V5V"/>
+                        <outlet property="buttonTweet" destination="TJZ-F0-D4o" id="R6G-LX-cfH"/>
                         <outlet property="buttonYellow" destination="d5I-b0-aFU" id="4H8-kv-xWn"/>
                         <outlet property="closeVisitBreakdown" destination="hlH-wA-aSl" id="hcM-Ze-R5E"/>
                         <outlet property="disabledView" destination="0ie-m5-kVx" id="Y7B-TQ-Vn6"/>
@@ -2947,6 +2943,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zV2-Qz-Hnt" firstAttribute="top" secondItem="6zk-ct-f32" secondAttribute="bottom" constant="2" id="1m1-5w-liv"/>
+                            <constraint firstItem="3om-MO-xl0" firstAttribute="leading" secondItem="GSz-Uk-HTu" secondAttribute="leadingMargin" constant="5" id="2br-67-ZCh"/>
                             <constraint firstItem="ItY-U1-Y20" firstAttribute="top" secondItem="gtx-bQ-FH4" secondAttribute="bottom" constant="5" id="8eX-Eh-00K"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gtx-bQ-FH4" secondAttribute="trailing" constant="20" id="E5H-Fm-3rT"/>
                             <constraint firstItem="KjI-DE-ggf" firstAttribute="top" secondItem="GSz-Uk-HTu" secondAttribute="top" id="EJk-34-Nha"/>
@@ -2955,9 +2952,9 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                             <constraint firstAttribute="centerX" secondItem="Hue-pC-2tI" secondAttribute="centerX" id="TEK-rl-58M"/>
                             <constraint firstAttribute="trailing" secondItem="KjI-DE-ggf" secondAttribute="trailing" id="YV0-ed-Ldz"/>
                             <constraint firstAttribute="centerX" secondItem="ItY-U1-Y20" secondAttribute="centerX" id="YkB-L3-U31"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3om-MO-xl0" secondAttribute="trailing" constant="5" id="baf-wN-INk"/>
                             <constraint firstItem="YV5-K9-MYY" firstAttribute="top" secondItem="ItY-U1-Y20" secondAttribute="bottom" constant="10" id="e3E-GY-VcI"/>
                             <constraint firstItem="3om-MO-xl0" firstAttribute="top" secondItem="6zk-ct-f32" secondAttribute="bottom" constant="30" id="egt-gR-12n"/>
-                            <constraint firstAttribute="centerX" secondItem="3om-MO-xl0" secondAttribute="centerX" id="fNp-qe-fsv"/>
                             <constraint firstItem="KjI-DE-ggf" firstAttribute="leading" secondItem="GSz-Uk-HTu" secondAttribute="leading" id="hb3-Lq-DxV"/>
                             <constraint firstAttribute="centerX" secondItem="ItY-U1-Y20" secondAttribute="centerX" id="hcW-U2-RcI"/>
                             <constraint firstItem="gtx-bQ-FH4" firstAttribute="leading" secondItem="GSz-Uk-HTu" secondAttribute="leading" id="lC9-PW-W1v"/>
@@ -2975,6 +2972,8 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <exclude reference="zV2-Qz-Hnt"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2br-67-ZCh"/>
+                                <exclude reference="baf-wN-INk"/>
                                 <exclude reference="1m1-5w-liv"/>
                                 <exclude reference="uXY-DS-Qba"/>
                                 <exclude reference="Q52-tN-nN5"/>
@@ -2997,6 +2996,8 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <include reference="zV2-Qz-Hnt"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="2br-67-ZCh"/>
+                                <include reference="baf-wN-INk"/>
                                 <include reference="1m1-5w-liv"/>
                                 <include reference="uXY-DS-Qba"/>
                                 <include reference="plB-eH-D5c"/>
@@ -3023,6 +3024,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                     <navigationItem key="navigationItem" id="lGq-qB-u5C"/>
                     <connections>
                         <outlet property="PointsPicker" destination="Hue-pC-2tI" id="n7O-bs-wGl"/>
+                        <outlet property="backgroundLabel" destination="UJa-wR-TgM" id="sNt-Eg-9Zk"/>
                         <outlet property="ballAdjustView" destination="3om-MO-xl0" id="fpS-ii-m7V"/>
                         <outlet property="ballCounter" destination="YhA-eI-KWD" id="LnA-Ta-vnL"/>
                         <outlet property="ballImage" destination="K0X-5H-1MF" id="3A4-8T-Z5e"/>
@@ -3030,6 +3032,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                         <outlet property="greenBaizeView" destination="KjI-DE-ggf" id="Mfo-Qm-Ul7"/>
                         <outlet property="labelExplanation" destination="gtx-bQ-FH4" id="YRm-kp-wku"/>
                         <outlet property="labelPointsRemaining" destination="4Yd-T7-tPF" id="wvj-Qx-QOr"/>
+                        <outlet property="mainView" destination="GSz-Uk-HTu" id="Y1e-Uz-jFc"/>
                         <outlet property="selectPlayerButton" destination="ItY-U1-Y20" id="pdO-eW-fZC"/>
                         <outlet property="stepperBallAdjuster" destination="bV5-uD-LVY" id="dnd-xd-4o8"/>
                     </connections>
