@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="SSM3.png" translatesAutoresizingMaskIntoConstraints="NO" id="anB-dN-bN5">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="SSM2.png" translatesAutoresizingMaskIntoConstraints="NO" id="anB-dN-bN5">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                     <animations/>
                     <color key="backgroundColor" red="0.1151484079" green="0.58209493889999997" blue="0.05653730773" alpha="1" colorSpace="calibratedRGB"/>
@@ -26,7 +26,7 @@
                                 <constraint firstAttribute="width" constant="267.5" id="bXX-SI-0Ix"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
-                            <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -65,31 +65,30 @@
                         </mask>
                     </variation>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="SNOOKER SCORE MASTER" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="SNOOKER SCORE MASTER" textAlignment="right" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
                     <rect key="frame" x="20" y="61" width="440" height="200"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
-                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="200"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
-                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="118" y="136" width="243" height="208.5"/>
-                    </variation>
                 </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="4xG-Z4-ch6"/>
                 <constraint firstAttribute="trailing" secondItem="nxG-eS-yFx" secondAttribute="trailing" id="567-eM-hp2"/>
                 <constraint firstItem="nxG-eS-yFx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5yt-ik-ptU"/>
                 <constraint firstAttribute="bottom" secondItem="anB-dN-bN5" secondAttribute="bottom" id="6AC-sM-VQ1"/>
-                <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="9V6-kg-hDa"/>
                 <constraint firstItem="anB-dN-bN5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9pV-cN-q5j"/>
                 <constraint firstAttribute="trailing" secondItem="anB-dN-bN5" secondAttribute="trailing" id="H0U-xz-m9a"/>
                 <constraint firstItem="anB-dN-bN5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="O1T-MH-6jT"/>
-                <constraint firstAttribute="centerY" secondItem="kId-c2-rCX" secondAttribute="centerY" id="PDz-5I-tHd"/>
                 <constraint firstItem="nxG-eS-yFx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QlW-Fh-qcD"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="cXl-DF-aN4"/>
+                <constraint firstAttribute="bottom" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="10" id="plK-Be-igM"/>
                 <constraint firstAttribute="bottom" secondItem="nxG-eS-yFx" secondAttribute="bottom" id="s2A-qB-buj"/>
+                <constraint firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" constant="10" id="tj1-5k-e0w"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -102,8 +101,10 @@
                     <exclude reference="9pV-cN-q5j"/>
                     <exclude reference="H0U-xz-m9a"/>
                     <exclude reference="O1T-MH-6jT"/>
-                    <exclude reference="9V6-kg-hDa"/>
-                    <exclude reference="PDz-5I-tHd"/>
+                    <exclude reference="4xG-Z4-ch6"/>
+                    <exclude reference="cXl-DF-aN4"/>
+                    <exclude reference="plK-Be-igM"/>
+                    <exclude reference="tj1-5k-e0w"/>
                     <exclude reference="567-eM-hp2"/>
                     <exclude reference="5yt-ik-ptU"/>
                     <exclude reference="QlW-Fh-qcD"/>
@@ -119,8 +120,10 @@
                     <include reference="9pV-cN-q5j"/>
                     <include reference="H0U-xz-m9a"/>
                     <include reference="O1T-MH-6jT"/>
-                    <include reference="9V6-kg-hDa"/>
-                    <include reference="PDz-5I-tHd"/>
+                    <include reference="4xG-Z4-ch6"/>
+                    <include reference="cXl-DF-aN4"/>
+                    <include reference="plK-Be-igM"/>
+                    <include reference="tj1-5k-e0w"/>
                     <include reference="567-eM-hp2"/>
                     <include reference="5yt-ik-ptU"/>
                     <include reference="QlW-Fh-qcD"/>
@@ -131,6 +134,6 @@
         </view>
     </objects>
     <resources>
-        <image name="SSM3.png" width="480" height="640"/>
+        <image name="SSM2.png" width="240" height="320"/>
     </resources>
 </document>

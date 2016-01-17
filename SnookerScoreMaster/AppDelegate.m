@@ -34,7 +34,7 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
         NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        documentsURL = [documentsURL URLByAppendingPathComponent:@"MatchData.ssm"];
+        documentsURL = [documentsURL URLByAppendingPathComponent:@"ImportedFile.ssm"];
         [data writeToURL:documentsURL atomically:YES];
     }
     return YES;
