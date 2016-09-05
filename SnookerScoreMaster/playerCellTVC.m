@@ -16,12 +16,21 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    UIColor *backgroundColor = self.badgeView.backgroundColor;
+    [super setHighlighted:highlighted animated:animated];
+    self.badgeView.backgroundColor = backgroundColor;
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+     UIColor *backgroundColor = self.badgeView.backgroundColor;
+    [super setSelected:selected animated:animated];
+     self.badgeView.backgroundColor = backgroundColor;
+}
 
 
 

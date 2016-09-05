@@ -7,9 +7,10 @@
 //
 
 #import "graphV.h"
+#import "embededMatchStatisticsVC.h"
 
-@implementation graphV
 
+@implementation graphV 
 
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
 
@@ -99,7 +100,6 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
 
 
 
-
 - (void)drawMatchStackedbarGraphWithContext:(CGContextRef)ctx
 {
     float scalePoints = 1.0f/ (float)self.matchMaxPoints;
@@ -117,10 +117,10 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
     }
     
     // Player 1 plotting
-    touchIndex = [self plotMatchPlayerStakedbar:false :ctx :1 :self.matchFramePoints :[UIColor colorWithRed:51.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
+    touchIndex = [self plotMatchPlayerStakedbar:false :ctx :1 :self.matchFramePoints :[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
     
     // Player 2 plotting
-    touchIndex = [self plotMatchPlayerStakedbar:false :ctx :2 :self.matchFramePoints :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
+    touchIndex = [self plotMatchPlayerStakedbar:false :ctx :2 :self.matchFramePoints :[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
     
 }
 
@@ -185,10 +185,7 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
             [data setValue:[NSNumber numberWithInt:[self getFramePoints:[self selectedData] :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:frameIndex]]] forKey:@"player2"];
         }
         
-        
-        
-        
-        
+ 
         
         
         [data setValue:[NSNumber numberWithInt:0] forKey:@"player1Offset"];
@@ -207,7 +204,7 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
 
 #pragma LINE-GRAPH
 
--(void)plotPlayerLines:(bool)fillGraph :(CGContextRef)ctx :(int) playerIndex :(int) breakOfPlayer  :(UIColor*) playerColour :(float) scalePointsY :(float) scaleVisitsX {
+-(void)plotPlayerLines:(bool)fillGraph :(CGContextRef)ctx :(int) playerIndex :(int) breakOfPlayer  :(UIColor*) playerColour {
     
     CGContextSetLineWidth(ctx, 1.5);
     CGContextSetStrokeColorWithColor(ctx, [playerColour CGColor]);
@@ -226,6 +223,9 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
     colorspace = CGColorSpaceCreateDeviceRGB();
     
     CGContextSetFillColorWithColor(ctx, [[UIColor colorWithRed:1.0 green:0.5 blue:0 alpha:0.5] CGColor]);
+
+    
+ 
     
     if (fillGraph) {
         
@@ -234,16 +234,16 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
         colorspace = CGColorSpaceCreateDeviceRGB();
         
         if (playerIndex == 2) {
-            CGFloat components[8] = {209.0f/255.0f, 0.0, 0.0, 0.0,  // Start color
-                209.0f/255.0f, 0.0, 0.0, 0.55}; // End color
+            CGFloat components[8] = {255.0f/255.0f, 45.0f/255.0f, 85.0f/255.0, 0.0,  // Start color
+                255.0f/255.0f, 45.0f/255.0f, 85.0f/255.0f, 0.55}; // End color
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
         } else {
             
             
             // CGFloat components[8] = {0.0f/255.0f, 0.0f/255.0f, 205.0f/255.0f, 0.1,  // Start color
             //    0.0f/255.0f, 0.0f/255.0f, 205.0f/255.0f, 0.4}; // End color
-            CGFloat components[8] = {51.0f/255.0f, 255.0f/255.0f, 255.0f/255.0f, 0.0,  // Start color
-                51.0f/255.0f, 255.0f/255.0f, 255.0f/255.0f, 0.55}; // End color
+            CGFloat components[8] = {0.0f/255.0f, 122.0f/255.0f, 255.0f/255.0f, 0.0,  // Start color
+                0.0f/255.0f, 122.0f/255.0f, 255.0f/255.0f, 0.55}; // End color
             
             
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
@@ -270,8 +270,8 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
             }
             
             score += [pointsValue intValue];
-            float plotPoints = scalePointsY * score;
-            plotVisitsX = kOffsetX + dataIndex * scaleVisitsX;
+            float plotPoints = self.scalePointsY * score;
+            plotVisitsX = kOffsetX + dataIndex * self.scaleVisitsX;
             plotPointsY = graphHeight - maxGraphHeight * plotPoints;
             CGContextAddLineToPoint(ctx, plotVisitsX ,plotPointsY );
         }
@@ -304,8 +304,8 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
             dataIndex ++;
             score += breakOfPlayer;
             
-            float plotPoints = scalePointsY * score;
-            plotVisitsX = kOffsetX + dataIndex * scaleVisitsX;
+            float plotPoints = self.scalePointsY * score;
+            plotVisitsX = kOffsetX + dataIndex * self.scaleVisitsX;
             plotPointsY = graphHeight - maxGraphHeight * plotPoints;
             
             CGContextAddLineToPoint(ctx, plotVisitsX ,plotPointsY );
@@ -317,7 +317,95 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
 }
 
 
--(void)plotPlayerMarkers:(CGContextRef)ctx :(int) playerIndex  :(UIColor*) playerColour :(float) scalePointsY :(float) scaleVisitsX {
+
+
+
+-(void)plotHighlighter:(CGContextRef)ctx :(UIColor*) highlightColour :(int) breakIndex {
+    
+    CGContextSetLineWidth(ctx, 4.0);
+    CGContextSetStrokeColorWithColor(ctx, [highlightColour CGColor]);
+    CGContextSetFillColorWithColor(ctx, [highlightColour CGColor]);
+    
+    /* assist with scale of graph - height */
+    int maxScore, p1ActiveBreak=0, p2ActiveBreak=0;
+    
+    breakEntry *checkData = [self.selectedData lastObject];
+    
+    if (self.graphReferenceId == [checkData.frameid intValue]) {
+        if (self.p1.activeBreak>0) {
+            p1ActiveBreak=[self.p1.activeBreak intValue];
+        }
+        if (self.p2.activeBreak>0) {
+            p2ActiveBreak=[self.p2.activeBreak intValue];
+        }
+    }
+    
+    if (self.scorePlayer1+p1ActiveBreak > self.scorePlayer2+p2ActiveBreak) {
+        maxScore = self.scorePlayer1+1+p1ActiveBreak;
+    } else {
+        maxScore = self.scorePlayer2+1+p2ActiveBreak;
+    }
+    self.scalePointsY = 1.0f/maxScore;
+    
+    
+    int graphHeight = self.frame.size.height;
+    int maxGraphHeight = graphHeight - kOffsetY;
+    float plotVisitsX=0.0f;     // maintains X position of line
+    float plotPointsY=0.0f;     // maintains Y position of line
+    
+    int p1_score=0; // variable used to store visit point value.
+    int p2_score=0; // variable used to store visit point value.
+    int dataIndex = 0;
+    for (breakEntry *entry in self.frameData) {
+        
+        
+        
+        float plotPoints;
+        dataIndex ++;
+        NSNumber *pointsValue=entry.points;
+
+        if (entry.playerid==[NSNumber numberWithInt:1]) {
+            p1_score += [pointsValue intValue];
+            plotPoints = self.scalePointsY * p1_score;
+        } else if (entry.playerid==[NSNumber numberWithInt:2]) {
+            p2_score += [pointsValue intValue];
+            plotPoints = self.scalePointsY * p2_score;
+        } else if (entry.playerid==[NSNumber numberWithInt:0]) {
+            plotPoints = 0;
+        }
+  
+        plotVisitsX = kOffsetX + dataIndex * self.scaleVisitsX;
+        
+        
+        plotPointsY = graphHeight - maxGraphHeight * plotPoints;
+ 
+        if (breakIndex==dataIndex) {
+     
+        
+            CGRect rect;
+            if (self.frameData.count > 30)
+                rect = CGRectMake(plotVisitsX - kSmallCircleRadius, plotPointsY - kSmallCircleRadius, 2 * kSmallCircleRadius, 2 * kSmallCircleRadius);
+            else {
+                rect = CGRectMake(plotVisitsX - kCircleRadius, plotPointsY - kCircleRadius, 2 * kCircleRadius, 2 * kCircleRadius);
+            }
+
+            CGContextBeginPath(ctx);
+            
+            CGContextAddEllipseInRect(ctx, rect);
+            
+            CGContextDrawPath(ctx, kCGPathFillStroke);
+                
+            return;
+        }
+    }
+    
+}
+
+
+
+
+
+-(void)plotPlayerMarkers:(CGContextRef)ctx :(int) playerIndex  :(UIColor*) playerColour :(int) breakIndex {
     
     CGContextSetLineWidth(ctx, 4.0);
     CGContextSetStrokeColorWithColor(ctx, [playerColour CGColor]);
@@ -342,21 +430,27 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
             NSNumber *pointsValue=entry.points;
             score += [pointsValue intValue];
             
-            float plotPoints = scalePointsY * score;
+            float plotPoints = self.scalePointsY * score;
             
-            plotVisitsX = kOffsetX + dataIndex * scaleVisitsX;
+            plotVisitsX = kOffsetX + dataIndex * self.scaleVisitsX;
             plotPointsY = graphHeight - maxGraphHeight * plotPoints;
             
-            CGRect rect;
-            if (self.frameData.count > 30)
-                rect = CGRectMake(plotVisitsX - kSmallCircleRadius, plotPointsY - kSmallCircleRadius, 2 * kSmallCircleRadius, 2 * kSmallCircleRadius);
-            else {
-                rect = CGRectMake(plotVisitsX - kCircleRadius, plotPointsY - kCircleRadius, 2 * kCircleRadius, 2 * kCircleRadius);
+            UIColor *useColour = playerColour;
+            if (breakIndex==dataIndex) {
+                useColour = [UIColor orangeColor];
             }
-            if (dataIndex<100) {
-                touchAreas[dataIndex] = rect;
-            }
-            CGContextAddEllipseInRect(ctx, rect);
+            
+                CGRect rect;
+                if (self.frameData.count > 30)
+                    rect = CGRectMake(plotVisitsX - kSmallCircleRadius, plotPointsY - kSmallCircleRadius, 2 * kSmallCircleRadius, 2 * kSmallCircleRadius);
+                else {
+                    rect = CGRectMake(plotVisitsX - kCircleRadius, plotPointsY - kCircleRadius, 2 * kCircleRadius, 2 * kCircleRadius);
+                }
+                if (dataIndex<100) {
+                    touchAreas[dataIndex] = rect;
+                }
+                CGContextAddEllipseInRect(ctx, rect);
+            
         }
     }
     CGContextDrawPath(ctx, kCGPathFillStroke);
@@ -384,49 +478,56 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
     } else {
         maxScore = self.scorePlayer2+1+p2ActiveBreak;
     }
-    float scalePoints = 1.0f/maxScore;
+    self.scalePointsY = 1.0f/maxScore;
     /* assist with scale of graph - width */
     NSUInteger frameDataEntries = self.frameData.count;
      if (p1ActiveBreak+p2ActiveBreak > 0) {
         frameDataEntries ++;
     }
-    float scaleVisits=0.0;
-    if (frameDataEntries>0) {
-        scaleVisits = (self.frame.size.width - 5) / frameDataEntries;
-    }
+
+    [self plotPlayerLines:false :ctx :1 :p1ActiveBreak :[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f]];
+    [self plotPlayerLines:true :ctx :1 :p1ActiveBreak :[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f]];
+    [self plotPlayerMarkers:ctx :1 :[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f] :0];
+ 
+
+    [self plotPlayerLines:false :ctx :2 :p2ActiveBreak :[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f]];
+    [self plotPlayerLines:true :ctx :2 :p2ActiveBreak :[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f]];
+    [self plotPlayerMarkers:ctx :2 :[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f] :0];
+
     
-    [self plotPlayerLines:false :ctx :1 :p1ActiveBreak :[UIColor colorWithRed:51.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    [self plotPlayerLines:true :ctx :1 :p1ActiveBreak :[UIColor colorWithRed:51.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    [self plotPlayerMarkers:ctx :1 :[UIColor colorWithRed:51.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    
-    
-    [self plotPlayerLines:false :ctx :2 :p2ActiveBreak :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    [self plotPlayerLines:true :ctx :2 :p2ActiveBreak :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
-    [self plotPlayerMarkers:ctx :2 :[UIColor colorWithRed:209.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] :scalePoints :scaleVisits];
     
 }
 
-
 #pragma USER EVENTS
+
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
+   
     CGPoint point = [touch locationInView:self];
-    //NSLog(@"Touch x:%f, y:%f", point.x, point.y);
+    
     for (int i = 0; i < 100; i++)
     {
         if (CGRectContainsPoint(touchAreas[i], point))
         {
-            if (self.graphReferenceId>0) {
+            if (self.graphReferenceId!=0) {
+                
+               // [self showFrameDuration:i];
+                
                 //[self updateStatBox:i :TRUE];
             } else {
-                //[self loadVisitWindow:i :TRUE];
+
+                [self.delegate loadBreakShots:i :TRUE];
             }
             break;
         }
     }
 }
+
+
+
 
 
 -(void) loadSharedData {
@@ -469,65 +570,80 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
         if ([self.p1.activeBreak intValue] + [self.p2.activeBreak intValue] > 0 && self.graphReferenceId == [checkData.frameid intValue]) {
             frameDataEntries ++;
         }
-        float scaleVisits = 0.0;
+        
+        self.scaleVisitsX = 0.0;
         if (frameDataEntries>0) {
-            scaleVisits = ((int)self.frame.size.width - 5) / frameDataEntries;
+            self.scaleVisitsX = ((int)self.frame.size.width - 5) / frameDataEntries;
         }
-        if (scaleVisits==0) {
-            scaleVisits=50;
+        if (self.scaleVisitsX==0) {
+            self.scaleVisitsX=50;
         }
-        if (frameDataEntries <= 30) {
+        
+        
+        if (self.overlay==false) {
+        
+            if (frameDataEntries <= 30) {
+                // How many lines?
+                int howMany = (self.frame.size.width - kOffsetX) + 11 / self.scaleVisitsX;
+                // Here the lines go
+                for (int i = 0; i < howMany; i++)
+                {
+                    CGContextMoveToPoint(context, kOffsetX + i * self.scaleVisitsX, kGraphTop);
+                    CGContextAddLineToPoint(context, kOffsetX + i * self.scaleVisitsX, graphBottom);
+                }
+            
+                int howManyHorizontal = (graphBottom - kGraphTop - kOffsetY) / self.scaleVisitsX;
+                for (int i = 0; i <= howManyHorizontal; i++)
+                {
+                    CGContextMoveToPoint(context, kOffsetX, graphBottom - kOffsetY - i * self.scaleVisitsX);
+                    CGContextAddLineToPoint(context, self.frame.size.width, graphBottom - kOffsetY - i * self.scaleVisitsX    );
+                }
+                CGContextStrokePath(context);
+            }
+            CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
+            [self drawLineGraphWithContext:context];
+        } else {
+            CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
+            
+            
+            [self plotHighlighter:context :[UIColor colorWithRed:90.0f/255.0f green:200.0f/255.0f blue:250.0f/255.0f alpha:1.0f] :self.plotHighlightIndex];
+        }
+    } else {
+        if (self.overlay==false) {
+            // draw stacked bar graph for match
+            float scaleFrames = 0.0;
+            int colsScale = self.numberOfFrames;
+            if (self.numberOfFrames>0) {
+                if (self.numberOfFrames<8) {
+                    colsScale = 8;
+                }
+                scaleFrames = ((int)self.frame.size.width) / colsScale;
+            }
+            if (scaleFrames==0) {
+                scaleFrames=10;
+            }
             // How many lines?
-            int howMany = (self.frame.size.width - kOffsetX) + 11 / scaleVisits;
+            int howMany = (self.frame.size.width - kOffsetX) + 11 / scaleFrames;
+    
             // Here the lines go
             for (int i = 0; i < howMany; i++)
             {
-                CGContextMoveToPoint(context, kOffsetX + i * scaleVisits, kGraphTop);
-                CGContextAddLineToPoint(context, kOffsetX + i * scaleVisits, graphBottom);
+                CGContextMoveToPoint(context, kOffsetX + i * scaleFrames, kGraphTop);
+                CGContextAddLineToPoint(context, kOffsetX + i * scaleFrames, graphBottom);
             }
-            
-            int howManyHorizontal = (graphBottom - kGraphTop - kOffsetY) / scaleVisits;
+            int howManyHorizontal = (graphBottom - kGraphTop - kOffsetY) / scaleFrames;
             for (int i = 0; i <= howManyHorizontal; i++)
             {
-                CGContextMoveToPoint(context, kOffsetX, graphBottom - kOffsetY - i * scaleVisits);
-                CGContextAddLineToPoint(context, self.frame.size.width, graphBottom - kOffsetY - i * scaleVisits    );
+                CGContextMoveToPoint(context, kOffsetX, graphBottom - kOffsetY - i * scaleFrames);
+                CGContextAddLineToPoint(context, self.frame.size.width, graphBottom - kOffsetY - i * scaleFrames    );
             }
-            CGContextStrokePath(context);
-        }
-        CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
-      [self drawLineGraphWithContext:context];
-  
-    } else {
-        // draw stacked bar graph for match
-        float scaleFrames = 0.0;
-        int colsScale = self.numberOfFrames;
-        if (self.numberOfFrames>0) {
-            if (self.numberOfFrames<8) {
-                colsScale = 8;
-            }
-            scaleFrames = ((int)self.frame.size.width) / colsScale;
-        }
-        if (scaleFrames==0) {
-            scaleFrames=10;
-        }
-        // How many lines?
-        int howMany = (self.frame.size.width - kOffsetX) + 11 / scaleFrames;
         
-        // Here the lines go
-        for (int i = 0; i < howMany; i++)
-        {
-            CGContextMoveToPoint(context, kOffsetX + i * scaleFrames, kGraphTop);
-            CGContextAddLineToPoint(context, kOffsetX + i * scaleFrames, graphBottom);
+        
+            CGContextStrokePath(context);
+            CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
+            [self drawMatchStackedbarGraphWithContext:context];
+            
         }
-        int howManyHorizontal = (graphBottom - kGraphTop - kOffsetY) / scaleFrames;
-        for (int i = 0; i <= howManyHorizontal; i++)
-        {
-            CGContextMoveToPoint(context, kOffsetX, graphBottom - kOffsetY - i * scaleFrames);
-            CGContextAddLineToPoint(context, self.frame.size.width, graphBottom - kOffsetY - i * scaleFrames    );
-        }
-        CGContextStrokePath(context);
-        CGContextSetLineDash(context, 0, NULL, 0); // Remove the dash
-        [self drawMatchStackedbarGraphWithContext:context];
         
     }
     

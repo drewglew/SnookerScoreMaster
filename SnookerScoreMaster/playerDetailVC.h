@@ -9,16 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "playerListingTVC.h"
 #import "HeadToHeadTVC.h"
-#import "matchListingTVC.h"
+#import "matchesVC.h"
 #import "player.h"
 #import "breakBallCell.h"
 #import "ballShot.h"
 #import "match.h"
+#import "dbHelper.h"
+#import "AvatarV.h"
+#import "common.h"
+#import "NSDate+TimeAgo.h"
 
 @class playerDetailVC;
 @protocol PlayerDelegate <NSObject>
 - (void)addItemViewController:(playerDetailVC *)controller didUpdatePlayer :(NSNumber*) newPlayerNumber :(int)playerId :(NSString*) playerName :(NSString*) playerEmail :(NSString*) playerImageName :(bool)photoUpdated;
-- (void)addItemViewController:(playerDetailVC *)controller didInsertPlayer :(int)nextPlayerNumber :(NSString*) playerName :(NSString*) playerEmail :(NSString*) playerImageName :(bool)photoUpdated;
+- (void)addItemViewController:(playerDetailVC *)controller didInsertPlayer :(int)nextPlayerNumber :(NSString*) playerName :(NSString*) playerEmail :(NSString*) playerImageName :(bool)photoUpdated :(NSString*) playerkey;
 @end
 @interface playerDetailVC : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, weak) id <PlayerDelegate> delegate;
@@ -26,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *playerNickName;
 @property (weak, nonatomic) IBOutlet UITextField *playerEmail;
 @property (assign) int playerIndex;
+@property (assign) bool viewDismissed;
+@property (assign) bool isHollow;
 @property (assign) int nextPlayerNumber;
 @property (assign) int currentPlayerNumber;
 //@property (assign) int currentPlayerHiBreak;
@@ -36,12 +42,22 @@
 @property (strong,nonatomic) NSNumber* currentPlayerHiBreak;
 @property (strong,nonatomic) NSNumber* activeMatchId;
 @property (strong, nonatomic) NSMutableArray     *currentPlayerHighestBreakHistory;
-
-
+@property (strong, nonatomic) NSMutableArray     *activeBreakShots;
 @property (assign) bool photoUpdated;
 @property (strong, nonatomic) NSString *nickName;
+@property (strong, nonatomic) NSString *nextPlayerKey;
+@property (strong, nonatomic) NSString *currentPlayerKey;
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *imagePathPhoto;
 @property (strong, nonatomic) NSMutableArray *historyBreakShots;
 @property (strong, nonatomic) match *activeMatchPlayers;
+@property (strong, nonatomic) NSString *skinPrefix;
+@property (assign) int theme;
+@property (weak, nonatomic) IBOutlet UILabel *breakShownLabel;
+@property (weak, nonatomic) IBOutlet UIView *avatarPlayer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAvatarWidth;
+@property (assign) int activeFramePointsRemaining;
+@property (strong, nonatomic) dbHelper *db;
+@property (strong, nonatomic) player *p1; // represents this player
+@property (strong, nonatomic) player *p2; // represents the other player
 @end

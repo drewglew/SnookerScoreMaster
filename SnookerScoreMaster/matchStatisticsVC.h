@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "player.h"
-#import "embededMatchStatisticsV.h"
-#import "matchListingTVC.h"
+#import "embededMatchStatisticsVC.h"
+#import "matchesVC.h"
 #import "match.h"
 
-@class matchStatistics;
+@class matchStatisticsVC;
 
 @protocol MatchStatisticsDelegate <NSObject>
+- (void)addItemViewController:(matchStatisticsVC *)controller keepDisplayState:(int)displayState;
 @end
 
 @interface matchStatisticsVC : UIViewController {}
@@ -25,5 +26,12 @@
 @property (strong, nonatomic) match *activeMatchPlayers;
 @property (strong, nonatomic) NSMutableArray *activeMatchData;
 @property (strong, nonatomic) NSMutableArray *activeFrameData;
+@property (assign) bool activeMatchStatistcsShown;
+@property (assign) int displayState;
+@property (strong, nonatomic) NSString *skinPrefix;
+@property (assign) int activeFramePointsRemaining;
+@property (strong, nonatomic) dbHelper *db;
+@property (assign) bool isHollow;
+@property (assign) int theme;
 @end
 

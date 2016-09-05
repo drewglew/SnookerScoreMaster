@@ -10,7 +10,7 @@
 
 
 
-@interface matchStatisticsVC () <EmbededMatchStatisticsDelegate>
+@interface matchStatisticsVC () <EmbededMatchStatisticsDelegate, graphViewDelegate>
 
 @end
 
@@ -34,17 +34,30 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if([segue.identifier isEqualToString:@"matchliststatistics"]) {
-        embededMatchStatisticsV *controller = (embededMatchStatisticsV *)segue.destinationViewController;
+    if([segue.identifier isEqualToString:@"matchliststatistics"] || [segue.identifier isEqualToString:@"activeMatchStatistics"]) {
+        embededMatchStatisticsVC *controller = (embededMatchStatisticsVC *)segue.destinationViewController;
         controller.delegate = self;
         
         controller.p1 = self.p1;
         controller.p2 = self.p2;
         controller.m = self.m;
         controller.activeMatchPlayers = self.activeMatchPlayers;
-    }
-    
-    
+        controller.activeMatchStatistcsShown = self.activeMatchStatistcsShown;
+        controller.displayState = self.displayState;
+        controller.db = self.db;
+        controller.skinPrefix = self.skinPrefix;
+        controller.activeFramePointsRemaining = self.activeFramePointsRemaining;
+        controller.isHollow = self.isHollow;
+        controller.theme = self.theme;
+    } }
+
+- (void)addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState {
+    self.displayState = displayState;
+    [self.delegate addItemViewController:self keepDisplayState:self.displayState];
+}
+
+-(bool) loadBreakShots:(int) breakShotsIndex :(BOOL) fromGraph {
+    return true;
 }
 
 @end

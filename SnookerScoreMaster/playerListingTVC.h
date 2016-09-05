@@ -25,8 +25,9 @@
 @property (nonatomic) NSNumber *activePlayerNumber;
 @property (strong, nonatomic) dbHelper *db;
 @property (strong, nonatomic) player *activePlayer;
-@property (strong, nonatomic) NSArray  *players;
-@property (strong ,nonatomic) NSMutableDictionary *cachedImages;
+@property (strong, nonatomic) NSMutableArray  *players;
+@property (strong, nonatomic) NSMutableDictionary  *cachedAvatars;
+
 
 
 @end

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *Player2HiBreak;
 @property (nonatomic) NSNumber *Player1Number;
 @property (nonatomic) NSNumber *Player2Number;
+@property (nonatomic) NSNumber *numberOfFrames;
 @property (nonatomic) NSNumber *MatchId;
 @property (nonatomic) match *m;
 @property (weak, nonatomic) IBOutlet UILabel *Player1Name;
@@ -25,5 +26,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *Player1FrameWins;
 @property (weak, nonatomic) IBOutlet UILabel *Player2FrameWins;
 @property (weak, nonatomic) IBOutlet UILabel *matchDate;
+@property (strong, nonatomic) NSString *matchEndDate;
+@property (weak, nonatomic) IBOutlet UILabel *matchDuration;
+
+
 @end
 

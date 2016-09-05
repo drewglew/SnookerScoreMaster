@@ -14,10 +14,30 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    UIColor *opponentBGColor = self.opponentBadge.backgroundColor;
+    UIColor *selectedBGColor = self.selectedBadge.backgroundColor;
+    [super setHighlighted:highlighted animated:animated];
+    
+    self.opponentBadge.backgroundColor = opponentBGColor;
+    self.selectedBadge.backgroundColor = selectedBGColor;
 }
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    UIColor *opponentBGColor = self.opponentBadge.backgroundColor;
+    UIColor *selectedBGColor = self.selectedBadge.backgroundColor;
+    
+    [super setSelected:selected animated:animated];
+    
+    self.opponentBadge.backgroundColor = opponentBGColor;
+    self.selectedBadge.backgroundColor = selectedBGColor;
+}
+
+
+
+
 
 @end

@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *playerHiBreak;
 @property (weak, nonatomic) IBOutlet UILabel *playerWinPC;
 @property (weak, nonatomic) IBOutlet UILabel *playerMatches;
+@property (weak, nonatomic) IBOutlet UIView *avatarView;
 
 
 

@@ -23,12 +23,19 @@
 @property (nonatomic) NSNumber *activePlayerNumber;
 @property (strong, nonatomic) dbHelper *db;
 @property (strong, nonatomic) player *activePlayer;
-@property (strong, nonatomic) NSArray  *matches;
+@property (strong, nonatomic) NSMutableArray  *matches;
 @property (strong ,nonatomic) NSMutableDictionary *cachedImages;
+
+
+@property (strong ,nonatomic) NSMutableDictionary *cachedAvatarP1;
+@property (strong ,nonatomic) NSMutableDictionary *cachedAvatarP2;
 @property (assign) int staticPlayer1Number;
 @property (assign) int staticPlayer2Number;
 @property (assign) int staticPlayer1CurrentBreak;
 @property (assign) int staticPlayer2CurrentBreak;
 @property (strong,nonatomic) NSNumber* activeMatchId;
 @property (strong, nonatomic) match *activeMatchPlayers;
+@property (assign) int displayState;
+@property (assign) int activeFramePointsRemaining;
+@property (strong, nonatomic) NSString *skinPrefix;
 @end

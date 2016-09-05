@@ -21,6 +21,8 @@
 @property (nonatomic) NSNumber *Player1FrameWins;
 @property (nonatomic) NSNumber *Player2FrameWins;
 @property (nonatomic) NSString *matchDate;
+@property (nonatomic) NSString *matchEndDate;
+@property (nonatomic) NSString *matchDuration;
 @property (nonatomic) NSNumber *matchid;
 @property (nonatomic) NSString *matchkey;
 

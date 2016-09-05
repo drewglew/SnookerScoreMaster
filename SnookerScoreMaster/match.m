@@ -21,6 +21,9 @@
 @synthesize Player1FrameWins;
 @synthesize Player2FrameWins;
 @synthesize matchDate;
+@synthesize matchEndDate;
+@synthesize matchDuration;
+
 @synthesize matchid;
 @synthesize matchkey;
 

@@ -22,12 +22,9 @@
 @synthesize activePlayer;
 
 
-/* created 20150909 */
--(void)initDB {
-    /* most times the database is already existing */
-    self.db = [[dbHelper alloc] init];
-    //    [self.db deleteDB:@"snookmast.db"];
-    [self.db dbCreate :@"snookmast.db"];
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     self.activePlayer = [self.db getPlayerByPlayerNumber :self.activePlayerNumber];
     self.opponents = [self.db findAllPlayers :[NSNumber numberWithInt:2] :self.activePlayerNumber];
@@ -36,14 +33,6 @@
     self.cachedImages = [[NSMutableDictionary alloc] init];
     
     [self.tableView reloadData];
-    
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    
-    [self initDB];
 
 }
 
@@ -74,11 +63,12 @@
 }
 
 
+/* last modified 20160204 */
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"headtohead";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
     HeadToHeadCellTVC *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
@@ -100,13 +90,16 @@
     cell.selectedName.text = self.activePlayer.nickName;
     cell.selectedNumber = self.activePlayer.playerNumber;
     cell.selectedHiBreak.text = [NSString stringWithFormat:@"%@",p.selectedHiBreak];
-    cell.selectedWinPC.text = [NSString stringWithFormat:@"%@%%",self.activePlayer.playerWinsPC];
+    
+    cell.selectedWinPC.text = [NSString stringWithFormat:@"%@",p.playerMatchLosses];
     
     
     cell.opponentName.text = p.nickName;
     cell.opponentNumber = p.playerNumber;
     cell.opponentHiBreak.text = [NSString stringWithFormat:@"%@",p.hiBreak];
-    cell.opponentWinPC.text = [NSString stringWithFormat:@"%@%%",p.playerWinsPC];
+    
+    
+    cell.opponentWinPC.text = [NSString stringWithFormat:@"%@",p.playerMatchWins];
     
     cell.HeadToHeadMatches.text = [NSString stringWithFormat:@"matches %@",p.playerMatchCount];
     
@@ -136,12 +129,15 @@
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
-    if([self.cachedImages objectForKey:@"artist"] != nil){
-        cell.opponentPhoto.image = [self.cachedImages valueForKey:identifier];
+
+    AvatarV *avOpponent = [[AvatarV alloc] initWithFrame:CGRectMake(0, 0, 75.0, 75.0)];
+    AvatarV *avSelected = [[AvatarV alloc] initWithFrame:CGRectMake(0, 0, 75.0, 75.0)];
+
+    if([self.cachedImages objectForKey:identifier] != nil){
+        [avOpponent setAvatarImage:[self.cachedImages valueForKey:identifier]];
     }else{
 
-        
-        cell.opponentPhoto.image = [UIImage imageNamed:@""];
+        avSelected.avatarImage = nil;
         char const * s = [identifier UTF8String];
         dispatch_queue_t queue = dispatch_queue_create(s, 0);
         dispatch_async(queue, ^{
@@ -152,13 +148,13 @@
             img = [[UIImage alloc] initWithData:data];
             
             if (img==nil) {
-                img = [UIImage imageNamed:@"female_icon.png"];
+                img = [UIImage imageNamed:@"avatar.png"];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([tableView indexPathForCell:cell].row == indexPath.row) {
                     [self.cachedImages setValue:img forKey:identifier];
-                    cell.opponentPhoto.image = [self.cachedImages valueForKey:identifier];
+                    [avOpponent setAvatarImage:[self.cachedImages valueForKey:identifier]];
                 }
             });
         });
@@ -169,12 +165,38 @@
     UIImage *img = [[UIImage alloc] initWithData:data];
     
     if (img==nil) {
-        img = [UIImage imageNamed:@"female_icon.png"];
+        img = [UIImage imageNamed:@"avatar.png"];
     }
+    [avSelected setAvatarImage:img];
+    avSelected.borderWidth = 3;
+    avOpponent.borderWidth = 3;
+  
+    if ([p.playerWinsPC intValue]==-1) {
+        avSelected.borderColors = @[[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0.0/255.0 alpha:1]];
+         avOpponent.borderColors = @[[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0.0/255.0 alpha:1]];
+        avSelected.borderValues = @[@(1.0)];
+        avOpponent.borderValues = @[@(1.0)];
+    } else {
+    
+        avSelected.borderColors = @[[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1],
+                            [UIColor colorWithRed:255.0/255.0 green:59.0/255.0 blue:48.0/255.0 alpha:1]];
+    
+        avOpponent.borderColors = @[[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1],
+                            [UIColor colorWithRed:255.0/255.0 green:59.0/255.0 blue:48.0/255.0 alpha:1]];
+    
 
-    cell.selectedPhoto.image = img;
+        float selectedWin = winsRemainder/100.0f;
+        float oppenentWin = [p.playerWinsPC floatValue]/100.0f;
     
+        avSelected.borderValues = @[@(selectedWin),@(oppenentWin)];
+        avOpponent.borderValues = @[@(oppenentWin),@(selectedWin)];
+    }
     
+    [cell.opponentAvatarView addSubview:avOpponent];
+    [cell.selectedvatarView addSubview:avSelected];
+    
+    cell.layer.shouldRasterize = true;
+    [cell.layer setRasterizationScale:[[UIScreen mainScreen] scale]];
     
     return cell;
 }
@@ -224,25 +246,9 @@
 */
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(HeadToHeadCellTVC *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.opponentPhoto.frame = CGRectMake(cell.opponentPhoto.frame.origin.x, cell.opponentPhoto.frame.origin.y, 75, 75);
-    cell.opponentPhoto.clipsToBounds = YES;
-    cell.opponentPhoto.layer.cornerRadius = 75/2.0f;
-    
-    cell.opponentPhoto.layer.borderColor=[UIColor orangeColor].CGColor;
-    cell.opponentPhoto.layer.borderWidth=1.5f;
+
     cell.opponentBadge.layer.cornerRadius = 15;
-    
-    
-    cell.selectedPhoto.frame = CGRectMake(cell.selectedPhoto.frame.origin.x, cell.selectedPhoto.frame.origin.y, 75, 75);
-    cell.selectedPhoto.clipsToBounds = YES;
-    cell.selectedPhoto.layer.cornerRadius = 75/2.0f;
-    
-    cell.selectedPhoto.layer.borderColor=[UIColor orangeColor].CGColor;
-    cell.selectedPhoto.layer.borderWidth=1.5f;
     cell.selectedBadge.layer.cornerRadius = 15;
-    
-    
-    
 }
 
 

@@ -24,6 +24,10 @@
 @property (nonatomic) NSNumber *opponentNumber;
 @property (nonatomic) NSNumber *selectedNumber;
 
+@property (weak, nonatomic) IBOutlet UIView *opponentAvatarView;
+
+@property (weak, nonatomic) IBOutlet UIView *selectedvatarView;
+
 
 
 @end

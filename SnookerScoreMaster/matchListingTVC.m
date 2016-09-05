@@ -10,7 +10,7 @@
 #import "matchCellTVC.h"
 #import "matchStatisticsVC.h"
 
-@interface matchListingTVC () <PlayerDelegate, MatchStatisticsDelegate>
+@interface matchListingTVC () <PlayerDelegate, MatchStatisticsDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -21,22 +21,6 @@
 @synthesize activePlayer;
 
 
-/* created 20150909 */
--(void)initDB {
-    /* most times the database is already existing */
-    self.db = [[dbHelper alloc] init];
-    //    [self.db deleteDB:@"snookmast.db"];
-    [self.db dbCreate :@"snookmast.db"];
-    
-    self.activePlayer = [self.db getPlayerByPlayerNumber :self.activePlayerNumber];
-    self.matches = [self.db findAllMatches];
-    self.title = @"";
-    self.navigationItem.title = @"Matches";
-    self.cachedImages = [[NSMutableDictionary alloc] init];
-    [self.tableView reloadData];
-    
-}
-
 -(void)viewWillAppear :(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -45,10 +29,24 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 }
 
+/* last modified 20160205 */
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initDB];
+    self.activePlayer = [self.db getPlayerByPlayerNumber :self.activePlayerNumber];
+    self.matches = [self.db findAllMatches];
+    self.title = @"";
+    self.navigationItem.title = @"Matches";
+    // to be removed
+    self.cachedImages = [[NSMutableDictionary alloc] init];
+    
+    self.cachedAvatarP1 = [[NSMutableDictionary alloc] init];
+    self.cachedAvatarP2 = [[NSMutableDictionary alloc] init];
+    
+    [self.tableView reloadData];
+    
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -65,6 +63,7 @@
     return self.matches.count;
 }
 
+/* last modified 20160204 */
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -89,6 +88,7 @@
     cell.Player2Name.text = m.player2Name;
     cell.Player1Number = m.Player1Number;
     cell.Player2Number = m.Player2Number;
+    cell.matchDuration.text = m.matchDuration;
     
     if (self.activeMatchId == m.matchid) {
         cell.Player1HiBreak.text = [NSString stringWithFormat:@"%@",self.activeMatchPlayers.Player1HiBreak];
@@ -99,12 +99,15 @@
     
         cell.Player1HiBreak.text = [NSString stringWithFormat:@"%@",m.Player1HiBreak];
         cell.Player2HiBreak.text = [NSString stringWithFormat:@"%@",m.Player2HiBreak];
-        cell.Player1FrameWins .text = [NSString stringWithFormat:@"%@",m.Player1FrameWins];
+        cell.Player1FrameWins.text = [NSString stringWithFormat:@"%@",m.Player1FrameWins];
         cell.Player2FrameWins.text = [NSString stringWithFormat:@"%@",m.Player2FrameWins];
     }
     
     
     cell.matchDate.text = [NSString stringWithFormat:@"%@",[self relativeDateStringForDate  :m.matchDate]];
+    cell.matchEndDate = [NSString stringWithFormat:@"%@",[self relativeDateStringForDate  :m.matchEndDate]];
+    
+    
     cell.MatchId = m.matchid;
     
     
@@ -120,24 +123,27 @@
         [cell.player2Badge setHidden:NO];
     }
     
+    cell.layer.shouldRasterize = true;
+    [cell.layer setRasterizationScale:[[UIScreen mainScreen] scale]];
     
     
-    NSString *identifier1 = [NSString stringWithFormat:@"Player1%ld" ,
+    NSString *identifier1 = [NSString stringWithFormat:@"Avatar1%ld" ,
                             (long)indexPath.row];
-    NSString *identifier2 = [NSString stringWithFormat:@"Player2%ld" ,
+    NSString *identifier2 = [NSString stringWithFormat:@"Avatar2%ld" ,
                              (long)indexPath.row];
     
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+ 
     
-    if([self.cachedImages objectForKey:@"artist"] != nil){
+    if([self.cachedImages objectForKey:identifier1] != nil){
         cell.player1Photo.image = [self.cachedImages valueForKey:identifier1];
         cell.player2Photo.image = [self.cachedImages valueForKey:identifier2];
     }else{
 
         
         
-        cell.player1Photo.image = [UIImage imageNamed:@""];
+        cell.player1Photo.image = nil;
         char const * s = [identifier1 UTF8String];
         dispatch_queue_t queue = dispatch_queue_create(s, 0);
         dispatch_async(queue, ^{
@@ -148,7 +154,7 @@
             img = [[UIImage alloc] initWithData:data];
             
             if (img==nil) {
-                img = [UIImage imageNamed:@"female_icon.png"];
+                img = [UIImage imageNamed:@"avatar.png"];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -159,7 +165,7 @@
             });
         });
         
-        cell.player2Photo.image = [UIImage imageNamed:@""];
+        cell.player2Photo.image = nil;
         s = [identifier1 UTF8String];
         queue = dispatch_queue_create(s, 0);
         dispatch_async(queue, ^{
@@ -170,7 +176,7 @@
             img = [[UIImage alloc] initWithData:data];
             
             if (img==nil) {
-                img = [UIImage imageNamed:@"female_icon.png"];
+                img = [UIImage imageNamed:@"avatar.png"];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -186,6 +192,8 @@
 }
 
 
+
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(matchCellTVC *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     match *m = [self.matches objectAtIndex:indexPath.row];
@@ -197,7 +205,7 @@
     cell.player1Photo.layer.cornerRadius = 75/2.0f;
     
     
-    cell.player1Photo.layer.borderWidth=1.5f;
+    cell.player1Photo.layer.borderWidth=3.0f;
     
     cell.player1Badge.layer.cornerRadius = 15;
     
@@ -206,30 +214,33 @@
     cell.player2Photo.layer.cornerRadius = 75/2.0f;
     
     cell.player2Photo.layer.borderColor=[UIColor orangeColor].CGColor;
-    cell.player2Photo.layer.borderWidth=1.5f;
+    cell.player2Photo.layer.borderWidth=3.0f;
     cell.player2Badge.layer.cornerRadius = 15;
 
     
     
     
     if (m.Player1FrameWins > m.Player2FrameWins) {
-        cell.player1Photo.layer.borderColor=[UIColor greenColor].CGColor;
-        cell.player2Photo.layer.borderColor=[UIColor redColor].CGColor;
+        
+        cell.player1Photo.layer.borderColor=[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1].CGColor;
+        cell.player2Photo.layer.borderColor=[UIColor colorWithRed:255.0/255.0 green:59.0/255.0 blue:48.0/255.0 alpha:1].CGColor;
         
         
     } else if (m.Player1FrameWins < m.Player2FrameWins) {
     
-        cell.player1Photo.layer.borderColor=[UIColor redColor].CGColor;
-        cell.player2Photo.layer.borderColor=[UIColor greenColor].CGColor;
+        cell.player1Photo.layer.borderColor=[UIColor colorWithRed:255.0/255.0 green:59.0/255.0 blue:48.0/255.0 alpha:1].CGColor;
+        cell.player2Photo.layer.borderColor=[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1].CGColor;
     
     } else {
-        cell.player1Photo.layer.borderColor=[UIColor orangeColor].CGColor;
-        cell.player2Photo.layer.borderColor=[UIColor orangeColor].CGColor;
+        cell.player1Photo.layer.borderColor=[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0.0/255.0 alpha:1].CGColor;
+        cell.player2Photo.layer.borderColor=[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0.0/255.0 alpha:1].CGColor;
         
     }
 
     
 }
+
+
 
 
 /*
@@ -293,26 +304,34 @@
         player *p1 = [self.db getPlayerByPlayerNumber:[sender Player1Number]];
         player *p2 = [self.db getPlayerByPlayerNumber:[sender Player2Number]];
         
-        
-       
         controller.p1 = p1;
+        
         controller.p2 = p2;
         controller.m = [sender m];
-        if (controller.m.matchid==self.activeMatchId) {
+
+        if (controller.m.matchid== self.activeMatchId) {
             if (p1.playerNumber == [NSNumber numberWithInt:self.staticPlayer1Number]) {
                 p1.activeBreak = [NSNumber numberWithInt:self.staticPlayer1CurrentBreak];
+                
             } else if (p1.playerNumber == [NSNumber numberWithInt:self.staticPlayer2Number]) {
                 p1.activeBreak = [NSNumber numberWithInt:self.staticPlayer2CurrentBreak];
+                
             }
             
             if (p2.playerNumber == [NSNumber numberWithInt:self.staticPlayer1Number]) {
                 p2.activeBreak = [NSNumber numberWithInt:self.staticPlayer1CurrentBreak];
+               
             } else if (p2.playerNumber == [NSNumber numberWithInt:self.staticPlayer2Number]) {
                 p2.activeBreak = [NSNumber numberWithInt:self.staticPlayer2CurrentBreak];
+                
             }
         }
         controller.activeMatchPlayers =self.activeMatchPlayers;
-        
+        controller.activeMatchStatistcsShown = false;
+        controller.displayState = self.displayState;
+        controller.skinPrefix = self.skinPrefix;
+        controller.activeFramePointsRemaining = self.activeFramePointsRemaining;
+        controller.db = self.db;
     }  
     
     
@@ -346,8 +365,7 @@
 
 
 
-- (void)addItemViewController:(playerDetailVC *)controller didInsertPlayer :(int)nextPlayerNumber :(NSString*) playerName :(NSString*) playerEmail :
-(NSString*) playerImageName :(bool)photoUpdated {
+- (void)addItemViewController:(playerDetailVC *)controller didInsertPlayer :(int)nextPlayerNumber :(NSString*) playerName :(NSString*) playerEmail :(NSString*) playerImageName :(bool)photoUpdated :(NSString*) playerkey {
 }
 
 - (void)addItemViewController:(playerListingTVC *)controller loadPlayerDetails :(player*) playerSelected {
@@ -358,6 +376,36 @@
 - (void)addItemViewController:(playerDetailVC *)controller didUpdatePlayer :(NSNumber*) newPlayerNumber :(int)playerId :(NSString*) playerName :(NSString*) playerEmail :(NSString*) playerImageName :(bool)photoUpdated {
     
     // not used in this class
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    //Here the dataSource array is of dictionary objects
+    match *m = [self.matches objectAtIndex:indexPath.row];
+    
+    if (([m.Player1Number intValue]  == self.staticPlayer1Number && [m.Player2Number intValue] == self.staticPlayer2Number)) {
+        // nothing to do here
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //Here the dataSource array is of dictionary objects
+    match *m = [self.matches objectAtIndex:indexPath.row];
+   
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.db deleteWholeMatchData:m.matchid];
+        [self.matches removeObjectAtIndex:indexPath.row];
+        [tableView reloadData]; // tell table to refresh now
+    }
+}
+
+
+- (void)addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState {
+    self.displayState = displayState;
 }
 
 

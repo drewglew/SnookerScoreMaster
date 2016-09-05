@@ -6,12 +6,18 @@
 //  Copyright © 2016 andrew glew. All rights reserved.
 //
 
+
 #import <UIKit/UIKit.h>
 #import "breakEntry.h"
 #import "player.h"
+//#import "embededMatchStatisticsVC.h"
+
+@protocol graphViewDelegate
+-(bool)loadBreakShots:(int) breakShotsIndex :(BOOL) fromGraph;
+@end
 
 @interface graphV : UIView
-
+@property (assign) id <graphViewDelegate> delegate;
 @property (strong, nonatomic) NSMutableArray *matchFramePoints;
 @property (assign) int matchMaxPoints;
 @property (assign) int numberOfFrames;
@@ -19,10 +25,14 @@
 @property (strong, nonatomic) NSMutableArray *frameData;
 @property (assign) bool matchStatistics;
 @property (assign) int graphReferenceId;
+@property (assign) int plotHighlightIndex;
 @property (assign) int scorePlayer1;
 @property (assign) int scorePlayer2;
 @property (assign) int currentBreakPlayer1;
 @property (assign) int currentBreakPlayer2;
+@property (assign) float scaleVisitsX;
+@property (assign) float scalePointsY;
+@property (assign) bool overlay;
 @property (strong, nonatomic) player *p1;
 @property (strong, nonatomic) player *p2;
 
@@ -38,5 +48,5 @@
 #define kSmallCircleRadius 2.0
 
 -(void) loadSharedData;
-
+-(void)plotPlayerMarkers:(CGContextRef)ctx :(int) playerIndex  :(UIColor*) playerColour :(int) breakIndex;
 @end

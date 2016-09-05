@@ -9,7 +9,7 @@
 #import "playerListingTVC.h"
 #import "playerCellTVC.h"
 
-@interface playerListingTVC () <PlayerDelegate>
+@interface playerListingTVC () <PlayerDelegate,UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -21,22 +21,9 @@
 @synthesize viewOption;
 @synthesize activePlayer;
 
-/* created 20150909 */
--(void)initDB {
-    /* most times the database is already existing */
-    self.db = [[dbHelper alloc] init];
-    //    [self.db deleteDB:@"snookmast.db"];
-    [self.db dbCreate :@"snookmast.db"];
-    
-
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self initDB];
-
-  
     self.players = [self.db findAllPlayers :[NSNumber numberWithInt:1] :self.activePlayerNumber];
     /* search nsarray for number  */
     for (player* item in self.players)
@@ -45,28 +32,16 @@
             self.activePlayer = item;
         }
     }
-    
     self.title = @"Players";
-    self.cachedImages = [[NSMutableDictionary alloc] init];
-    
+    self.cachedAvatars = [[NSMutableDictionary alloc] init];
     [self.tableView reloadData];
 }
-
-
--(void)test {
-    
-    
-}
-
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setToolbarHidden:NO animated:YES];
     
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -84,10 +59,10 @@
 }
 
 
+/* last modified 20160205 */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"player";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     playerCellTVC *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -104,16 +79,21 @@
         cell.contentView.superview.backgroundColor = [UIColor whiteColor];
     }
     
-    
     cell.playerName.text = p.nickName;
     cell.playerNumber = p.playerNumber;
     cell.playerEmail.text = p.emailAddress ;
     cell.playerHiBreak.text = [NSString stringWithFormat:@"%@",p.hiBreak];
-    cell.playerWinPC.text = [NSString stringWithFormat:@"%@%% Wins",p.playerWinsPC];
+    
+    float matchWinsPC =0.0f;
+    
+    matchWinsPC = ([p.playerMatchWins floatValue] / [p.playerMatchCount floatValue]) * 100.0f;
+    
+    cell.playerWinPC.text = [NSString stringWithFormat:@"%.2f%% Won",matchWinsPC];
+    
     
     cell.playerMatches.text = [NSString stringWithFormat:@"matches %@",p.playerMatchCount];
     
-    if ([cell.playerWinPC.text isEqualToString:@"-1% Wins"]) {
+    if ([p.playerWinsPC intValue] == -1 ) {
         [cell.playerWinPC setHidden:YES];
     } else {
         [cell.playerWinPC setHidden:NO];
@@ -129,40 +109,54 @@
     NSString *identifier = [NSString stringWithFormat:@"Cell%ld" ,
                             (long)indexPath.row];
     
-    if([self.cachedImages objectForKey:@"artist"] != nil){
-        cell.playerPhoto.image = [self.cachedImages valueForKey:identifier];
-    }else{
-        
+
+    if([self.cachedAvatars objectForKey:identifier] != nil){
+        [cell.avatarView addSubview:[self.cachedAvatars valueForKey:identifier]];
+    } else {
+        AvatarV *av = [[AvatarV alloc] initWithFrame:CGRectMake(0, 0, 75.0, 75.0)];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         
-        cell.playerPhoto.image = [UIImage imageNamed:@""];
+        av.avatarImage = nil;
+
         char const * s = [identifier UTF8String];
         dispatch_queue_t queue = dispatch_queue_create(s, 0);
         dispatch_async(queue, ^{
-            UIImage *img = nil;
             
-            NSData *data;
-            data = [NSData dataWithContentsOfFile:[[paths objectAtIndex:0] stringByAppendingPathComponent:p.photoLocation]];
-            img = [[UIImage alloc] initWithData:data];
-            
-            if (img==nil) {
-                img = [UIImage imageNamed:@"female_icon.png"];
-            }
-          
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([tableView indexPathForCell:cell].row == indexPath.row) {
-                    [self.cachedImages setValue:img forKey:identifier];
-                    cell.playerPhoto.image = [self.cachedImages valueForKey:identifier];
+                    NSData *data;
+                    data = [NSData dataWithContentsOfFile:[[paths objectAtIndex:0] stringByAppendingPathComponent:p.photoLocation]];
+                    UIImage *img = [[UIImage alloc] initWithData:data];
+                    
+                    if (img==nil) {
+                        img = [UIImage imageNamed:@"avatar.png"];
+                    }
+                    
+                    [av setAvatarImage:img];
+                    av.borderWidth = 3;
+
+                    if ([p.playerWinsPC intValue]==-1) {
+                        av.borderColors = @[[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0.0/255.0 alpha:1]];
+                        av.borderValues = @[@(1.0)];
+                    } else {
+                        
+                        av.borderColors = @[[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1],
+                                            [UIColor colorWithRed:255.0/255.0 green:59.0/255.0 blue:48.0/255.0 alpha:1]];
+                        
+                        float winPC = [p.playerWinsPC floatValue]/100.0f;
+                        float losePC = 1.0f - winPC;
+                        av.borderValues = @[@(winPC),@(losePC)];
+                        
+                    }
+                    [self.cachedAvatars setValue:av forKey:identifier];
                 }
             });
         });
+        [cell.avatarView addSubview:av];
     }
-
-    
-
     return cell;
-
 }
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(playerCellTVC *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.playerPhoto.frame = CGRectMake(cell.playerPhoto.frame.origin.x, cell.playerPhoto.frame.origin.y, 75, 75);
@@ -170,12 +164,12 @@
     cell.playerPhoto.layer.cornerRadius = 75/2.0f;
 
        cell.playerPhoto.layer.borderColor=[UIColor orangeColor].CGColor;
-    
-    cell.playerPhoto.layer.borderWidth=1.5f;
+ 
+    cell.playerPhoto.layer.borderWidth=3.0f;
     cell.badgeView.layer.cornerRadius = 15;
-    
+ 
 
-    
+ 
 }
 
 
@@ -238,7 +232,7 @@
 
 
 
-- (void)addItemViewController:(playerDetailVC *)controller didInsertPlayer :(int)nextPlayerNumber :(NSString*) playerName :(NSString*) playerEmail :(NSString*) playerImageName :(bool)photoUpdated {
+- (void)addItemViewController:(playerDetailVC *)controller didInsertPlayer :(int)nextPlayerNumber :(NSString*) playerName :(NSString*) playerEmail :(NSString*) playerImageName :(bool)photoUpdated :(NSString*) playerkey {
     
     
     player *p = [[player alloc] init];
@@ -249,6 +243,7 @@
     p.hiBreak = 0;
     p.hiBreakDate = @"";
     p.trailBlazer = 0;
+    p.playerkey = playerkey;
 
     [self.db insertPlayer:p];
     
@@ -268,6 +263,30 @@
     // not used in this class
 }
 
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    player *p = [self.players objectAtIndex:indexPath.row];
+    
+    if ([p.playerMatchCount intValue]  == 0 && self.players.count>1) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    player *p = [self.players objectAtIndex:indexPath.row];
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.db deletePlayer:p.playerNumber];
+        [self.players removeObjectAtIndex:indexPath.row];
+        [tableView reloadData]; // tell table to refresh now
+    }
+ 
+}
 
 
 @end
