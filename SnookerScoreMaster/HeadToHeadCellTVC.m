@@ -10,8 +10,10 @@
 
 @implementation HeadToHeadCellTVC
 
+
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
 }
 
 

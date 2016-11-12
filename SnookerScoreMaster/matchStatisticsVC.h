@@ -26,6 +26,7 @@
 @property (strong, nonatomic) match *activeMatchPlayers;
 @property (strong, nonatomic) NSMutableArray *activeMatchData;
 @property (strong, nonatomic) NSMutableArray *activeFrameData;
+@property (strong, nonatomic) NSMutableArray *activeShots;
 @property (assign) bool activeMatchStatistcsShown;
 @property (assign) int displayState;
 @property (strong, nonatomic) NSString *skinPrefix;

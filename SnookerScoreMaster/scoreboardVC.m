@@ -126,6 +126,7 @@
 @property (assign) bool isPaused;
 @property (assign) bool isMatchStarted;
 @property (assign) bool isHollow;
+@property (assign) bool isShotStopWatch;
 //@property (assign) bool embedImagesInHTML;
 @property(nonatomic) CGPoint aaaShotViewPos;
 @property (strong, nonatomic) UIAlertView *alertEndScores;
@@ -732,7 +733,7 @@ issue with startup now controlled by onload block condition
     }
     
        
-
+    
     
     
     
@@ -832,6 +833,7 @@ issue with startup now controlled by onload block condition
         [defaults setBool:NO forKey:@"isHollow"];
         [defaults setValue:@"0" forKey:@"theme"];
         [defaults setValue:@"147" forKey:@"celebrateBreakLimit"];
+        [defaults setBool:NO forKey:@"isShotStopWatch"];
         
     }
     self.textScorePlayer1.text = self.textScorePlayer1.nickName;
@@ -845,6 +847,7 @@ issue with startup now controlled by onload block condition
     
     self.theme = [[defaults valueForKey:@"theme"] intValue];
     self.isHollow = [[defaults valueForKey:@"isHollow"] boolValue];
+    self.isShotStopWatch = [[defaults valueForKey:@"isShotStopWatch"] boolValue];
     self.breakThreshholdForCelebration = [[defaults valueForKey:@"celebrateBreakLimit"] intValue];
     
     
@@ -918,7 +921,9 @@ issue with startup now controlled by onload block condition
     self.segOptions2.tintColor = [UIColor darkGrayColor];
     self.shotPlayerNameLabel.textColor = [UIColor blackColor];
     
-
+    if (!self.isShotStopWatch) {
+        self.labelStopwatch.hidden = true;
+    }
     
     
     self.foulLabel.textColor = [UIColor whiteColor];
@@ -1459,7 +1464,10 @@ issue with startup now controlled by onload block condition
     _frameTimeInSeconds = 0;
     _entryTimeInSeconds = 0;
     
-    self.labelStopwatch.text = [self formattedShortTime:_entryTimeInSeconds];
+    if (self.isShotStopWatch) {
+        self.labelStopwatch.text = [self formattedShortTime:_entryTimeInSeconds];
+    }
+    
     self.labelFrameStopwatch.text = [self formattedTime:_frameTimeInSeconds];
 
     
@@ -1632,7 +1640,10 @@ issue with startup now controlled by onload block condition
         }
         
         self.buttonSwapPlayer.hidden = false;
-        self.labelStopwatch.hidden = false;
+        
+        if (self.isShotStopWatch) {
+            self.labelStopwatch.hidden = false;
+        }
         self.viewBreak.hidden = false;
         //self.activeBreak.hidden = true;
         [self.activeBreak clearBreak:self.viewBreak];
@@ -2886,6 +2897,8 @@ issue with startup now controlled by onload block condition
         controller.isHollow = self.isHollow;
         controller.theme = self.theme;
         
+        controller.activeShots = self.activeBreak.shots;
+        
     }
 }
 
@@ -3494,11 +3507,14 @@ issue with startup now controlled by onload block condition
             //need to stop all activity except the
             self.buttonSwapPlayer.backgroundColor = self.skinMainFontColor;
             self.buttonSwapPlayer.layer.borderColor = self.skinMainFontColor.CGColor;
+            self.labelStopwatch.hidden = true;
+
             self.labelStopwatch.textColor = self.skinMainFontColor;
             //[self.buttonSwapPlayer setTitleColor:self.skinMainFontColor forState:UIControlStateNormal];
             
         } else {
             self.isPaused=true;
+            self.labelStopwatch.hidden = false;
             self.labelStopwatch.text=@"paused";
             [self.activeBreak setMatchid:self.activeMatchId];
             [self.activeBreak setFrameid:currentFrameId];

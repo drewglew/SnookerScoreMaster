@@ -25,6 +25,14 @@ CGRect touchAreas[100];
 }
 */
 
+
+/*
+ 
+ self.graphStatisticView.frameData = [[[self.graphStatisticView.frameData reverseObjectEnumerator] allObjects] mutableCopy];
+ 
+ */
+
+
 #pragma MATCH STACK-BAR-GRAPH
 
 /* created 20151003 */
@@ -533,6 +541,14 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
 -(void) loadSharedData {
    if (self.graphReferenceId !=0 ) {
        self.frameData = [self getData:self.selectedData :[NSNumber numberWithInt:self.graphReferenceId]];
+       
+       
+       if (self.graphReferenceId==self.numberOfFrames) {
+            // somehow construct breakentry here for the table view.
+           
+       }
+
+       self.frameDataReversed = [[[self.frameData reverseObjectEnumerator] allObjects] mutableCopy];
        
        self.scorePlayer1 = [self getFramePoints:self.frameData :[NSNumber numberWithInt:1] :[NSNumber numberWithInt:self.graphReferenceId]];
        self.scorePlayer2 = [self getFramePoints:self.frameData :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:self.graphReferenceId]];

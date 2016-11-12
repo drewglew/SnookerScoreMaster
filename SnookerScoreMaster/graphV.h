@@ -23,6 +23,7 @@
 @property (assign) int numberOfFrames;
 @property (strong, nonatomic) NSMutableArray *selectedData;
 @property (strong, nonatomic) NSMutableArray *frameData;
+@property (strong, nonatomic) NSMutableArray *frameDataReversed;
 @property (assign) bool matchStatistics;
 @property (assign) int graphReferenceId;
 @property (assign) int plotHighlightIndex;

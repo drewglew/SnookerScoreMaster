@@ -14,6 +14,7 @@
 #import "graphV.h"
 #import "singlePlayerStatsV.h"
 #import "common.h"
+#import "frameStatisticCellTVC.h"
 #import <Social/Social.h>
 
 @class embededMatchStatisticsVC;
@@ -22,7 +23,7 @@
 -(void) addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState;
 @end
 
-@interface embededMatchStatisticsVC : UIViewController {}
+@interface embededMatchStatisticsVC : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) id <EmbededMatchStatisticsDelegate> delegate;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintGeneralCellWidth;
@@ -54,6 +55,7 @@
 @property (strong, nonatomic) NSMutableArray *activeMatchData;
 @property (strong, nonatomic) NSMutableArray *activeFrameData;
 @property (strong, nonatomic) NSMutableArray *breakShots;
+@property (strong, nonatomic) NSMutableArray *activeShots;
 @property (assign) NSUInteger breakShotsCount;
 @property (assign) NSNumber *breakShotsPoints ;
 @property (nonatomic) NSString *breakShotsReference;
@@ -149,12 +151,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallBlue;
 @property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallPink;
 @property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallBlack;
-
-
-
-
-
-
+@property (strong, nonatomic) IBOutlet UIView *frameStatisticView;
+@property (strong, nonatomic) IBOutlet UITableView *tableFrameStatistics;
+@property (strong, nonatomic) IBOutlet UIButton *buttonDetailStats;
+@property (strong, nonatomic) IBOutlet UIButton *buttonListStats;
 
 @end
 

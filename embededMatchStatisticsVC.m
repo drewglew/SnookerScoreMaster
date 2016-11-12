@@ -145,6 +145,10 @@
     /* set display as we expect it to be from last entry */
     int workerDisplayState = self.displayState;
 
+    if (workerDisplayState>=8) {
+        [self manageMoreFrame :true];
+        workerDisplayState -= 8;
+    }
     if (workerDisplayState>=4) {
         [self manageMoreBreak :true];
         workerDisplayState -= 4;
@@ -605,6 +609,7 @@
     self.breakShotsIndex = index;
     if (fromGraph) {
         [self manageMoreBreak :false];
+        [self manageMoreFrame :false];
     }
     [self reloadGrid];
     
@@ -683,38 +688,45 @@
 - (IBAction)breakStatisticsPressed:(id)sender {
     
     [self manageMoreBreak :false];
-    
-    
 }
 
 /* frame level stepper to switch between each frame or match graph view */
 /* last modified 20160206 */
 - (IBAction)stepperChanged:(id)sender {
+    
     [self reloadActiveGraph];
     
-    [self loadBreakShots:1 :false];
+    if (self.breakStatistcsView.hidden==false) {
     
-    self.graphStatisticsOverlayView.plotHighlightIndex = 1;
-    if (self.stepperFrame.value>0) {
-        [self.graphStatisticsOverlayView loadSharedData];
-        self.frameDuration = [common getFrameDuration :self.graphStatisticView.frameData];
+    
+        [self loadBreakShots:1 :false];
+    
+        self.graphStatisticsOverlayView.plotHighlightIndex = 1;
+        if (self.stepperFrame.value>0) {
+            [self.graphStatisticsOverlayView loadSharedData];
+            self.frameDuration = [common getFrameDuration :self.graphStatisticView.frameData];
+        }
+        [self.graphStatisticsOverlayView setNeedsDisplay];
+
+        
+        self.P2BreakInfo.hidden = true;
+        self.p2BreakInfoBall.hidden = true;
+        self.P1BreakInfo.hidden = true;
+        self.p1BreakInfoBall.hidden = true;
+        
+        self.P1AmountBreak.hidden = false;
+        self.P2AmountBreak.hidden = false;
+
+        
+    } else if (self.frameStatisticView.hidden==false) {
+        [self.tableFrameStatistics reloadData];
     }
-    [self.graphStatisticsOverlayView setNeedsDisplay];
-
-        
-    self.P2BreakInfo.hidden = true;
-    self.p2BreakInfoBall.hidden = true;
-    self.P1BreakInfo.hidden = true;
-    self.p1BreakInfoBall.hidden = true;
-        
-    self.P1AmountBreak.hidden = false;
-    self.P2AmountBreak.hidden = false;
-
-    [self updateSummaryLabelContent :self.graphSummaryLabel];
     
-
+    [self updateSummaryLabelContent :self.graphSummaryLabel];
     [self updateDurationVisitLabelContent :self.DurationVisitsLabel];
-   
+    
+    
+    
 }
 
 
@@ -733,7 +745,7 @@
             self.background.hidden = false;
             self.breakStatistcsView.hidden = false;
         }
-    
+        self.buttonListStats.enabled = self.breakStatistcsView.hidden;
         if (self.graphStatisticsOverlayView.hidden == false) {
             
             [self.actionButton setImage:[UIImage imageNamed:@"tweet_black64x64.png"] forState:UIControlStateNormal];
@@ -764,6 +776,52 @@
     }
 }
 
+/* when a single frame graph is in view, user may press the frame detail */
+-(void)manageMoreFrame :(bool)toload {
+    
+    if (self.player1StatView.hidden && self.player2StatView.hidden && self.stepperFrame.value>0) {
+        if (!toload) {
+            self.graphStatisticsOverlayView.hidden = !self.graphStatisticsOverlayView.hidden;
+            self.background.hidden = !self.background.hidden;
+            self.frameStatisticView.hidden = !self.frameStatisticView.hidden;
+        } else {
+            self.graphStatisticsOverlayView.hidden = false;
+            self.background.hidden = false;
+            self.frameStatisticView.hidden = false;
+        }
+        if (self.frameStatisticView.hidden==false) {
+            [self.tableFrameStatistics reloadData];
+        }
+        self.buttonDetailStats.enabled = self.frameStatisticView.hidden;
+        if (self.graphStatisticsOverlayView.hidden == false) {
+            
+            [self.actionButton setImage:[UIImage imageNamed:@"tweet_black64x64.png"] forState:UIControlStateNormal];
+            self.stepperFrame.minimumValue=1;
+            
+            if (!toload) {
+                self.displayState += 8;
+            }
+        } else {
+            
+            self.player2View.hidden=false;
+            self.player1View.hidden=false;
+            self.graphStatisticsOverlayView.hidden = true;
+            self.background.hidden = true;
+            self.frameStatisticView.hidden = true;
+            
+            self.graphStatisticsOverlayView.hidden=true;
+            [self.actionButton setImage:[UIImage imageNamed:@"export2.png"] forState:UIControlStateNormal];
+            
+            if (!toload) {
+                self.displayState -= 8;
+            }
+            self.stepperFrame.minimumValue=0;
+        }
+    }
+    
+}
+
+
 
 
 /* called when user presses more button for either player or when view is loaded */
@@ -789,6 +847,10 @@
             }
         }
     }
+    self.buttonDetailStats.enabled = self.graphStatisticsOverlayView.hidden;
+    self.buttonListStats.enabled = self.graphStatisticsOverlayView.hidden;
+
+    
 }
 
 
@@ -1156,10 +1218,7 @@
                                             fileName:@"MatchData.ssm"];
         
         [self presentViewController:snookerScorerMailComposer animated:YES completion:nil];
-        
-        
-        
-        
+ 
     } else {
         
         /* tweet break selected */
@@ -1186,6 +1245,98 @@
 
 
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.graphStatisticView.frameDataReversed count] ;
+}
+
+
+
+- (frameStatisticCellTVC *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"frameVisitCell";
+    
+    frameStatisticCellTVC *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[frameStatisticCellTVC alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    
+    breakEntry *entry = [self.graphStatisticView.frameDataReversed objectAtIndex:indexPath.row];
+    cell.balls = entry.shots;
+    
+    cell.scoreLabel.text = [NSString stringWithFormat:@"%@",entry.points];
+    
+    /* normal text within cell */
+    if(entry.playerid==[NSNumber numberWithInt:1]) {
+        cell.playerLabel.text = self.p1.nickName;
+        cell.cellContentView.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+        
+    } else {
+        cell.playerLabel.text = self.p2.nickName;
+        cell.cellContentView.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
+    }
+    
+    /* indicator icon/white ball for fouls */
+    if (entry.lastshotid==[NSNumber numberWithInt:Foul] || entry.lastshotid==[NSNumber numberWithInt:Bonus] ) {
+        cell.visitIndictorView.hidden = false;
+        if (entry.lastshotid==[NSNumber numberWithInt:Foul]) {
+            cell.visitIndicatorIcon.text = @"!";
+        }
+        else {
+            cell.visitIndicatorIcon.text = @"+";
+        }
+        
+    } else {
+        cell.visitIndictorView.hidden = true;
+    }
+ 
+    [cell.frameBallCollectionView reloadData];
+    
+    
+    cell.collectionHeightConstraint.constant = cell.frameBallCollectionView.collectionViewLayout.collectionViewContentSize.height;
+    
+    
+    return cell;
+}
+
+
+-(CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*) indexPath
+{
+    static NSString *CellIdentifier = @"frameVisitCell";
+    
+    frameStatisticCellTVC *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[frameStatisticCellTVC alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+
+    breakEntry *entry = [self.graphStatisticView.frameDataReversed objectAtIndex:indexPath.row];
+    cell.balls = entry.shots;
+
+    [cell.frameBallCollectionView reloadData];
+    
+    
+    cell.collectionHeightConstraint.constant = cell.frameBallCollectionView.collectionViewLayout.collectionViewContentSize.height;
+    
+
+    return cell.frameBallCollectionView.collectionViewLayout.collectionViewContentSize.height + 50;
+    
+}
+
+
+/* created 20161108 */
+- (IBAction)frameStatisticsPressed:(id)sender {
+    
+    [self manageMoreFrame :false];
+    
+
+    
+}
 
 
 - (void)addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState {

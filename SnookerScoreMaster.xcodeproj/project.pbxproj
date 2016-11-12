@@ -11,6 +11,7 @@
 		3A0582091C455FA500E37873 /* HeadToHeadCellTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0582081C455FA500E37873 /* HeadToHeadCellTVC.m */; };
 		3A05820C1C4566B400E37873 /* HeadToHeadTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A05820B1C4566B400E37873 /* HeadToHeadTVC.m */; };
 		3A05820F1C457AD800E37873 /* HeadToHeadTV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A05820E1C457AD800E37873 /* HeadToHeadTV.m */; };
+		3A065F9E1DD2486B00C35BDC /* frameStatisticCellTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A065F9D1DD2486B00C35BDC /* frameStatisticCellTVC.m */; };
 		3A066B2A1C484221006C7033 /* matchCellTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A066B291C484221006C7033 /* matchCellTVC.m */; };
 		3A066B2D1C48426C006C7033 /* matchListingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A066B2C1C48426C006C7033 /* matchListingTVC.m */; };
 		3A066B301C48473F006C7033 /* match.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A066B2F1C48473F006C7033 /* match.m */; };
@@ -170,6 +171,8 @@
 		3A05820B1C4566B400E37873 /* HeadToHeadTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadToHeadTVC.m; sourceTree = "<group>"; };
 		3A05820D1C457AD800E37873 /* HeadToHeadTV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadToHeadTV.h; sourceTree = "<group>"; };
 		3A05820E1C457AD800E37873 /* HeadToHeadTV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadToHeadTV.m; sourceTree = "<group>"; };
+		3A065F9C1DD2486B00C35BDC /* frameStatisticCellTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frameStatisticCellTVC.h; sourceTree = "<group>"; };
+		3A065F9D1DD2486B00C35BDC /* frameStatisticCellTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = frameStatisticCellTVC.m; sourceTree = "<group>"; };
 		3A066B281C484221006C7033 /* matchCellTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matchCellTVC.h; sourceTree = "<group>"; };
 		3A066B291C484221006C7033 /* matchCellTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = matchCellTVC.m; sourceTree = "<group>"; };
 		3A066B2B1C48426C006C7033 /* matchListingTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matchListingTVC.h; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 		3A037B671C418EAB00038BC0 /* UITableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				3A065F9C1DD2486B00C35BDC /* frameStatisticCellTVC.h */,
+				3A065F9D1DD2486B00C35BDC /* frameStatisticCellTVC.m */,
 				3A037B681C418ED900038BC0 /* playerCellTVC.h */,
 				3A037B691C418ED900038BC0 /* playerCellTVC.m */,
 				3A0582071C455FA500E37873 /* HeadToHeadCellTVC.h */,
@@ -952,6 +957,7 @@
 				3ADBD2001C497758001876F2 /* embededMatchStatisticsVC.m in Sources */,
 				3A35C21A1BD5FB8800B89BD2 /* frameScore.m in Sources */,
 				3A6101801D3BE350001F6BF6 /* NSDate+TimeAgo.m in Sources */,
+				3A065F9E1DD2486B00C35BDC /* frameStatisticCellTVC.m in Sources */,
 				3A7ADE0F1C4A23D30014B847 /* matchStatisticsVC.m in Sources */,
 				3A35C2021BD5FA2B00B89BD2 /* dbHelper.m in Sources */,
 				3A2B6AC31C40FB8A003F8FC4 /* playerListingTVC.m in Sources */,

@@ -49,6 +49,9 @@
         controller.activeFramePointsRemaining = self.activeFramePointsRemaining;
         controller.isHollow = self.isHollow;
         controller.theme = self.theme;
+        controller.activeShots = self.activeShots;
+        
+        
     } }
 
 - (void)addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState {

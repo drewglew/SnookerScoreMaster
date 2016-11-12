@@ -10,8 +10,10 @@
 
 @implementation matchCellTVC
 
+
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
