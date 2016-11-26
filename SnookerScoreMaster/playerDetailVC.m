@@ -24,7 +24,7 @@
 @property (strong, nonatomic) UIColor *blueColour;
 @property (strong, nonatomic) UIColor *pinkColour;
 @property (strong, nonatomic) UIColor *blackColour;
-enum themes {greenbaize, dark, modern};
+enum themes {photo, dark, light, modern};
 
 @end
 
@@ -35,6 +35,13 @@ enum themes {greenbaize, dark, modern};
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backbutton"]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self.navigationController
+                                                                  action:@selector(popViewControllerAnimated:)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playerImageTapped:)];
     singleTap.numberOfTapsRequired = 1;
@@ -49,33 +56,64 @@ enum themes {greenbaize, dark, modern};
    
     self.photoUpdated = false;
     
-    self.redColour = [UIColor colorWithRed:174.0f/255.0f green:20.0f/255.0f blue:20.0f/255.0f alpha:1.0];
-    
-    self.yellowColour = [UIColor colorWithRed:255.0f/255.0f green:247.0f/255.0f blue:93.0f/255.0f alpha:1.0];
-    self.greenColour = [UIColor colorWithRed:27.0f/255.0f green:84.0f/255.0f blue:27.0f/255.0f alpha:1.0];
-    self.brownColour = [UIColor colorWithRed:80.0f/255.0f green:21.0f/255.0f blue:0.0f/255.0f alpha:1.0];
-    self.blueColour = [UIColor colorWithRed:39.0f/255.0f green:38.0f/255.0f blue:198.0f/255.0f alpha:1.0];
-    self.pinkColour = [UIColor colorWithRed:201.0f/255.0f green:128.0f/255.0f blue:184.0f/255.0f alpha:1.0];
+    self.redColour = [UIColor colorWithRed:217.0f/255.0f green:23.0f/255.0f blue:60.0f/255.0f alpha:1.0];
+    self.yellowColour = [UIColor colorWithRed:222.0f/255.0f green:199.0f/255.0f blue:4.0f/255.0f alpha:1.0];
+    self.greenColour = [UIColor colorWithRed:61.0f/255.0f green:191.0f/255.0f blue:61.0f/255.0f alpha:1.0];
+    self.brownColour = [UIColor colorWithRed:120.0f/255.0f green:64.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+    self.blueColour = [UIColor colorWithRed:39.0f/255.0f green:121.0f/255.0f blue:198.0f/255.0f alpha:1.0];
+    self.pinkColour = [UIColor colorWithRed:201.0f/255.0f green:78.0f/255.0f blue:184.0f/255.0f alpha:1.0];
     self.blackColour = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
     
+    //[self.view setBackgroundColor: self.skinBackgroundColour];
     
-    if (self.theme == dark) {
-        [self.view setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
+    
+    if (self.theme==photo) {
+        
+        
+        
+    } else if (self.theme==dark) {
+
+    } else if (self.theme==light) {
+    
+    } else if (self.theme == modern) {
+      //  [self.view setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
     }
+    
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    
+    if (self.currentPlayerNumber == self.staticPlayer1Number) {
+        //[self.view setBackgroundColor: self.skinPlayer1Colour];
+        gradient.colors = [NSArray arrayWithObjects:(id)[self.skinPlayer1Colour CGColor], (id)[self.skinBackgroundColour CGColor], nil];
+    } else {
+        //[self.view setBackgroundColor: self.skinPlayer2Colour];
+        gradient.colors = [NSArray arrayWithObjects:(id)[self.skinPlayer2Colour CGColor], (id)[self.skinBackgroundColour CGColor], nil];
+    }
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    
+    UIImage *changecolourimage;
+    
+    changecolourimage = [[UIImage imageNamed:@"buttoneditplayer"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.playerUpdateButton setImage:changecolourimage forState:UIControlStateNormal];
+    self.playerUpdateButton.tintColor = self.skinForegroundColour ;
     
 }
 
 
 -(void)viewWillAppear :(BOOL)animated {
     [super viewWillAppear:animated];
-  
+
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self.navigationController setToolbarHidden:YES animated:YES];
-    [self.navigationController.navigationBar setBackgroundImage:nil
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = nil;
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.shadowImage =[UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+
+  
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     /* handle player key if this is a new record or an update to existing */
@@ -86,6 +124,10 @@ enum themes {greenbaize, dark, modern};
         self.currentPlayerKey = p.playerkey;
     }
 
+    
+    
+ 
+    
     
     if (((self.currentPlayerNumber == self.staticPlayer1Number && self.staticPlayer1CurrentBreak>0) || (self.currentPlayerNumber == self.staticPlayer2Number && self.staticPlayer2CurrentBreak>0)) && self.activeBreakShots.count>0) {
         self.historyBreakShots = self.activeBreakShots;
@@ -101,6 +143,9 @@ enum themes {greenbaize, dark, modern};
         NSString *ago = [timeStamp timeAgo];
         
         self.breakShownLabel.text = [NSString stringWithFormat:@"%d is players live break - started %@",self.staticPlayer1CurrentBreak+self.staticPlayer2CurrentBreak,ago];
+        
+        
+
     } else {
             
         self.historyBreakShots = [self.db findHistoryActivePlayersHiBreakBalls :[NSNumber numberWithInt:self.currentPlayerNumber] :[NSNumber numberWithInt:self.staticPlayer1Number] :[NSNumber numberWithInt:self.staticPlayer2Number] :self.p1.hbEver.breakTotal :self.p1.hbEver.breakBalls];
@@ -122,12 +167,36 @@ enum themes {greenbaize, dark, modern};
 
             self.breakShownLabel.text = [NSString stringWithFormat:@"%@ is players highest recorded break - %@", self.p1.hbEver.breakTotal, ago];
         }
+
+        
     }
     
     self.historyHighestBreakBallsCollection.dataSource = self;
     self.historyHighestBreakBallsCollection.delegate = self;
 
     [self.historyHighestBreakBallsCollection reloadData];
+    
+    UIImage *changecolourimage;
+
+    
+    changecolourimage = [[UIImage imageNamed:@"buttonplayers"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.playerListButton setImage:changecolourimage forState:UIControlStateNormal];
+    self.playerListButton.tintColor = self.skinForegroundColour;
+
+    changecolourimage = [[UIImage imageNamed:@"buttonheadtohead"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.headToHeadButton setImage:changecolourimage forState:UIControlStateNormal];
+    self.headToHeadButton.tintColor = self.skinForegroundColour;
+
+    changecolourimage = [[UIImage imageNamed:@"buttonmatch"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.matchListButton setImage:changecolourimage forState:UIControlStateNormal];
+    self.matchListButton.tintColor = self.skinForegroundColour;
+
+    
+    changecolourimage = [[UIImage imageNamed:@"buttoncolumn"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.playerStatButton setImage:changecolourimage forState:UIControlStateNormal];
+    self.playerStatButton.tintColor = self.skinForegroundColour;
+   
+    
     
 }
 
@@ -302,6 +371,10 @@ enum themes {greenbaize, dark, modern};
         controller.activeFramePointsRemaining = self.activeFramePointsRemaining;
         controller.db = self.db;
     
+        controller.skinForegroundColour = self.skinForegroundColour;
+        controller.skinBackgroundColour = self.skinBackgroundColour;
+        controller.skinPlayer1Colour = self.skinPlayer1Colour;
+        controller.skinPlayer2Colour = self.skinPlayer2Colour;
         
         
     } else if ([segue.identifier isEqualToString:@"PlayerStatistics"]) {
@@ -455,6 +528,22 @@ enum themes {greenbaize, dark, modern};
 
 
 - (void)addItemViewController:(playerListingTVC *)controller loadPlayerDetails :(player*) playerSelected {
+    
+    
+    UIImage *changecolourimage;
+    
+    
+    if (playerSelected.swappedPlayer==true) {
+        changecolourimage = [[UIImage imageNamed:@"updateplayer"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [self.playerUpdateButton setImage:changecolourimage forState:UIControlStateNormal];
+        self.playerUpdateButton.tintColor = self.skinForegroundColour ;
+    } else {
+        
+        changecolourimage = [[UIImage imageNamed:@"buttoneditplayer"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [self.playerUpdateButton setImage:changecolourimage forState:UIControlStateNormal];
+        self.playerUpdateButton.tintColor = self.skinForegroundColour ;
+    }
+
     
 
     if (self.currentPlayerNumber == [playerSelected.playerNumber intValue]) {

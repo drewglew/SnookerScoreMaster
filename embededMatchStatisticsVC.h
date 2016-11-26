@@ -42,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
 
 @property (weak, nonatomic) IBOutlet UILabel *background;
+@property (strong, nonatomic) IBOutlet UIView *footerView;
 
 
 @property (weak, nonatomic) IBOutlet UIStepper *stepperFrame;
@@ -119,6 +120,9 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *borderLabel;
 @property (weak, nonatomic) IBOutlet UIButton *actionButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *tweetButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *forwardButton;
 @property (weak, nonatomic) IBOutlet UIImageView *p1BreakInfoBall;
@@ -155,6 +159,19 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableFrameStatistics;
 @property (strong, nonatomic) IBOutlet UIButton *buttonDetailStats;
 @property (strong, nonatomic) IBOutlet UIButton *buttonListStats;
+@property (strong, nonatomic) IBOutlet UILabel *sliderBorderLabel;
+@property (strong, nonatomic) IBOutlet UIView *player2BreakInfoView;
+@property (strong, nonatomic) IBOutlet UIView *player1BreakInfoView;
+
+
+
+
+
+@property (strong, nonatomic) UIColor *skinBackgroundColour;
+@property (strong, nonatomic) UIColor *skinForegroundColour;
+@property (strong, nonatomic) UIColor *skinPlayer1Colour;
+@property (strong, nonatomic) UIColor *skinPlayer2Colour;
+
 
 @end
 

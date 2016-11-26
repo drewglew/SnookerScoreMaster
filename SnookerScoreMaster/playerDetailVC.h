@@ -60,4 +60,9 @@
 @property (strong, nonatomic) dbHelper *db;
 @property (strong, nonatomic) player *p1; // represents this player
 @property (strong, nonatomic) player *p2; // represents the other player
+
+@property (strong, nonatomic) UIColor *skinBackgroundColour;
+@property (strong, nonatomic) UIColor *skinForegroundColour;
+@property (strong, nonatomic) UIColor *skinPlayer1Colour;
+@property (strong, nonatomic) UIColor *skinPlayer2Colour;
 @end

@@ -228,7 +228,7 @@ last modified -
 
 /* 
 created 20150928
-last modified 20160206
+last modified 20161123
  
 20160206 fixed bug with returned ballshot array, it was not excluding the balls that were not needed in the break count 
 20160208 moved into common class
@@ -240,7 +240,7 @@ last modified 20160206
     NSMutableArray *balls;
     
     for (breakEntry *data in activeDataSet) {
-        if (playerId == data.playerid && (frameId == data.frameid || frameId == nil)) {
+        if (playerId == data.playerid && (frameId == data.frameid || frameId == [NSNumber numberWithInt:0])) {
             int totalBreak = 0;
             int potCount = 0;
             
@@ -261,7 +261,6 @@ last modified 20160206
                 ballsInBreak = potCount;
             }
         }
-        
     }
     return balls;
 }
@@ -415,7 +414,7 @@ last modified -
 
 /*
 created 20150927
-last modified -
+last modified - 20161123
  
 20160208 moved into common class
 */
@@ -423,7 +422,7 @@ last modified -
 + (int) getHiBreak :(NSMutableArray *) frameDataSet :(NSNumber *) playerId :(NSNumber *) frameId {
     int highestBreak=0;
     for (breakEntry *data in frameDataSet) {
-        if (playerId == data.playerid && (frameId == data.frameid || frameId == nil)) {
+        if (playerId == data.playerid && (frameId == data.frameid || frameId == [NSNumber numberWithInt:0])) {
             int totalBreak = 0;
             for (ballShot *shot in data.shots) {
                 if (shot.shotid==[NSNumber numberWithInt:Potted]) {
@@ -643,8 +642,6 @@ last modified -
     }
     return totalPotsOfWantedBall;
 }
-
-
 
 
 

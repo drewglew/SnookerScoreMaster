@@ -34,5 +34,11 @@
 @property (strong, nonatomic) dbHelper *db;
 @property (assign) bool isHollow;
 @property (assign) int theme;
+
+@property (strong, nonatomic) UIColor *skinBackgroundColour;
+@property (strong, nonatomic) UIColor *skinForegroundColour;
+@property (strong, nonatomic) UIColor *skinPlayer1Colour;
+@property (strong, nonatomic) UIColor *skinPlayer2Colour;
+
 @end
 

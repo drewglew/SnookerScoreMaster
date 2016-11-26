@@ -43,5 +43,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelExportButton;
 @property (weak, nonatomic) IBOutlet UIButton *exportButton;
 
+@property (strong, nonatomic) UIColor *skinBackgroundColour;
+@property (strong, nonatomic) UIColor *skinForegroundColour;
+@property (strong, nonatomic) UIColor *skinPlayer1Colour;
+@property (strong, nonatomic) UIColor *skinPlayer2Colour;
 
 @end

@@ -33,6 +33,8 @@ CGRect touchAreas[100];
  */
 
 
+
+
 #pragma MATCH STACK-BAR-GRAPH
 
 /* created 20151003 */
@@ -124,11 +126,13 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
         scaleFrames = ((int)self.frame.size.width) / colsScale;
     }
     
+    
+    
     // Player 1 plotting
-    touchIndex = [self plotMatchPlayerStakedbar:false :ctx :1 :self.matchFramePoints :[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
+    touchIndex = [self plotMatchPlayerStakedbar:false :ctx :1 :self.matchFramePoints :self.skinPlayer1Colour :scalePoints :scaleFrames :touchIndex];
     
     // Player 2 plotting
-    touchIndex = [self plotMatchPlayerStakedbar:false :ctx :2 :self.matchFramePoints :[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f] :scalePoints :scaleFrames :touchIndex];
+    touchIndex = [self plotMatchPlayerStakedbar:false :ctx :2 :self.matchFramePoints :self.skinPlayer2Colour :scalePoints :scaleFrames :touchIndex];
     
 }
 
@@ -233,8 +237,6 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
     CGContextSetFillColorWithColor(ctx, [[UIColor colorWithRed:1.0 green:0.5 blue:0 alpha:0.5] CGColor]);
 
     
- 
-    
     if (fillGraph) {
         
         size_t num_locations = 2;
@@ -242,16 +244,19 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
         colorspace = CGColorSpaceCreateDeviceRGB();
         
         if (playerIndex == 2) {
-            CGFloat components[8] = {255.0f/255.0f, 45.0f/255.0f, 85.0f/255.0, 0.0,  // Start color
-                255.0f/255.0f, 45.0f/255.0f, 85.0f/255.0f, 0.55}; // End color
+            const CGFloat *componentsP2 = CGColorGetComponents(self.skinPlayer2Colour.CGColor);
+
+            CGFloat components[8] = {componentsP2[0], componentsP2[1], componentsP2[2], 0.65,  // Start color
+                componentsP2[0], componentsP2[1], componentsP2[2], 0.05}; // End color
+            
+            
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
         } else {
             
-            
-            // CGFloat components[8] = {0.0f/255.0f, 0.0f/255.0f, 205.0f/255.0f, 0.1,  // Start color
-            //    0.0f/255.0f, 0.0f/255.0f, 205.0f/255.0f, 0.4}; // End color
-            CGFloat components[8] = {0.0f/255.0f, 122.0f/255.0f, 255.0f/255.0f, 0.0,  // Start color
-                0.0f/255.0f, 122.0f/255.0f, 255.0f/255.0f, 0.55}; // End color
+             const CGFloat *componentsP1 = CGColorGetComponents(self.skinPlayer1Colour.CGColor);
+
+            CGFloat components[8] = {componentsP1[0], componentsP1[1], componentsP1[2], 0.65,  // Start color
+                componentsP1[0], componentsP1[1], componentsP1[2], 0.05}; // End color
             
             
             gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
@@ -493,14 +498,14 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
         frameDataEntries ++;
     }
 
-    [self plotPlayerLines:false :ctx :1 :p1ActiveBreak :[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f]];
-    [self plotPlayerLines:true :ctx :1 :p1ActiveBreak :[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f]];
-    [self plotPlayerMarkers:ctx :1 :[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f] :0];
+    [self plotPlayerLines:false :ctx :1 :p1ActiveBreak :self.skinPlayer1Colour];
+    //[self plotPlayerLines:true :ctx :1 :p1ActiveBreak :self.skinPlayer1Colour];
+    [self plotPlayerMarkers:ctx :1 :self.skinPlayer1Colour :0];
  
 
-    [self plotPlayerLines:false :ctx :2 :p2ActiveBreak :[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f]];
-    [self plotPlayerLines:true :ctx :2 :p2ActiveBreak :[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f]];
-    [self plotPlayerMarkers:ctx :2 :[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f] :0];
+    [self plotPlayerLines:false :ctx :2 :p2ActiveBreak :self.skinPlayer2Colour];
+    //[self plotPlayerLines:true :ctx :2 :p2ActiveBreak :self.skinPlayer2Colour];
+    [self plotPlayerMarkers:ctx :2 :self.skinPlayer2Colour:0];
 
     
     
@@ -534,6 +539,12 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
     }
 }
 
+/* created 14/11/16 */
+-(void) initColours:(UIColor*) skinPlayer1Colour :(UIColor*) skinPlayer2Colour {
+    
+    self.skinPlayer1Colour = skinPlayer1Colour;
+    self.skinPlayer2Colour = skinPlayer2Colour;
+}
 
 
 
@@ -557,6 +568,8 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
        
        
    }
+    
+    
     
 }
 

@@ -17,7 +17,7 @@
 
 @implementation embededMatchStatisticsVC {
     UISwipeGestureRecognizer *swipeRight;
-    enum themes {greenbaize, dark, modern};
+    enum themes {photo, dark, light, modern, mono};
     
 }
 
@@ -43,8 +43,7 @@
     self.player1Photo.frame = CGRectMake(self.player1Photo.frame.origin.x, self.player1Photo.frame.origin.y, 50, 50);
     self.player1Photo.clipsToBounds = YES;
     self.player1Photo.layer.cornerRadius = 50/2.0f;
-    self.player1Photo.layer.borderWidth=3.0f;
-    self.player1Photo.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f].CGColor;
+
     
     pngdata = [NSData dataWithContentsOfFile:[[paths objectAtIndex:0] stringByAppendingPathComponent:self.p2.photoLocation]];
     
@@ -59,12 +58,11 @@
     self.player2Photo.frame = CGRectMake(self.player2Photo.frame.origin.x, self.player2Photo.frame.origin.y, 50, 50);
     self.player2Photo.clipsToBounds = YES;
     self.player2Photo.layer.cornerRadius = 50/2.0f;
-    self.player2Photo.layer.borderWidth=3.0f;
-    self.player2Photo.layer.borderColor = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f].CGColor;
     
     self.player1Name.text=self.p1.nickName;
     self.player2Name.text=self.p2.nickName;
     
+    [self.graphStatisticView initColours :self.skinPlayer1Colour :self.skinPlayer2Colour];
     
     self.graphStatisticView.overlay=false;
     self.graphStatisticsOverlayView.overlay=true;
@@ -125,9 +123,6 @@
     
     self.graphStatisticsOverlayView.matchFramePoints = [[NSMutableArray alloc] init];
     self.graphStatisticsOverlayView.frameData = [[NSMutableArray alloc] init];
-    
-    self.graphStepper.tintColor = [UIColor darkGrayColor];
- 
 
     self.breakCollection.dataSource = self;
     self.breakCollection.delegate = self;
@@ -142,26 +137,25 @@
     
     [self reloadActiveGraph];
     
-    /* set display as we expect it to be from last entry */
-    int workerDisplayState = self.displayState;
-
-    if (workerDisplayState>=8) {
-        [self manageMoreFrame :true];
-        workerDisplayState -= 8;
+    if (self.stepperFrame.value==0) {
+        self.displayState=0;
+        self.buttonDetailStats.enabled=false;
+        self.buttonListStats.enabled=false;
+        self.tweetButton.enabled=false;
     }
-    if (workerDisplayState>=4) {
-        [self manageMoreBreak :true];
-        workerDisplayState -= 4;
+    
+    if (self.displayState==8) {
+        [self presentBreakStats:0];
+    } else if (self.displayState==4) {
+        [self presentFrameStats:0];
+    } else {
+        if (self.displayState>=2) {
+            [self presentPlayer2Stats:0];
+        }
+        if (self.displayState==3 || self.displayState==1) {
+            [self presentPlayer1Stats:0];
+        }
     }
-    if (workerDisplayState>=2) {
-        [self manageMorePlayer:self.player2StatView :[NSNumber numberWithInt:2] :2 :true];
-        workerDisplayState -= 2;
-    }
-    if (workerDisplayState>=1) {
-        [self manageMorePlayer:self.player1StatView :[NSNumber numberWithInt:1] :1 :true];
-        workerDisplayState -= 1;
-    }
-
     self.P2BreakInfo.hidden = true;
     self.p2BreakInfoBall.hidden = true;
     self.P1BreakInfo.hidden = true;
@@ -183,36 +177,97 @@
     [self.p1TopBreaks sizeToFit];
     [self.p2TopBreaks sizeToFit];
     
-    self.redColour = [UIColor colorWithRed:174.0f/255.0f green:20.0f/255.0f blue:20.0f/255.0f alpha:1.0];
     
-    self.yellowColour = [UIColor colorWithRed:255.0f/255.0f green:247.0f/255.0f blue:93.0f/255.0f alpha:1.0];
-    self.greenColour = [UIColor colorWithRed:27.0f/255.0f green:84.0f/255.0f blue:27.0f/255.0f alpha:1.0];
-    self.brownColour = [UIColor colorWithRed:80.0f/255.0f green:21.0f/255.0f blue:0.0f/255.0f alpha:1.0];
-    self.blueColour = [UIColor colorWithRed:39.0f/255.0f green:38.0f/255.0f blue:198.0f/255.0f alpha:1.0];
-    self.pinkColour = [UIColor colorWithRed:201.0f/255.0f green:128.0f/255.0f blue:184.0f/255.0f alpha:1.0];
+    /* colour setup */
+    self.redColour = [UIColor colorWithRed:217.0f/255.0f green:23.0f/255.0f blue:60.0f/255.0f alpha:1.0];
+    self.yellowColour = [UIColor colorWithRed:222.0f/255.0f green:199.0f/255.0f blue:4.0f/255.0f alpha:1.0];
+    self.greenColour = [UIColor colorWithRed:61.0f/255.0f green:191.0f/255.0f blue:61.0f/255.0f alpha:1.0];
+    self.brownColour = [UIColor colorWithRed:120.0f/255.0f green:64.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+    self.blueColour = [UIColor colorWithRed:39.0f/255.0f green:121.0f/255.0f blue:198.0f/255.0f alpha:1.0];
+    self.pinkColour = [UIColor colorWithRed:201.0f/255.0f green:78.0f/255.0f blue:184.0f/255.0f alpha:1.0];
     self.blackColour = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
-    
     
     UIImage *changecolourimage = [[UIImage imageNamed:@"ios7-arrow-back-128-000000.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.backButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.backButton.tintColor = [UIColor whiteColor];
+    self.backButton.tintColor = self.skinForegroundColour;
     changecolourimage = [[UIImage imageNamed:@"ios7-arrow-forward-128-000000.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.forwardButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.forwardButton.tintColor = [UIColor whiteColor];
+    self.forwardButton.tintColor = self.skinForegroundColour;
     
     
-    if (self.theme == dark) {
+    
+    changecolourimage = [[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.buttonDetailStats setImage:changecolourimage forState:UIControlStateNormal];
+    self.buttonDetailStats.tintColor = self.skinForegroundColour;
+    changecolourimage = [[UIImage imageNamed:@"framestatistic"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.buttonListStats setImage:changecolourimage forState:UIControlStateNormal];
+    self.buttonListStats.tintColor = self.skinForegroundColour;
+    changecolourimage = [[UIImage imageNamed:@"export2.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.actionButton setImage:changecolourimage forState:UIControlStateNormal];
+    self.actionButton.tintColor = self.skinForegroundColour;
+    changecolourimage = [[UIImage imageNamed:@"tweet_black64x64"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.tweetButton setImage:changecolourimage forState:UIControlStateNormal];
+    self.tweetButton.tintColor = self.skinForegroundColour;
+    
+    
+    self.footerView.backgroundColor = self.skinBackgroundColour;
+    self.player1View.backgroundColor = self.skinPlayer1Colour;
+    self.player2View.backgroundColor = self.skinPlayer2Colour;
+    self.graphStepper.tintColor = self.skinForegroundColour;
+    self.player1Name.textColor = [UIColor whiteColor];
+    self.player2Name.textColor = [UIColor whiteColor];
+    self.frameStatisticView.backgroundColor = self.skinBackgroundColour;
+    self.tableFrameStatistics.backgroundColor = self.skinBackgroundColour;
+    self.tableFrameStatistics.separatorColor = self.skinBackgroundColour;
+    self.graphStatisticView.backgroundColor = self.skinBackgroundColour;
+    self.player1StatView.backgroundColor = self.skinPlayer1Colour;
+    self.player2StatView.backgroundColor = self.skinPlayer2Colour;
+    self.view.backgroundColor = self.skinForegroundColour;
+    self.sliderBorderLabel.backgroundColor = self.skinForegroundColour;
+    self.graphReferenceLabel.textColor = self.skinForegroundColour;
+    
+    
+    self.player1Score.textColor = [UIColor whiteColor];
+    self.player2Score.textColor = [UIColor whiteColor];
+    self.P1AmountBreak.textColor = [UIColor whiteColor];
+    self.P2AmountBreak.textColor = [UIColor whiteColor];
+    self.P1BreakInfo.textColor = [UIColor whiteColor];
+    self.P2BreakInfo.textColor = [UIColor whiteColor];
+    self.player1BreakInfoView.backgroundColor = self.skinPlayer1Colour;
+    self.player2BreakInfoView.backgroundColor = self.skinPlayer2Colour;
+    
+    if (self.theme == photo) {
+        self.background.backgroundColor = [UIColor lightGrayColor];
+        
+    } else if (self.theme == mono) {
+         self.graphStatisticView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    
+ /*   if (self.theme == dark) {
         [self.view setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
         [self.graphStatisticView setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
     }
-    
+ */
 }
 
 -(void)viewWillAppear :(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage =[UIImage new];
+    
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
     
 }
+
+
+
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -391,13 +446,64 @@
         self.p1HiBreakLabel.text = [NSString stringWithFormat:@"%d",hibreak];
         self.p1AvgBreakLabel.text = [NSString stringWithFormat:@"%.02f",avgbreak];
         self.p1BallAvgLabel.text = [NSString stringWithFormat:@"%.02f",avgball];
-        self.p1RedCountLabel.text = [NSString stringWithFormat:@"%d",redcount];
-        self.p1YellowCountLabel.text = [NSString stringWithFormat:@"%d",yellowcount];
-        self.p1GreenCountLabel.text = [NSString stringWithFormat:@"%d",greencount];
-        self.p1BrownCountLabel.text = [NSString stringWithFormat:@"%d",browncount];
-        self.p1BlueCountLabel.text = [NSString stringWithFormat:@"%d",bluecount];
-        self.p1PinkCountLabel.text = [NSString stringWithFormat:@"%d",pinkcount];
-        self.p1BlackCountLabel.text = [NSString stringWithFormat:@"%d",blackcount];
+        
+        if (redcount==0) {
+            self.p1ImageBallRed.hidden=true;
+            self.p1RedCountLabel.hidden=true;
+        } else {
+            self.p1ImageBallRed.hidden=false;
+            self.p1RedCountLabel.hidden=false;
+            self.p1RedCountLabel.text = [NSString stringWithFormat:@"%d",redcount];
+        }
+        if (yellowcount==0) {
+            self.p1ImageBallYellow.hidden=true;
+            self.p1YellowCountLabel.hidden=true;
+        } else {
+            self.p1ImageBallYellow.hidden=false;
+            self.p1YellowCountLabel.hidden=false;
+            self.p1YellowCountLabel.text = [NSString stringWithFormat:@"%d",yellowcount];
+        }
+        if (greencount==0) {
+            self.p1ImageBallGreen.hidden=true;
+            self.p1GreenCountLabel.hidden=true;
+        } else {
+            self.p1ImageBallGreen.hidden=false;
+            self.p1GreenCountLabel.hidden=false;
+            self.p1GreenCountLabel.text = [NSString stringWithFormat:@"%d",greencount];
+        }
+        if (browncount==0) {
+            self.p1ImageBallBrown.hidden=true;
+            self.p1BrownCountLabel.hidden=true;
+        } else {
+            self.p1ImageBallBrown.hidden=false;
+            self.p1BrownCountLabel.hidden=false;
+            self.p1BrownCountLabel.text = [NSString stringWithFormat:@"%d",browncount];
+        }
+        if (bluecount==0) {
+            self.p1ImageBallBlue.hidden=true;
+            self.p1BlueCountLabel.hidden=true;
+        } else {
+            self.p1ImageBallBlue.hidden=false;
+            self.p1BlueCountLabel.hidden=false;
+            self.p1BlueCountLabel.text = [NSString stringWithFormat:@"%d",bluecount];
+        }
+        if (pinkcount==0) {
+            self.p1ImageBallPink.hidden=true;
+            self.p1PinkCountLabel.hidden=true;
+        } else {
+            self.p1ImageBallPink.hidden=false;
+            self.p1PinkCountLabel.hidden=false;
+            self.p1PinkCountLabel.text = [NSString stringWithFormat:@"%d",pinkcount];
+        }
+        if (blackcount==0) {
+            self.p1ImageBallBlack.hidden=true;
+            self.p1BlackCountLabel.hidden=true;
+        } else {
+            self.p1ImageBallBlack.hidden=false;
+            self.p1BlackCountLabel.hidden=false;
+            self.p1BlackCountLabel.text = [NSString stringWithFormat:@"%d",blackcount];
+        }
+
         self.p1SumPotsFouls.text = potfouls;
         self.p1TopBreaks.text = topbreaks;
         self.p1ShotAvgTimeLabel.text = [NSString stringWithFormat:@"%.02f",avgShotTime];
@@ -405,13 +511,65 @@
         self.p2HiBreakLabel.text = [NSString stringWithFormat:@"%d",hibreak];
         self.p2AvgBreakLabel.text = [NSString stringWithFormat:@"%.02f",avgbreak];
         self.p2BallAvgLabel.text = [NSString stringWithFormat:@"%.02f",avgball];
-        self.p2RedCountLabel.text = [NSString stringWithFormat:@"%d",redcount];
-        self.p2YellowCountLabel.text = [NSString stringWithFormat:@"%d",yellowcount];
-        self.p2GreenCountLabel.text = [NSString stringWithFormat:@"%d",greencount];
-        self.p2BrownCountLabel.text = [NSString stringWithFormat:@"%d",browncount];
-        self.p2BlueCountLabel.text = [NSString stringWithFormat:@"%d",bluecount];
-        self.p2PinkCountLabel.text = [NSString stringWithFormat:@"%d",pinkcount];
-        self.p2BlackCountLabel.text = [NSString stringWithFormat:@"%d",blackcount];
+        
+        if (redcount==0) {
+            self.p2ImageBallRed.hidden=true;
+            self.p2RedCountLabel.hidden=true;
+        } else {
+            self.p2ImageBallRed.hidden=false;
+            self.p2RedCountLabel.hidden=false;
+            self.p2RedCountLabel.text = [NSString stringWithFormat:@"%d",redcount];
+        }
+        
+        if (yellowcount==0) {
+            self.p2ImageBallYellow.hidden=true;
+            self.p2YellowCountLabel.hidden=true;
+        } else {
+            self.p2ImageBallYellow.hidden=false;
+            self.p2YellowCountLabel.hidden=false;
+            self.p2YellowCountLabel.text = [NSString stringWithFormat:@"%d",yellowcount];
+        }
+        if (greencount==0) {
+            self.p2ImageBallGreen.hidden=true;
+            self.p2GreenCountLabel.hidden=true;
+        } else {
+            self.p2ImageBallGreen.hidden=false;
+            self.p2GreenCountLabel.hidden=false;
+            self.p2GreenCountLabel.text = [NSString stringWithFormat:@"%d",greencount];
+        }
+        if (browncount==0) {
+            self.p2ImageBallBrown.hidden=true;
+            self.p2BrownCountLabel.hidden=true;
+        } else {
+            self.p2ImageBallBrown.hidden=false;
+            self.p2BrownCountLabel.hidden=false;
+            self.p2BrownCountLabel.text = [NSString stringWithFormat:@"%d",browncount];
+        }
+        if (bluecount==0) {
+            self.p2ImageBallBlue.hidden=true;
+            self.p2BlueCountLabel.hidden=true;
+        } else {
+            self.p2ImageBallBlue.hidden=false;
+            self.p2BlueCountLabel.hidden=false;
+            self.p2BlueCountLabel.text = [NSString stringWithFormat:@"%d",bluecount];
+        }
+        if (pinkcount==0) {
+            self.p2ImageBallPink.hidden=true;
+            self.p2PinkCountLabel.hidden=true;
+        } else {
+            self.p2ImageBallPink.hidden=false;
+            self.p2PinkCountLabel.hidden=false;
+            self.p2PinkCountLabel.text = [NSString stringWithFormat:@"%d",pinkcount];
+        }
+        if (blackcount==0) {
+            self.p2ImageBallBlack.hidden=true;
+            self.p2BlackCountLabel.hidden=true;
+        } else {
+            self.p2ImageBallBlack.hidden=false;
+            self.p2BlackCountLabel.hidden=false;
+            self.p2BlackCountLabel.text = [NSString stringWithFormat:@"%d",blackcount];
+        }
+        
         self.p2SumPotsFouls.text = potfouls;
         self.p2TopBreaks.text = topbreaks;
         self.p2ShotAvgTimeLabel.text = [NSString stringWithFormat:@"%.02f",avgShotTime];
@@ -608,8 +766,8 @@
     self.breakShotsReference = [NSString stringWithFormat:@"%d/%d",index,(int)self.activeFrameData.count];
     self.breakShotsIndex = index;
     if (fromGraph) {
-        [self manageMoreBreak :false];
-        [self manageMoreFrame :false];
+        //[self manageMoreBreak :false];
+       // [self manageMoreFrame :false];
     }
     [self reloadGrid];
     
@@ -685,14 +843,14 @@
 }
 
 
-- (IBAction)breakStatisticsPressed:(id)sender {
-    
-    [self manageMoreBreak :false];
-}
+
 
 /* frame level stepper to switch between each frame or match graph view */
 /* last modified 20160206 */
 - (IBAction)stepperChanged:(id)sender {
+    
+    UIStepper *stepper = sender;
+    
     
     [self reloadActiveGraph];
     
@@ -702,7 +860,7 @@
         [self loadBreakShots:1 :false];
     
         self.graphStatisticsOverlayView.plotHighlightIndex = 1;
-        if (self.stepperFrame.value>0) {
+        if (stepper.value>0) {
             [self.graphStatisticsOverlayView loadSharedData];
             self.frameDuration = [common getFrameDuration :self.graphStatisticView.frameData];
         }
@@ -722,6 +880,17 @@
         [self.tableFrameStatistics reloadData];
     }
     
+    if (stepper.value==0) {
+        self.buttonListStats.enabled = false;
+        self.buttonDetailStats.enabled = false;
+    } else {
+        if (self.displayState==0) {
+            self.buttonListStats.enabled = true;
+            self.buttonDetailStats.enabled = true;
+        }
+    }
+    
+    
     [self updateSummaryLabelContent :self.graphSummaryLabel];
     [self updateDurationVisitLabelContent :self.DurationVisitsLabel];
     
@@ -731,14 +900,18 @@
 
 
 
+
+
+
 /* when a single frame graph is in view, user may press the frame detail */
 -(void)manageMoreBreak :(bool)toload {
 
-    if (self.player1StatView.hidden && self.player2StatView.hidden && self.stepperFrame.value>0) {
+    if (self.player1StatView.hidden && self.player2StatView.hidden && self.stepperFrame.value>0 && self.frameStatisticView.hidden) {
         if (!toload) {
             //self.overlayView.hidden = !self.overlayView.hidden;
             self.graphStatisticsOverlayView.hidden = !self.graphStatisticsOverlayView.hidden;
             self.background.hidden = !self.background.hidden;
+            self.frameStatisticView.hidden = !self.frameStatisticView.hidden;
             self.breakStatistcsView.hidden = !self.breakStatistcsView.hidden;
         } else {
             self.graphStatisticsOverlayView.hidden = false;
@@ -746,9 +919,15 @@
             self.breakStatistcsView.hidden = false;
         }
         self.buttonListStats.enabled = self.breakStatistcsView.hidden;
+        self.MorePlayer1Button.enabled = self.breakStatistcsView.hidden;
+        self.MorePlayer2Button.enabled = self.breakStatistcsView.hidden;
+        
         if (self.graphStatisticsOverlayView.hidden == false) {
             
-            [self.actionButton setImage:[UIImage imageNamed:@"tweet_black64x64.png"] forState:UIControlStateNormal];
+            self.tweetButton.enabled = true;
+            self.actionButton.enabled = false;
+            
+            //[self.actionButton setImage:[UIImage imageNamed:@"tweet_black64x64.png"] forState:UIControlStateNormal];
             [self loadBreakShots:self.breakShotsIndex :false];
             
             self.stepperFrame.minimumValue=1;
@@ -766,7 +945,11 @@
             
             
             self.graphStatisticsOverlayView.hidden=true;
-            [self.actionButton setImage:[UIImage imageNamed:@"export2.png"] forState:UIControlStateNormal];
+            
+            self.tweetButton.enabled = true;
+            self.actionButton.enabled = false;
+            
+            //[self.actionButton setImage:[UIImage imageNamed:@"export2.png"] forState:UIControlStateNormal];
             
             if (!toload) {
                 self.displayState -= 4;
@@ -795,7 +978,10 @@
         self.buttonDetailStats.enabled = self.frameStatisticView.hidden;
         if (self.graphStatisticsOverlayView.hidden == false) {
             
-            [self.actionButton setImage:[UIImage imageNamed:@"tweet_black64x64.png"] forState:UIControlStateNormal];
+            //[self.actionButton setImage:[UIImage imageNamed:@"tweet_black64x64.png"] forState:UIControlStateNormal];
+            self.tweetButton.enabled = true;
+            self.actionButton.enabled = false;
+            
             self.stepperFrame.minimumValue=1;
             
             if (!toload) {
@@ -810,7 +996,10 @@
             self.frameStatisticView.hidden = true;
             
             self.graphStatisticsOverlayView.hidden=true;
-            [self.actionButton setImage:[UIImage imageNamed:@"export2.png"] forState:UIControlStateNormal];
+            //[self.actionButton setImage:[UIImage imageNamed:@"export2.png"] forState:UIControlStateNormal];
+            
+            self.tweetButton.enabled = false;
+            self.actionButton.enabled = true;
             
             if (!toload) {
                 self.displayState -= 8;
@@ -855,14 +1044,6 @@
 
 
 
-- (IBAction)buttonMorePlayer1Pressed:(id)sender {
-    [self manageMorePlayer:self.player1StatView :[NSNumber numberWithInt:1] :1 :false];
-}
-
-- (IBAction)buttonMorePlayer2Pressed:(id)sender {
-    [self manageMorePlayer:self.player2StatView :[NSNumber numberWithInt:2] :2 :false];
-    
-}
 
 
 /* visit level - next */
@@ -1051,7 +1232,7 @@
              
          }
          
-         frameInfo.textColor = [UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+         frameInfo.textColor = self.skinPlayer1Colour;
  
      } else if (player2Score > player1Score) {
         //  player two has either won or is winning
@@ -1071,7 +1252,7 @@
          }
 
          
-         frameInfo.textColor = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
+         frameInfo.textColor = self.skinPlayer2Colour;
      } else {
          // players tied
          if (self.graphStatisticView.graphReferenceId != 0) {
@@ -1172,10 +1353,7 @@
 
 
 - (IBAction)exportMatchPressed:(id)sender {
-    
-    
-    if (self.breakStatistcsView.hidden == true ) {
-        
+
         /* export the current match selected to file and send through email */
         
         
@@ -1219,29 +1397,15 @@
         
         [self presentViewController:snookerScorerMailComposer animated:YES completion:nil];
  
-    } else {
-        
-        /* tweet break selected */
-        
-        UIImage *image;
-        
-        image = [self imageWithCollectionView :self.breakCollection];
-        
-        
-        
-        if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
-        {
-            SLComposeViewController *tweetSheetOBJ = [SLComposeViewController
-                                                      composeViewControllerForServiceType:SLServiceTypeTwitter];
-            [tweetSheetOBJ setInitialText: [NSString stringWithFormat:@"#snooker #score. Nice Score! @earsmusic73 #SnookerScoreMaster"]];
-            [tweetSheetOBJ addImage:image];
-            [self presentViewController:tweetSheetOBJ animated:YES completion:nil];
-        }
-        
-        
-    }
+
+    
+
     
 }
+
+
+
+
 
 
 
@@ -1271,14 +1435,18 @@
     
     cell.scoreLabel.text = [NSString stringWithFormat:@"%@",entry.points];
     
+    NSLog(@"Number test:%@ %@",entry.lastshotid, [NSNumber numberWithInt:Bonus]);
+    
     /* normal text within cell */
     if(entry.playerid==[NSNumber numberWithInt:1]) {
         cell.playerLabel.text = self.p1.nickName;
-        cell.cellContentView.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
-        
-    } else {
+        cell.cellContentView.backgroundColor = self.skinPlayer1Colour;
+    } else if(entry.playerid==[NSNumber numberWithInt:2]) {
         cell.playerLabel.text = self.p2.nickName;
-        cell.cellContentView.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
+        cell.cellContentView.backgroundColor = self.skinPlayer2Colour;
+    } else {
+        cell.playerLabel.text = @"Adjustment";
+        cell.cellContentView.backgroundColor = self.skinBackgroundColour;
     }
     
     /* indicator icon/white ball for fouls */
@@ -1329,19 +1497,145 @@
 }
 
 
+
+/* manage the display state of the view components */
+- (IBAction)buttonMorePlayer1Pressed:(id)sender {
+    [self presentPlayer1Stats:1];
+}
+
+-(void)presentPlayer1Stats:(int)adjustment {
+    if (self.player1StatView.hidden) {
+        [self  loadPlayerStatistics:[NSNumber numberWithInt:1]];
+        [self loadBreakBalls:[NSNumber numberWithInt:1]];
+        self.buttonListStats.enabled=false;
+        self.buttonDetailStats.enabled=false;
+        self.actionButton.enabled=false;
+        self.displayState += adjustment;
+    } else {
+        if (self.player2StatView.hidden)  {
+            self.buttonListStats.enabled=true;
+            self.buttonDetailStats.enabled=true;
+            self.actionButton.enabled=true;
+        }
+         self.displayState -= adjustment;
+    }
+    if (self.breakStatistcsView.hidden==true && self.frameStatisticView.hidden==true) {
+        self.player1StatView.hidden = !self.player1StatView.hidden;
+    }
+
+}
+
+- (IBAction)buttonMorePlayer2Pressed:(id)sender {
+    [self presentPlayer2Stats:2];
+}
+
+-(void)presentPlayer2Stats:(int)adjustment {
+    if (self.player2StatView.hidden) {
+        [self loadPlayerStatistics:[NSNumber numberWithInt:2]];
+        [self loadBreakBalls:[NSNumber numberWithInt:2]];
+        self.buttonListStats.enabled=false;
+        self.buttonDetailStats.enabled=false;
+        self.actionButton.enabled=false;
+        self.displayState += adjustment;
+    } else {
+        if (self.player1StatView.hidden)  {
+            self.buttonListStats.enabled=true;
+            self.buttonDetailStats.enabled=true;
+            self.actionButton.enabled=true;
+        }
+        self.displayState -= adjustment;
+    }
+    if (self.breakStatistcsView.hidden==true && self.frameStatisticView.hidden==true) {
+        self.player2StatView.hidden = !self.player2StatView.hidden;
+    }
+}
+
+
 /* created 20161108 */
 - (IBAction)frameStatisticsPressed:(id)sender {
-    
-    [self manageMoreFrame :false];
-    
-
-    
+    [self presentFrameStats:4];
 }
+
+-(void)presentFrameStats:(int)adjustment {
+    if (self.frameStatisticView.hidden) {
+        self.actionButton.enabled = false;
+        self.MorePlayer1Button.enabled = false;
+        self.MorePlayer2Button.enabled = false;
+        self.buttonDetailStats.enabled = false;
+        self.stepperFrame.minimumValue=1;
+        [self.tableFrameStatistics reloadData];
+        self.displayState += adjustment;
+    } else {
+        self.actionButton.enabled = true;
+        self.MorePlayer1Button.enabled = true;
+        self.MorePlayer2Button.enabled = true;
+        self.buttonDetailStats.enabled = true;
+        self.stepperFrame.minimumValue=0;
+        self.displayState -= adjustment;
+    }
+    
+    if (self.player2StatView.hidden && self.self.player1StatView.hidden && self.stepperFrame.value>0 && self.breakStatistcsView.hidden) {
+        self.frameStatisticView.hidden=!self.frameStatisticView.hidden;
+    }
+}
+
+- (IBAction)breakStatisticsPressed:(id)sender {
+    [self presentBreakStats:8];
+}
+
+-(void)presentBreakStats:(int)adjustment {
+    if (self.breakStatistcsView.hidden) {
+        [self loadBreakShots:self.breakShotsIndex :false];
+        self.tweetButton.enabled = true;
+        self.actionButton.enabled = false;
+        self.MorePlayer1Button.enabled = false;
+        self.MorePlayer2Button.enabled = false;
+        self.buttonListStats.enabled = false;
+        self.stepperFrame.minimumValue=1;
+        self.displayState += adjustment;
+    } else {
+        self.tweetButton.enabled = false;
+        self.actionButton.enabled = true;
+        self.MorePlayer1Button.enabled = true;
+        self.MorePlayer2Button.enabled = true;
+        self.buttonListStats.enabled = true;
+        self.player2View.hidden=false;
+        self.player1View.hidden=false;
+        self.stepperFrame.minimumValue=0;
+        self.displayState -= adjustment;
+    }
+    if (self.player1StatView.hidden && self.player2StatView.hidden && self.stepperFrame.value>0 && self.frameStatisticView.hidden) {
+        self.breakStatistcsView.hidden=!self.breakStatistcsView.hidden;
+        self.graphStatisticsOverlayView.hidden=!self.graphStatisticsOverlayView.hidden;
+    }
+}
+
+
+
 
 
 - (void)addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState {
     
 }
+
+- (IBAction)tweetButtonPressed:(id)sender {
+/* tweet break selected */
+
+ UIImage *image;
+ 
+ image = [self imageWithCollectionView :self.breakCollection];
+ 
+ if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+ {
+ SLComposeViewController *tweetSheetOBJ = [SLComposeViewController
+ composeViewControllerForServiceType:SLServiceTypeTwitter];
+ [tweetSheetOBJ setInitialText: [NSString stringWithFormat:@"#snooker #score. Nice Score! @earsmusic73 #SnookerScoreMaster"]];
+ [tweetSheetOBJ addImage:image];
+ [self presentViewController:tweetSheetOBJ animated:YES completion:nil];
+ }
+
+}
+
 
 
 @end

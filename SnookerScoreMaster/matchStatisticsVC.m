@@ -21,6 +21,8 @@
     // Do any additional setup after loading the view.
 }
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -50,6 +52,12 @@
         controller.isHollow = self.isHollow;
         controller.theme = self.theme;
         controller.activeShots = self.activeShots;
+        
+        controller.skinForegroundColour = self.skinForegroundColour;
+        controller.skinBackgroundColour = self.skinBackgroundColour;
+        controller.skinPlayer1Colour = self.skinPlayer1Colour;
+        controller.skinPlayer2Colour = self.skinPlayer2Colour;
+
         
         
     } }

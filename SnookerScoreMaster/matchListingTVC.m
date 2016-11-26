@@ -219,7 +219,6 @@
 
     
     
-    
     if (m.Player1FrameWins > m.Player2FrameWins) {
         
         cell.player1Photo.layer.borderColor=[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1].CGColor;

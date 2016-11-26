@@ -60,6 +60,11 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *visitBallGrid;
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 
+@property (strong, nonatomic) UIColor *skinBackgroundColour;
+@property (strong, nonatomic) UIColor *skinForegroundColour;
+@property (strong, nonatomic) UIColor *skinPlayer1Colour;
+@property (strong, nonatomic) UIColor *skinPlayer2Colour;
+
 
 /* https://www.youtube.com/watch?v=mdG6XpwwuwI */
 -(void) processCurrentUsersHighestBreak;

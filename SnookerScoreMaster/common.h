@@ -17,6 +17,9 @@
 
 @interface common : NSObject
 
+
+
+
 + (NSString *) stringFromTimeInterval :(NSTimeInterval) interval;
 + (NSString *) getTimeElapsed :(NSString *) from :(NSString *) to;
 + (NSString *) getFrameDuration :(NSMutableArray *) data;
@@ -43,4 +46,6 @@
 
 + (NSNumber*) getHBTotal :(NSMutableArray *) activeDataSet :(NSNumber *) playerId :(NSNumber *) frameId;
 + (NSMutableArray *) getHBBalls :(NSMutableArray*) activeDataSet :(NSNumber*)playerId :(NSNumber*)frameId;
+
+
 @end

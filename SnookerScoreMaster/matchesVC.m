@@ -24,8 +24,16 @@
 -(void)viewWillAppear :(BOOL)animated {
     [super viewWillAppear:animated];
     
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self.navigationController setToolbarHidden:YES animated:YES];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage =[UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 }
 
@@ -48,8 +56,13 @@
     [self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
     self.exportButton.tintColor = [UIColor grayColor];
     
+    self.view.backgroundColor = self.skinBackgroundColour;
+    self.tableView.backgroundColor = self.skinBackgroundColour;
+    
+    
     
 }
+
 
 
 
@@ -90,28 +103,40 @@
     
     
     cell.Player1Name.text = m.player1Name;
+    cell.Player1Name.textColor = self.skinForegroundColour;
     cell.Player2Name.text = m.player2Name;
+    cell.Player2Name.textColor = self.skinForegroundColour;
     cell.Player1Number = m.Player1Number;
+    
     cell.Player2Number = m.Player2Number;
     cell.matchDuration.text = m.matchDuration;
+    cell.matchDuration.textColor = self.skinForegroundColour;
     
     if (self.activeMatchId == m.matchid) {
         cell.Player1HiBreak.text = [NSString stringWithFormat:@"%@",self.activeMatchPlayers.Player1HiBreak];
+        cell.Player1HiBreak.textColor = self.skinForegroundColour;
         cell.Player2HiBreak.text = [NSString stringWithFormat:@"%@",self.activeMatchPlayers.Player1HiBreak];
+        cell.Player2HiBreak.textColor = self.skinForegroundColour;
         cell.Player1FrameWins .text = [NSString stringWithFormat:@"%@",self.activeMatchPlayers.Player1FrameWins];
+        cell.Player1FrameWins.textColor = self.skinForegroundColour;
         cell.Player2FrameWins.text = [NSString stringWithFormat:@"%@",self.activeMatchPlayers.Player2FrameWins];
+        cell.Player2FrameWins.textColor = self.skinForegroundColour;
     } else {
         
         cell.Player1HiBreak.text = [NSString stringWithFormat:@"%@",m.Player1HiBreak];
+        cell.Player1HiBreak.textColor = self.skinBackgroundColour;
         cell.Player2HiBreak.text = [NSString stringWithFormat:@"%@",m.Player2HiBreak];
+        cell.Player2HiBreak.textColor = self.skinBackgroundColour;
         cell.Player1FrameWins.text = [NSString stringWithFormat:@"%@",m.Player1FrameWins];
+        cell.Player1FrameWins.textColor = self.skinForegroundColour;
         cell.Player2FrameWins.text = [NSString stringWithFormat:@"%@",m.Player2FrameWins];
+        cell.Player2FrameWins.textColor = self.skinForegroundColour;
     }
     
     
     cell.matchDate.text = [NSString stringWithFormat:@"%@",[self relativeDateStringForDate  :m.matchDate]];
+    cell.matchDate.textColor = self.skinForegroundColour;
     cell.matchEndDate = [NSString stringWithFormat:@"%@",[self relativeDateStringForDate  :m.matchEndDate]];
-    
     
     cell.MatchId = m.matchid;
     
@@ -210,7 +235,7 @@
     cell.player1Photo.layer.cornerRadius = 75/2.0f;
     
     
-    cell.player1Photo.layer.borderWidth=3.0f;
+    cell.player1Photo.layer.borderWidth=1.5f;
     
     cell.player1Badge.layer.cornerRadius = 15;
     
@@ -219,11 +244,12 @@
     cell.player2Photo.layer.cornerRadius = 75/2.0f;
     
     cell.player2Photo.layer.borderColor=[UIColor orangeColor].CGColor;
-    cell.player2Photo.layer.borderWidth=3.0f;
+    cell.player2Photo.layer.borderWidth=1.5f;
     cell.player2Badge.layer.cornerRadius = 15;
     
-    
-    
+    cell.backgroundColor = self.skinBackgroundColour;
+ 
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (m.Player1FrameWins > m.Player2FrameWins) {
         
@@ -337,6 +363,10 @@
         controller.skinPrefix = self.skinPrefix;
         controller.activeFramePointsRemaining = self.activeFramePointsRemaining;
         controller.db = self.db;
+        controller.skinForegroundColour = self.skinForegroundColour;
+        controller.skinBackgroundColour = self.skinBackgroundColour;
+        controller.skinPlayer1Colour = self.skinPlayer1Colour;
+        controller.skinPlayer2Colour = self.skinPlayer2Colour;
     }
     
     

@@ -38,4 +38,7 @@
 @property (assign) int displayState;
 @property (assign) int activeFramePointsRemaining;
 @property (strong, nonatomic) NSString *skinPrefix;
+
+
+
 @end

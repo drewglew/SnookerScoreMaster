@@ -15,6 +15,7 @@
 #import "DraggableView.h"
 
 
+
 @interface scoreboardVC () <PlayerDelegate, MatchStatisticsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *player1SnookerTableImageView;
@@ -104,6 +105,11 @@
 @property (strong, nonatomic) IBOutlet UIImageView *shotBallImage;
 @property (strong, nonatomic) IBOutlet UIButton *buttonCloseInstructions;
 @property (weak, nonatomic) IBOutlet UILabel *shotPlayerNameLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *snookerBackgroundPhotoImage;
+@property (strong, nonatomic) IBOutlet UILabel *sliderBorderLabel;
+
+
+
 @property (strong, nonatomic) NSMutableArray *frameData;
 @property (nonatomic) NSString *savedNamePlayer1;
 @property (nonatomic) NSString *savedNamePlayer2;
@@ -182,10 +188,17 @@
 @synthesize db;
 @synthesize skinPrefix;
 
+
+@synthesize skinPlayer1Colour;
+@synthesize skinPlayer2Colour;
+@synthesize skinBackgroundColour;
+@synthesize skinForegroundColour;
+
+
 enum scoreStatus { LiveFrameScore, PreviousFrameScore };
 enum scoreStatus scoreState;
 enum IndicatorStyle {highlight, hide};
-enum themes {greenbaize, dark, modern};
+enum themes {photo, dark, light, modern};
 
 #define MY_APPDELEGATE ((AppDelegate*)[UIApplication sharedApplication].delegate)
 
@@ -430,52 +443,6 @@ issue with startup now controlled by onload block condition
         }
         
     }
-
-
-
-    /*
-    
-    if (self.activeMatchData.count!=0) {
-     
-        p.hbMatch.breakBalls = [common getHBBalls:self.activeMatchData :[NSNumber numberWithInt:p.playerIndex] :0];
-        p.hbMatch.breakTotal = [common getHBTotal:self.activeMatchData:[NSNumber numberWithInt:p.playerIndex] :0];
-        p.hbFrame.breakBalls = [common getHBBalls:self.activeFrameData :[NSNumber numberWithInt:p.playerIndex] :0];
-        p.hbFrame.breakTotal = [common getHBTotal:self.activeFrameData :[NSNumber numberWithInt:p.playerIndex] :0];
-        
-        if ([self.db getActiveMatchId]==[NSNumber numberWithInt:1]) {
-            p.hbMatch.breakBalls = [common getHBBalls:self.activeMatchData :[NSNumber numberWithInt:p.playerIndex] :0];
-            p.hbMatch.breakTotal = [common getHBTotal:self.activeMatchData:[NSNumber numberWithInt:p.playerIndex] :0];
-        }
- 
-    
-        p.highestBreakHistory = [common getHBBalls:self.activeMatchData :[NSNumber numberWithInt:p.playerIndex] :0];
-        p.highestBreak = [common getHiBreak:self.activeFrameData:[NSNumber numberWithInt:p.playerIndex] :0];
-    } else if (self.activeFrameData.count!=0) {
-     
-        p.hbFrame.breakBalls = [common getHBBalls:self.activeFrameData :[NSNumber numberWithInt:p.playerIndex] :0];
-        p.hbFrame.breakTotal = [common getHBTotal:self.activeFrameData :[NSNumber numberWithInt:p.playerIndex] :0];
-        
-        p.hbMatch.breakBalls = [common getHBBalls:self.activeFrameData :[NSNumber numberWithInt:p.playerIndex] :0];
-        p.hbMatch.breakTotal = [common getHBTotal:self.activeFrameData :[NSNumber numberWithInt:p.playerIndex] :0];
-        
-        if ([self.db getActiveMatchId]==[NSNumber numberWithInt:1]) {
-            NSNumber *temp  = [common getHBTotal:self.activeFrameData:[NSNumber numberWithInt:p.playerIndex] :0];
-            if (temp==nil && p.hbEver.breakTotal>0) {
-                // do nothing here, we have already loaded the detail
-            } else {
-                p.hbEver.breakBalls = [common getHBBalls:self.activeFrameData :[NSNumber numberWithInt:p.playerIndex] :0];
-                p.hbEver.breakTotal = [common getHBTotal:self.activeFrameData:[NSNumber numberWithInt:p.playerIndex] :0];
-            }
-        }
-        
-     
-        p.highestBreakHistory = [common getHBBalls:self.activeFrameData :[NSNumber numberWithInt:p.playerIndex] :0];
-        p.highestBreak = [common getHiBreak:self.activeFrameData:[NSNumber numberWithInt:p.playerIndex] :0];
-    } else {
-        p.highestBreak = 0;
-    }
-*/
-    
     return p;
 }
 
@@ -854,64 +821,103 @@ issue with startup now controlled by onload block condition
     //self.skinMainFontColor = [UIColor orangeColor];
     
     
-    self.skinMainFontColor = [UIColor colorWithRed:76.0f/255.0f green:218.0f/255.0f blue:100.0f/255.0f alpha:1.0];
     
-    
-    UIColor *top_menu_icon_colour;
-    
-    if (self.theme!=greenbaize) {
-        self.greenBaizeView.hidden = true;
+  
+    if (self.theme==photo) {
+        self.snookerBackgroundPhotoImage.hidden = false;
+        self.skinForegroundColour = [UIColor colorWithRed:192.0f/255.0f green:139.0f/255.0f blue:98.0f/255.0f alpha:1.0];
+        self.skinBackgroundColour  = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+        
+        self.skinPlayer1Colour = [UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0];
+        self.skinPlayer2Colour = [UIColor colorWithRed:90.0f/255.0f green:200.0f/255.0f blue:250.0f/255.0f alpha:1.0];
+        
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight ];
+        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        blurEffectView.frame = self.view.bounds;
+        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.scoreBoardBackLabel addSubview:blurEffectView];
         
         
-        if (self.theme==dark) {
-            self.scoreBoardBackLabel.backgroundColor = [UIColor blackColor];
-             self.mainView.backgroundColor = [UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0];
-            
-            self.scoreBoardBackLabel.alpha = 0.4f;
-            //ABCD
-            top_menu_icon_colour = [UIColor orangeColor];
-            [self.labelFrameStopwatch setTextColor:[UIColor orangeColor]];
-            
-            self.skinMainFontColor = [UIColor orangeColor];
-            
-            self.buttonSwapPlayer.alpha = 0.03f;
-            
-            //self.ballsBackLabel.backgroundColor = [UIColor orangeColor];
-        } else {
-            // modern
-            top_menu_icon_colour = [UIColor blackColor];
-            
-            self.mainView.backgroundColor = [UIColor colorWithRed:204.0f/255.0f green:204.0f/255.0f blue:204.0f/255.0f alpha:1.0];
-            self.skinMainFontColor = [UIColor blackColor];
-            self.scoreBoardBackLabel.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1];
-            
-            self.viewScorePlayer1.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
-            self.viewScorePlayer2.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
+    } else if (self.theme==dark) {
+        self.snookerBackgroundPhotoImage.hidden = true;
+        self.skinForegroundColour  = [UIColor colorWithRed:76.0f/255.0f green:217.0f/255.0f blue:100.0f/255.0f alpha:1.0];
+        self.skinBackgroundColour = [UIColor colorWithRed:28.0f/255.0f green:39.0f/255.0f blue:28.0f/255.0f alpha:1.0];
+        self.skinPlayer1Colour = [UIColor colorWithRed:88.0f/255.0f green:86.0f/255.0f blue:214.0f/255.0f alpha:1.0];
+        self.skinPlayer2Colour = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0];
+   
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.frame = self.view.bounds;
+        gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:28.0f/255.0f green:39.0f/255.0f blue:28.0f/255.0f alpha:1.0] CGColor], nil];
+        [self.view.layer insertSublayer:gradient atIndex:0];
+        
+        
+        
+    } else if (self.theme==modern) {
+        self.snookerBackgroundPhotoImage.hidden = true;
+        self.skinForegroundColour  = [UIColor colorWithRed:168.0f/255.0f green:218.0f/255.0f blue:220.0f/255.0f alpha:1.0];
+        self.skinBackgroundColour = [UIColor colorWithRed:29.0f/255.0f green:53.0f/255.0f blue:87.0f/255.0f alpha:1.0];
+        self.skinPlayer1Colour = [UIColor colorWithRed:9.0f/255.0f green:9.0f/255.0f blue:59.0f/255.0f alpha:1.0];
+        self.skinPlayer2Colour = [UIColor colorWithRed:86.0f/255.0f green:86.0f/255.0f blue:149.0f/255.0f alpha:1.0];
+        /* TODO */
+        
+    } else if (self.theme==light) {
+        self.snookerBackgroundPhotoImage.hidden = true;
+        self.skinForegroundColour  = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+        self.skinBackgroundColour = [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0];
+        self.skinPlayer1Colour = [UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0];
+        self.skinPlayer2Colour = [UIColor colorWithRed:76.0f/255.0f green:217.0f/255.0f blue:100.0f/255.0f alpha:1.0];
+    
+       
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.frame = self.view.bounds;
+        gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor darkGrayColor] CGColor], (id)[[UIColor whiteColor] CGColor], nil];
+        [self.view.layer insertSublayer:gradient atIndex:0];
+        
+        
+    
+    } else {   // mono
+        self.snookerBackgroundPhotoImage.hidden = true;
+        self.skinForegroundColour  = [UIColor colorWithRed:0.0f/255.0f green:252.0f/255.0f blue:176.0f/255.0f alpha:1.0];
+        self.skinBackgroundColour = [UIColor colorWithRed:14.0f/255.0f green:73.0f/255.0f blue:55.0f/255.0f alpha:1.0];
 
-        }
-    } else {
-        top_menu_icon_colour = [UIColor colorWithRed:76.0f/255.0f green:218.0f/255.0f blue:100.0f/255.0f alpha:1.0];
         
+        
+        self.skinPlayer1Colour = [UIColor colorWithRed:88.0f/255.0f green:86.0f/255.0f blue:214.0f/255.0f alpha:1.0];
+        self.skinPlayer2Colour = [UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0];
+        
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.frame = self.view.bounds;
+        gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:14.0f/255.0f green:73.0f/255.0f blue:55.0f/255.0f alpha:1.0] CGColor], (id)[[UIColor colorWithRed:90.0f/255.0f green:200.0f/255.0f blue:121.0f/255.0f alpha:1.0] CGColor], nil];
+        [self.view.layer insertSublayer:gradient atIndex:0];
+        
+
     }
+    
+    self.mainView.backgroundColor = self.skinBackgroundColour;
+
+    
+    
     UIImage *changecolourimage = [[UIImage imageNamed:@"top_button_adjust"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.buttonAdjust setImage:changecolourimage forState:UIControlStateNormal];
-    self.buttonAdjust.tintColor = top_menu_icon_colour;
+    self.buttonAdjust.tintColor = self.skinForegroundColour ;
     changecolourimage = [[UIImage imageNamed:@"top_button_undo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.buttonClear setImage:changecolourimage forState:UIControlStateNormal];
-    self.buttonClear.tintColor = top_menu_icon_colour;
+    self.buttonClear.tintColor = self.skinForegroundColour;
     changecolourimage = [[UIImage imageNamed:@"top_button_new"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.buttonNew setImage:changecolourimage forState:UIControlStateNormal];
-    self.buttonNew.tintColor = top_menu_icon_colour;
+    self.buttonNew.tintColor = self.skinForegroundColour;
     
     changecolourimage = [[UIImage imageNamed:@"top_button_finish"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.buttonEnd setImage:changecolourimage forState:UIControlStateNormal];
-    self.buttonEnd.tintColor = top_menu_icon_colour;
+    self.buttonEnd.tintColor = self.skinForegroundColour;
     
     changecolourimage = [[UIImage imageNamed:@"top_button_help"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.buttonHelp setImage:changecolourimage forState:UIControlStateNormal];
-    self.buttonHelp.tintColor = top_menu_icon_colour;
+    self.buttonHelp.tintColor = self.skinForegroundColour;
     
-     [self.labelFrameStopwatch setTextColor:top_menu_icon_colour];
+    self.sliderBorderLabel.backgroundColor = self.skinForegroundColour;
+    
+    [self.labelFrameStopwatch setTextColor:self.skinForegroundColour];
 
     self.shotView.layer.cornerRadius = 5;
     self.shotView.layer.masksToBounds = YES;
@@ -926,35 +932,25 @@ issue with startup now controlled by onload block condition
     }
     
     
-    self.foulLabel.textColor = [UIColor whiteColor];
-    self.switchFoul.thumbTintColor = self.skinMainFontColor;
-    self.switchFoul.tintColor = self.skinMainFontColor;
-    self.labelStopwatch.textColor = self.skinMainFontColor;
-    self.labelVisitCounter.textColor = self.skinMainFontColor;
-    //self.labelScoreMatchPlayer1.textColor = self.skinMainFontColor;
-    self.labelScoreMatchPlayer2.textColor = self.skinMainFontColor;
+    self.foulLabel.textColor = [UIColor redColor];
+    self.switchFoul.tintColor = self.skinForegroundColour;
+    self.labelStopwatch.textColor = self.skinForegroundColour;
+    self.labelVisitCounter.textColor = self.skinForegroundColour;
+    //self.labelScoreMatchPlayer1.textColor = self.skinForegroundColour;
+    self.labelScoreMatchPlayer2.textColor = self.skinForegroundColour;
     
-    self.textScorePlayer2.textColor = self.skinMainFontColor;
-    self.textPlayerTwoName.textColor =  self.skinMainFontColor;
+    self.textScorePlayer2.textColor = self.skinForegroundColour;
+    self.textPlayerTwoName.textColor =  self.skinForegroundColour;
  
     self.scoreBoardBackLabel.layer.cornerRadius = 5;
+    self.scoreBoardBackLabel.layer.borderWidth = 1.0f;
+    self.scoreBoardBackLabel.layer.borderColor = self.skinForegroundColour.CGColor;
     self.scoreBoardBackLabel.layer.masksToBounds = YES;
 
     self.visitBallGrid.backgroundColor = [UIColor colorWithRed:35.0f/255.0f green:35.0f/255.0f blue:35.0f/255.0f alpha:1.0f];
     self.visitBallGrid.layer.cornerRadius = 5;
     self.visitBallGrid.layer.masksToBounds = YES;
-
-    if (self.theme==modern) {
-        self.foulLabel.textColor = [UIColor lightGrayColor];
-        //[self.buttonCloseShot setImage:[UIImage imageNamed:@"close-black.png"] forState:UIControlStateNormal];
-        self.switchFoul.onTintColor = [UIColor whiteColor];
-        self.labelScoreMatchPlayer1.textColor = self.skinMainFontColor;
-        self.labelScoreMatchPlayer2.textColor = self.skinMainFontColor;
-       self.scoreBoardBackLabel.backgroundColor = [UIColor lightGrayColor];
-        self.scoreBoardBackLabel.alpha=0.9f;
-    }
-    
-    self.shotTabId=1; // pot/miss
+   self.shotTabId=1; // pot/miss
     
 }
 
@@ -1052,9 +1048,9 @@ issue with startup now controlled by onload block condition
     [self makeRoundShotButton:self.shotMissButton :self.shotMissButton.frame.origin.x :self.shotMissButton.frame.origin.y :50.0f :false];
     [self makeRoundShotButton:self.shotSelectPreviousButton :self.shotSelectPreviousButton.frame.origin.x :self.shotSelectPreviousButton.frame.origin.y :35.0f :false];
     [self makeRoundShotButton:self.shotSelectNextButton :self.shotSelectNextButton.frame.origin.x :self.shotSelectNextButton.frame.origin.y :35.0f :false];
-    [common makeRoundButtonOwnColour:self.openPlayer1DetailButton :self.openPlayer1DetailButton.frame.origin.x :self.openPlayer1DetailButton.frame.origin.y :75.0f :[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f]];
-    [common makeRoundButtonOwnColour:self.openPlayer2DetailButton :self.openPlayer2DetailButton.frame.origin.x :self.openPlayer2DetailButton.frame.origin.y :75.0f :[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f]];
-    [common makeRoundButtonOwnColour:self.buttonSwapPlayer :self.buttonSwapPlayer.frame.origin.x :self.buttonSwapPlayer.frame.origin.y :self.buttonSwapPlayer.frame.size.width :self.skinMainFontColor];
+    [common makeRoundButtonOwnColour:self.openPlayer1DetailButton :self.openPlayer1DetailButton.frame.origin.x :self.openPlayer1DetailButton.frame.origin.y :75.0f :self.skinPlayer1Colour];
+    [common makeRoundButtonOwnColour:self.openPlayer2DetailButton :self.openPlayer2DetailButton.frame.origin.x :self.openPlayer2DetailButton.frame.origin.y :75.0f : self.skinPlayer2Colour];
+    [common makeRoundButtonOwnColour:self.buttonSwapPlayer :self.buttonSwapPlayer.frame.origin.x :self.buttonSwapPlayer.frame.origin.y :self.buttonSwapPlayer.frame.size.width :self.skinForegroundColour];
     [common makeBallImage:self.imagePottedBall :self.imagePottedBall.frame.origin.x :self.imagePottedBall.frame.origin.y :self.imagePottedBall.frame.size.width :5.0f];
 
     [self setBallButtonImage :self.buttonRed];
@@ -1078,7 +1074,7 @@ issue with startup now controlled by onload block condition
     //half of the width
     shotButton.layer.cornerRadius = heightWidth/2.0f;
     if (useSkinColour) {
-        shotButton.layer.borderColor=self.skinMainFontColor.CGColor;
+        shotButton.layer.borderColor=self.skinForegroundColour.CGColor;
     } else {
         shotButton.layer.borderColor=[UIColor orangeColor].CGColor;
     }
@@ -1105,7 +1101,7 @@ issue with startup now controlled by onload block condition
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.tintColor = self.skinMainFontColor;
+    self.navigationController.navigationBar.tintColor = self.skinForegroundColour;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 }
@@ -1507,14 +1503,13 @@ issue with startup now controlled by onload block condition
 -(void)resetIndicatorStyle :(UILabel*) indicatorBall {
     //[indicatorBall setFont:[UIFont systemFontOfSize:24]];
     
-    UIFont *font = [UIFont fontWithName:@"Aileron-Regular" size:20];
+    UIFont *font = [UIFont fontWithName:@"Avenir-Book" size:24];
     [indicatorBall setFont:font];
-    
     
     //[indicatorBall setFont:[UIFont systemFontOfSize:24.0f weight:UIFontWeightRegular]];
     
     //indicatorBall.font = [UIFont fontWithName:@"Verdana" size:24.0f];
-    indicatorBall.textColor = self.skinMainFontColor;
+    indicatorBall.textColor = self.skinForegroundColour;
 }
 
 
@@ -1796,29 +1791,11 @@ issue with startup now controlled by onload block condition
                 
                 [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:self.shotTypeId] :[NSNumber numberWithInt:self.shotGroup1SegmentId] :[NSNumber numberWithInt:self.shotGroup2SegmentId] :self.pocketId :pottedFreeBall :self.isHollow];
                 
-                
-                //[self.viewBreak setAlpha:0.0f];
-                
-                //fade in
-
-                
-                
-                /*
-                
-                [UIView beginAnimations:nil context:nil];
-                [UIView setAnimationDuration:1.0];
-                //[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown  forView:self.viewBreak cache:YES];
-                [UIView setAnimationTransition:UIViewAnimationOptionTransitionCrossDissolve  forView:self.viewBreak cache:YES];
-                //[self.view addSubview:self.viewBreak];
-                [UIView commitAnimations];
-                */
                 [self clearIndicators :highlight];
                 
-                UIFont *font = [UIFont fontWithName:@"Aileron-Bold" size:20];
+                UIFont *font = [UIFont fontWithName:@"Avenir-Black" size:24];;
                 [indicatorBall setFont:font];
                 
-                
-               // [indicatorBall setFont:[UIFont systemFontOfSize:24.0f weight:UIFontWeightBold]];
                 
                 if (self.theme!=modern) {
                     indicatorBall.textColor = [UIColor whiteColor];
@@ -1973,19 +1950,19 @@ issue with startup now controlled by onload block condition
         self.currentPlayer = self.textScorePlayer2;
         self.opposingPlayer = self.textScorePlayer1;
         [self.textPlayerTwoName setTextColor:[UIColor whiteColor]];
-        [self.textPlayerOneName setTextColor:self.skinMainFontColor];
+        [self.textPlayerOneName setTextColor:self.skinForegroundColour];
         [self.labelScoreMatchPlayer2 setTextColor:[UIColor whiteColor]];
-        [self.labelScoreMatchPlayer1 setTextColor:self.skinMainFontColor];
+        [self.labelScoreMatchPlayer1 setTextColor:self.skinForegroundColour ];
     } else {
         self.currentPlayer = self.textScorePlayer1;
         self.opposingPlayer = self.textScorePlayer2;
-        [self.textPlayerTwoName setTextColor:self.skinMainFontColor];
+        [self.textPlayerTwoName setTextColor:self.skinForegroundColour];
         [self.textPlayerOneName setTextColor:[UIColor whiteColor]];
-        [self.labelScoreMatchPlayer2 setTextColor:self.skinMainFontColor];
+        [self.labelScoreMatchPlayer2 setTextColor:self.skinForegroundColour];
         [self.labelScoreMatchPlayer1 setTextColor:[UIColor whiteColor]];
     }
     [self.currentPlayer setTextColor:[UIColor whiteColor]];
-    [self.opposingPlayer setTextColor:self.skinMainFontColor];
+    [self.opposingPlayer setTextColor:self.skinForegroundColour];
     scoreState = LiveFrameScore;
 }
 
@@ -2010,7 +1987,7 @@ issue with startup now controlled by onload block condition
     } else {
         labelScore = [NSString stringWithFormat:@"%d",self.currentPlayer.currentFrame.frameScore];
         self.currentPlayer.text = labelScore;
-        [self.currentPlayer setTextColor:self.skinMainFontColor];
+        [self.currentPlayer setTextColor:self.skinForegroundColour];
         scoreState = PreviousFrameScore;
     }
 
@@ -2038,10 +2015,10 @@ issue with startup now controlled by onload block condition
     self.currentPlayer = self.textScorePlayer1;
     self.opposingPlayer = self.textScorePlayer2;
     [self.currentPlayer setTextColor:[UIColor whiteColor]];
-    [self.opposingPlayer setTextColor:self.skinMainFontColor];
+    [self.opposingPlayer setTextColor:self.skinForegroundColour ];
     [self.textPlayerOneName setTextColor:[UIColor whiteColor]];
-    [self.textPlayerTwoName setTextColor:self.skinMainFontColor];
-    [self.labelScoreMatchPlayer2 setTextColor:self.skinMainFontColor];
+    [self.textPlayerTwoName setTextColor:self.skinForegroundColour];
+    [self.labelScoreMatchPlayer2 setTextColor:self.skinForegroundColour];
     [self.labelScoreMatchPlayer1 setTextColor:[UIColor whiteColor]];
     scoreState = PreviousFrameScore;
     [self displayMedal];
@@ -2068,7 +2045,7 @@ issue with startup now controlled by onload block condition
     } else {
             labelScore = [NSString stringWithFormat:@"%d",self.currentPlayer.currentFrame.frameScore];
             self.currentPlayer.text = labelScore;
-            [self.currentPlayer setTextColor:self.skinMainFontColor];
+            [self.currentPlayer setTextColor:self.skinForegroundColour];
             scoreState = PreviousFrameScore;
     }
 }
@@ -2078,11 +2055,11 @@ issue with startup now controlled by onload block condition
     self.currentPlayer = self.textScorePlayer2;
     self.opposingPlayer = self.textScorePlayer1;
     [self.currentPlayer setTextColor:[UIColor whiteColor]];
-    [self.opposingPlayer setTextColor:self.skinMainFontColor];
+    [self.opposingPlayer setTextColor:self.skinForegroundColour ];
     [self.textPlayerTwoName setTextColor:[UIColor whiteColor]];
-    [self.textPlayerOneName setTextColor:self.skinMainFontColor];
+    [self.textPlayerOneName setTextColor:self.skinForegroundColour ];
     [self.labelScoreMatchPlayer2 setTextColor:[UIColor whiteColor]];
-    [self.labelScoreMatchPlayer1 setTextColor:self.skinMainFontColor];
+    [self.labelScoreMatchPlayer1 setTextColor:self.skinForegroundColour];
     scoreState = PreviousFrameScore;
     [self displayMedal];
 }
@@ -2785,19 +2762,17 @@ issue with startup now controlled by onload block condition
         
         controller.currentPlayerHiBreak = [NSNumber  numberWithInt:self.textScorePlayer1.highestBreak];
         controller.currentPlayerHighestBreakHistory = self.textScorePlayer1.highestBreakHistory;
-        
-        
-        
-        
+
         controller.staticPlayer1CurrentBreak = p1ActiveBreak;
         controller.staticPlayer2CurrentBreak = p2ActiveBreak;
         controller.activeMatchId = self.activeMatchId;
         controller.activeMatchPlayers = m;
-        controller.activeBreakShots = self.activeBreak.shots;
-        
-        
+
         controller.skinPrefix = self.skinPrefix;
-        
+        controller.skinForegroundColour = self.skinForegroundColour;
+        controller.skinBackgroundColour = self.skinBackgroundColour;
+        controller.skinPlayer1Colour = self.skinPlayer1Colour;
+        controller.skinPlayer2Colour = self.skinPlayer2Colour;
         
         controller.activeFramePointsRemaining = [common getPointsRemainingInFrame:self.buttonRed :self.activeBreak :self.activeColour];
         
@@ -2820,28 +2795,7 @@ issue with startup now controlled by onload block condition
         m.Player1Number = self.textScorePlayer1.playerNumber;
         m.Player2Number = self.textScorePlayer2.playerNumber;
         m.matchid = self.activeMatchId;
-        
-        
-        
-        /*
-        p.highestBreakInActiveFrame
-        p.highestBreakInActiveFrameBalls
-        p.highestBreakInActiveMatch
-        p.highestBreakInActiveMatchBalls
-        p.highestBreakByPlayer
-        p.highestBreakByPlayerBalls
-         
-         
-        hiBreak.activeFrame
-        hiBreak.activeFrame.Points
-        hiBreak.activeFrame.Balls
-        hiBreak.activeMatch
-         
-         
-         
-         
-        */
-        
+
         playerDetailVC *controller = (playerDetailVC *)segue.destinationViewController;
         controller.delegate = self;
         controller.playerIndex = 2;
@@ -2861,6 +2815,11 @@ issue with startup now controlled by onload block condition
         controller.activeBreakShots = self.activeBreak.shots;
         controller.isHollow = self.isHollow;
         controller.theme = self.theme;
+        controller.skinForegroundColour = self.skinForegroundColour;
+        controller.skinBackgroundColour = self.skinBackgroundColour;
+        controller.skinPlayer1Colour = self.skinPlayer1Colour;
+        controller.skinPlayer2Colour = self.skinPlayer2Colour;
+        
         controller.p1 = self.textScorePlayer2;
         controller.p2 = self.textScorePlayer2;
         
@@ -2881,8 +2840,7 @@ issue with startup now controlled by onload block condition
         m.Player1Number = self.textScorePlayer1.playerNumber;
         m.Player2Number = self.textScorePlayer2.playerNumber;
         m.matchid = self.activeMatchId;
-        
-        
+
         controller.p1 = self.textScorePlayer1;
         controller.p2 = self.textScorePlayer2;
         controller.p1.activeBreak = [NSNumber numberWithInt:p1ActiveBreak];
@@ -2898,6 +2856,11 @@ issue with startup now controlled by onload block condition
         controller.theme = self.theme;
         
         controller.activeShots = self.activeBreak.shots;
+        
+        controller.skinForegroundColour = self.skinForegroundColour;
+        controller.skinBackgroundColour = self.skinBackgroundColour;
+        controller.skinPlayer1Colour = self.skinPlayer1Colour;
+        controller.skinPlayer2Colour = self.skinPlayer2Colour;
         
     }
 }
@@ -3503,13 +3466,13 @@ issue with startup now controlled by onload block condition
             self.isPaused=false;
             [self.db deletePausedEntry];
             [self enableControls:true];
-            [common makeRoundButtonOwnColour:self.buttonSwapPlayer :self.buttonSwapPlayer.frame.origin.x :self.buttonSwapPlayer.frame.origin.y :self.buttonSwapPlayer.frame.size.width :self.skinMainFontColor];
+            [common makeRoundButtonOwnColour:self.buttonSwapPlayer :self.buttonSwapPlayer.frame.origin.x :self.buttonSwapPlayer.frame.origin.y :self.buttonSwapPlayer.frame.size.width :self.skinForegroundColour];
             //need to stop all activity except the
-            self.buttonSwapPlayer.backgroundColor = self.skinMainFontColor;
-            self.buttonSwapPlayer.layer.borderColor = self.skinMainFontColor.CGColor;
+            self.buttonSwapPlayer.backgroundColor = self.skinForegroundColour ;
+            self.buttonSwapPlayer.layer.borderColor = self.skinForegroundColour.CGColor;
             self.labelStopwatch.hidden = true;
 
-            self.labelStopwatch.textColor = self.skinMainFontColor;
+            self.labelStopwatch.textColor = self.skinForegroundColour;
             //[self.buttonSwapPlayer setTitleColor:self.skinMainFontColor forState:UIControlStateNormal];
             
         } else {
@@ -3695,7 +3658,7 @@ issue with startup now controlled by onload block condition
     self.buttonBlack.enabled=true;
     
     self.buttonRed.colour = @"RED";
-    self.buttonRed.ballColour=[UIColor colorWithRed:174.0f/255.0f green:20.0f/255.0f blue:20.0f/255.0f alpha:1.0];
+    self.buttonRed.ballColour=[UIColor colorWithRed:217.0f/255.0f green:23.0f/255.0f blue:60.0f/255.0f alpha:1.0];
     self.redIndicator.ballIndex = [NSNumber numberWithInt:1];
     self.buttonRed.foulPoints = 4;
     self.buttonRed.pottedPoints = 1;
@@ -3708,7 +3671,7 @@ issue with startup now controlled by onload block condition
  
     
     self.buttonYellow.colour = @"YELLOW";
-    self.buttonYellow.ballColour=[UIColor colorWithRed:255.0f/255.0f green:247.0f/255.0f blue:93.0f/255.0f alpha:1.0];
+    self.buttonYellow.ballColour=[UIColor colorWithRed:222.0f/255.0f green:199.0f/255.0f blue:4.0f/255.0f alpha:1.0];
     self.yellowIndicator.ballIndex = [NSNumber numberWithInt:2];
     self.buttonYellow.foulPoints = 4;
     self.buttonYellow.pottedPoints = 2;
@@ -3727,7 +3690,7 @@ issue with startup now controlled by onload block condition
     self.buttonYellow.imageNameSmall = @"yellow_02_small";
     
     self.buttonGreen.colour = @"GREEN";
-    self.buttonGreen.ballColour=[UIColor colorWithRed:27.0f/255.0f green:84.0f/255.0f blue:27.0f/255.0f alpha:1.0];
+    self.buttonGreen.ballColour=[UIColor colorWithRed:61.0f/255.0f green:191.0f/255.0f blue:61.0f/255.0f alpha:1.0];
     self.greenIndicator.ballIndex = [NSNumber numberWithInt:3];
     self.buttonGreen.foulPoints = 4;
     self.buttonGreen.pottedPoints = 3;
@@ -3744,7 +3707,7 @@ issue with startup now controlled by onload block condition
     self.buttonGreen.imageNameSmall = @"green_03_green";
     
     self.buttonBrown.colour = @"BROWN";
-    self.buttonBrown.ballColour=[UIColor colorWithRed:80.0f/255.0f green:21.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+    self.buttonBrown.ballColour=[UIColor colorWithRed:120.0f/255.0f green:64.0f/255.0f blue:0.0f/255.0f alpha:1.0];
     self.brownIndicator.ballIndex = [NSNumber numberWithInt:4];
     self.buttonBrown.foulPoints = 4;
     self.buttonBrown.pottedPoints = 4;
@@ -3761,7 +3724,7 @@ issue with startup now controlled by onload block condition
     self.buttonBrown.imageNameSmall = @"brown_04_small";
     
     self.buttonBlue.colour = @"BLUE";
-    self.buttonBlue.ballColour=[UIColor colorWithRed:39.0f/255.0f green:38.0f/255.0f blue:198.0f/255.0f alpha:1.0];
+    self.buttonBlue.ballColour=[UIColor colorWithRed:39.0f/255.0f green:121.0f/255.0f blue:198.0f/255.0f alpha:1.0];
         self.blueIndicator.ballIndex = [NSNumber numberWithInt:5];
     self.buttonBlue.foulPoints = 5;
     self.buttonBlue.pottedPoints = 5;
@@ -3778,7 +3741,7 @@ issue with startup now controlled by onload block condition
     self.buttonBlue.imageNameSmall = @"blue_05_small";
 
     self.buttonPink.colour = @"PINK";
-    self.buttonPink.ballColour=[UIColor colorWithRed:201.0f/255.0f green:128.0f/255.0f blue:184.0f/255.0f alpha:1.0];
+    self.buttonPink.ballColour=[UIColor colorWithRed:201.0f/255.0f green:78.0f/255.0f blue:184.0f/255.0f alpha:1.0];
     self.pinkIndicator.ballIndex = [NSNumber numberWithInt:6];
     self.buttonPink.foulPoints = 6;
     self.buttonPink.pottedPoints = 6;
@@ -3968,6 +3931,15 @@ issue with startup now controlled by onload block condition
 
 - (void)addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState {
     self.displayState = displayState;
+    
+    /*
+     player1stats hidden or not
+     player2stats hidden or not
+     breakStats hidden false
+     frameStats hidden false
+    
+    */
+    
 }
 
 - (NSTimer *)createTimer {
