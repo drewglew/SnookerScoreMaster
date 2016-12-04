@@ -38,6 +38,7 @@
 + (int) getTotalVisits :(NSMutableArray*) frameDataSet  :(NSNumber *) playerId;
 + (int) getScoreByShotId :(NSMutableArray *) frameDataSet :(NSNumber *) playerId :(NSNumber *) shotId;
 + (int) getSumOfShotsByType :(NSMutableArray *) frameDataSet  :(NSNumber *) playerId :(int) shotType;
++(int) getBreakScoreFromBalls : (NSMutableArray *) balls;
 + (NSString *) getTopRangeOfPlayerBreaks :(NSMutableArray *) data :(NSNumber *) playerid;
 + (int) getQtyOfBallsByColor :(NSMutableArray *) activeDataSet  :(NSNumber *) playerid :(NSNumber *) reqBallPoint;
 + (int) getIntFrameDuration :(NSMutableArray *) data;

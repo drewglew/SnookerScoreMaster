@@ -86,6 +86,8 @@
 		3A6311211C5D25AE007EC892 /* buttonadduser48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A63111E1C5D25AE007EC892 /* buttonadduser48x48.png */; };
 		3A6311221C5D25AE007EC892 /* buttonadduser64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A63111F1C5D25AE007EC892 /* buttonadduser64x64.png */; };
 		3A6311231C5D25AE007EC892 /* buttonadduser128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6311201C5D25AE007EC892 /* buttonadduser128x128.png */; };
+		3A7379441DF372D400E5D556 /* IntroPVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7379431DF372D400E5D556 /* IntroPVC.m */; };
+		3A7379471DF3F8BB00E5D556 /* helpPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7379461DF3F8BB00E5D556 /* helpPageVC.m */; };
 		3A7ADE0F1C4A23D30014B847 /* matchStatisticsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7ADE0E1C4A23D30014B847 /* matchStatisticsVC.m */; };
 		3A7ADE121C4A316C0014B847 /* graphV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7ADE111C4A316C0014B847 /* graphV.m */; };
 		3A7ADE171C4A8BC00014B847 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7ADE161C4A8BC00014B847 /* more.png */; };
@@ -273,6 +275,10 @@
 		3A63111E1C5D25AE007EC892 /* buttonadduser48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonadduser48x48.png; sourceTree = "<group>"; };
 		3A63111F1C5D25AE007EC892 /* buttonadduser64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonadduser64x64.png; sourceTree = "<group>"; };
 		3A6311201C5D25AE007EC892 /* buttonadduser128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonadduser128x128.png; sourceTree = "<group>"; };
+		3A7379421DF372D400E5D556 /* IntroPVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroPVC.h; sourceTree = "<group>"; };
+		3A7379431DF372D400E5D556 /* IntroPVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroPVC.m; sourceTree = "<group>"; };
+		3A7379451DF3F8BB00E5D556 /* helpPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helpPageVC.h; sourceTree = "<group>"; };
+		3A7379461DF3F8BB00E5D556 /* helpPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = helpPageVC.m; sourceTree = "<group>"; };
 		3A7ADE0D1C4A23D30014B847 /* matchStatisticsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matchStatisticsVC.h; sourceTree = "<group>"; };
 		3A7ADE0E1C4A23D30014B847 /* matchStatisticsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = matchStatisticsVC.m; sourceTree = "<group>"; };
 		3A7ADE101C4A316C0014B847 /* graphV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphV.h; sourceTree = "<group>"; };
@@ -557,6 +563,8 @@
 			children = (
 				3ADBD1FE1C497758001876F2 /* embededMatchStatisticsVC.h */,
 				3ADBD1FF1C497758001876F2 /* embededMatchStatisticsVC.m */,
+				3A7379451DF3F8BB00E5D556 /* helpPageVC.h */,
+				3A7379461DF3F8BB00E5D556 /* helpPageVC.m */,
 				3A7ADE0D1C4A23D30014B847 /* matchStatisticsVC.h */,
 				3A7ADE0E1C4A23D30014B847 /* matchStatisticsVC.m */,
 				3A35C2041BD5FA8600B89BD2 /* adjustVC.h */,
@@ -618,6 +626,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3A7379411DF372AA00E5D556 /* UIPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3A7379421DF372D400E5D556 /* IntroPVC.h */,
+				3A7379431DF372D400E5D556 /* IntroPVC.m */,
+			);
+			name = UIPageViewController;
+			sourceTree = "<group>";
+		};
 		3A9D79641D359BDD00307714 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,6 +689,7 @@
 			isa = PBXGroup;
 			children = (
 				3AB429041BC95E83002FE58E /* Main.storyboard */,
+				3A7379411DF372AA00E5D556 /* UIPageViewController */,
 				3A9D79641D359BDD00307714 /* Fonts */,
 				3A0582101C457ADF00E37873 /* UITableView */,
 				3A037B671C418EAB00038BC0 /* UITableViewCell */,
@@ -948,10 +966,12 @@
 				3A35C2091BD5FA8600B89BD2 /* scoreboardVC.m in Sources */,
 				3A1EC1911D3E9AAE00B2348E /* hibreak.m in Sources */,
 				3A61EEC11C3EDB0700BEF957 /* playerDetailVC.m in Sources */,
+				3A7379441DF372D400E5D556 /* IntroPVC.m in Sources */,
 				3A35C20F1BD5FAB500B89BD2 /* DraggableView.m in Sources */,
 				3A05820C1C4566B400E37873 /* HeadToHeadTVC.m in Sources */,
 				3A6311051C5C196E007EC892 /* AvatarV.m in Sources */,
 				3A13858E1C580C1600ECF0EF /* frame.m in Sources */,
+				3A7379471DF3F8BB00E5D556 /* helpPageVC.m in Sources */,
 				3A35C2081BD5FA8600B89BD2 /* adjustVC.m in Sources */,
 				3A066B301C48473F006C7033 /* match.m in Sources */,
 				3ADBD2001C497758001876F2 /* embededMatchStatisticsVC.m in Sources */,

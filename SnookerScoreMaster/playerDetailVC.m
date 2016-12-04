@@ -75,6 +75,10 @@ enum themes {photo, dark, light, modern};
 
     } else if (self.theme==light) {
     
+        self.playerNickName.textColor = self.skinForegroundColour;
+        self.playerEmail.textColor = self.skinForegroundColour;
+        self.breakShownLabel.textColor = self.skinForegroundColour;
+        
     } else if (self.theme == modern) {
       //  [self.view setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
     }
@@ -113,23 +117,28 @@ enum themes {photo, dark, light, modern};
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
 
-  
+    player *p;
+    
+    
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     /* handle player key if this is a new record or an update to existing */
     if (self.playerIndex==0) {
         self.nextPlayerKey = [[NSUUID UUID] UUIDString];
     } else {
-        player* p = [self.db getPlayerByPlayerNumber :[NSNumber numberWithInt:self.currentPlayerNumber]];
+        p = [self.db getPlayerByPlayerNumber :[NSNumber numberWithInt:self.currentPlayerNumber]];
         self.currentPlayerKey = p.playerkey;
     }
 
+    if (self.playerIndex==1) {
+        p = self.p1;
+    } else {
+        p = self.p2;
+    }
     
-    
- 
-    
-    
+
     if (((self.currentPlayerNumber == self.staticPlayer1Number && self.staticPlayer1CurrentBreak>0) || (self.currentPlayerNumber == self.staticPlayer2Number && self.staticPlayer2CurrentBreak>0)) && self.activeBreakShots.count>0) {
+
         self.historyBreakShots = self.activeBreakShots;
         
         ballShot *b = [self.activeBreakShots firstObject];
@@ -143,34 +152,37 @@ enum themes {photo, dark, light, modern};
         NSString *ago = [timeStamp timeAgo];
         
         self.breakShownLabel.text = [NSString stringWithFormat:@"%d is players live break - started %@",self.staticPlayer1CurrentBreak+self.staticPlayer2CurrentBreak,ago];
-        
-        
 
     } else {
-            
-        self.historyBreakShots = [self.db findHistoryActivePlayersHiBreakBalls :[NSNumber numberWithInt:self.currentPlayerNumber] :[NSNumber numberWithInt:self.staticPlayer1Number] :[NSNumber numberWithInt:self.staticPlayer2Number] :self.p1.hbEver.breakTotal :self.p1.hbEver.breakBalls];
-        
-        if (self.p1.hbEver.breakBalls.count==0) {
-            self.breakShownLabel.text = @"no breaks yet!";
-        } else {
-            
-            
-            ballShot *b = [self.p1.hbEver.breakBalls firstObject];
-            
-            NSString *dateString = b.shottimestamp;
-            
-            NSDateFormatter *df = [[NSDateFormatter alloc] init];
-            [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSDate *timeStamp = [df dateFromString: dateString];
-            
-            NSString *ago = [timeStamp timeAgo];
 
-            self.breakShownLabel.text = [NSString stringWithFormat:@"%@ is players highest recorded break - %@", self.p1.hbEver.breakTotal, ago];
-        }
+        
+        self.historyBreakShots = [self.db findHistoryActivePlayersHiBreakBalls :[NSNumber numberWithInt:self.currentPlayerNumber] :[NSNumber numberWithInt:self.staticPlayer1Number] :[NSNumber numberWithInt:self.staticPlayer2Number] :p.hbEver.breakTotal :p.hbEver.breakBalls];
+        p.hiBreak = [NSNumber numberWithInt: [common getBreakScoreFromBalls : self.historyBreakShots]];
 
         
     }
     
+    p.hiBreak = [NSNumber numberWithInt: [common getBreakScoreFromBalls : self.historyBreakShots]];
+    
+    
+    if (p.hiBreak==0) {
+        self.breakShownLabel.text = @"no breaks yet!";
+    } else {
+        ballShot *b = [self.historyBreakShots firstObject];
+            
+        NSString *dateString = b.shottimestamp;
+            
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *timeStamp = [df dateFromString: dateString];
+            
+        NSString *ago = [timeStamp timeAgo];
+
+        self.breakShownLabel.text = [NSString stringWithFormat:@"%@ is players highest recorded break - %@", p.hiBreak, ago];
+
+    }
+
+
     self.historyHighestBreakBallsCollection.dataSource = self;
     self.historyHighestBreakBallsCollection.delegate = self;
 
@@ -549,11 +561,10 @@ enum themes {photo, dark, light, modern};
     if (self.currentPlayerNumber == [playerSelected.playerNumber intValue]) {
         /* nothing to do */
     } else {
-        self.currentPlayerNumber = [playerSelected.playerNumber intValue];
         
-       // if (self.playerIndex!=0) {
-       //     self.photoUpdated = true;
-       // }
+        
+        self.currentPlayerNumber = [playerSelected.playerNumber intValue];
+
         self.imagePathPhoto = playerSelected.photoLocation;
         self.nickName = playerSelected.nickName;
         self.email = playerSelected.emailAddress;
@@ -603,6 +614,10 @@ enum themes {photo, dark, light, modern};
 }
 
 
+
+
+
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     breakBallCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"breakCell" forIndexPath:indexPath];
     [[cell contentView] setFrame:[cell bounds]];
@@ -642,6 +657,8 @@ enum themes {photo, dark, light, modern};
     }
     
 }
+
+
 
 
 

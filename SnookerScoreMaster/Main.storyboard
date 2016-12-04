@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="i47-Tx-fHO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C53a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="i47-Tx-fHO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -93,7 +93,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snookerbackground" translatesAutoresizingMaskIntoConstraints="NO" id="q0Q-j7-8Fb" userLabel="SnookerBackground">
+                            <imageView userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snookerbackground" translatesAutoresizingMaskIntoConstraints="NO" id="q0Q-j7-8Fb" userLabel="SnookerBackground">
                                 <rect key="frame" x="0.0" y="0.0" width="462" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDt-8a-IaH" userLabel="StopWatch">
@@ -160,14 +160,17 @@
                                 </variation>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-D7-AyH" userLabel="PlayersBreak">
-                                <rect key="frame" x="49" y="315" width="277" height="277"/>
+                                <rect key="frame" x="10" y="315" width="355" height="277"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="E4BEF81B-E4E2-4A27-963E-890E0E70863D" translatesAutoresizingMaskIntoConstraints="NO" id="vPY-GV-iZp">
-                                        <rect key="frame" x="0.0" y="0.0" width="277" height="277"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="9B634C33-BEEB-4FA6-A339-5F4E8595FDAC" translatesAutoresizingMaskIntoConstraints="NO" id="vPY-GV-iZp">
+                                        <rect key="frame" x="39" y="0.0" width="277" height="277"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="vPY-GV-iZp" secondAttribute="height" multiplier="1:1" id="a0W-Sc-87K"/>
+                                        </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GO!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="50" translatesAutoresizingMaskIntoConstraints="NO" id="eUf-ou-jKw" userLabel="ActiveBreak" customClass="breakEntry">
-                                        <rect key="frame" x="0.0" y="0.0" width="277" height="277"/>
+                                        <rect key="frame" x="39" y="0.0" width="277" height="277"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="eUf-ou-jKw" secondAttribute="height" multiplier="1:1" id="kNc-w3-mWs"/>
@@ -187,16 +190,13 @@
                                         </variation>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="vPY-GV-iZp" secondAttribute="bottom" id="0Lg-9B-06K"/>
+                                    <constraint firstItem="vPY-GV-iZp" firstAttribute="centerX" secondItem="BVk-D7-AyH" secondAttribute="centerX" id="0ag-Mk-Bpu"/>
                                     <constraint firstItem="vPY-GV-iZp" firstAttribute="top" secondItem="BVk-D7-AyH" secondAttribute="top" id="8yq-nO-iKC"/>
                                     <constraint firstAttribute="bottom" secondItem="eUf-ou-jKw" secondAttribute="bottom" id="EaQ-6o-G1m"/>
-                                    <constraint firstAttribute="width" secondItem="BVk-D7-AyH" secondAttribute="height" multiplier="1:1" id="Rgb-I7-7F7"/>
-                                    <constraint firstItem="eUf-ou-jKw" firstAttribute="leading" secondItem="BVk-D7-AyH" secondAttribute="leading" id="UQw-5D-UQz"/>
-                                    <constraint firstItem="vPY-GV-iZp" firstAttribute="leading" secondItem="BVk-D7-AyH" secondAttribute="leading" id="WEv-pr-Qoh"/>
-                                    <constraint firstAttribute="trailing" secondItem="eUf-ou-jKw" secondAttribute="trailing" id="f15-pJ-aOL"/>
-                                    <constraint firstAttribute="trailing" secondItem="vPY-GV-iZp" secondAttribute="trailing" id="hBG-uq-P6q"/>
+                                    <constraint firstItem="eUf-ou-jKw" firstAttribute="centerX" secondItem="BVk-D7-AyH" secondAttribute="centerX" id="iW4-Z2-fbP"/>
                                     <constraint firstItem="eUf-ou-jKw" firstAttribute="top" secondItem="BVk-D7-AyH" secondAttribute="top" id="kDh-Iq-awM"/>
                                 </constraints>
                                 <variation key="default">
@@ -204,16 +204,8 @@
                                         <exclude reference="eUf-ou-jKw"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="Rgb-I7-7F7"/>
                                         <exclude reference="EaQ-6o-G1m"/>
-                                        <exclude reference="UQw-5D-UQz"/>
-                                        <exclude reference="f15-pJ-aOL"/>
                                         <exclude reference="kDh-Iq-awM"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Rgb-I7-7F7"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -222,15 +214,10 @@
                                         <include reference="eUf-ou-jKw"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="Rgb-I7-7F7"/>
                                         <include reference="EaQ-6o-G1m"/>
-                                        <include reference="UQw-5D-UQz"/>
-                                        <include reference="f15-pJ-aOL"/>
                                         <include reference="kDh-Iq-awM"/>
                                         <include reference="0Lg-9B-06K"/>
                                         <include reference="8yq-nO-iKC"/>
-                                        <include reference="WEv-pr-Qoh"/>
-                                        <include reference="hBG-uq-P6q"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -608,17 +595,17 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pL-yv-TMP" userLabel="BallsRow">
-                                <rect key="frame" x="0.0" y="602" width="365" height="65"/>
+                                <rect key="frame" x="0.0" y="602" width="375" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySF-fh-9Yg" userLabel="background">
-                                        <rect key="frame" x="0.0" y="0.0" width="365" height="65"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                         <color key="backgroundColor" red="0.66428765300000003" green="0.85163755100000005" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZE-8n-Ejo" userLabel="Red" customClass="ball">
-                                        <rect key="frame" x="7" y="13" width="45" height="45"/>
+                                        <rect key="frame" x="9" y="13" width="45" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="7rh-IF-3Si"/>
@@ -631,8 +618,92 @@
                                             <action selector="redClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SF9-uX-TQe"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5I-b0-aFU" userLabel="Yellow" customClass="ball">
+                                        <rect key="frame" x="62" y="13" width="45" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Rpt-5Q-Uya"/>
+                                            <constraint firstAttribute="width" constant="45" id="fXE-EY-dyM"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="yellowClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LhJ-rD-g8l"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UE6-O6-6Jq" userLabel="Green" customClass="ball">
+                                        <rect key="frame" x="116" y="13" width="45" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Bil-o7-Qvl"/>
+                                            <constraint firstAttribute="width" constant="45" id="Vks-xr-04g"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="greenClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1LI-9O-Hu9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZs-TC-W3V" userLabel="Brown" customClass="ball">
+                                        <rect key="frame" x="170" y="13" width="45" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="XsT-j1-Sp8"/>
+                                            <constraint firstAttribute="height" constant="45" id="h52-1r-IYN"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="brownClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s0n-Mu-Xz4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PT7-Wc-dcJ" userLabel="Blue" customClass="ball">
+                                        <rect key="frame" x="223" y="13" width="45" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="iCV-RC-VC0"/>
+                                            <constraint firstAttribute="width" constant="45" id="xUB-jn-ufX"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="blueClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IRR-PB-Dia"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuL-tE-UcR" userLabel="Pink" customClass="ball">
+                                        <rect key="frame" x="277" y="13" width="45" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="8Kt-92-Z2g"/>
+                                            <constraint firstAttribute="width" constant="45" id="c6K-aS-mfi"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pinkClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8c3-c4-Sgb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vki-Pc-ofM" userLabel="Black" customClass="ball">
+                                        <rect key="frame" x="330" y="13" width="45" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="CYA-7K-Qsk"/>
+                                            <constraint firstAttribute="width" constant="45" id="Iiv-fT-DsW"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="blackClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c5c-dz-oJl"/>
+                                        </connections>
+                                    </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TH7-8b-1E9" userLabel="RedCounter" customClass="indicator">
-                                        <rect key="frame" x="7" y="13" width="45" height="45"/>
+                                        <rect key="frame" x="9" y="13" width="45" height="45"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="2aR-Yt-WkN"/>
@@ -655,92 +726,8 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5I-b0-aFU" userLabel="Yellow" customClass="ball">
-                                        <rect key="frame" x="59" y="13" width="45" height="45"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="Rpt-5Q-Uya"/>
-                                            <constraint firstAttribute="width" constant="45" id="fXE-EY-dyM"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="yellowClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LhJ-rD-g8l"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UE6-O6-6Jq" userLabel="Green" customClass="ball">
-                                        <rect key="frame" x="111" y="13" width="45" height="45"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="Bil-o7-Qvl"/>
-                                            <constraint firstAttribute="width" constant="45" id="Vks-xr-04g"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="greenClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1LI-9O-Hu9"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZs-TC-W3V" userLabel="Brown" customClass="ball">
-                                        <rect key="frame" x="164" y="13" width="45" height="45"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="45" id="XsT-j1-Sp8"/>
-                                            <constraint firstAttribute="height" constant="45" id="h52-1r-IYN"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="brownClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s0n-Mu-Xz4"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PT7-Wc-dcJ" userLabel="Blue" customClass="ball">
-                                        <rect key="frame" x="216" y="13" width="45" height="45"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="iCV-RC-VC0"/>
-                                            <constraint firstAttribute="width" constant="45" id="xUB-jn-ufX"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="blueClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IRR-PB-Dia"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuL-tE-UcR" userLabel="Pink" customClass="ball">
-                                        <rect key="frame" x="268" y="13" width="45" height="45"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="8Kt-92-Z2g"/>
-                                            <constraint firstAttribute="width" constant="45" id="c6K-aS-mfi"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="pinkClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8c3-c4-Sgb"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vki-Pc-ofM" userLabel="Black" customClass="ball">
-                                        <rect key="frame" x="320" y="13" width="45" height="45"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="CYA-7K-Qsk"/>
-                                            <constraint firstAttribute="width" constant="45" id="Iiv-fT-DsW"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="blackClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c5c-dz-oJl"/>
-                                        </connections>
-                                    </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-I6-Kz7" userLabel="YellowCounter" customClass="indicator">
-                                        <rect key="frame" x="59" y="13" width="45" height="45"/>
+                                        <rect key="frame" x="62" y="13" width="45" height="45"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="RWn-WE-atk"/>
@@ -764,7 +751,7 @@
                                         </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPb-vB-xSH" userLabel="GreenCounter" customClass="indicator">
-                                        <rect key="frame" x="111" y="13" width="45" height="45"/>
+                                        <rect key="frame" x="116" y="13" width="45" height="45"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="9ME-QP-gX4"/>
@@ -788,7 +775,7 @@
                                         </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEw-rC-212" userLabel="BrownCounter" customClass="indicator">
-                                        <rect key="frame" x="164" y="13" width="45" height="45"/>
+                                        <rect key="frame" x="170" y="13" width="45" height="45"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="4gV-V5-18H"/>
@@ -812,7 +799,7 @@
                                         </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5S-jd-XMf" userLabel="BlueCounter" customClass="indicator">
-                                        <rect key="frame" x="216" y="13" width="45" height="45"/>
+                                        <rect key="frame" x="223" y="13" width="45" height="45"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="462-ie-Zrt"/>
@@ -836,7 +823,7 @@
                                         </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2x-gm-eHF" userLabel="PinkCounter" customClass="indicator">
-                                        <rect key="frame" x="268" y="13" width="45" height="45"/>
+                                        <rect key="frame" x="277" y="13" width="45" height="45"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="8VQ-0l-q5D"/>
@@ -860,7 +847,7 @@
                                         </variation>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yz-DB-QLU" userLabel="BlackCounter" customClass="indicator">
-                                        <rect key="frame" x="320" y="13" width="45" height="45"/>
+                                        <rect key="frame" x="330" y="13" width="45" height="45"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="k9i-TN-LKu"/>
@@ -873,6 +860,10 @@
                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
                                         </variation>
                                     </label>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ea-4W-DVN" userLabel="BallRowDisabledView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -880,10 +871,12 @@
                                     <constraint firstAttribute="height" constant="65" id="8ca-wg-Cpf"/>
                                     <constraint firstAttribute="bottom" secondItem="EZE-8n-Ejo" secondAttribute="bottom" constant="7" id="980-c0-Blh"/>
                                     <constraint firstAttribute="bottom" secondItem="Vki-Pc-ofM" secondAttribute="bottom" constant="7" id="9ge-Az-vWo"/>
+                                    <constraint firstItem="5Ea-4W-DVN" firstAttribute="leading" secondItem="7pL-yv-TMP" secondAttribute="leading" id="F4F-0a-5Mk"/>
                                     <constraint firstItem="d5S-jd-XMf" firstAttribute="leading" secondItem="PT7-Wc-dcJ" secondAttribute="leading" id="FLG-Hk-bDc"/>
                                     <constraint firstAttribute="bottom" secondItem="d5I-b0-aFU" secondAttribute="bottom" constant="7" id="GHp-Zf-aBt"/>
                                     <constraint firstItem="KPb-vB-xSH" firstAttribute="leading" secondItem="UE6-O6-6Jq" secondAttribute="leading" id="GSv-39-QnW"/>
                                     <constraint firstItem="DZs-TC-W3V" firstAttribute="leading" secondItem="WEw-rC-212" secondAttribute="leading" id="I3R-u9-24A"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Ea-4W-DVN" secondAttribute="trailing" id="Ofj-Nh-ulv"/>
                                     <constraint firstAttribute="bottom" secondItem="DZs-TC-W3V" secondAttribute="bottom" constant="7" id="Q2F-b9-Vgs"/>
                                     <constraint firstAttribute="bottom" secondItem="PuL-tE-UcR" secondAttribute="bottom" constant="7" id="UsN-1E-Qzd"/>
                                     <constraint firstItem="PuL-tE-UcR" firstAttribute="trailing" secondItem="7pL-yv-TMP" secondAttribute="trailing" multiplier="6/7" id="V35-he-HDM"/>
@@ -903,6 +896,8 @@
                                     <constraint firstItem="DZs-TC-W3V" firstAttribute="top" secondItem="WEw-rC-212" secondAttribute="top" id="rFG-2m-QJ6"/>
                                     <constraint firstAttribute="bottom" secondItem="UE6-O6-6Jq" secondAttribute="bottom" constant="7" id="sjN-3G-WK3"/>
                                     <constraint firstAttribute="bottom" secondItem="ySF-fh-9Yg" secondAttribute="bottom" id="ssa-vR-4BV"/>
+                                    <constraint firstItem="5Ea-4W-DVN" firstAttribute="top" secondItem="7pL-yv-TMP" secondAttribute="top" id="uce-ae-3yI"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Ea-4W-DVN" secondAttribute="bottom" id="unY-9m-ZVB"/>
                                     <constraint firstItem="Vki-Pc-ofM" firstAttribute="leading" secondItem="7yz-DB-QLU" secondAttribute="leading" id="uqd-7g-YdW"/>
                                     <constraint firstItem="d5I-b0-aFU" firstAttribute="trailing" secondItem="7pL-yv-TMP" secondAttribute="trailing" multiplier="2/7" id="utk-cf-E8O"/>
                                     <constraint firstItem="PT7-Wc-dcJ" firstAttribute="top" secondItem="d5S-jd-XMf" secondAttribute="top" id="vcU-pY-Bzd"/>
@@ -991,7 +986,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibx-9o-5vh">
-                                <rect key="frame" x="167.5" y="49" width="30" height="30"/>
+                                <rect key="frame" x="167" y="49" width="30" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="ZkZ-hz-Dms"/>
@@ -1017,7 +1012,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsL-R4-o6o" userLabel="Button Help">
-                                <rect key="frame" x="239.5" y="49" width="30" height="30"/>
+                                <rect key="frame" x="239" y="49" width="30" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="6tj-KZ-zE5"/>
@@ -1039,8 +1034,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="helpClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2eD-Ql-Qxw"/>
-                                    <segue destination="mmC-Gu-eX7" kind="show" identifier="Help" id="nry-RY-hIR"/>
+                                    <segue destination="OTg-J7-fRi" kind="show" identifier="presentHelp" id="Qm8-g2-S9Y"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7jH-dA-Uqi" userLabel="Button End">
@@ -1070,10 +1064,10 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csU-kT-3TD" userLabel="ShotSelection" customClass="DraggableView">
-                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                <rect key="frame" x="10" y="10" width="300" height="400"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tNB-kE-nFr" userLabel="close">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="270" y="5" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="nYw-uk-Nd1"/>
                                             <constraint firstAttribute="height" constant="25" id="riQ-AH-u4F"/>
@@ -1096,7 +1090,7 @@
                                         </connections>
                                     </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bqb-xv-LZv" userLabel="segOptions1">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="25" y="95" width="250" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="NzS-Qc-qB3"/>
                                         </constraints>
@@ -1119,7 +1113,7 @@
                                         </variation>
                                     </segmentedControl>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wpp-fM-85Y" userLabel="sefOptions2">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="25" y="138" width="250" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="rya-Ye-Tzv"/>
                                         </constraints>
@@ -1142,10 +1136,10 @@
                                         </variation>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEH-Cb-WvQ" userLabel="SnookertableView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="10.5" y="181" width="279" height="149"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snooker_table2" translatesAutoresizingMaskIntoConstraints="NO" id="Xln-Hr-uyi" userLabel="SnookerTable">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="279" height="149"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Xln-Hr-uyi" secondAttribute="height" multiplier="15:8" id="Mn7-hP-N8R"/>
                                                 </constraints>
@@ -1161,42 +1155,42 @@
                                                 </variation>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YM5-c7-OxA" userLabel="bulkLeftPocket">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="93" height="74.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="tableBulkLeftPocketPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GuV-j0-g4s"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAf-iF-3qh" userLabel="bulkRightPocket">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="0.0" y="74.5" width="93" height="74.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="tableBulkRightPocketPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vrC-fF-Bac"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8K-yG-thr" userLabel="middleLeftPocket">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="93" y="0.0" width="93" height="74.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="tableMiddleLeftPocket:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rMN-ZC-q5g"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcP-Za-Wzx" userLabel="middleRightPocket">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="93" y="74.5" width="93" height="74.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="tableMiddleRightPocket:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V7N-07-Klx"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Idg-Mj-Lu3" userLabel="bottomLeftPocket">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="186" y="0.0" width="93" height="74.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="tableBottomLeftPocket:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Stf-fh-o3j"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OfI-PC-e5T" userLabel="buttonRightPocket">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="186" y="74.5" width="93" height="74.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="tableBottomRightPocket:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iM2-a1-2yR"/>
@@ -1247,13 +1241,24 @@
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="eDJ-uZ-OYt"/>
+                                                <exclude reference="0p5-Xk-oLg"/>
+                                                <exclude reference="itb-6s-t5A"/>
+                                                <exclude reference="SWd-Rq-f9B"/>
+                                                <exclude reference="d8Y-Xp-B33"/>
+                                                <exclude reference="uDk-Tl-f6C"/>
                                                 <exclude reference="5cm-2u-3Fo"/>
                                                 <exclude reference="Lne-rG-IyT"/>
                                                 <exclude reference="rv8-6d-4Bd"/>
                                                 <exclude reference="zED-7O-fzW"/>
-                                                <exclude reference="SWd-Rq-f9B"/>
-                                                <exclude reference="d8Y-Xp-B33"/>
-                                                <exclude reference="uDk-Tl-f6C"/>
+                                                <exclude reference="YEZ-Tl-jaI"/>
+                                                <exclude reference="bIW-tI-SVO"/>
+                                                <exclude reference="g5i-Ik-ugi"/>
+                                                <exclude reference="q5m-h9-dnL"/>
+                                                <exclude reference="6YE-0n-xMT"/>
+                                                <exclude reference="D7Z-z5-RYu"/>
+                                                <exclude reference="P3u-eY-QjF"/>
+                                                <exclude reference="pzi-DM-U6s"/>
+                                                <exclude reference="sMA-oE-mRL"/>
                                                 <exclude reference="ROa-ei-30i"/>
                                                 <exclude reference="aJQ-B6-BdO"/>
                                                 <exclude reference="gwh-W5-YlT"/>
@@ -1264,17 +1269,6 @@
                                                 <exclude reference="L65-NK-1yh"/>
                                                 <exclude reference="aTf-tx-Oow"/>
                                                 <exclude reference="bG7-yk-LZu"/>
-                                                <exclude reference="YEZ-Tl-jaI"/>
-                                                <exclude reference="bIW-tI-SVO"/>
-                                                <exclude reference="g5i-Ik-ugi"/>
-                                                <exclude reference="q5m-h9-dnL"/>
-                                                <exclude reference="0p5-Xk-oLg"/>
-                                                <exclude reference="itb-6s-t5A"/>
-                                                <exclude reference="6YE-0n-xMT"/>
-                                                <exclude reference="D7Z-z5-RYu"/>
-                                                <exclude reference="P3u-eY-QjF"/>
-                                                <exclude reference="pzi-DM-U6s"/>
-                                                <exclude reference="sMA-oE-mRL"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -1289,13 +1283,24 @@
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="eDJ-uZ-OYt"/>
+                                                <include reference="0p5-Xk-oLg"/>
+                                                <include reference="itb-6s-t5A"/>
+                                                <include reference="SWd-Rq-f9B"/>
+                                                <include reference="d8Y-Xp-B33"/>
+                                                <include reference="uDk-Tl-f6C"/>
                                                 <include reference="5cm-2u-3Fo"/>
                                                 <include reference="Lne-rG-IyT"/>
                                                 <include reference="rv8-6d-4Bd"/>
                                                 <include reference="zED-7O-fzW"/>
-                                                <include reference="SWd-Rq-f9B"/>
-                                                <include reference="d8Y-Xp-B33"/>
-                                                <include reference="uDk-Tl-f6C"/>
+                                                <include reference="YEZ-Tl-jaI"/>
+                                                <include reference="bIW-tI-SVO"/>
+                                                <include reference="g5i-Ik-ugi"/>
+                                                <include reference="q5m-h9-dnL"/>
+                                                <include reference="6YE-0n-xMT"/>
+                                                <include reference="D7Z-z5-RYu"/>
+                                                <include reference="P3u-eY-QjF"/>
+                                                <include reference="pzi-DM-U6s"/>
+                                                <include reference="sMA-oE-mRL"/>
                                                 <include reference="ROa-ei-30i"/>
                                                 <include reference="aJQ-B6-BdO"/>
                                                 <include reference="gwh-W5-YlT"/>
@@ -1306,22 +1311,11 @@
                                                 <include reference="L65-NK-1yh"/>
                                                 <include reference="aTf-tx-Oow"/>
                                                 <include reference="bG7-yk-LZu"/>
-                                                <include reference="YEZ-Tl-jaI"/>
-                                                <include reference="bIW-tI-SVO"/>
-                                                <include reference="g5i-Ik-ugi"/>
-                                                <include reference="q5m-h9-dnL"/>
-                                                <include reference="0p5-Xk-oLg"/>
-                                                <include reference="itb-6s-t5A"/>
-                                                <include reference="6YE-0n-xMT"/>
-                                                <include reference="D7Z-z5-RYu"/>
-                                                <include reference="P3u-eY-QjF"/>
-                                                <include reference="pzi-DM-U6s"/>
-                                                <include reference="sMA-oE-mRL"/>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="56C198BC-549C-4F24-8F22-3C7927282EDC" translatesAutoresizingMaskIntoConstraints="NO" id="T4u-pd-ztu">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EFC5E3E4-0B4D-4065-8A05-CE40DD35085D" translatesAutoresizingMaskIntoConstraints="NO" id="T4u-pd-ztu">
+                                        <rect key="frame" x="25" y="20" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Tut-lo-P4i"/>
                                             <constraint firstAttribute="width" constant="50" id="ewh-XZ-Om8"/>
@@ -1340,7 +1334,7 @@
                                         </variation>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljX-Wb-aGW" userLabel="ShotSelectPreviousButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="10" y="355" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="BDM-M4-GWP"/>
                                             <constraint firstAttribute="width" constant="35" id="J5c-31-fzI"/>
@@ -1366,7 +1360,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UtN-Fg-Vay" userLabel="ShotSelectNextButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="255" y="355" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="GRQ-3u-zJX"/>
                                             <constraint firstAttribute="width" constant="35" id="Y96-H7-B09"/>
@@ -1392,10 +1386,10 @@
                                         </connections>
                                     </button>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cbp-lg-9v8" userLabel="ShotFoulButtonView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="75" y="340" width="150" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVd-uB-e4H" userLabel="FoulButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="50" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="41G-yF-QAO"/>
                                                     <constraint firstAttribute="width" constant="50" id="uo0-on-dHS"/>
@@ -1452,10 +1446,10 @@
                                         </variation>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UzZ-xD-wfE" userLabel="ShotSafetyButtonView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="75" y="340" width="150" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6m-nf-Fhy" userLabel="SafetyButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="50" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="o1f-TR-pWe"/>
                                                     <constraint firstAttribute="width" constant="50" id="qiN-zZ-dZB"/>
@@ -1512,10 +1506,10 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5f8-wD-AiE" userLabel="ShotPotMissButtonView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="75" y="340" width="150" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CL5-CK-hfs" userLabel="PottedButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="10" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="ZNY-Ut-chI"/>
                                                     <constraint firstAttribute="width" constant="50" id="dI6-dN-jKo"/>
@@ -1541,7 +1535,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQY-lq-lOf" userLabel="MissedButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <rect key="frame" x="90" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="RDB-D5-Lc8"/>
                                                     <constraint firstAttribute="width" constant="50" id="au1-RQ-pgc"/>
@@ -1606,7 +1600,7 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-Oe-XWf" userLabel="player">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="90" y="30" width="185" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="gHx-2S-FZ1"/>
                                         </constraints>
@@ -1675,34 +1669,34 @@
                                     <mask key="constraints">
                                         <exclude reference="YUD-uI-Wqn"/>
                                         <exclude reference="ksa-11-954"/>
-                                        <exclude reference="23c-UU-px9"/>
-                                        <exclude reference="6Sl-Rq-oEt"/>
-                                        <exclude reference="SLV-64-9wV"/>
-                                        <exclude reference="2NV-Ke-BX5"/>
-                                        <exclude reference="Q0T-yI-etQ"/>
-                                        <exclude reference="qnw-eq-Csh"/>
-                                        <exclude reference="1Bk-rb-06K"/>
-                                        <exclude reference="qbM-Ur-yKO"/>
-                                        <exclude reference="xW9-6m-5w9"/>
+                                        <exclude reference="I3o-Tl-frz"/>
+                                        <exclude reference="stJ-yp-Cvt"/>
                                         <exclude reference="1eo-JJ-Mef"/>
                                         <exclude reference="O8t-Af-htG"/>
                                         <exclude reference="OBz-0W-4pb"/>
-                                        <exclude reference="I3o-Tl-frz"/>
-                                        <exclude reference="stJ-yp-Cvt"/>
-                                        <exclude reference="Zmd-N9-xbg"/>
-                                        <exclude reference="wlB-yp-Z4R"/>
-                                        <exclude reference="Byc-Dg-7VZ"/>
-                                        <exclude reference="Ewo-tL-fUZ"/>
-                                        <exclude reference="hto-yH-aop"/>
+                                        <exclude reference="2NV-Ke-BX5"/>
+                                        <exclude reference="Q0T-yI-etQ"/>
+                                        <exclude reference="qnw-eq-Csh"/>
+                                        <exclude reference="75S-Og-ShN"/>
+                                        <exclude reference="82f-gr-Ox6"/>
+                                        <exclude reference="p1A-hV-yih"/>
+                                        <exclude reference="86r-h4-Hqf"/>
+                                        <exclude reference="awX-SQ-PjT"/>
                                         <exclude reference="hrm-7L-IGe"/>
                                         <exclude reference="xh3-vx-1ao"/>
                                         <exclude reference="LDo-Jv-c0f"/>
                                         <exclude reference="mym-Kt-bjL"/>
-                                        <exclude reference="86r-h4-Hqf"/>
-                                        <exclude reference="awX-SQ-PjT"/>
-                                        <exclude reference="75S-Og-ShN"/>
-                                        <exclude reference="82f-gr-Ox6"/>
-                                        <exclude reference="p1A-hV-yih"/>
+                                        <exclude reference="23c-UU-px9"/>
+                                        <exclude reference="6Sl-Rq-oEt"/>
+                                        <exclude reference="SLV-64-9wV"/>
+                                        <exclude reference="1Bk-rb-06K"/>
+                                        <exclude reference="qbM-Ur-yKO"/>
+                                        <exclude reference="xW9-6m-5w9"/>
+                                        <exclude reference="Byc-Dg-7VZ"/>
+                                        <exclude reference="Ewo-tL-fUZ"/>
+                                        <exclude reference="hto-yH-aop"/>
+                                        <exclude reference="Zmd-N9-xbg"/>
+                                        <exclude reference="wlB-yp-Z4R"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -1722,34 +1716,34 @@
                                     <mask key="constraints">
                                         <include reference="YUD-uI-Wqn"/>
                                         <include reference="ksa-11-954"/>
-                                        <include reference="23c-UU-px9"/>
-                                        <include reference="6Sl-Rq-oEt"/>
-                                        <include reference="SLV-64-9wV"/>
-                                        <include reference="2NV-Ke-BX5"/>
-                                        <include reference="Q0T-yI-etQ"/>
-                                        <include reference="qnw-eq-Csh"/>
-                                        <include reference="1Bk-rb-06K"/>
-                                        <include reference="qbM-Ur-yKO"/>
-                                        <include reference="xW9-6m-5w9"/>
+                                        <include reference="I3o-Tl-frz"/>
+                                        <include reference="stJ-yp-Cvt"/>
                                         <include reference="1eo-JJ-Mef"/>
                                         <include reference="O8t-Af-htG"/>
                                         <include reference="OBz-0W-4pb"/>
-                                        <include reference="I3o-Tl-frz"/>
-                                        <include reference="stJ-yp-Cvt"/>
-                                        <include reference="Zmd-N9-xbg"/>
-                                        <include reference="wlB-yp-Z4R"/>
-                                        <include reference="Byc-Dg-7VZ"/>
-                                        <include reference="Ewo-tL-fUZ"/>
-                                        <include reference="hto-yH-aop"/>
+                                        <include reference="2NV-Ke-BX5"/>
+                                        <include reference="Q0T-yI-etQ"/>
+                                        <include reference="qnw-eq-Csh"/>
+                                        <include reference="75S-Og-ShN"/>
+                                        <include reference="82f-gr-Ox6"/>
+                                        <include reference="p1A-hV-yih"/>
+                                        <include reference="86r-h4-Hqf"/>
+                                        <include reference="awX-SQ-PjT"/>
                                         <include reference="hrm-7L-IGe"/>
                                         <include reference="xh3-vx-1ao"/>
                                         <include reference="LDo-Jv-c0f"/>
                                         <include reference="mym-Kt-bjL"/>
-                                        <include reference="86r-h4-Hqf"/>
-                                        <include reference="awX-SQ-PjT"/>
-                                        <include reference="75S-Og-ShN"/>
-                                        <include reference="82f-gr-Ox6"/>
-                                        <include reference="p1A-hV-yih"/>
+                                        <include reference="23c-UU-px9"/>
+                                        <include reference="6Sl-Rq-oEt"/>
+                                        <include reference="SLV-64-9wV"/>
+                                        <include reference="1Bk-rb-06K"/>
+                                        <include reference="qbM-Ur-yKO"/>
+                                        <include reference="xW9-6m-5w9"/>
+                                        <include reference="Byc-Dg-7VZ"/>
+                                        <include reference="Ewo-tL-fUZ"/>
+                                        <include reference="hto-yH-aop"/>
+                                        <include reference="Zmd-N9-xbg"/>
+                                        <include reference="wlB-yp-Z4R"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1825,7 +1819,6 @@
                             <constraint firstItem="Iid-KG-oAz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="0Z6-G8-Udf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="q0Q-j7-8Fb" secondAttribute="trailing" constant="-103" id="1Dj-ok-6RQ"/>
                             <constraint firstItem="q0Q-j7-8Fb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="21g-Iv-Ibl"/>
-                            <constraint firstItem="0Gp-S9-NhC" firstAttribute="leading" secondItem="BVk-D7-AyH" secondAttribute="leading" id="2u4-CX-I7x"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0ie-m5-kVx" secondAttribute="bottom" id="34H-Ws-oPB"/>
                             <constraint firstItem="zbo-VC-TiV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="55" id="3JQ-fI-eje">
                                 <variation key="heightClass=compact" constant="10"/>
@@ -1833,8 +1826,6 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="q0Q-j7-8Fb" secondAttribute="bottom" id="6a1-75-2QN"/>
                             <constraint firstAttribute="trailing" secondItem="Iid-KG-oAz" secondAttribute="trailing" id="8EO-gS-VSj"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yuN-IZ-g5v" secondAttribute="bottom" constant="40" id="8NW-8H-3vV"/>
-                            <constraint firstItem="BVk-D7-AyH" firstAttribute="leading" secondItem="zbo-VC-TiV" secondAttribute="trailing" constant="-262" id="9yg-br-nxu"/>
-                            <constraint firstItem="BVk-D7-AyH" firstAttribute="top" secondItem="zbo-VC-TiV" secondAttribute="bottom" id="BJR-ah-0vc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Snw-xa-VfU" secondAttribute="trailing" multiplier="5/1.75" id="D2D-Xe-3fv"/>
                             <constraint firstItem="0Gp-S9-NhC" firstAttribute="top" secondItem="HDt-8a-IaH" secondAttribute="bottom" constant="-75" id="GFS-3s-V6z"/>
                             <constraint firstItem="0Gp-S9-NhC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K8v-Od-Q1t"/>
@@ -1844,7 +1835,7 @@
                             <constraint firstItem="zbo-VC-TiV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-10" id="O5Y-VE-LYZ"/>
                             <constraint firstItem="IVi-CE-5nn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-15" id="Paq-D6-GvP"/>
                             <constraint firstItem="fl5-Qi-2DZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S2m-Vj-yFM"/>
-                            <constraint firstItem="0Gp-S9-NhC" firstAttribute="width" secondItem="BVk-D7-AyH" secondAttribute="width" id="TSV-eO-lpM"/>
+                            <constraint firstItem="0Gp-S9-NhC" firstAttribute="width" secondItem="BVk-D7-AyH" secondAttribute="height" id="TSV-eO-lpM"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Iid-KG-oAz" secondAttribute="bottom" id="VeO-lC-b7X"/>
                             <constraint firstItem="fl5-Qi-2DZ" firstAttribute="bottom" secondItem="0Gp-S9-NhC" secondAttribute="bottom" constant="-25" id="Vxe-2y-jTV"/>
                             <constraint firstItem="0Gp-S9-NhC" firstAttribute="height" secondItem="BVk-D7-AyH" secondAttribute="height" id="WuD-HH-pYZ"/>
@@ -1860,13 +1851,14 @@
                             <constraint firstItem="ibx-9o-5vh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="f1z-wk-mdZ"/>
                             <constraint firstItem="IVi-CE-5nn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gAT-2x-qkf"/>
                             <constraint firstItem="Snw-xa-VfU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="gWw-xC-Hzh"/>
+                            <constraint firstItem="BVk-D7-AyH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="hwS-6j-lTO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0ie-m5-kVx" secondAttribute="trailing" constant="-60" id="jCa-Wi-wGD"/>
                             <constraint firstItem="0Gp-S9-NhC" firstAttribute="height" secondItem="BVk-D7-AyH" secondAttribute="height" id="jOe-rx-w4Z"/>
                             <constraint firstItem="1ou-rw-GfI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="35" id="ksD-Ip-CtH"/>
                             <constraint firstItem="q0Q-j7-8Fb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lOZ-rG-DDB"/>
-                            <constraint firstItem="0Gp-S9-NhC" firstAttribute="width" secondItem="BVk-D7-AyH" secondAttribute="width" id="m7D-Ak-BDC"/>
+                            <constraint firstAttribute="trailing" secondItem="BVk-D7-AyH" secondAttribute="trailing" constant="10" id="p0G-e1-QwC"/>
                             <constraint firstItem="1ou-rw-GfI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pCg-Ht-5OH"/>
-                            <constraint firstAttribute="trailing" secondItem="7pL-yv-TMP" secondAttribute="trailing" constant="10" id="rBT-bA-90B"/>
+                            <constraint firstAttribute="trailing" secondItem="7pL-yv-TMP" secondAttribute="trailing" id="rBT-bA-90B"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IVi-CE-5nn" secondAttribute="trailing" constant="-15" id="rDh-XD-evl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zbo-VC-TiV" secondAttribute="trailing" constant="-10" id="rNg-Y3-ptu"/>
                             <constraint firstItem="HDt-8a-IaH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="st8-pW-6UF"/>
@@ -1876,14 +1868,12 @@
                             </constraint>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IVi-CE-5nn" secondAttribute="bottom" id="x71-m0-NER"/>
                             <constraint firstItem="0ie-m5-kVx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="xY7-rh-bMW"/>
-                            <constraint firstAttribute="centerX" secondItem="BVk-D7-AyH" secondAttribute="centerX" id="z2e-Ak-sml"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="HDt-8a-IaH"/>
                                 <exclude reference="0Gp-S9-NhC"/>
                                 <exclude reference="fl5-Qi-2DZ"/>
-                                <exclude reference="BVk-D7-AyH"/>
                                 <exclude reference="yuN-IZ-g5v"/>
                                 <exclude reference="0ie-m5-kVx"/>
                                 <exclude reference="8Km-uF-Tfd"/>
@@ -1896,50 +1886,42 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="ufA-pd-X2T"/>
-                                <exclude reference="O5Y-VE-LYZ"/>
-                                <exclude reference="rNg-Y3-ptu"/>
                                 <exclude reference="gWw-xC-Hzh"/>
                                 <exclude reference="f1z-wk-mdZ"/>
                                 <exclude reference="YRD-Dp-83v"/>
-                                <exclude reference="2u4-CX-I7x"/>
+                                <exclude reference="czY-rK-MDa"/>
+                                <exclude reference="NVZ-yF-5w7"/>
+                                <exclude reference="e0Y-YV-A4X"/>
+                                <exclude reference="O5Y-VE-LYZ"/>
+                                <exclude reference="rNg-Y3-ptu"/>
+                                <exclude reference="0R4-lL-Pd6"/>
+                                <exclude reference="34H-Ws-oPB"/>
+                                <exclude reference="8NW-8H-3vV"/>
+                                <exclude reference="VeO-lC-b7X"/>
+                                <exclude reference="st8-pW-6UF"/>
+                                <exclude reference="S2m-Vj-yFM"/>
+                                <exclude reference="Vxe-2y-jTV"/>
                                 <exclude reference="GFS-3s-V6z"/>
                                 <exclude reference="K8v-Od-Q1t"/>
                                 <exclude reference="TSV-eO-lpM"/>
                                 <exclude reference="WuD-HH-pYZ"/>
                                 <exclude reference="bac-pq-ApZ"/>
                                 <exclude reference="jOe-rx-w4Z"/>
-                                <exclude reference="m7D-Ak-BDC"/>
-                                <exclude reference="0R4-lL-Pd6"/>
-                                <exclude reference="9yg-br-nxu"/>
-                                <exclude reference="BJR-ah-0vc"/>
-                                <exclude reference="z2e-Ak-sml"/>
-                                <exclude reference="st8-pW-6UF"/>
-                                <exclude reference="NVZ-yF-5w7"/>
-                                <exclude reference="e0Y-YV-A4X"/>
-                                <exclude reference="czY-rK-MDa"/>
+                                <exclude reference="Zey-w6-xvE"/>
                                 <exclude reference="0Z6-G8-Udf"/>
                                 <exclude reference="8EO-gS-VSj"/>
                                 <exclude reference="jCa-Wi-wGD"/>
                                 <exclude reference="xY7-rh-bMW"/>
-                                <exclude reference="Zey-w6-xvE"/>
-                                <exclude reference="S2m-Vj-yFM"/>
-                                <exclude reference="Vxe-2y-jTV"/>
-                                <exclude reference="34H-Ws-oPB"/>
-                                <exclude reference="8NW-8H-3vV"/>
-                                <exclude reference="VeO-lC-b7X"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="subviews">
-                                <include reference="BVk-D7-AyH"/>
                                 <exclude reference="ibx-9o-5vh"/>
                                 <exclude reference="MsL-R4-o6o"/>
                                 <exclude reference="7jH-dA-Uqi"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="0R4-lL-Pd6"/>
-                                <include reference="BJR-ah-0vc"/>
-                                <include reference="z2e-Ak-sml"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1947,7 +1929,6 @@
                                 <include reference="HDt-8a-IaH"/>
                                 <include reference="0Gp-S9-NhC"/>
                                 <include reference="fl5-Qi-2DZ"/>
-                                <include reference="BVk-D7-AyH"/>
                                 <include reference="yuN-IZ-g5v"/>
                                 <include reference="0ie-m5-kVx"/>
                                 <include reference="8Km-uF-Tfd"/>
@@ -1955,40 +1936,36 @@
                                 <include reference="ibx-9o-5vh"/>
                                 <include reference="MsL-R4-o6o"/>
                                 <include reference="7jH-dA-Uqi"/>
-                                <exclude reference="csU-kT-3TD"/>
                                 <include reference="Iid-KG-oAz"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="ufA-pd-X2T"/>
-                                <include reference="O5Y-VE-LYZ"/>
-                                <include reference="rNg-Y3-ptu"/>
                                 <include reference="gWw-xC-Hzh"/>
                                 <include reference="f1z-wk-mdZ"/>
                                 <include reference="YRD-Dp-83v"/>
-                                <include reference="2u4-CX-I7x"/>
+                                <include reference="czY-rK-MDa"/>
+                                <include reference="NVZ-yF-5w7"/>
+                                <include reference="e0Y-YV-A4X"/>
+                                <include reference="O5Y-VE-LYZ"/>
+                                <include reference="rNg-Y3-ptu"/>
+                                <include reference="0R4-lL-Pd6"/>
+                                <include reference="34H-Ws-oPB"/>
+                                <include reference="8NW-8H-3vV"/>
+                                <include reference="VeO-lC-b7X"/>
+                                <include reference="st8-pW-6UF"/>
+                                <include reference="S2m-Vj-yFM"/>
+                                <include reference="Vxe-2y-jTV"/>
                                 <include reference="GFS-3s-V6z"/>
                                 <include reference="K8v-Od-Q1t"/>
                                 <include reference="TSV-eO-lpM"/>
                                 <include reference="WuD-HH-pYZ"/>
                                 <include reference="bac-pq-ApZ"/>
                                 <include reference="jOe-rx-w4Z"/>
-                                <include reference="m7D-Ak-BDC"/>
-                                <include reference="0R4-lL-Pd6"/>
-                                <include reference="z2e-Ak-sml"/>
-                                <include reference="st8-pW-6UF"/>
-                                <include reference="NVZ-yF-5w7"/>
-                                <include reference="e0Y-YV-A4X"/>
-                                <include reference="czY-rK-MDa"/>
+                                <include reference="Zey-w6-xvE"/>
                                 <include reference="0Z6-G8-Udf"/>
                                 <include reference="8EO-gS-VSj"/>
                                 <include reference="jCa-Wi-wGD"/>
                                 <include reference="xY7-rh-bMW"/>
-                                <include reference="Zey-w6-xvE"/>
-                                <include reference="S2m-Vj-yFM"/>
-                                <include reference="Vxe-2y-jTV"/>
-                                <include reference="34H-Ws-oPB"/>
-                                <include reference="8NW-8H-3vV"/>
-                                <include reference="VeO-lC-b7X"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -1998,11 +1975,6 @@
                                 <exclude reference="7jH-dA-Uqi"/>
                             </mask>
                         </variation>
-                        <variation key="heightClass=compact-widthClass=regular">
-                            <mask key="constraints">
-                                <include reference="9yg-br-nxu"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="BC4-Kb-rN3"/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -2010,9 +1982,12 @@
                     <connections>
                         <outlet property="activeBreak" destination="eUf-ou-jKw" id="BoG-RZ-2ag"/>
                         <outlet property="ballCollectionView" destination="7pL-yv-TMP" id="Z0L-UA-uQK"/>
+                        <outlet property="ballRowDisabledView" destination="5Ea-4W-DVN" id="bq2-Ak-mIs"/>
                         <outlet property="ballsBackLabel" destination="ySF-fh-9Yg" id="iL6-il-zS9"/>
                         <outlet property="blackIndicator" destination="7yz-DB-QLU" id="B1Y-aJ-DHX"/>
                         <outlet property="blueIndicator" destination="d5S-jd-XMf" id="0Lz-P6-ya2"/>
+                        <outlet property="breakViewLeadingConstraint" destination="hwS-6j-lTO" id="Ixw-Q7-tt7"/>
+                        <outlet property="breakViewTrailingConstraint" destination="p0G-e1-QwC" id="XR9-l2-6xO"/>
                         <outlet property="brownIndicator" destination="WEw-rC-212" id="9xl-jc-YxN"/>
                         <outlet property="buttonAdjust" destination="Snw-xa-VfU" id="ah0-9C-Y6o"/>
                         <outlet property="buttonBlack" destination="Vki-Pc-ofM" id="x6x-C7-Oz8"/>
@@ -2038,7 +2013,6 @@
                         <outlet property="disabledView" destination="0ie-m5-kVx" id="Y7B-TQ-Vn6"/>
                         <outlet property="foulLabel" destination="zcf-md-cih" id="Bt5-aB-Wqb"/>
                         <outlet property="greenIndicator" destination="KPb-vB-xSH" id="CwS-LT-IGR"/>
-                        <outlet property="helpView" destination="SoA-cO-ODd" id="Md8-hH-GPZ"/>
                         <outlet property="imagePottedBall" destination="vPY-GV-iZp" id="vLT-Kp-Zfn"/>
                         <outlet property="labelCongratDetail" destination="dgd-Kw-E8R" id="nEB-M5-rUl"/>
                         <outlet property="labelCongratsMessage" destination="vUX-FU-HWj" id="aMg-6Q-5V3"/>
@@ -2110,10 +2084,11 @@
                                         <rect key="frame" x="0.0" y="50" width="343" height="607"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28K-B7-XKy" userLabel="mainHelp">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="3500"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="2500"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJ5-ML-md5" userLabel="HeaderHelp">
                                                         <rect key="frame" x="5" y="5" width="333" height="150"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="150" id="8Wr-hL-Zzk"/>
                                                         </constraints>
@@ -2132,111 +2107,66 @@
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="helpSSM18.PNG" translatesAutoresizingMaskIntoConstraints="NO" id="z6v-6I-w6j" userLabel="helpImage">
-                                                        <rect key="frame" x="5" y="160" width="333" height="520"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="520" id="ZNy-Rx-mNu"/>
-                                                        </constraints>
-                                                        <variation key="default">
-                                                            <mask key="constraints">
-                                                                <exclude reference="ZNy-Rx-mNu"/>
-                                                            </mask>
-                                                        </variation>
-                                                        <variation key="widthClass=compact">
-                                                            <mask key="constraints">
-                                                                <include reference="ZNy-Rx-mNu"/>
-                                                            </mask>
-                                                        </variation>
-                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rK-hu-SgL" userLabel="FooterHelp">
-                                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <rect key="frame" x="5" y="165" width="300" height="3325"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <string key="text">-+ PLAYER NAME SETUP +-
-Tap the players avatar and the player is in view.  Tapping the expanded avatar allows a photo of the player to be taken and used.  The players name may also be edited along with the email address.  
+Tap the players avatar from the scorebord and the player detail is placed in view.  Tapping the expanded avatar allows a photo of the player to be taken and used.  The players name may also be edited along with their email address.  
 
 -+ SIMPLE USAGE +-
-Tap on the range of coloured balls at the foot of the screen to add to current players break.  A player can be switched by pressing either the name or the current frame score in the scoreboard section directly.  
+From the scoreboard tap on the range of coloured balls at the foot of the screen to add to current players break.  A player can be switched by pressing either the name or the current frame score in the scoreboard section directly.  
 
-The large 'break ball' keeps count of the current break. When a break is finished make sure the player who made the break is highlighted (white text denotes selected player) and tap the break ball to give that player the points in his/her frame.
+The large 'break ball' keeps count of the active break. When a break is finished make sure the player who made the break is highlighted (white text denotes selected player) and tap the break ball to finalize the break and give that player the points in his/her frame.
 
-If you make a mistake before submitting the break; tap the 'undo' button.  It will prompt you to choose between canceling last shot or the whole break.  
+If you make a mistake before submitting the break; tap the 'undo' button.  It will prompt you to choose between canceling last shot or a complete rerack.  
 
-Fouls are added by turning the toggle on, selecting the player who fouled and lastly clicking the colour to denote the points which will be added to the opposing players score.  It is possible for fouls to end an existing break. 
+Fouls are added by turning the toggle on, selecting the player who fouled and lastly clicking the colour to denote the points which will be added to the opposing players score.  It is possible for fouls to end an existing break.   A frame can be completed by clicking ‘New’ button.  If scores tied you will be unable to proceed until there is a clear winner.
 
--+ ADVANCED TRACKING +-
-When selecting the colour on the lower ball rack keep your finger depressed for 1 second and a selection view will appear. Here you are able to track further detail on a shot.  Pot and Miss are the most commonly used recorded shot. You can rate the distance of the pot/miss and also the skill level involved.  Flukes can also be logged!   
-
-Here you can rate a safety and also provide further information about a foul that may have been committed.  After the selection is made the normal view returns.  The full detail of pockets is not represented in the statistics in this version of the app.  It will be available soon.
 
 -+ GENERAL DETAILS +-
-If you make a mistake after accepting the break you can 'Undo' the last whole break.  Also available on this option is the ability to rerack the whole frame in one go.
-
-Swipe from right to left on the scoreboard will display the Frame Statistic view.    'More' buttons beside the player avatars provide statistics for each player. The 'More' button next to the match/frame selection when a frame is in focus (line graph) allows you to step through the frame highlighting the entry point on the graph.  Each break detail is shown.  Pressing a ball in a break provides further expansion of the shot.     
-Using +/- on the frame graph display allows you to roll through past frames as well as the current one. 
-A frame can be completed by clicking ‘New’ button.  If scores tied you will be unable to proceed until there is a clear winner.
+If you make a mistake after accepting the break you can 'Undo' the last whole break.  Also available while there is no active break on this option is the ability to rerack the whole frame in one go.
+ -+ STATISTICS +-
+Swiping from right to left on the scoreboard will display the Statistic view of the current match.    Touching the player avatars provide statistics for each player. The 3 dot 'More' button next to the match/frame selection is available from the frame line graphs.  This allows you to step through the frame highlighting the entry point on the graph.  Each break detail is shown.  Touching a ball in a break provides further expansion of the shot.      To the right side to the 3 dot 'More' button is the 3 lines button.  Again only when frame line graphs are in view can this option be displayed.  It shows the detais on visits in order of latest first.  
+Back to the main statistic display, using +/- on the frame graph allows you to roll through past frames as well as the current one. 
 
 -+ CLOSING THE MATCH +-
 Once the match is completed tap 'End' to close the match.  If the current frame has scores you will be asked if you want to include it in the final match statistics. Once the match ends you have a variety of choices.  You can send an email with statistics to each player.  This contains also a data file that can allow users to export into either a spreadsheet or import into another device with Snooker Score Master installed.  Alternatively you can just keep the match data, it will be available from the players selection view.  The last option available is to scrap the match and not save any data.
- You will be able to pick up where you left off if your device runs out of power.  In the lite version only data for a single match is possible!  -+ Other Views +- Tapping a players avatar on the scoreboard presnts the Player Detail view.  Green border here are win percentages, red loss pecentages and orange drawn matches.  You may edit the name or email address. pressing the first icon from the left bottom saves the changes and brings you back to the scoreboard.    To select another player or add a new one press the second icon.  From the next view you can click New or select a different user.  The third icon from the left side provides head to head detail for current player.   From the headTohead view you may select an opponent and get his/her headTohead details.  The last icon presents all matches that have either been played on the device or imported.  Selecting a match opens up the familiar statistics view.  Exporting of a match can be made from the presented graph view by clicking the bottom far right export button.  HAPPY SNOOKER-ING!</string>
-                                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+ You will be able to pick up where you left off if your device runs out of power.  In the lite version only data for a single match is possible!  -+ Other Things +- Tapping a players avatar on the scoreboard presnts the Player Detail view.  Green border here are win percentages, red loss pecentages and orange drawn matches.  You may edit the name or email address. pressing the first icon from the left bottom saves the changes and brings you back to the scoreboard.    To select another player or add a new one press the second icon.  From the next view you can click New or select a different user.  The third icon from the left side provides head to head detail for current player.   From the headTohead view you may select an opponent and get his/her headTohead details.  The last icon presents all matches that have either been played on the device or imported.  Selecting a match opens up the familiar statistics view.  Exporting of a match can be made from the presented graph view by clicking the bottom far right export button.  HAPPY SNOOKER-ING!</string>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                         <variation key="widthClass=compact">
-                                                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                         </variation>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="qJ5-ML-md5" firstAttribute="leading" secondItem="28K-B7-XKy" secondAttribute="leading" constant="5" id="23L-ox-TvO"/>
-                                                    <constraint firstItem="1rK-hu-SgL" firstAttribute="top" secondItem="z6v-6I-w6j" secondAttribute="bottom" constant="20" id="8PE-ab-F9R"/>
-                                                    <constraint firstAttribute="bottom" secondItem="1rK-hu-SgL" secondAttribute="bottom" id="Kg7-JV-bF3"/>
-                                                    <constraint firstAttribute="trailing" secondItem="1rK-hu-SgL" secondAttribute="trailing" constant="5" id="Xxg-NX-PZx"/>
-                                                    <constraint firstItem="qJ5-ML-md5" firstAttribute="top" secondItem="28K-B7-XKy" secondAttribute="top" constant="5" id="Yo6-dT-7PR"/>
-                                                    <constraint firstAttribute="trailing" secondItem="qJ5-ML-md5" secondAttribute="trailing" constant="5" id="l1W-A0-u6x"/>
-                                                    <constraint firstItem="1rK-hu-SgL" firstAttribute="leading" secondItem="28K-B7-XKy" secondAttribute="leading" constant="5" id="p1J-lz-Zpt"/>
-                                                    <constraint firstAttribute="height" constant="3500" id="rjL-7Q-IzF"/>
-                                                    <constraint firstItem="z6v-6I-w6j" firstAttribute="leading" secondItem="28K-B7-XKy" secondAttribute="leading" constant="5" id="sJO-AK-agd"/>
-                                                    <constraint firstAttribute="trailing" secondItem="z6v-6I-w6j" secondAttribute="trailing" constant="5" id="usZ-Zi-iN1"/>
-                                                    <constraint firstItem="z6v-6I-w6j" firstAttribute="top" secondItem="qJ5-ML-md5" secondAttribute="bottom" constant="5" id="zmL-p6-1BM"/>
+                                                    <constraint firstItem="1rK-hu-SgL" firstAttribute="top" secondItem="qJ5-ML-md5" secondAttribute="bottom" constant="10" id="5HZ-sw-qab"/>
+                                                    <constraint firstAttribute="bottom" secondItem="1rK-hu-SgL" secondAttribute="bottom" constant="10" id="Adp-Gv-OhD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="qJ5-ML-md5" secondAttribute="trailing" constant="5" id="Zs4-YO-a8R"/>
+                                                    <constraint firstItem="1rK-hu-SgL" firstAttribute="leading" secondItem="28K-B7-XKy" secondAttribute="leading" constant="5" id="bwA-vv-dO5"/>
+                                                    <constraint firstItem="qJ5-ML-md5" firstAttribute="top" secondItem="28K-B7-XKy" secondAttribute="top" constant="5" id="cg3-T6-MXV"/>
+                                                    <constraint firstItem="qJ5-ML-md5" firstAttribute="leading" secondItem="28K-B7-XKy" secondAttribute="leading" constant="5" id="fPO-so-Iqz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="1rK-hu-SgL" secondAttribute="trailing" constant="5" id="qA0-Zp-tUt"/>
+                                                    <constraint firstAttribute="height" constant="2500" id="rjL-7Q-IzF"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="subviews">
                                                         <exclude reference="qJ5-ML-md5"/>
-                                                        <exclude reference="z6v-6I-w6j"/>
-                                                    </mask>
-                                                    <mask key="constraints">
-                                                        <exclude reference="23L-ox-TvO"/>
-                                                        <exclude reference="Yo6-dT-7PR"/>
-                                                        <exclude reference="l1W-A0-u6x"/>
-                                                        <exclude reference="8PE-ab-F9R"/>
-                                                        <exclude reference="sJO-AK-agd"/>
-                                                        <exclude reference="usZ-Zi-iN1"/>
-                                                        <exclude reference="zmL-p6-1BM"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="widthClass=compact">
                                                     <mask key="subviews">
                                                         <include reference="qJ5-ML-md5"/>
-                                                        <include reference="z6v-6I-w6j"/>
-                                                        <include reference="1rK-hu-SgL"/>
                                                     </mask>
                                                     <mask key="constraints">
                                                         <include reference="rjL-7Q-IzF"/>
-                                                        <include reference="23L-ox-TvO"/>
-                                                        <include reference="Yo6-dT-7PR"/>
-                                                        <include reference="l1W-A0-u6x"/>
-                                                        <include reference="8PE-ab-F9R"/>
-                                                        <include reference="Kg7-JV-bF3"/>
-                                                        <include reference="Xxg-NX-PZx"/>
-                                                        <include reference="p1J-lz-Zpt"/>
-                                                        <include reference="sJO-AK-agd"/>
-                                                        <include reference="usZ-Zi-iN1"/>
-                                                        <include reference="zmL-p6-1BM"/>
                                                     </mask>
                                                 </variation>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="28K-B7-XKy" secondAttribute="width" id="4EN-uj-lqQ"/>
                                             <constraint firstAttribute="bottom" secondItem="28K-B7-XKy" secondAttribute="bottom" id="HxK-d1-hXg"/>
@@ -2254,9 +2184,6 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
-                                            <mask key="subviews">
-                                                <include reference="28K-B7-XKy"/>
-                                            </mask>
                                             <mask key="constraints">
                                                 <include reference="4EN-uj-lqQ"/>
                                                 <include reference="HxK-d1-hXg"/>
@@ -2266,7 +2193,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                             </mask>
                                         </variation>
                                     </scrollView>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXJ-4i-OR4">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXJ-4i-OR4">
                                         <rect key="frame" x="10" y="10" width="323" height="30"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -2298,7 +2225,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="ejw-bb-xGO" firstAttribute="top" secondItem="yXJ-4i-OR4" secondAttribute="bottom" constant="10" id="0nH-1a-dBJ"/>
                                     <constraint firstAttribute="trailing" secondItem="ejw-bb-xGO" secondAttribute="trailing" id="9SP-76-gPe"/>
@@ -2313,7 +2240,6 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
-                                        <exclude reference="ejw-bb-xGO"/>
                                         <exclude reference="yXJ-4i-OR4"/>
                                     </mask>
                                     <mask key="constraints">
@@ -2328,7 +2254,6 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="subviews">
-                                        <include reference="ejw-bb-xGO"/>
                                         <include reference="yXJ-4i-OR4"/>
                                     </mask>
                                     <mask key="constraints">
@@ -2343,7 +2268,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.20830620659999999" green="0.51784939240000005" blue="0.21842447919999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SoA-cO-ODd" firstAttribute="top" secondItem="qzR-JH-C7u" secondAttribute="topMargin" id="2Ib-AM-UzY"/>
                             <constraint firstItem="UTF-3R-NHW" firstAttribute="top" secondItem="SoA-cO-ODd" secondAttribute="bottom" id="8Wc-w6-dhY"/>
@@ -2355,7 +2280,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEt-9y-0Lx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-908" y="555"/>
+            <point key="canvasLocation" x="3022" y="-1719"/>
         </scene>
         <!--Player Detail-->
         <scene sceneID="GES-6V-jvS">
@@ -2376,7 +2301,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                     <constraint firstAttribute="height" constant="35" id="t6A-G2-OCZ"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="26"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="26"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -2399,7 +2324,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                     <constraint firstAttribute="height" constant="60" id="RwV-a2-Rkm"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Aileron-Bold" family="Aileron" pointSize="50"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="50"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -2515,7 +2440,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8c-wv-Aff">
-                                <rect key="frame" x="167.5" y="588" width="30" height="30"/>
+                                <rect key="frame" x="167" y="588" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="E8c-wv-Aff" secondAttribute="height" multiplier="1:1" id="kvU-um-9cW"/>
@@ -2537,7 +2462,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYM-re-UN0">
-                                <rect key="frame" x="239.5" y="588" width="30" height="30"/>
+                                <rect key="frame" x="239" y="588" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QYM-re-UN0" secondAttribute="height" multiplier="1:1" id="LsT-0a-1YV"/>
@@ -2659,29 +2584,29 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <exclude reference="N6C-1E-ZRX"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="FBi-OY-sfU"/>
-                                <exclude reference="h8Y-i4-ffg"/>
-                                <exclude reference="LIe-R6-2aj"/>
-                                <exclude reference="NBE-R7-QJN"/>
-                                <exclude reference="puz-zV-6LH"/>
-                                <exclude reference="hpE-nG-W7b"/>
-                                <exclude reference="lzP-r3-oOk"/>
-                                <exclude reference="tv1-pR-YD8"/>
-                                <exclude reference="zQA-hm-GLA"/>
-                                <exclude reference="Six-dW-Gv3"/>
-                                <exclude reference="qCO-0Q-djd"/>
-                                <exclude reference="HOn-Ob-ERh"/>
-                                <exclude reference="HVQ-Hd-y5z"/>
-                                <exclude reference="M6U-WK-ZcB"/>
-                                <exclude reference="4qf-8D-wVy"/>
-                                <exclude reference="RrY-J5-XnT"/>
-                                <exclude reference="YI4-4O-0pD"/>
                                 <exclude reference="9ch-Z6-9ql"/>
                                 <exclude reference="OsN-a6-uxm"/>
                                 <exclude reference="bvm-KO-Y7Q"/>
                                 <exclude reference="h1g-AX-Kkt"/>
                                 <exclude reference="x9V-DX-Xrf"/>
                                 <exclude reference="xMI-dS-UZv"/>
+                                <exclude reference="hpE-nG-W7b"/>
+                                <exclude reference="lzP-r3-oOk"/>
+                                <exclude reference="tv1-pR-YD8"/>
+                                <exclude reference="zQA-hm-GLA"/>
+                                <exclude reference="Six-dW-Gv3"/>
+                                <exclude reference="qCO-0Q-djd"/>
+                                <exclude reference="FBi-OY-sfU"/>
+                                <exclude reference="h8Y-i4-ffg"/>
+                                <exclude reference="LIe-R6-2aj"/>
+                                <exclude reference="NBE-R7-QJN"/>
+                                <exclude reference="puz-zV-6LH"/>
+                                <exclude reference="HOn-Ob-ERh"/>
+                                <exclude reference="HVQ-Hd-y5z"/>
+                                <exclude reference="M6U-WK-ZcB"/>
+                                <exclude reference="4qf-8D-wVy"/>
+                                <exclude reference="RrY-J5-XnT"/>
+                                <exclude reference="YI4-4O-0pD"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -2697,29 +2622,29 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <include reference="N6C-1E-ZRX"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="FBi-OY-sfU"/>
-                                <include reference="h8Y-i4-ffg"/>
-                                <include reference="LIe-R6-2aj"/>
-                                <include reference="NBE-R7-QJN"/>
-                                <include reference="puz-zV-6LH"/>
-                                <include reference="hpE-nG-W7b"/>
-                                <include reference="lzP-r3-oOk"/>
-                                <include reference="tv1-pR-YD8"/>
-                                <include reference="zQA-hm-GLA"/>
-                                <include reference="Six-dW-Gv3"/>
-                                <include reference="qCO-0Q-djd"/>
-                                <include reference="HOn-Ob-ERh"/>
-                                <include reference="HVQ-Hd-y5z"/>
-                                <include reference="M6U-WK-ZcB"/>
-                                <include reference="4qf-8D-wVy"/>
-                                <include reference="RrY-J5-XnT"/>
-                                <include reference="YI4-4O-0pD"/>
                                 <include reference="9ch-Z6-9ql"/>
                                 <include reference="OsN-a6-uxm"/>
                                 <include reference="bvm-KO-Y7Q"/>
                                 <include reference="h1g-AX-Kkt"/>
                                 <include reference="x9V-DX-Xrf"/>
                                 <include reference="xMI-dS-UZv"/>
+                                <include reference="hpE-nG-W7b"/>
+                                <include reference="lzP-r3-oOk"/>
+                                <include reference="tv1-pR-YD8"/>
+                                <include reference="zQA-hm-GLA"/>
+                                <include reference="Six-dW-Gv3"/>
+                                <include reference="qCO-0Q-djd"/>
+                                <include reference="FBi-OY-sfU"/>
+                                <include reference="h8Y-i4-ffg"/>
+                                <include reference="LIe-R6-2aj"/>
+                                <include reference="NBE-R7-QJN"/>
+                                <include reference="puz-zV-6LH"/>
+                                <include reference="HOn-Ob-ERh"/>
+                                <include reference="HVQ-Hd-y5z"/>
+                                <include reference="M6U-WK-ZcB"/>
+                                <include reference="4qf-8D-wVy"/>
+                                <include reference="RrY-J5-XnT"/>
+                                <include reference="YI4-4O-0pD"/>
                             </mask>
                         </variation>
                     </view>
@@ -2840,7 +2765,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qt-vb-Ou7" userLabel="OpponentHiBreak">
                                                     <rect key="frame" x="1" y="1" width="28" height="28"/>
-                                                    <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -2906,7 +2831,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtQ-RK-Ueg" userLabel="SelectedHiBreak">
                                                     <rect key="frame" x="1" y="1" width="28" height="28"/>
-                                                    <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -2954,7 +2879,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                 <constraint firstAttribute="width" constant="100" id="7fB-hV-2tV"/>
                                                 <constraint firstAttribute="height" constant="15" id="8pz-wA-lHI"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
@@ -2976,7 +2901,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="kPq-5v-kUU"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
@@ -2996,7 +2921,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="j9L-7u-10x"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
@@ -3016,7 +2941,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="4qH-MR-l0j"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
@@ -3036,7 +2961,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="fQ0-gR-FtG"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
@@ -3829,7 +3754,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHm-OV-701" userLabel="Player1HiBreak">
                                                             <rect key="frame" x="1" y="1" width="28" height="28"/>
-                                                            <fontDescription key="fontDescription" name="Aileron-Regular" family="Aileron" pointSize="12"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3862,7 +3787,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Qbd-g8-vKn"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Aileron-Regular" family="Aileron" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -3881,7 +3806,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="pF1-0B-NFo"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -3900,7 +3825,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="75" id="RsW-38-73T"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Aileron-Regular" family="Aileron" pointSize="50"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="50"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3929,7 +3854,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2l-lM-vzM" userLabel="Player2HiBreak">
                                                             <rect key="frame" x="1" y="1" width="28" height="28"/>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <fontDescription key="fontDescription" name="Aileron-Regular" family="Aileron" pointSize="12"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3961,7 +3886,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="75" id="smo-3i-g6T"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Aileron-Regular" family="Aileron" pointSize="50"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="50"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3970,7 +3895,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Y1J-od-UD2"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Aileron-Thin" family="Aileron" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -3990,7 +3915,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                         <constraint firstAttribute="height" constant="75" id="39Y-51-72c"/>
                                                         <constraint firstAttribute="width" constant="36" id="vzq-uA-vtd"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Aileron-Regular" family="Aileron" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3999,7 +3924,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="mRT-bv-bDB"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Aileron-Heavy" family="Aileron" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -4126,7 +4051,225 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYv-Em-Ha9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="156" y="-412"/>
+            <point key="canvasLocation" x="-497" y="-401"/>
+        </scene>
+        <!--IntroPVC-->
+        <scene sceneID="GHo-n3-gSw">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="2" navigationOrientation="horizontal" spineLocation="none" id="OTg-J7-fRi" customClass="IntroPVC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hsx-0a-HEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-136" y="-1819"/>
+        </scene>
+        <!--Help PageVC-->
+        <scene sceneID="99L-rw-MiF">
+            <objects>
+                <viewController storyboardIdentifier="Intro1ID" id="4Pi-mz-pnb" customClass="helpPageVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q3D-3v-8bh"/>
+                        <viewControllerLayoutGuide type="bottom" id="4je-OS-Rht"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TVI-Hl-xxb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scoreboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMI-iT-vOV">
+                                <rect key="frame" x="10" y="70" width="355" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="irU-X0-E4p"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucq-q6-5Al">
+                                <rect key="frame" x="172" y="5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bYA-ON-HD5"/>
+                                    <constraint firstAttribute="width" constant="30" id="kwX-Rz-l23"/>
+                                </constraints>
+                                <state key="normal" title="Close" image="close-orange">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeHelpPressed:" destination="4Pi-mz-pnb" eventType="touchUpInside" id="PMw-f6-mes"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="724-CH-SA3">
+                                <rect key="frame" x="16" y="118" width="349" height="201"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="PA3-m1-7HK"/>
+                                </constraints>
+                                <mutableString key="text">Directly tapping on any ball within the rack at the foot of the screen will add to current players break.  A player can be switched by touching their score directly.  
+
+The 'break ball' keeps count of the active break. When a break ihas ended make sure the player who made the break is selected and siply tap the break ball to finalize the break.
+
+If you make a mistake before submitting the break; tap the 'undo' button.  It will prompt you to choose between canceling last shot or a complete rerack.  </mutableString>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wB-x7-aaD">
+                                <rect key="frame" x="10" y="542" width="355" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="4qE-Fe-jEA"/>
+                                </constraints>
+                                <string key="text">Fouls are added by turning the toggle onto 'Foul', selecting the player who commited the foul and lastly clicking the rack ball to denote the points to add to the opposing player.    A frame can be completed by clicking the triangle button.</string>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="helpPage1_scoreboard" translatesAutoresizingMaskIntoConstraints="NO" id="P8G-th-taJ">
+                                <rect key="frame" x="26" y="340" width="323" height="182"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="724-CH-SA3" firstAttribute="leading" secondItem="TVI-Hl-xxb" secondAttribute="leading" constant="10" id="4Gk-qZ-oeg"/>
+                            <constraint firstItem="724-CH-SA3" firstAttribute="top" secondItem="PMI-iT-vOV" secondAttribute="bottom" constant="10" id="9nm-1f-IDA"/>
+                            <constraint firstAttribute="trailing" secondItem="724-CH-SA3" secondAttribute="trailing" constant="10" id="A6M-dB-Mdj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="P8G-th-taJ" secondAttribute="trailing" constant="10" id="B5t-sM-6RO"/>
+                            <constraint firstItem="PMI-iT-vOV" firstAttribute="top" secondItem="Q3D-3v-8bh" secondAttribute="bottom" constant="50" id="HrQ-Zb-pwN"/>
+                            <constraint firstItem="P8G-th-taJ" firstAttribute="top" secondItem="724-CH-SA3" secondAttribute="bottom" constant="20" id="IZP-9P-oe8"/>
+                            <constraint firstItem="P8G-th-taJ" firstAttribute="centerX" secondItem="TVI-Hl-xxb" secondAttribute="centerX" id="LkD-RB-9cl"/>
+                            <constraint firstItem="7wB-x7-aaD" firstAttribute="top" secondItem="P8G-th-taJ" secondAttribute="bottom" constant="20" id="MXn-bO-qU0"/>
+                            <constraint firstItem="P8G-th-taJ" firstAttribute="leading" secondItem="TVI-Hl-xxb" secondAttribute="leadingMargin" constant="10" id="PTd-lM-QZ3"/>
+                            <constraint firstAttribute="trailing" secondItem="PMI-iT-vOV" secondAttribute="trailing" constant="10" id="WGE-WR-nGp"/>
+                            <constraint firstItem="7wB-x7-aaD" firstAttribute="leading" secondItem="TVI-Hl-xxb" secondAttribute="leading" constant="10" id="bIM-QV-qkF"/>
+                            <constraint firstItem="ucq-q6-5Al" firstAttribute="top" secondItem="Q3D-3v-8bh" secondAttribute="bottom" id="dj5-E6-ERQ"/>
+                            <constraint firstItem="ucq-q6-5Al" firstAttribute="centerX" secondItem="TVI-Hl-xxb" secondAttribute="centerX" id="itZ-FO-ek9"/>
+                            <constraint firstItem="PMI-iT-vOV" firstAttribute="leading" secondItem="TVI-Hl-xxb" secondAttribute="leading" constant="10" id="s8D-dV-E0k"/>
+                            <constraint firstItem="4je-OS-Rht" firstAttribute="top" secondItem="7wB-x7-aaD" secondAttribute="bottom" constant="25" id="ui1-6k-gIx"/>
+                            <constraint firstAttribute="trailing" secondItem="7wB-x7-aaD" secondAttribute="trailing" constant="10" id="x2N-0C-ZCc"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5rR-q6-AtL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="568.79999999999995" y="-1819.3403298350827"/>
+        </scene>
+        <!--Help PageVC-->
+        <scene sceneID="QHr-Z6-UO9">
+            <objects>
+                <viewController storyboardIdentifier="Intro2ID" id="yV3-bW-541" customClass="helpPageVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qlD-de-IHO"/>
+                        <viewControllerLayoutGuide type="bottom" id="ias-Ia-FCo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LbL-IR-Xdg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jN6-eo-ZUG">
+                                <rect key="frame" x="10" y="70" width="355" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="bO4-mK-DOh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVe-nZ-prp">
+                                <rect key="frame" x="172" y="20" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="i8F-a3-dbe"/>
+                                    <constraint firstAttribute="height" constant="30" id="mlK-md-QGg"/>
+                                </constraints>
+                                <state key="normal" title="Close" image="close-orange">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeHelpPressed:" destination="yV3-bW-541" eventType="touchUpInside" id="qJH-Dp-tlu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nh1-ho-46R">
+                                <rect key="frame" x="26" y="120" width="323" height="522"/>
+                                <mutableString key="text">Swiping from right to left on the main scoreboard will display the Statistics for the active match.    Back to the main statistic display, using +/- on the frame graph allows you to roll through past frames as well as the current one.   Touching the player avatars on the graph view provides current player statistics inside frame(s) and active match.   The 3 dot 'More' button next to the match/frame selection details each visit.  This allows you to step through the frame while highlighting the entry point on the graph.  Each break detail is shown.  Touching a ball in a break gives further breakdown of shot.      To the right side to the 3 dot 'More' button is the 3 lines icon.  Again only when frame statistic is shown does the view display.  It shows the detais on player visits in order of latest first. </mutableString>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="nh1-ho-46R" secondAttribute="trailing" constant="10" id="6xT-cN-7fQ"/>
+                            <constraint firstAttribute="trailing" secondItem="jN6-eo-ZUG" secondAttribute="trailing" constant="10" id="BmY-QR-OgE"/>
+                            <constraint firstItem="eVe-nZ-prp" firstAttribute="top" secondItem="qlD-de-IHO" secondAttribute="bottom" id="KNY-Oo-411"/>
+                            <constraint firstItem="ias-Ia-FCo" firstAttribute="top" secondItem="nh1-ho-46R" secondAttribute="bottom" constant="25" id="KVR-PM-37k"/>
+                            <constraint firstItem="eVe-nZ-prp" firstAttribute="centerX" secondItem="LbL-IR-Xdg" secondAttribute="centerX" id="bhx-6N-PhD"/>
+                            <constraint firstItem="nh1-ho-46R" firstAttribute="top" secondItem="jN6-eo-ZUG" secondAttribute="bottom" constant="10" id="fgD-WC-xx3"/>
+                            <constraint firstItem="jN6-eo-ZUG" firstAttribute="leading" secondItem="LbL-IR-Xdg" secondAttribute="leading" constant="10" id="iOJ-we-khL"/>
+                            <constraint firstItem="nh1-ho-46R" firstAttribute="leading" secondItem="LbL-IR-Xdg" secondAttribute="leadingMargin" constant="10" id="sep-yy-WUQ"/>
+                            <constraint firstItem="jN6-eo-ZUG" firstAttribute="top" secondItem="qlD-de-IHO" secondAttribute="bottom" constant="50" id="yrB-Jx-va3"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HFa-c7-Eci" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1238" y="-1819"/>
+        </scene>
+        <!--Help PageVC-->
+        <scene sceneID="0KC-bT-FE6">
+            <objects>
+                <viewController storyboardIdentifier="Intro3ID" id="nNV-Ub-Ubh" customClass="helpPageVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H1y-y2-U0I"/>
+                        <viewControllerLayoutGuide type="bottom" id="pdT-Ce-mhZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UgC-Ad-HR2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eep-Bb-TtN">
+                                <rect key="frame" x="10" y="70" width="355" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="VDN-9K-Jlu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYQ-VZ-IZo">
+                                <rect key="frame" x="173" y="20" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0XK-cz-G0u"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="OoW-c6-J7k"/>
+                                    <constraint firstAttribute="width" constant="30" id="XT6-0r-Ew7"/>
+                                </constraints>
+                                <state key="normal" title="Close" image="close-orange">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeHelpPressed:" destination="nNV-Ub-Ubh" eventType="touchUpInside" id="8kr-Em-dRn"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQ7-Bb-3fA">
+                                <rect key="frame" x="10" y="120" width="355" height="522"/>
+                                <mutableString key="text">Tapping a players avatar from the scoreboard presnts the Player Menu.  The border of the avatar is a pie-chart, Green are the proportion of match wins, red are losses and orange drawn.  It is possible to edit the current name,email or photo. touching the update  icon saves the changes and returns back to the scoreboard.    To select a different player or create a new player press the players icon 2nd from left.  The next view you can choose 'New' or select a stored player.  Back inside the player menu page you can accept that player into the current match replacing the original or discard to continue.  The next icon provides head to head detail for current player against all the players he/she has competed with. From the headTohead view you may select another opponent and see his/her headTohead details.  The next icon presents all matches that have either been played on the device or imported.  Choosing a single match opens up the familiar Statistics view.  Exporting of a match can be made from the match list by clicking the export button.  Here you can select multiple matches and export into a single email. </mutableString>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eep-Bb-TtN" firstAttribute="leading" secondItem="UgC-Ad-HR2" secondAttribute="leading" constant="10" id="3GM-H3-JS5"/>
+                            <constraint firstAttribute="trailing" secondItem="eep-Bb-TtN" secondAttribute="trailing" constant="10" id="80z-Ut-KCy"/>
+                            <constraint firstAttribute="trailing" secondItem="xQ7-Bb-3fA" secondAttribute="trailing" constant="10" id="9rN-bs-KiB"/>
+                            <constraint firstItem="pdT-Ce-mhZ" firstAttribute="top" secondItem="xQ7-Bb-3fA" secondAttribute="bottom" constant="25" id="Qob-mL-yMC"/>
+                            <constraint firstItem="xQ7-Bb-3fA" firstAttribute="top" secondItem="eep-Bb-TtN" secondAttribute="bottom" constant="10" id="RDh-zP-DF4"/>
+                            <constraint firstItem="rYQ-VZ-IZo" firstAttribute="top" secondItem="H1y-y2-U0I" secondAttribute="bottom" id="hbo-aU-Vts"/>
+                            <constraint firstItem="rYQ-VZ-IZo" firstAttribute="centerX" secondItem="UgC-Ad-HR2" secondAttribute="centerX" id="jnP-NK-0Pw"/>
+                            <constraint firstItem="eep-Bb-TtN" firstAttribute="top" secondItem="H1y-y2-U0I" secondAttribute="bottom" constant="50" id="psr-Vx-Onn"/>
+                            <constraint firstItem="xQ7-Bb-3fA" firstAttribute="leading" secondItem="UgC-Ad-HR2" secondAttribute="leading" constant="10" id="xoZ-c7-9Rb"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u0U-6r-QIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1916" y="-1819"/>
         </scene>
         <!--Embeded Match StatisticsVC-->
         <scene sceneID="SlI-zo-6Wa">
@@ -4375,7 +4518,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnw-e1-Gsa" userLabel="Export">
-                                        <rect key="frame" x="326.5" y="40" width="30" height="30"/>
+                                        <rect key="frame" x="327" y="40" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hnw-e1-Gsa" secondAttribute="height" multiplier="1:1" id="ea3-R0-IYx"/>
                                             <constraint firstAttribute="width" constant="30" id="iSW-Q1-jgH"/>
@@ -5739,7 +5882,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="niY-JF-Je6" customClass="ballSumIV">
-                                                        <rect key="frame" x="30.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="31" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="5sE-pl-mgb"/>
@@ -5974,7 +6117,7 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7J1-aA-8fL" userLabel="yellowPottedCount">
-                                                        <rect key="frame" x="30.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="31" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="4pu-C5-eVH"/>
@@ -7001,18 +7144,11 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <exclude reference="4xE-Dv-nXQ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Vez-B0-K1F"/>
-                                <exclude reference="qda-5R-NrY"/>
+                                <exclude reference="bLe-OW-dzI"/>
                                 <exclude reference="2nf-Eb-9eS"/>
                                 <exclude reference="xHx-ub-lVD"/>
                                 <exclude reference="Olx-7j-nbO"/>
                                 <exclude reference="mOL-wj-QRw"/>
-                                <exclude reference="0N9-xp-Avy"/>
-                                <exclude reference="m6S-3Y-Ze6"/>
-                                <exclude reference="plm-Vu-KjN"/>
-                                <exclude reference="0Vy-U8-VIu"/>
-                                <exclude reference="8CF-qP-bDm"/>
-                                <exclude reference="RcE-fw-ejH"/>
                                 <exclude reference="46I-uh-9oG"/>
                                 <exclude reference="UXL-Q0-pkA"/>
                                 <exclude reference="ccE-wY-J5H"/>
@@ -7022,12 +7158,19 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <exclude reference="sZs-X0-LFI"/>
                                 <exclude reference="tD9-Qu-SiB"/>
                                 <exclude reference="wtJ-y4-9pW"/>
+                                <exclude reference="0N9-xp-Avy"/>
+                                <exclude reference="m6S-3Y-Ze6"/>
+                                <exclude reference="plm-Vu-KjN"/>
+                                <exclude reference="0Vy-U8-VIu"/>
+                                <exclude reference="8CF-qP-bDm"/>
+                                <exclude reference="RcE-fw-ejH"/>
+                                <exclude reference="Vez-B0-K1F"/>
+                                <exclude reference="qda-5R-NrY"/>
                                 <exclude reference="JmZ-G3-qS6"/>
                                 <exclude reference="K1H-cu-ZOG"/>
                                 <exclude reference="Vfv-OI-z8E"/>
                                 <exclude reference="aeT-lW-sLs"/>
                                 <exclude reference="gL6-fp-GJg"/>
-                                <exclude reference="bLe-OW-dzI"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -7042,18 +7185,11 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <include reference="4xE-Dv-nXQ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Vez-B0-K1F"/>
-                                <include reference="qda-5R-NrY"/>
+                                <include reference="bLe-OW-dzI"/>
                                 <include reference="2nf-Eb-9eS"/>
                                 <include reference="xHx-ub-lVD"/>
                                 <include reference="Olx-7j-nbO"/>
                                 <include reference="mOL-wj-QRw"/>
-                                <include reference="0N9-xp-Avy"/>
-                                <include reference="m6S-3Y-Ze6"/>
-                                <include reference="plm-Vu-KjN"/>
-                                <include reference="0Vy-U8-VIu"/>
-                                <include reference="8CF-qP-bDm"/>
-                                <include reference="RcE-fw-ejH"/>
                                 <include reference="46I-uh-9oG"/>
                                 <include reference="UXL-Q0-pkA"/>
                                 <include reference="ccE-wY-J5H"/>
@@ -7063,12 +7199,19 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
                                 <include reference="sZs-X0-LFI"/>
                                 <include reference="tD9-Qu-SiB"/>
                                 <include reference="wtJ-y4-9pW"/>
+                                <include reference="0N9-xp-Avy"/>
+                                <include reference="m6S-3Y-Ze6"/>
+                                <include reference="plm-Vu-KjN"/>
+                                <include reference="0Vy-U8-VIu"/>
+                                <include reference="8CF-qP-bDm"/>
+                                <include reference="RcE-fw-ejH"/>
+                                <include reference="Vez-B0-K1F"/>
+                                <include reference="qda-5R-NrY"/>
                                 <include reference="JmZ-G3-qS6"/>
                                 <include reference="K1H-cu-ZOG"/>
                                 <include reference="Vfv-OI-z8E"/>
                                 <include reference="aeT-lW-sLs"/>
                                 <include reference="gL6-fp-GJg"/>
-                                <include reference="bLe-OW-dzI"/>
                             </mask>
                         </variation>
                     </view>
@@ -7163,31 +7306,13 @@ Once the match is completed tap 'End' to close the match.  If the current frame 
             </objects>
             <point key="canvasLocation" x="1520.8" y="2834.9325337331338"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="cbq-VW-oGa">
-            <objects>
-                <viewController id="hwb-89-e7E" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cIr-p4-ouV"/>
-                        <viewControllerLayoutGuide type="bottom" id="zp2-b3-J9w"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PD4-lt-xFA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Z4C-U2-lcC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="810" y="-184"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="56C198BC-549C-4F24-8F22-3C7927282EDC" width="500" height="500">
+        <image name="9B634C33-BEEB-4FA6-A339-5F4E8595FDAC" width="164" height="147">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
 GR4fJSYsLzU4VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
-V05TQ29sb3KAAoAMEiTAAACAA4AKWns1MDAsIDUwMH3SFQoWGFpOUy5vYmplY3RzoReABIAJ0hUKGhii
+V05TQ29sb3KAAoAMEiTAAACAA4AKWnsxNjQsIDE0N33SFQoWGFpOUy5vYmplY3RzoReABIAJ0hUKGhii
 GxyABYAGgAkQBdMgCiEiIyRXTlMuYmFzZVtOUy5yZWxhdGl2ZYAAgAiAB18QiWZpbGU6Ly8vVXNlcnMv
 ZHJldy9Eb3dubG9hZHMvWGNvZGUtYmV0YS5hcHAvQ29udGVudHMvUGx1Z0lucy9JREVJbnRlcmZhY2VC
 dWlsZGVyS2l0LmlkZXBsdWdpbi9Db250ZW50cy9SZXNvdXJjZXMvSUJNaXNzaW5nSW1hZ2VHbHlwaC50
@@ -7199,11 +7324,11 @@ ewGEAYoBjQGWAZsBowGmAa0BtQHCAccByQHLAdAB2AHbAeAB6AHrAf0CAAIFAAAAAAAAAgEAAAAAAAAA
 PwAAAAAAAAAAAAAAAAAAAgc
 </mutableData>
         </image>
-        <image name="E4BEF81B-E4E2-4A27-963E-890E0E70863D" width="164" height="147">
+        <image name="EFC5E3E4-0B4D-4065-8A05-CE40DD35085D" width="500" height="500">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
 GR4fJSYsLzU4VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
-V05TQ29sb3KAAoAMEiTAAACAA4AKWnsxNjQsIDE0N33SFQoWGFpOUy5vYmplY3RzoReABIAJ0hUKGhii
+V05TQ29sb3KAAoAMEiTAAACAA4AKWns1MDAsIDUwMH3SFQoWGFpOUy5vYmplY3RzoReABIAJ0hUKGhii
 GxyABYAGgAkQBdMgCiEiIyRXTlMuYmFzZVtOUy5yZWxhdGl2ZYAAgAiAB18QiWZpbGU6Ly8vVXNlcnMv
 ZHJldy9Eb3dubG9hZHMvWGNvZGUtYmV0YS5hcHAvQ29udGVudHMvUGx1Z0lucy9JREVJbnRlcmZhY2VC
 dWlsZGVyS2l0LmlkZXBsdWdpbi9Db250ZW50cy9SZXNvdXJjZXMvSUJNaXNzaW5nSW1hZ2VHbHlwaC50
@@ -7223,17 +7348,18 @@ PwAAAAAAAAAAAAAAAAAAAgc
         <image name="buttonmatch" width="104" height="128"/>
         <image name="buttonplayers" width="120" height="128"/>
         <image name="close-black" width="128" height="128"/>
+        <image name="close-orange" width="128" height="128"/>
         <image name="close-orange.png" width="128" height="128"/>
         <image name="export2" width="98" height="128"/>
         <image name="export2.png" width="128" height="128"/>
         <image name="framestatistic" width="128" height="128"/>
-        <image name="helpSSM18.PNG" width="750" height="1334"/>
+        <image name="helpPage1_scoreboard" width="360" height="640"/>
         <image name="ios7-arrow-back-128-000000.png" width="128" height="128"/>
         <image name="ios7-arrow-forward-128-000000.png" width="128" height="128"/>
         <image name="more" width="128" height="128"/>
         <image name="red_01.png" width="500" height="500"/>
         <image name="snooker_table2" width="380" height="200"/>
-        <image name="snookerbackground" width="462" height="640"/>
+        <image name="snookerbackground" width="2448" height="3264"/>
         <image name="top_button_adjust" width="120" height="128"/>
         <image name="top_button_finish" width="108" height="128"/>
         <image name="top_button_help" width="96" height="128"/>

@@ -645,7 +645,17 @@ last modified -
 
 
 
++(int) getBreakScoreFromBalls : (NSMutableArray *) balls {
+    
+    int pointsScored=0;
+    for (ballShot *shot in balls) {
+        if (shot.shotid==[NSNumber numberWithInt:Potted]) {
+            pointsScored += [shot.value intValue];
+        }
+    }
 
+    return pointsScored;
+}
 
 
 

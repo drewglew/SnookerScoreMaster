@@ -64,7 +64,7 @@
 @property (strong, nonatomic) UIColor *skinForegroundColour;
 @property (strong, nonatomic) UIColor *skinPlayer1Colour;
 @property (strong, nonatomic) UIColor *skinPlayer2Colour;
-
+@property (strong, nonatomic) UIColor *skinSelectedScore;
 
 /* https://www.youtube.com/watch?v=mdG6XpwwuwI */
 -(void) processCurrentUsersHighestBreak;
