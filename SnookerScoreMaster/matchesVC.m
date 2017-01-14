@@ -52,9 +52,12 @@
     
     [self.tableView reloadData];
     
-    UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.exportButton.tintColor = [UIColor grayColor];
+    //UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    //[self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
+    self.exportButton.tintColor = [UIColor whiteColor];
+    [self.exportButton setTitle:@"Set Export Mode" forState:UIControlStateNormal];
+    [self.exportButton setBackgroundColor:[UIColor darkGrayColor]];
+    
     
     self.view.backgroundColor = self.skinBackgroundColour;
     self.tableView.backgroundColor = self.skinBackgroundColour;
@@ -83,6 +86,10 @@
 
 /* last modified 20160204 */
 
+
+
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"matchrow";
@@ -94,12 +101,23 @@
     }
     //Here the dataSource array is of dictionary objects
     match *m = [self.matches objectAtIndex:indexPath.row];
-    
+    /*
     if (([m.Player1Number intValue]  == self.staticPlayer1Number && [m.Player2Number intValue] == self.staticPlayer2Number)) {
-        cell.contentView.superview.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+        //cell.contentView.superview.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     } else {
-        cell.contentView.superview.backgroundColor = [UIColor whiteColor];
+        //cell.contentView.superview.backgroundColor = [UIColor whiteColor];
     }
+    */
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:10.0/255.0 blue:10.0/255.0 alpha:1.0];
+    [cell setSelectedBackgroundView:bgColorView];
+    
+    if ([m.matchDuration isEqualToString:@"match ongoing"]) {
+        cell.userInteractionEnabled = NO;
+    } else {
+        cell.userInteractionEnabled = YES;
+    }
+    
     
     
     cell.Player1Name.text = m.player1Name;
@@ -114,9 +132,9 @@
     
     if (self.activeMatchId == m.matchid) {
         cell.Player1HiBreak.text = [NSString stringWithFormat:@"%@",self.activeMatchPlayers.Player1HiBreak];
-        cell.Player1HiBreak.textColor = self.skinForegroundColour;
+        cell.Player1HiBreak.textColor = self.skinBackgroundColour;
         cell.Player2HiBreak.text = [NSString stringWithFormat:@"%@",self.activeMatchPlayers.Player1HiBreak];
-        cell.Player2HiBreak.textColor = self.skinForegroundColour;
+        cell.Player2HiBreak.textColor = self.skinBackgroundColour;
         cell.Player1FrameWins .text = [NSString stringWithFormat:@"%@",self.activeMatchPlayers.Player1FrameWins];
         cell.Player1FrameWins.textColor = self.skinForegroundColour;
         cell.Player2FrameWins.text = [NSString stringWithFormat:@"%@",self.activeMatchPlayers.Player2FrameWins];
@@ -249,7 +267,7 @@
     
     cell.backgroundColor = self.skinBackgroundColour;
  
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.tintColor = self.skinForegroundColour;
     
     if (m.Player1FrameWins > m.Player2FrameWins) {
         
@@ -272,51 +290,6 @@
 }
 
 
-
-
-/*
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier forIndexPath:indexPath];
- 
- // Configure the cell...
- 
- return cell;
- }
- */
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 
 #pragma mark - Navigation
@@ -418,6 +391,9 @@
 }
 
 
+
+
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     //Here the dataSource array is of dictionary objects
     match *m = [self.matches objectAtIndex:indexPath.row];
@@ -451,20 +427,21 @@
 
 
 
+
 - (void)addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState {
     self.displayState = displayState;
 }
 
 
 /* created      20160717
- last modified  20160717
+ last modified  20170113
  */
 
 - (IBAction)cancelExportPressed:(id)sender {
     [self.tableView setEditing:FALSE animated:true];
-    UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.exportButton.tintColor = [UIColor grayColor];
+    self.exportButton.tintColor = [UIColor whiteColor];
+      [self.exportButton setTitle:@"Set Export Mode" forState:UIControlStateNormal];
+    [self.exportButton setBackgroundColor:[UIColor darkGrayColor]];
     [self.exportButton setSelected:false];
     self.cancelExportButton.hidden=true;
 }
@@ -476,15 +453,18 @@
  */
 - (IBAction)exportPressed:(UIButton*)sender {
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    
     sender.selected =!sender.selected;
     
     if (sender.selected==true) {
         [self.tableView setEditing:sender.selected animated:true];
         
         
-        UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
-        self.exportButton.tintColor = [UIColor blackColor];
+       // UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+       // [self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
+        [self.exportButton setTitle:@"Export Selected" forState:UIControlStateNormal];
+        [self.exportButton setBackgroundColor:[UIColor darkGrayColor]];
+        self.exportButton.tintColor = [UIColor lightGrayColor];
         
         self.cancelExportButton.hidden=false;
         
@@ -553,9 +533,10 @@
             
            
         }
-        [self.tableView setEditing:sender.selected animated:true];
-        UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
+        [self setEditing:sender.selected animated:true];
+       // UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        //[self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
+          [self.exportButton setTitle:@"Set Export Mode" forState:UIControlStateNormal];
         self.exportButton.tintColor = [UIColor grayColor];
         self.cancelExportButton.hidden=true;
         

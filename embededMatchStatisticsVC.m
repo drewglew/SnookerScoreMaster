@@ -144,18 +144,7 @@
         self.tweetButton.enabled=false;
     }
     
-    if (self.displayState==8) {
-        [self presentBreakStats:0];
-    } else if (self.displayState==4) {
-        [self presentFrameStats:0];
-    } else {
-        if (self.displayState>=2) {
-            [self presentPlayer2Stats:0];
-        }
-        if (self.displayState==3 || self.displayState==1) {
-            [self presentPlayer1Stats:0];
-        }
-    }
+
     self.P2BreakInfo.hidden = true;
     self.p2BreakInfoBall.hidden = true;
     self.P1BreakInfo.hidden = true;
@@ -194,22 +183,6 @@
     [self.forwardButton setImage:changecolourimage forState:UIControlStateNormal];
     self.forwardButton.tintColor = self.skinForegroundColour;
     
-    
-    
-    changecolourimage = [[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.buttonDetailStats setImage:changecolourimage forState:UIControlStateNormal];
-    self.buttonDetailStats.tintColor = self.skinForegroundColour;
-    changecolourimage = [[UIImage imageNamed:@"framestatistic"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.buttonListStats setImage:changecolourimage forState:UIControlStateNormal];
-    self.buttonListStats.tintColor = self.skinForegroundColour;
-    changecolourimage = [[UIImage imageNamed:@"export2.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.actionButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.actionButton.tintColor = self.skinForegroundColour;
-    changecolourimage = [[UIImage imageNamed:@"tweet_black64x64"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.tweetButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.tweetButton.tintColor = self.skinForegroundColour;
-    
-    
     self.footerView.backgroundColor = self.skinBackgroundColour;
     self.player1View.backgroundColor = self.skinPlayer1Colour;
     self.player2View.backgroundColor = self.skinPlayer2Colour;
@@ -241,6 +214,22 @@
         
     } else if (self.theme == mono) {
          self.graphStatisticView.backgroundColor = [UIColor whiteColor];
+    }
+    
+
+    
+    
+    if (self.displayState==8) {
+        [self presentBreakStats:0];
+    } else if (self.displayState==4) {
+        [self presentFrameStats:0];
+    } else {
+        if (self.displayState>=2) {
+            [self presentPlayer2Stats:0];
+        }
+        if (self.displayState==3 || self.displayState==1) {
+            [self presentPlayer1Stats:0];
+        }
     }
     
     
@@ -926,9 +915,9 @@
         if (self.graphStatisticsOverlayView.hidden == false) {
             
             self.tweetButton.enabled = true;
-            self.actionButton.enabled = false;
             
-            //[self.actionButton setImage:[UIImage imageNamed:@"tweet_black64x64.png"] forState:UIControlStateNormal];
+            
+            
             [self loadBreakShots:self.breakShotsIndex :false];
             
             self.stepperFrame.minimumValue=1;
@@ -948,9 +937,8 @@
             self.graphStatisticsOverlayView.hidden=true;
             
             self.tweetButton.enabled = true;
-            self.actionButton.enabled = false;
             
-            //[self.actionButton setImage:[UIImage imageNamed:@"export2.png"] forState:UIControlStateNormal];
+            
             
             if (!toload) {
                 self.displayState -= 4;
@@ -979,9 +967,9 @@
         self.buttonDetailStats.enabled = self.frameStatisticView.hidden;
         if (self.graphStatisticsOverlayView.hidden == false) {
             
-            //[self.actionButton setImage:[UIImage imageNamed:@"tweet_black64x64.png"] forState:UIControlStateNormal];
+            
             self.tweetButton.enabled = true;
-            self.actionButton.enabled = false;
+            
             
             self.stepperFrame.minimumValue=1;
             
@@ -997,10 +985,10 @@
             self.frameStatisticView.hidden = true;
             
             self.graphStatisticsOverlayView.hidden=true;
-            //[self.actionButton setImage:[UIImage imageNamed:@"export2.png"] forState:UIControlStateNormal];
+            
             
             self.tweetButton.enabled = false;
-            self.actionButton.enabled = true;
+            
             
             if (!toload) {
                 self.displayState -= 8;
@@ -1353,62 +1341,6 @@
 }
 
 
-- (IBAction)exportMatchPressed:(id)sender {
-
-        /* export the current match selected to file and send through email */
-        
-        
-        
-        
-        NSString *filecontent = [self exportDataFile :self.activeMatchData];
-        
-        /* needs to be mailed/sent somehow */
-        
-        
-        /* next part attempts to compose an email and offer the user to load recipients & send an email */
-        BOOL ok = [MFMailComposeViewController canSendMail];
-        if (!ok) return;
-        
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *filePathSSM = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"MatchData.ssm"];
-        
-        [fileManager removeItemAtPath:filePathSSM error:nil];
-        
-        NSError *error;
-        
-        [filecontent writeToFile:filePathSSM atomically:YES encoding:NSUTF8StringEncoding error:&error];
-        
-        
-        NSString *body = [NSString stringWithFormat:@"Match between %@ and %@ exported to file.  It is possible once email is received to import this match onto another iOS device running Snooker Score Master!</br></br>Player One (%@):%@ frames, highest break of %@</br>Player Two (%@):%@ frames, highest break of %@", self.p1.nickName, self.p2.nickName,self.p1.nickName,self.m.Player1FrameWins,self.m.Player1HiBreak,self.p2.nickName,self.m.Player2FrameWins, self.m.Player2HiBreak];
-        
-        
-        MFMailComposeViewController* snookerScorerMailComposer = [MFMailComposeViewController new];
-        snookerScorerMailComposer.mailComposeDelegate = self;
-        [snookerScorerMailComposer setSubject:[NSString stringWithFormat:@"Snooker Score Master - Matchday :%@", self.m.matchDate]];
-        
-        [snookerScorerMailComposer setToRecipients:[NSArray arrayWithObjects:self.p1.emailAddress, self.p2.emailAddress, nil]];
-        
-        [snookerScorerMailComposer setMessageBody:body isHTML:YES];
-        
-        /* attach files */
-        NSData *ssmFile = [NSData dataWithContentsOfFile:filePathSSM];
-        [snookerScorerMailComposer addAttachmentData:ssmFile
-                                            mimeType:@"text/plain"
-                                            fileName:@"MatchData.ssm"];
-        
-        [self presentViewController:snookerScorerMailComposer animated:YES completion:nil];
- 
-
-    
-
-    
-}
-
-
-
-
-
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -1449,7 +1381,9 @@
         cell.playerLabel.text = @"Adjustment";
         cell.cellContentView.backgroundColor = self.skinBackgroundColour;
     }
-    
+    if ([entry.duration intValue]!=0 || entry.duration!=nil) {
+        cell.durationLabel.text = [NSString stringWithFormat:@"%@ s.",entry.duration];
+    }
     /* indicator icon/white ball for fouls */
     if (entry.lastshotid==[NSNumber numberWithInt:Foul] || entry.lastshotid==[NSNumber numberWithInt:Bonus] ) {
         cell.visitIndictorView.hidden = false;
@@ -1504,45 +1438,53 @@
     [self presentPlayer1Stats:1];
 }
 
+/* last modified 20161211 */
 -(void)presentPlayer1Stats:(int)adjustment {
+    
     if (self.player1StatView.hidden) {
         [self  loadPlayerStatistics:[NSNumber numberWithInt:1]];
         [self loadBreakBalls:[NSNumber numberWithInt:1]];
         self.buttonListStats.enabled=false;
         self.buttonDetailStats.enabled=false;
-        self.actionButton.enabled=false;
+        
         self.displayState += adjustment;
     } else {
         if (self.player2StatView.hidden)  {
             self.buttonListStats.enabled=true;
             self.buttonDetailStats.enabled=true;
-            self.actionButton.enabled=true;
+            
         }
          self.displayState -= adjustment;
     }
     if (self.breakStatistcsView.hidden==true && self.frameStatisticView.hidden==true) {
+     
         self.player1StatView.hidden = !self.player1StatView.hidden;
+        
     }
-
 }
 
 - (IBAction)buttonMorePlayer2Pressed:(id)sender {
     [self presentPlayer2Stats:2];
 }
 
+/* last modified 20161211 */
 -(void)presentPlayer2Stats:(int)adjustment {
+
     if (self.player2StatView.hidden) {
         [self loadPlayerStatistics:[NSNumber numberWithInt:2]];
         [self loadBreakBalls:[NSNumber numberWithInt:2]];
+        
+        
+        
         self.buttonListStats.enabled=false;
         self.buttonDetailStats.enabled=false;
-        self.actionButton.enabled=false;
+        
         self.displayState += adjustment;
     } else {
         if (self.player1StatView.hidden)  {
             self.buttonListStats.enabled=true;
             self.buttonDetailStats.enabled=true;
-            self.actionButton.enabled=true;
+            
         }
         self.displayState -= adjustment;
     }
@@ -1558,8 +1500,9 @@
 }
 
 -(void)presentFrameStats:(int)adjustment {
+    
     if (self.frameStatisticView.hidden) {
-        self.actionButton.enabled = false;
+        
         self.MorePlayer1Button.enabled = false;
         self.MorePlayer2Button.enabled = false;
         self.buttonDetailStats.enabled = false;
@@ -1567,7 +1510,7 @@
         [self.tableFrameStatistics reloadData];
         self.displayState += adjustment;
     } else {
-        self.actionButton.enabled = true;
+       
         self.MorePlayer1Button.enabled = true;
         self.MorePlayer2Button.enabled = true;
         self.buttonDetailStats.enabled = true;
@@ -1588,7 +1531,7 @@
     if (self.breakStatistcsView.hidden) {
         [self loadBreakShots:self.breakShotsIndex :false];
         self.tweetButton.enabled = true;
-        self.actionButton.enabled = false;
+       
         self.MorePlayer1Button.enabled = false;
         self.MorePlayer2Button.enabled = false;
         self.buttonListStats.enabled = false;
@@ -1596,7 +1539,7 @@
         self.displayState += adjustment;
     } else {
         self.tweetButton.enabled = false;
-        self.actionButton.enabled = true;
+        
         self.MorePlayer1Button.enabled = true;
         self.MorePlayer2Button.enabled = true;
         self.buttonListStats.enabled = true;

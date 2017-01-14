@@ -32,7 +32,17 @@
     UIViewController *p3 = [self.storyboard
                             instantiateViewControllerWithIdentifier:@"Intro3ID"];
     
-    myViewControllers = @[p1,p2,p3];
+    UIViewController *p4 = [self.storyboard
+                            instantiateViewControllerWithIdentifier:@"Intro4ID"];
+    
+    UIViewController *p5 = [self.storyboard
+                            instantiateViewControllerWithIdentifier:@"Intro5ID"];
+    
+    UIViewController *p6 = [self.storyboard
+                            instantiateViewControllerWithIdentifier:@"Intro6ID"];
+    
+    
+    myViewControllers = @[p1,p2,p3,p4,p5,p6];
     
     [self setViewControllers:@[p1]
                    direction:UIPageViewControllerNavigationDirectionForward

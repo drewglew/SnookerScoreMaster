@@ -18,25 +18,10 @@
 
 @interface scoreboardVC () <PlayerDelegate, MatchStatisticsDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *player1SnookerTableImageView;
-@property (weak, nonatomic) IBOutlet UILabel *player1BulkLeftLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player1BulkRightLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player1MiddleLeftLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player1MiddleRightLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player1BottomLeftLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player1BottomRightLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *player2SnookerTableImageView;
-@property (weak, nonatomic) IBOutlet UILabel *player2BulkLeftLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player2BulkRightLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player2MiddleLeftLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player2MiddleRightLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player2BottomLeftLabel;
-@property (weak, nonatomic) IBOutlet UILabel *player2BottomRightLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *medalImgPlayer1;
 @property (weak, nonatomic) IBOutlet UIImageView *medalImgPlayer2;
 @property (weak, nonatomic) IBOutlet UIButton *closeButtonCongratulations;
-@property (weak, nonatomic) IBOutlet UILabel *labelCongratDetail;
 
 
 
@@ -49,16 +34,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelVisitCounter;
 
 @property (weak, nonatomic) IBOutlet UILabel *labelCongratsMessage;
+@property (strong, nonatomic) IBOutlet UILabel *labelCongratsPlayerMessage;
 
 
-@property (weak, nonatomic) IBOutlet UIButton *buttonBulkLeftPocket;
-@property (weak, nonatomic) IBOutlet UIButton *buttonBulkRightPocket;
-@property (weak, nonatomic) IBOutlet UIButton *buttonMiddleLeftPocket;
-@property (weak, nonatomic) IBOutlet UIButton *buttonMiddleRightPocket;
-@property (weak, nonatomic) IBOutlet UIButton *buttonBottomLeftPocket;
-@property (weak, nonatomic) IBOutlet UIButton *buttonBottomRightPocket;
 @property (weak, nonatomic) IBOutlet breakEntry *activeBreak;
-@property (weak, nonatomic) IBOutlet UIImageView *greenBaizeView;
 @property (weak, nonatomic) IBOutlet UILabel *scoreBoardBackLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ballsBackLabel;
 @property (strong, nonatomic) IBOutlet ball *buttonRed;
@@ -81,44 +60,28 @@
 @property (strong, nonatomic) IBOutlet indicator *blueIndicator;
 @property (strong, nonatomic) IBOutlet indicator *pinkIndicator;
 @property (strong, nonatomic) IBOutlet indicator *blackIndicator;
-@property (strong, nonatomic) IBOutlet UILabel *foulLabel;
 @property (strong, nonatomic) IBOutlet UITextField *textPlayerOneName;
 @property (strong, nonatomic) IBOutlet UITextField *textPlayerTwoName;
 @property (strong, nonatomic) IBOutlet UIView *viewScorePlayer1;
 @property (strong, nonatomic) IBOutlet UIView *viewScorePlayer2;
 
 @property (strong, nonatomic) IBOutlet UIView *viewBreak;
-
 @property (strong, nonatomic) IBOutlet UIView *ballCollectionView;
-@property (strong, nonatomic) IBOutlet UIView *optionPanelView;
 @property (strong, nonatomic) IBOutlet UIView *disabledView;
 @property (strong, nonatomic) IBOutlet UIView *mainView;
 @property (strong, nonatomic) IBOutlet UIImageView *imagePottedBall;
-@property (strong, nonatomic) IBOutlet UISwitch *switchFoul;
 @property (strong, nonatomic) IBOutlet UIButton *buttonHelp;
 @property (strong, nonatomic) IBOutlet UIButton *buttonNew;
 @property (strong, nonatomic) IBOutlet UIButton *buttonEnd;
-@property (strong, nonatomic) IBOutlet UIView *optionPanelLeftView;
 @property (strong, nonatomic) IBOutlet UIButton *buttonClear;
 @property (strong, nonatomic) IBOutlet UIButton *buttonAdjust;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *trailingMedalPosition;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *breakViewLeadingConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *breakViewTrailingConstraint;
-
 @property (strong, nonatomic) IBOutlet UIView *ballRowDisabledView;
-
-
-
-
-/* Shot segment controls */
-@property (strong, nonatomic) IBOutlet UIImageView *shotBallImage;
-@property (strong, nonatomic) IBOutlet UIButton *buttonCloseInstructions;
-@property (weak, nonatomic) IBOutlet UILabel *shotPlayerNameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *snookerBackgroundPhotoImage;
 @property (strong, nonatomic) IBOutlet UILabel *sliderBorderLabel;
-
-
-
+@property (weak, nonatomic) IBOutlet UIButton *openPlayer1DetailButton;
+@property (weak, nonatomic) IBOutlet UIButton *openPlayer2DetailButton;
 @property (strong, nonatomic) NSMutableArray *frameData;
 @property (nonatomic) NSString *savedNamePlayer1;
 @property (nonatomic) NSString *savedNamePlayer2;
@@ -151,23 +114,7 @@
 @property (nonatomic) UIDynamicAnimator *animator;
 @property (strong, nonatomic) ball *buttonNoColor;
 @property (strong, nonatomic) indicator *buttonIndicator;
-@property (weak, nonatomic) IBOutlet UIButton *shotSelectPreviousButton;
-@property (weak, nonatomic) IBOutlet UIButton *shotSelectNextButton;
-@property (weak, nonatomic) IBOutlet UIView *shotFoulView;
-@property (weak, nonatomic) IBOutlet UIView *shotSafetyView;
-@property (weak, nonatomic) IBOutlet UIView *shotPotMissView;
-@property (weak, nonatomic) IBOutlet UIButton *shotFoulButton;
-@property (weak, nonatomic) IBOutlet UIButton *shotSafetyButton;
-@property (weak, nonatomic) IBOutlet UIButton *shotPotButton;
-@property (weak, nonatomic) IBOutlet UIButton *shotMissButton;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segOptions1;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segOptions2;
-@property (weak, nonatomic) IBOutlet DraggableView *shotView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadingShotSelectionConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topShotSelectionConstraint;
-@property (weak, nonatomic) IBOutlet UIButton *buttonCloseShot;
-@property (weak, nonatomic) IBOutlet UIButton *openPlayer1DetailButton;
-@property (weak, nonatomic) IBOutlet UIButton *openPlayer2DetailButton;
+
 
 @property (weak, nonatomic) NSTimer *myTimer;
 @property int frameTimeInSeconds;
@@ -189,6 +136,7 @@
 @synthesize ballReplaced;
 @synthesize matchTxId;
 @synthesize shotTypeId;
+@synthesize shotFoulId;
 @synthesize shotTabId;
 @synthesize shotGroup1SegmentId;
 @synthesize shotGroup2SegmentId;
@@ -339,9 +287,6 @@ issue with startup now controlled by onload block condition
     return [common stringFromTimeInterval :interval];
 }
 
-
-
-/* TODO this is not so great here ABC */
 
 /* created 20150922 */
 /* last modified 20160506 */
@@ -582,7 +527,7 @@ issue with startup now controlled by onload block condition
 
 
 
-/* last modified 20151012 */
+/* last modified 20161211 */
 -(void)viewDidLoad {
     
 
@@ -608,13 +553,18 @@ issue with startup now controlled by onload block condition
            doCheckPausedState = true;
         } else {
             /* we are starting over */
+            
+            self.imagePottedBall.layer.backgroundColor = [UIColor whiteColor].CGColor;
+            self.imagePottedBall.layer.borderColor = [UIColor whiteColor].CGColor;
+            
+            self.imagePottedBall.image = [UIImage imageNamed:@"one-finger-tap"];
+            
             self.viewBreak.hidden = false;
+            
+            
             self.currentFrameId = [NSNumber numberWithInt:1];
             self.isMatchStarted = false;
             self.ballCollectionView.hidden = true;
-            self.optionPanelView.hidden = true;
-            self.optionPanelLeftView.hidden = true;
-            self.shotView.hidden=true;
             self.matchData = [[NSMutableArray alloc] init];
             [self.textScorePlayer1 createFrame:([self.currentFrameId intValue])];
             self.textScorePlayer1.playerNumber = [NSNumber numberWithInt:1];
@@ -796,8 +746,6 @@ issue with startup now controlled by onload block condition
     //self.imagePottedBall.hidden = true;
     self.isMatchStarted = true;
     self.ballCollectionView.hidden = false;
-    self.optionPanelView.hidden = false;
-    self.optionPanelLeftView.hidden = false;
     self.activeColour = 1;
 }
 
@@ -832,7 +780,6 @@ issue with startup now controlled by onload block condition
     
     
     self.skinSelectedScore = [UIColor whiteColor];
-     self.foulLabel.textColor = [UIColor redColor];
   
     if (self.theme==photo) {
         self.snookerBackgroundPhotoImage.hidden = false;
@@ -844,7 +791,7 @@ issue with startup now controlled by onload block condition
         
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark ];
         UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        blurEffectView.frame = self.view.bounds;
+        blurEffectView.frame = self.scoreBoardBackLabel.bounds;
         blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.scoreBoardBackLabel addSubview:blurEffectView];
         
@@ -899,9 +846,6 @@ issue with startup now controlled by onload block condition
         [self.textPlayerOneName setTextColor:self.skinSelectedScore];
         [self.labelScoreMatchPlayer1 setTextColor:self.skinSelectedScore];
         [self.textScorePlayer1 setTextColor:self.skinSelectedScore];
-       // [self.switchFoul setTintColor:self.skinSelectedScore];
-        [self.switchFoul setThumbTintColor:skinForegroundColour];
-        [self.foulLabel setTextColor:skinSelectedScore];
         
     
     } else {   // mono
@@ -948,21 +892,11 @@ issue with startup now controlled by onload block condition
     
     [self.labelFrameStopwatch setTextColor:self.skinForegroundColour];
 
-    self.shotView.layer.cornerRadius = 5;
-    self.shotView.layer.masksToBounds = YES;
-    self.shotView.layer.borderWidth = 1.0f; //make border 1px thick
-    self.shotView.layer.borderColor = [UIColor darkGrayColor].CGColor;
-    self.segOptions1.tintColor = [UIColor darkGrayColor];
-    self.segOptions2.tintColor = [UIColor darkGrayColor];
-    self.shotPlayerNameLabel.textColor = [UIColor blackColor];
     
     if (!self.isShotStopWatch) {
         self.labelStopwatch.hidden = true;
     }
-    
-    
-   
-    self.switchFoul.tintColor = self.skinForegroundColour;
+
     self.labelStopwatch.textColor = self.skinForegroundColour;
     self.labelVisitCounter.textColor = self.skinForegroundColour;
     //self.labelScoreMatchPlayer1.textColor = self.skinForegroundColour;
@@ -1002,6 +936,7 @@ issue with startup now controlled by onload block condition
 }
 
 /* created 20151011 */
+/* modified 20161210 */
 -(void)addGestures {
     /* enable all gestures (long press/press/swipe) */
     UITapGestureRecognizer *selectPlayerOneTap = [[UITapGestureRecognizer alloc]
@@ -1029,18 +964,46 @@ issue with startup now controlled by onload block condition
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:swipeLeft];
     
+    /* long press gestures on balls in rack */
+    
+    UILongPressGestureRecognizer* redLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureBallLongPress:)];
+    [redLongPress setMinimumPressDuration:0.3];
+    [self.buttonRed addGestureRecognizer:redLongPress];
+    
+    UILongPressGestureRecognizer* yellowLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureBallLongPress:)];
+    [yellowLongPress setMinimumPressDuration:0.3];
+    [self.buttonYellow addGestureRecognizer:yellowLongPress];
+    
+    UILongPressGestureRecognizer* greenLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureBallLongPress:)];
+    [greenLongPress setMinimumPressDuration:0.3];
+    [self.buttonGreen addGestureRecognizer:greenLongPress];
+    
+    UILongPressGestureRecognizer* brownLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureBallLongPress:)];
+    [brownLongPress setMinimumPressDuration:0.3];
+    [self.buttonBrown addGestureRecognizer:brownLongPress];
+    
+    UILongPressGestureRecognizer* blueLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureBallLongPress:)];
+    [yellowLongPress setMinimumPressDuration:0.3];
+    [self.buttonBlue addGestureRecognizer:blueLongPress];
+    
+    UILongPressGestureRecognizer* pinkLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureBallLongPress:)];
+    [pinkLongPress setMinimumPressDuration:0.3];
+    [self.buttonPink addGestureRecognizer:pinkLongPress];
+    
+    UILongPressGestureRecognizer* blackLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureBallLongPress:)];
+    [blackLongPress setMinimumPressDuration:0.3];
+    [self.buttonBlack addGestureRecognizer:blackLongPress];
+    
+    
+    
+    
 }
 
 
 /* last modified 20160714 */
 - (void)viewDidLayoutSubviews {
 
-    [self makeRoundShotButton:self.shotFoulButton :self.shotFoulButton.frame.origin.x :self.shotFoulButton.frame.origin.y :50.0f :false];
-    [self makeRoundShotButton:self.shotSafetyButton :self.shotSafetyButton.frame.origin.x :self.shotSafetyButton.frame.origin.y :50.0f :false];
-    [self makeRoundShotButton:self.shotPotButton :self.shotPotButton.frame.origin.x :self.shotPotButton.frame.origin.y :50.0f :false];
-    [self makeRoundShotButton:self.shotMissButton :self.shotMissButton.frame.origin.x :self.shotMissButton.frame.origin.y :50.0f :false];
-    [self makeRoundShotButton:self.shotSelectPreviousButton :self.shotSelectPreviousButton.frame.origin.x :self.shotSelectPreviousButton.frame.origin.y :35.0f :false];
-    [self makeRoundShotButton:self.shotSelectNextButton :self.shotSelectNextButton.frame.origin.x :self.shotSelectNextButton.frame.origin.y :35.0f :false];
+    
     [common makeRoundButtonOwnColour:self.openPlayer1DetailButton :self.openPlayer1DetailButton.frame.origin.x :self.openPlayer1DetailButton.frame.origin.y :75.0f :self.skinPlayer1Colour];
     [common makeRoundButtonOwnColour:self.openPlayer2DetailButton :self.openPlayer2DetailButton.frame.origin.x :self.openPlayer2DetailButton.frame.origin.y :75.0f : self.skinPlayer2Colour];
     [common makeRoundButtonOwnColour:self.buttonSwapPlayer :self.buttonSwapPlayer.frame.origin.x :self.buttonSwapPlayer.frame.origin.y :self.buttonSwapPlayer.frame.size.width :self.skinForegroundColour];
@@ -1536,6 +1499,7 @@ issue with startup now controlled by onload block condition
 }
 
 
+/* last modified 20161211 */
 -(void)endBreakTap:(UITapGestureRecognizer *)gesture {
     int breakThreshold=0;
     NSString *congratsMsg;
@@ -1570,7 +1534,7 @@ issue with startup now controlled by onload block condition
             
             if (self.breakThreshholdForCelebration == 0) {
                 breakThreshold = [self.currentPlayer.hbEver.breakTotal intValue];
-                congratsMsg = [NSString stringWithFormat:@"Congratulations %@ have beaten your previous highest ever break!", self.currentPlayer.nickName];
+                congratsMsg = [NSString stringWithFormat:@"Congratulations %@, you have beaten your highest break record!", self.currentPlayer.nickName];
             }
         }
 
@@ -1580,7 +1544,7 @@ issue with startup now controlled by onload block condition
         
         if (self.breakThreshholdForCelebration != 0) {
            // breakThreshold = self.activeBreak.points;
-            congratsMsg = [NSString stringWithFormat:@"Congratulations %@ have scored a high break over the current limit of %d!", self.currentPlayer.nickName, self.breakThreshholdForCelebration];
+            congratsMsg = [NSString stringWithFormat:@"Congratulations %@, you have scored a break of %d!", self.currentPlayer.nickName, self.breakThreshholdForCelebration];
         }
         
         if ((self.activeBreak.points >= [NSNumber numberWithInt:self.breakThreshholdForCelebration] && self.breakThreshholdForCelebration!=0) || (breakThreshold != 0 && self.breakThreshholdForCelebration==0)) {
@@ -1588,16 +1552,13 @@ issue with startup now controlled by onload block condition
             [self.closeButtonCongratulations setImage:changecolourimage forState:UIControlStateNormal];
         
             if (self.currentPlayer.playerIndex==1) {
-                self.closeButtonCongratulations.tintColor = [UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
-                [self.labelCongratsMessage setTextColor:[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f]];
-                 [self.labelCongratDetail setTextColor:[UIColor colorWithRed:0.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f]];
-                
-                
+                self.closeButtonCongratulations.tintColor = self.skinPlayer1Colour;
+                [self.labelCongratsMessage setTextColor:self.skinPlayer1Colour];
+                [self.labelCongratsPlayerMessage setTextColor:self.skinPlayer1Colour];
             } else {
-                self.closeButtonCongratulations.tintColor = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f];
-                [self.labelCongratsMessage setTextColor:[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f]];
-                [self.labelCongratDetail setTextColor:[UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0f]];
-
+                self.closeButtonCongratulations.tintColor = self.skinPlayer2Colour;
+                [self.labelCongratsMessage setTextColor:self.skinPlayer2Colour];
+                [self.labelCongratsPlayerMessage setTextColor:self.skinPlayer2Colour];
             }
 
             self.skView.showsFPS = YES;
@@ -1606,11 +1567,13 @@ issue with startup now controlled by onload block condition
             celebrationSceneSKV * scene = [celebrationSceneSKV sceneWithSize:self.skView.bounds.size];
             scene.scaleMode = SKSceneScaleModeResizeFill;
 
-            scene.backgroundColor = [UIColor blackColor];
+            scene.backgroundColor = [UIColor clearColor];
             self.labelCongratsMessage.text = [NSString stringWithFormat:@"%@", self.activeBreak.text];
-            self.labelCongratDetail.text = congratsMsg;
+            self.labelCongratsPlayerMessage.text = congratsMsg;
             
-                    // Present the scene.
+            
+            
+            // Present the scene.
             [self.skView presentScene:scene];
             
             
@@ -1630,7 +1593,6 @@ issue with startup now controlled by onload block condition
     } else {
         
         self.activeMatchId = [self.db insertMatch :self.textScorePlayer1.playerNumber :self.textScorePlayer2.playerNumber];
-        
         if (self.activeMatchId==[NSNumber numberWithInt:1]) {
             /* very first new match */
             self.textScorePlayer1.playerNumber = [NSNumber numberWithInt:1];
@@ -1650,15 +1612,13 @@ issue with startup now controlled by onload block condition
         self.imagePottedBall.hidden = false;
         self.isMatchStarted = true;
         self.ballCollectionView.hidden = false;
-        self.optionPanelView.hidden = false;
-        self.optionPanelLeftView.hidden = false;
         [self addFrameStartDate];
     }
 }
 
 
 /* last modified 20161130 */
--(void)ballPotted:(ball*)pottedBall :(indicator*) indicatorBall :(id)sender {
+-(void)ballPotted:(ball*)pottedBall :(indicator*) indicatorBall {
     
     bool freeBall=false;
     ball* pottedFreeBall;
@@ -1677,35 +1637,50 @@ issue with startup now controlled by onload block condition
         [self.activeBreak setActive:[NSNumber numberWithInt:activeFlag_Active]];
     }
     
-    if ([self.switchFoul isOn] || self.shotTypeId == Foul) {
-        
-        self.shotTypeId = Foul;
-        self.pocketId = pocketNone;
+    if (self.shotTypeId == Foul) {
+
         [self.activeBreak setPlayerid :[NSNumber numberWithInt:[self.currentPlayer playerIndex]]];
         [self.activeBreak setLastshotid:[NSNumber numberWithInt:self.shotTypeId]];
         
-        [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Foul] :[NSNumber numberWithInt:self.shotGroup1SegmentId] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
+       
+        if ((self.shotFoulId==foulPotAndInOff && [pottedBall.colour isEqualToString:@"RED"]) || self.shotFoulId==foulWrongRedPot) {
+            [self.activeBreak addShotToBreak :self.buttonRed  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Potted] :[NSNumber numberWithInt:self.shotFoulId] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
+        } else {
+            [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Foul] :[NSNumber numberWithInt:self.shotFoulId] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
+        }
+        
+        
         [self.activeBreak setDuration:[NSNumber numberWithInt:_entryTimeInSeconds]];
         [self addBreakToData :self.activeBreak];
+
         [self closeBreak];
+
+        if ((self.shotFoulId==foulPotAndInOff && [pottedBall.colour isEqualToString:@"RED"]) || self.shotFoulId==foulWrongRedPot) {
+            //if (self.activeColour==pottedBall.pottedPoints) {
+                [self.buttonRed decreaseQty];
+                if (self.buttonRed.quantity == 0) {
+                    activeColour ++;
+                }
+            //}
+        }
+        
+       
         [self.activeBreak.shots removeAllObjects];
         [self.activeBreak setPoints:[NSNumber numberWithInt:pottedBall.foulPoints]];
         [self.activeBreak setLastshotid:[NSNumber numberWithInt:Bonus]];
         [self.activeBreak setPlayerid:[NSNumber numberWithInt:self.opposingPlayer.playerIndex]];
-        [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Bonus] :[NSNumber numberWithInt:self.shotGroup1SegmentId] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
+        [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Bonus] :[NSNumber numberWithInt:self.shotFoulId] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
         [self.activeBreak setDuration:[NSNumber numberWithInt:0]];
         [self addBreakToData :self.activeBreak];
         
-        [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
         
+        [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
         
         // add the foul points to opposing player
         [self.opposingPlayer setFoulScore:pottedBall.foulPoints];
 
         [self.activeBreak clearBreak:self.viewBreak];
         
-        [self.switchFoul setOn:false];
-        self.foulLabel.hidden=true;
         self.buttonAdjust.hidden = false;
         self.isUndoShot = false;
         
@@ -1717,6 +1692,9 @@ issue with startup now controlled by onload block condition
             int liveTotal = self.currentPlayer.currentFrame.frameScore + [self.activeBreak.points intValue];
             self.currentPlayer.text = [NSString stringWithFormat:@"%d",liveTotal];
         }
+        
+ 
+        
         
 
     } else if (self.shotTypeId == Standard || self.shotTypeId == Potted) {
@@ -1799,7 +1777,6 @@ issue with startup now controlled by onload block condition
                 
                 /* previous potted ball slides out right side of view and new ball slides in transition animation */
                 
-                //UIButton *ballButtonPressed = sender;
                 self.ballRowDisabledView.hidden = false;
                 //[self enableControls :false];
                 
@@ -1811,7 +1788,7 @@ issue with startup now controlled by onload block condition
                 self.breakViewTrailingConstraint.constant -= self.viewBreak.frame.size.width;
                 
                 /* TODO - consider if all parms need to be passed still */
-                [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:self.shotTypeId] :[NSNumber numberWithInt:self.shotGroup1SegmentId] :[NSNumber numberWithInt:self.shotGroup2SegmentId] :self.pocketId :pottedFreeBall :self.isHollow];
+                [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:self.shotTypeId] :[NSNumber numberWithInt:notany] :[NSNumber numberWithInt:self.shotGroup2SegmentId] :self.pocketId :pottedFreeBall :self.isHollow];
                 
                 
                 [UIView animateWithDuration:0.2
@@ -1899,7 +1876,7 @@ issue with startup now controlled by onload block condition
         
     } else if (self.shotTypeId == Missed) {
 
-        [self.activeBreak addShotToBreak:pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Missed]  :[NSNumber numberWithInt:self.shotGroup1SegmentId] :[NSNumber numberWithInt:self.shotGroup2SegmentId] :self.pocketId :nil :self.isHollow];
+        [self.activeBreak addShotToBreak:pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Missed]  :[NSNumber numberWithInt:notany] :[NSNumber numberWithInt:self.shotGroup2SegmentId] :self.pocketId :nil :self.isHollow];
         [self.activeBreak setDuration:[NSNumber numberWithInt:_entryTimeInSeconds]];
         
         if ([self.activeBreak.points intValue] > 0 ) {
@@ -1909,9 +1886,6 @@ issue with startup now controlled by onload block condition
             [self closeBreak];
             [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
             [self.activeBreak clearBreak:self.viewBreak];
-            
-            [self.switchFoul setOn:false];
-            self.foulLabel.hidden=true;
             self.buttonAdjust.hidden = false;
             self.isUndoShot = false;
             [self updateFrameVisitCounter];
@@ -1940,7 +1914,7 @@ issue with startup now controlled by onload block condition
         
         self.pocketId = pocketNone;
         
-        [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:self.shotTypeId] :[NSNumber numberWithInt:self.shotGroup1SegmentId] :[NSNumber numberWithInt:self.shotGroup2SegmentId] :self.pocketId :nil :self.isHollow];
+        [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:self.shotTypeId] :[NSNumber numberWithInt:notany] :[NSNumber numberWithInt:self.shotGroup2SegmentId] :self.pocketId :nil :self.isHollow];
         
         [self updateFrameVisitCounter];
         
@@ -1954,9 +1928,6 @@ issue with startup now controlled by onload block condition
             [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
             [self.activeBreak setLastshotid:[NSNumber numberWithInt:self.shotTypeId]];
             [self.activeBreak clearBreak:self.viewBreak];
-            
-            [self.switchFoul setOn:false];
-            self.foulLabel.hidden=true;
             self.buttonAdjust.hidden = false;
             self.isUndoShot = false;
             [self swapPlayers];
@@ -1984,37 +1955,37 @@ issue with startup now controlled by onload block condition
 
 - (IBAction)redClicked:(id)sender {
     self.shotTypeId = Standard;
-    [self ballPotted:self.buttonRed :self.redIndicator :sender];
+    [self ballPotted:self.buttonRed :self.redIndicator];
 }
 
 - (IBAction)yellowClicked:(id)sender {
     self.shotTypeId = Standard;
-    [self ballPotted:self.buttonYellow :self.yellowIndicator :sender];
+    [self ballPotted:self.buttonYellow :self.yellowIndicator];
 }
 
 - (IBAction)greenClicked:(id)sender {
     self.shotTypeId = Standard;
-    [self ballPotted:self.buttonGreen :self.greenIndicator :sender];
+    [self ballPotted:self.buttonGreen :self.greenIndicator];
 }
 
 - (IBAction)brownClicked:(id)sender {
     self.shotTypeId = Standard;
-    [self ballPotted:self.buttonBrown :self.brownIndicator :sender];
+    [self ballPotted:self.buttonBrown :self.brownIndicator];
 }
 
 - (IBAction)blueClicked:(id)sender {
     self.shotTypeId = Standard;
-    [self ballPotted:self.buttonBlue :self.blueIndicator :sender];
+    [self ballPotted:self.buttonBlue :self.blueIndicator];
 }
 
 - (IBAction)pinkClicked:(id)sender {
     self.shotTypeId = Standard;
-    [self ballPotted:self.buttonPink :self.pinkIndicator :sender];
+    [self ballPotted:self.buttonPink :self.pinkIndicator];
 }
 
 - (IBAction)blackClicked:(id)sender {
     self.shotTypeId = Standard;
-    [self ballPotted:self.buttonBlack :self.blackIndicator :sender];
+    [self ballPotted:self.buttonBlack :self.blackIndicator];
 }
 
 -(ball*)findBall:(int)selectedBall {
@@ -2181,31 +2152,6 @@ issue with startup now controlled by onload block condition
 
 }
 
-
-
-/* last modified 20151020 */
--(void)hidePlayersStats {
-    
-    [UIView animateWithDuration:0.60f animations:^{
-
-    }
-    completion:^ (BOOL finished)
-    {
-         if (finished) {
-             // Revert image view to original.
-             if (self.shotView.hidden == true) {
-                 if (!importedFile) {
-                     self.buttonEnd.hidden = false;
-                 }
-                 self.buttonNew.hidden = false;
-                 self.buttonHelp.hidden = false;
-             }
-             if (!importedFile) {
-  //               self.disabledView.hidden=true;
-             }
-         }
-     }];
-}
 
 #pragma mark - Match
 
@@ -2384,7 +2330,7 @@ issue with startup now controlled by onload block condition
 }
 
 
-/* last modified 20160719 */
+/* last modified 20161211 */
 -(void)endMatch :(NSString*) option {
     
     /* option                       email Y/N       saveStats Y/N       end current frame Y/N
@@ -2512,16 +2458,17 @@ issue with startup now controlled by onload block condition
     self.currentFrameId=[NSNumber numberWithInt:1];
 
     [self resetBalls];
-    self.imagePottedBall.image = [UIImage imageNamed:@"Snooker_balls_triangled.pngg"];
-    self.activeBreak.text = @"GO!";
+    self.imagePottedBall.image = [UIImage imageNamed:@"one-finger-tap"];
+    self.activeBreak.text = @"";
+    
+    self.imagePottedBall.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    self.imagePottedBall.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    
     self.activeBreak.hidden = false;
-    //self.imagePottedBall.hidden = false;
-    //self.buttonSwapPlayer.hidden = true;
     self.labelStopwatch.hidden = true;
     self.isMatchStarted = false;
     self.ballCollectionView.hidden = true;
-    self.optionPanelView.hidden = true;
-    self.optionPanelLeftView.hidden = true;
     
     _frameVisitCounter=0;
     self.labelVisitCounter.text = [NSString stringWithFormat:@"Visits %d",_frameVisitCounter];
@@ -2621,26 +2568,6 @@ issue with startup now controlled by onload block condition
         nameOfPlayer = self.textPlayerTwoName.text;
     }
     
-    if (item<6) {
-        if (playerId==[NSNumber numberWithInt:1]) {
-            self.player1SnookerTableImageView.hidden = true;
-            self.player1BulkLeftLabel.hidden = true;
-            self.player1BulkRightLabel.hidden = true;
-            self.player1MiddleLeftLabel.hidden = true;
-            self.player1MiddleRightLabel.hidden = true;
-            self.player1BottomLeftLabel.hidden = true;
-            self.player1BottomRightLabel.hidden = true;
-        } else {
-            self.player2SnookerTableImageView.hidden = true;
-            self.player2BulkLeftLabel.hidden = true;
-            self.player2BulkRightLabel.hidden = true;
-            self.player2MiddleLeftLabel.hidden = true;
-            self.player2MiddleRightLabel.hidden = true;
-            self.player2BottomLeftLabel.hidden = true;
-            self.player2BottomRightLabel.hidden = true;
-        }
-    }
-        
     if (item==0) {
         return [NSString stringWithFormat:@"Tap to view %@'s statistics!", nameOfPlayer];
     }
@@ -2778,6 +2705,7 @@ issue with startup now controlled by onload block condition
     NSString *data = [NSString stringWithFormat:@"%@%@%@%@",matchheader, tableHeader, tableDetail, tableFooter];
     return data;
 }
+
 
 #pragma mark - Navigation
 
@@ -3133,16 +3061,6 @@ issue with startup now controlled by onload block condition
     [self.activeBreak setPoints:[NSNumber numberWithInt:runningPoints]];
     [self addBreakToData:self.activeBreak];
     [self closeBreak];
-}
-
-#pragma mark - Option Box items
-
--(IBAction)switchChanged:(id)sender {
-    if ([self.switchFoul isOn] ) {
-        self.foulLabel.hidden = false;
-    } else {
-        self.foulLabel.hidden = true;
-    }
 }
 
 
@@ -3624,31 +3542,228 @@ issue with startup now controlled by onload block condition
 
 
 
-/* last modified 20151112 */
+/* last modified 20161210 */
 -(void)gestureBallLongPress:(UILongPressGestureRecognizer *)gesture
 {
     UIGestureRecognizer *recognizer = (UIGestureRecognizer*) gesture;
     
     if(UIGestureRecognizerStateBegan == gesture.state)
     {
-        self.buttonHelp.enabled = false;
-        self.buttonNew.enabled = false;
-        self.buttonEnd.enabled = false;
-        
         long tag = recognizer.view.tag;
+        // get ball object depending on what user pressed
+        ball *ballPressed;
+        indicator *indicatorOfBallPressed;
+        if (tag==1) {
+            ballPressed = self.buttonRed;
+            indicatorOfBallPressed = self.redIndicator;
+        } else if (tag==2) {
+            ballPressed = self.buttonYellow;
+            indicatorOfBallPressed = self.yellowIndicator;
+        } else if (tag==3) {
+            ballPressed = self.buttonGreen;
+            indicatorOfBallPressed = self.greenIndicator;
+        } else if (tag==4) {
+            ballPressed = self.buttonBrown;
+            indicatorOfBallPressed = self.brownIndicator;
+        } else if (tag==5) {
+            ballPressed = self.buttonBlue;
+            indicatorOfBallPressed = self.blueIndicator;
+        } else if (tag==6) {
+            ballPressed = self.buttonPink;
+            indicatorOfBallPressed = self.pinkIndicator;
+        } else if (tag==7) {
+            ballPressed = self.buttonBlack;
+            indicatorOfBallPressed = self.blackIndicator;
+        }
         
-        [self.switchFoul setOn:false];
+        NSString *titleMessage;
+        
         
         int currentPlayerIndex = self.currentPlayer.playerIndex;
         if (currentPlayerIndex==1) {
-            self.shotPlayerNameLabel.text = self.textPlayerOneName.text;
+            titleMessage = [NSString stringWithFormat:@"Nominate shot played by %@",self.textPlayerOneName.text];
+           
         } else {
-           self.shotPlayerNameLabel.text = self.textPlayerTwoName.text;
+            titleMessage = [NSString stringWithFormat:@"Nominate shot played by %@",self.textPlayerTwoName.text];
         }
+
         
-     [self setupShotSelectionView :tag];
+        
+       // self.activeColour
+        
+        
+        NSString *alertMessage = @"The selected ball might be either the\ntarget or the foul ball itself.";
+        
+        
+
+        
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:titleMessage
+                                                                       message:alertMessage
+                                                                preferredStyle:UIAlertControllerStyleActionSheet];
+
+        
+       // [alert.view setTintColor:[UIColor brownColor]];
+        
+        CGRect viewFrame = CGRectMake( 5, 20, 40, 40 );
+        UIImageView *ballPressedView = [[UIImageView alloc]initWithFrame:viewFrame];
+        [common makeBallImage:ballPressedView :ballPressedView.frame.origin.x :ballPressedView.frame.origin.y :ballPressedView.frame.size.width :5.0f];
+        ballPressedView.backgroundColor = ballPressed.ballColour;
+        ballPressedView.layer.borderColor = ballPressed.ballColour.CGColor;
+        
+        [alert.view addSubview:ballPressedView];
+        
+  
+        NSString *pottedText = [NSString stringWithFormat:@"POTTED %@",[ballPressed.colour uppercaseString]];
+        
+        NSString *freeballText = [NSString stringWithFormat:@"Potted free-ball (%d points)",self.activeColour];
+        
+        NSString *foulPotAndInoffText = [NSString stringWithFormat:@"Potted %@ & in-off ",[ballPressed.colour lowercaseString]];
+        
+        NSString *inoffText = [NSString stringWithFormat:@"In-off playing %@",[ballPressed.colour lowercaseString]];
+        
+        NSString *missedBallText = [NSString stringWithFormat:@"Missed ball while playing %@",[ballPressed.colour lowercaseString]];
+        
+        NSString *wrongBallText = [NSString stringWithFormat:@"Wrong ball potted/hit"];
+        
+        NSString *wrongRedPotText = [NSString stringWithFormat:@"Red ball potted playing %@" , [ballPressed.colour lowercaseString]];
+        
+        
+        
+        UIAlertAction *pottedAction = [UIAlertAction actionWithTitle:pottedText
+                                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                    
+                                                                      self.shotTypeId = Standard;
+                                                                      [self ballPotted:ballPressed :indicatorOfBallPressed];
+                                                                      
+                                                                      
+                                                                      NSLog(@"you made a pot");
+                                                                      
+                                                                  }];
+        [pottedAction setValue:ballPressed.ballColour forKey:@"titleTextColor"];
+        
+        
+        UIAlertAction *freeBallAction = [UIAlertAction actionWithTitle:freeballText
+                                                               style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                   
+                                                                   self.shotTypeId = Standard;
+                                                                   [self ballPotted:ballPressed :indicatorOfBallPressed];
+                                                                   
+                                                                   NSLog(@"well done you potted a free-ball");
+                                                                   
+                                                               }];
+        [freeBallAction setValue:ballPressed.ballColour forKey:@"titleTextColor"];
+        
+       
+        
+        
+        
+        UIAlertAction *foulPotAndInoffAction = [UIAlertAction actionWithTitle:foulPotAndInoffText
+                                                                 style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                     
+                                                                     self.shotTypeId=Foul;
+                                                                     self.shotFoulId=foulPotAndInOff;
+                                                                     
+                                                                     [self ballPotted:ballPressed :indicatorOfBallPressed];
+                                                                    
+                                                                     NSLog(@"you potted the white in-off while potting the object ball");
+                                                                 
+                                                                 }];
+    
+        
+       
+        
+        [foulPotAndInoffAction setValue: [UIColor colorWithRed:139.0f/255.0f green:12.0f/255.0f blue:0.0f/255.0f alpha:1.0f] forKey:@"titleTextColor"];
+        
+        UIAlertAction *inoffAction = [UIAlertAction actionWithTitle:inoffText
+                                                                 style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                     
+                                                                     self.shotTypeId=Foul;
+                                                                     self.shotFoulId=foulInOff;
+                                                        
+                                                                    [self ballPotted:ballPressed :indicatorOfBallPressed];
+                                                                     
+                                                                     
+                                                                     NSLog(@"whoops you potted the white in-off");
+                                                                     
+                                                                 }];
+        [inoffAction setValue:[UIColor colorWithRed:139.0f/255.0f green:12.0f/255.0f blue:0.0f/255.0f alpha:1.0f]  forKey:@"titleTextColor"];
+        
+        
+        UIAlertAction *wrongBallAction = [UIAlertAction actionWithTitle:wrongBallText
+                                                                 style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                     
+                                                                     self.shotTypeId=Foul;
+                                                                     self.shotFoulId=foulWrongPotOrHit;
+                                                                     
+                                                                    [self ballPotted:ballPressed :indicatorOfBallPressed];
+                                                                     
+                                                                     NSLog(@"You potted ot hit the wrong ball");
+                                                                     
+                                                                 }];
+        [wrongBallAction setValue:[UIColor colorWithRed:139.0f/255.0f green:12.0f/255.0f blue:0.0f/255.0f alpha:1.0f]  forKey:@"titleTextColor"];
+        
+        UIAlertAction *missedBallAction = [UIAlertAction actionWithTitle:missedBallText
+                                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                      
+                                                                      self.shotTypeId=Foul;
+                                                                      self.shotFoulId=foulMissedBall;
+                                                                      
+                                                                      [self ballPotted:ballPressed :indicatorOfBallPressed];
+                                                                      
+                                                                      NSLog(@"You missed the ball altogether");
+                                                                      
+                                                                  }];
+        [missedBallAction setValue:[UIColor colorWithRed:139.0f/255.0f green:12.0f/255.0f blue:0.0f/255.0f alpha:1.0f]  forKey:@"titleTextColor"];
+        
+        
+        UIAlertAction *wrongPotRedAction = [UIAlertAction actionWithTitle:wrongRedPotText
+                                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                      
+                                                                      self.shotTypeId=Foul;
+                                                                      self.shotFoulId=foulWrongRedPot;
+                                                                      
+                                                                      [self ballPotted:ballPressed :indicatorOfBallPressed];
+                                                                      
+                                                                      [self clearIndicators :hide];
+                                                                      
+                                                                      NSLog(@"You potted the red when you shouldn't have");
+                                                                      
+                                                                  }];
+        [wrongPotRedAction setValue:[UIColor colorWithRed:139.0f/255.0f green:12.0f/255.0f blue:0.0f/255.0f alpha:1.0f]  forKey:@"titleTextColor"];
+        
+        
+        
+        
+        UIAlertAction *CancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                                                               NSLog(@"You pressed cancel");
+                                                           }];
+    
+   
+    if (tag!=self.activeColour && (self.activeBreak.points==[NSNumber numberWithInt:0] || self.activeBreak.points==nil)) {
+        [alert addAction:freeBallAction];
+    } else {
+         [alert addAction:pottedAction];
+    }
+    
+    if (tag==self.activeColour) {
+        [alert addAction:foulPotAndInoffAction];
+        [alert addAction:inoffAction];
+    }
+    [alert addAction:wrongBallAction];
+    [alert addAction:missedBallAction];
+        
+    if (tag!=1 && self.activeColour==1) {
+        [alert addAction:wrongPotRedAction];
+    }
+    [alert addAction:CancelAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
     }
 }
+
+
 
 
 -(void)gesturePauseLongPress:(UILongPressGestureRecognizer *)gesture
@@ -3714,113 +3829,7 @@ issue with startup now controlled by onload block condition
     self.buttonBlue.enabled=enabledFlag;
     self.buttonPink.enabled=enabledFlag;
     self.buttonBlack.enabled=enabledFlag;
-    self.switchFoul.enabled=enabledFlag;
 }
-
-
-
-
-/* created 20151020 */
-/* last modified 20151112 */
--(void) setupShotSelectionView :(long) tag {
-    
-    
-    if (tag!=0) {
-    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:24], NSFontAttributeName, nil];
-    [self.segOptions1 setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    [self.segOptions2 setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    
-    
-    if(tag== 1) {
-        self.buttonIndicator = self.redIndicator;
-        self.shotBallColour = @"red";
-        self.shotBallImage.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@%@.png",self.skinPrefix,self.buttonRed.imageNameLarge]];
-    } else if(tag == 2) {
-        self.buttonIndicator = self.yellowIndicator;
-        self.shotBallColour = @"yellow";
-        self.shotBallImage.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@%@.png",self.skinPrefix,self.buttonYellow.imageNameLarge]];
-    } else if(tag == 3) {
-        self.buttonIndicator = self.greenIndicator;
-        self.shotBallColour = @"green";
-        self.shotBallImage.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@%@.png",self.skinPrefix,self.buttonGreen.imageNameLarge]];
-    } else if(tag == 4) {
-        self.buttonIndicator = self.brownIndicator;
-        self.shotBallColour = @"brown";
-        self.shotBallImage.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@%@.png",self.skinPrefix,self.buttonBrown.imageNameLarge]];
-    } else if(tag == 5) {
-        self.buttonIndicator = self.blueIndicator;
-        self.shotBallColour = @"blue";
-        self.shotBallImage.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@%@.png",self.skinPrefix,self.buttonBlue.imageNameLarge]];
-    } else if(tag == 6) {
-        self.buttonIndicator = self.pinkIndicator;
-        self.shotBallColour = @"pink";
-        self.shotBallImage.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@%@.png",self.skinPrefix,self.buttonPink.imageNameLarge]];
-    } else if(tag == 7) {
-        self.shotBallColour = @"black";
-        self.buttonIndicator = self.blackIndicator;
-        self.shotBallImage.image = [UIImage imageNamed: [NSString stringWithFormat:@"%@%@.png",self.skinPrefix,self.buttonBlack.imageNameLarge]];
-    }
-    }
-    
-    [self snookerTableClear];
-    
-    self.shotPotMissView.hidden = true;
-    self.shotSafetyView.hidden = true;
-    self.shotFoulView.hidden = true;
-    
-    if (self.shotTabId==1) {
-        self.shotPotMissView.hidden = false;        
-        self.segOptions2.hidden=false;
-        // add text to both segment options
-        [self.segOptions1 setTitle:@"Short" forSegmentAtIndex:0];
-        [self.segOptions1 setTitle:@"Medium" forSegmentAtIndex:1];
-        [self.segOptions1 setTitle:@"Long" forSegmentAtIndex:2];
-        [self.segOptions1 setTitle:@"Escape" forSegmentAtIndex:3];
-        [self.segOptions2 setTitle:@"Easy" forSegmentAtIndex:0];
-        [self.segOptions2 setTitle:@"Average" forSegmentAtIndex:1];
-        [self.segOptions2 setTitle:@"Hard" forSegmentAtIndex:2];
-        [self.segOptions2 setTitle:@"Fluke" forSegmentAtIndex:3];
-
-    } else {
-        // hide second segmentOption
-        self.segOptions2.hidden=true;
-        if (self.shotTabId==0) {
-            // show Safety text in segment
-            self.shotSafetyView.hidden = false;
-            [self.segOptions1 setTitle:@"Superb" forSegmentAtIndex:0];
-            [self.segOptions1 setTitle:@"Good" forSegmentAtIndex:1];
-            [self.segOptions1 setTitle:@"Alright" forSegmentAtIndex:2];
-            [self.segOptions1 setTitle:@"Bad" forSegmentAtIndex:3];
-            
-        } else {
-            // show Foul text in segment
-            self.shotFoulView.hidden = false;
-            [self.segOptions1 setTitle:@"InOff" forSegmentAtIndex:0];
-            [self.segOptions1 setTitle:@"Wrong Hit" forSegmentAtIndex:1];
-            [self.segOptions1 setTitle:@"Wrong Pot" forSegmentAtIndex:2];
-            [self.segOptions1 setTitle:@"All Missed" forSegmentAtIndex:3];
-        }
-        
-    }
-
-    
-    if (tag!=0) {
-        self.shotView.alpha=0.0f;
-        self.shotView.hidden = false;
-    
- //       self.disabledView.hidden=false;
-
-        [UIView animateWithDuration:0.25f animations:^{
-            self.shotView.alpha=1.0f;
-                } completion:^(BOOL finished){
-                    nil;
-                }
-         ];
-    }
-    
-}
-
-
 
 
 
@@ -3973,161 +3982,10 @@ issue with startup now controlled by onload block condition
 }
 
 
--(void)snookerTablePocketSelected :(UIButton*)pocketSelected :(NSNumber*)pocketIndex :(float)top :(float)left :(float)bottom :(float)right {
-    self.topShotSelectionConstraint.constant =  self.shotView.frame.origin.y;
-    self.leadingShotSelectionConstraint.constant = self.shotView.frame.origin.x;
-    [self snookerTableClear];
-    [pocketSelected setImage:self.shotBallImage.image forState:UIControlStateNormal];    
-    [pocketSelected setImageEdgeInsets:UIEdgeInsetsMake(top, left, bottom, right)];
-    [pocketSelected setContentMode:UIViewContentModeScaleAspectFit];
-    self.pocketId=pocketIndex;
-}
 
-
--(void)snookerTableClear {
-    [self.buttonBulkLeftPocket setImage:nil forState:UIControlStateNormal];
-    [self.buttonBulkRightPocket setImage:nil forState:UIControlStateNormal];
-    [self.buttonMiddleLeftPocket setImage:nil forState:UIControlStateNormal];
-    [self.buttonMiddleRightPocket setImage:nil forState:UIControlStateNormal];
-    [self.buttonBottomLeftPocket setImage:nil forState:UIControlStateNormal];
-    [self.buttonBottomRightPocket setImage:nil forState:UIControlStateNormal];
-    self.pocketId=[NSNumber numberWithInt:pocketNone];
-    bool pocketEnabled = true;
-    if (shotTabId!=1) {
-        pocketEnabled = false;
-    }
-    self.buttonBulkLeftPocket.enabled = pocketEnabled;
-    self.buttonBulkRightPocket.enabled = pocketEnabled;
-    self.buttonMiddleLeftPocket.enabled = pocketEnabled;
-    self.buttonMiddleRightPocket.enabled = pocketEnabled;
-    self.buttonBottomLeftPocket.enabled = pocketEnabled;
-    self.buttonBottomRightPocket.enabled = pocketEnabled;
-}
-
-
-
-- (IBAction)tableBulkLeftPocketPressed:(id)sender {
-    [self snookerTablePocketSelected:self.buttonBulkLeftPocket :[NSNumber numberWithInt:pocketBulkLeft] :6.0f :7.0f :44.0f :63.0f];
-}
-
-- (IBAction)tableBulkRightPocketPressed:(id)sender {
-     [self snookerTablePocketSelected:self.buttonBulkRightPocket :[NSNumber numberWithInt:pocketBulkRight]  :44.0f :7.0f :6.0f :63.0f];
-}
-
-- (IBAction)tableMiddleLeftPocket:(id)sender {
-    [self snookerTablePocketSelected:self.buttonMiddleLeftPocket :[NSNumber numberWithInt:pocketMiddleLeft] :6.0f :35.0f :44.0f :35.0f];
-}
-
-- (IBAction)tableMiddleRightPocket:(id)sender {
-    [self snookerTablePocketSelected:self.buttonMiddleRightPocket :[NSNumber numberWithInt:pocketMiddleRight] :44.0f :35.0f :6.0f :35.0f];
-}
-
-- (IBAction)tableBottomLeftPocket:(id)sender {
-    [self snookerTablePocketSelected:self.buttonBottomLeftPocket :[NSNumber numberWithInt:pocketBottomLeft] :6.0f :63.0f :44.0f :7.0f];
-}
-
-- (IBAction)tableBottomRightPocket:(id)sender {
-     [self snookerTablePocketSelected:self.buttonBottomRightPocket :[NSNumber numberWithInt:pocketBottomRight] :44.0f :63.0f :6.0f :7.0f];
-}
-
-
-/* Shot view buttons */
-
-/* last modified 20151020 */
-- (IBAction)closeShot:(id)sender {
-    [self closeShotPopup];
-}
-
-
-/* created 20151112 */
-- (IBAction)shotFoulButtonPressed:(id)sender {
-    self.shotTypeId=Foul;
-    self.shotGroup1SegmentId = (int)self.segOptions1.selectedSegmentIndex;
-    [self ballPotted:[self getShotBall:self.shotBallColour] :self.buttonIndicator :sender];
-    [self closeShotPopup];
-}
-
-/* created 20151112 */
-- (IBAction)shotSafetyButtonPressed:(id)sender {
-    self.shotTypeId=Safety;
-    self.shotGroup1SegmentId = (int)self.segOptions1.selectedSegmentIndex;
-    [self ballPotted:[self getShotBall:self.shotBallColour] :self.buttonIndicator :sender];
-    [self closeShotPopup];
-}
-
-/* created 20151112 */
-- (IBAction)shotPotButtonPressed:(id)sender {
-    self.shotTypeId=Potted;
-    self.shotGroup1SegmentId = (int)self.segOptions1.selectedSegmentIndex;
-    self.shotGroup2SegmentId = (int)self.segOptions2.selectedSegmentIndex;
-    [self ballPotted:[self getShotBall:self.shotBallColour] :self.buttonIndicator :sender];
-    [self closeShotPopup];
-}
-
-/* created 20151112 */
-- (IBAction)shotMissButtonPressed:(id)sender {
-    self.shotTypeId=Missed;
-    self.shotGroup1SegmentId = (int)self.segOptions1.selectedSegmentIndex;
-    self.shotGroup2SegmentId = (int)self.segOptions2.selectedSegmentIndex;
-    [self ballPotted:[self getShotBall:self.shotBallColour] :self.buttonIndicator :sender];
-    [self closeShotPopup];
-}
-
-/* created 20151112 */
-- (IBAction)shotPreviousButtonPressed:(id)sender {
-
-   // potMiss=1; safety=0; foul=2
-    
-    if (shotTabId==1) {
-        shotTabId = 0;
-    } else if (shotTabId==0) {
-        shotTabId = 2;
-    } else {
-        shotTabId = 1;
-    }
-    self.topShotSelectionConstraint.constant =  self.shotView.frame.origin.y;
-    self.leadingShotSelectionConstraint.constant = self.shotView.frame.origin.x;
-    [self setupShotSelectionView :0];
-}
-
-/* created 20151112 */
-- (IBAction)shotNextButtonPressed:(id)sender {
-
-    if (shotTabId==1) {
-        shotTabId = 2;
-    } else if (shotTabId==2) {
-        shotTabId = 0;
-    } else {
-        shotTabId = 1;
-    }
-    self.topShotSelectionConstraint.constant =  self.shotView.frame.origin.y;
-    self.leadingShotSelectionConstraint.constant = self.shotView.frame.origin.x;
-    [self setupShotSelectionView :0];
-}
-
-
--(void) closeShotPopup {
-    self.shotView.hidden=true;
-    self.buttonHelp.enabled = true;
-    self.buttonNew.enabled = true;
-    self.buttonEnd.enabled = true;
- //   self.disabledView.hidden=true;
-    self.topShotSelectionConstraint.constant =  self.shotView.frame.origin.y;
-    self.leadingShotSelectionConstraint.constant = self.shotView.frame.origin.x;
-    
-}
 
 - (void)addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState {
     self.displayState = displayState;
-    
-    /*
-     player1stats hidden or not
-     player2stats hidden or not
-     breakStats hidden false
-     frameStats hidden false
-    
-    */
-    
 }
 
 - (NSTimer *)createTimer {

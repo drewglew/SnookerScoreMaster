@@ -58,6 +58,20 @@ last modified -
 */
 + (NSString *) getFrameDuration :(NSMutableArray *) data {
     
+    
+    int duration=0;
+    for (breakEntry *entry in data) {
+        duration += [entry.duration intValue];
+    }
+    if (duration!=0) {
+
+        int seconds = duration % 60;
+        int minutes = (duration / 60) % 60;
+        int hours = duration / 3600;
+        
+        return [NSString stringWithFormat:@"%02d:%02d:%02d",hours, minutes, seconds];
+    }
+    
     if (data.count>0) {
         breakEntry *firstEntry = [[breakEntry alloc] init];
         firstEntry = [data objectAtIndex:0];

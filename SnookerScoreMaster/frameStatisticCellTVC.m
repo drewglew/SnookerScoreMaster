@@ -34,10 +34,7 @@
     [super layoutSubviews];
     self.cellContentView.layer.cornerRadius = 5.0;;
     self.cellContentView.layer.masksToBounds = YES;
-    //self.cellContentView.layer.borderWidth = 1.0f; //make border 1px thick
-    //self.cellContentView.layer.borderColor = [UIColor colorWithRed:43.0f/255.0f green:51.0f/255.0f blue:70.0f/255.0f alpha:1.0].CGColor;
-    
-    
+ 
 }
 
 

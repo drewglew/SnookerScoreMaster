@@ -15,7 +15,7 @@
         /* Setup your scene here */
         
         
-        self.backgroundColor = [SKColor blackColor];
+        self.backgroundColor = [SKColor clearColor];
  
         SKEmitterNode *emitter =  [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"MyParticle" ofType:@"sks"]];
         emitter.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);

@@ -53,6 +53,7 @@
 @property (strong, nonatomic) NSMutableArray *selectedFrameData;
 
 @property (assign) int shotTypeId;
+@property (assign) int shotFoulId;
 @property (assign) int shotTabId;
 @property (assign) int shotGroup1SegmentId;
 @property (assign) int shotGroup2SegmentId;

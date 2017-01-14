@@ -20,6 +20,7 @@
 @synthesize delegate;
 @synthesize viewOption;
 @synthesize activePlayer;
+@synthesize playerTableView;
 
 
 - (void)viewDidLoad {
@@ -172,9 +173,11 @@
  
 }
 
-
-
-
+/*
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    return !self.tableView.isEditing;
+}
+*/
 
 
 
@@ -227,7 +230,27 @@
     
     
 }
+/*
+- (IBAction)toolbarbuttonTouched:(id)sender
+{
 
+    if ([self.toolbarButtonMerge.title isEqualToString:@"Merge"])
+    {
+       
+        [self.playerTableView setEditing:YES animated:YES];
+        
+        
+        self.toolbarButtonMerge.title = @"Done";
+    }
+    else
+    {
+        NSArray *rowsSelectedForMerger = [self.tableView indexPathsForSelectedRows];
+        
+        [self.playerTableView setEditing:NO animated:YES];
+        self.toolbarButtonMerge.title = @"Merge";
+    }
+}
+*/
 
 
 

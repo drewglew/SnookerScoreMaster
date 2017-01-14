@@ -119,7 +119,6 @@
 @property (assign) bool activeMatchStatistcsShown;
 
 @property (weak, nonatomic) IBOutlet UILabel *borderLabel;
-@property (weak, nonatomic) IBOutlet UIButton *actionButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *tweetButton;
 
@@ -162,6 +161,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *sliderBorderLabel;
 @property (strong, nonatomic) IBOutlet UIView *player2BreakInfoView;
 @property (strong, nonatomic) IBOutlet UIView *player1BreakInfoView;
+
 
 
 

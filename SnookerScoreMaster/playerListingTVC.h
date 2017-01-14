@@ -27,6 +27,8 @@
 @property (strong, nonatomic) player *activePlayer;
 @property (strong, nonatomic) NSMutableArray  *players;
 @property (strong, nonatomic) NSMutableDictionary  *cachedAvatars;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *toolbarButtonMerge;
+@property (strong, nonatomic) IBOutlet UITableView *playerTableView;
 
 
 

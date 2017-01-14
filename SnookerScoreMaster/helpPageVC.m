@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.ballPageIndicator.layer.cornerRadius =  self.ballPageIndicator.frame.size.width / 2.0;
+
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -29,6 +29,15 @@ enum themes {photo, dark, light, modern};
 @end
 
 
+/*
+ TODO before release. 20170113
+ 
+ the format of the players tablelist is not good.
+ would like to be able to add an existing photo to the avatar as well as only taking a new one.
+ head to head needs also a refresh.
+ 
+ */
+
 
 
 @implementation playerDetailVC
@@ -96,11 +105,14 @@ enum themes {photo, dark, light, modern};
     }
     [self.view.layer insertSublayer:gradient atIndex:0];
     
-    UIImage *changecolourimage;
+    /* UIImage *changecolourimage;
     
     changecolourimage = [[UIImage imageNamed:@"buttoneditplayer"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.playerUpdateButton setImage:changecolourimage forState:UIControlStateNormal];
     self.playerUpdateButton.tintColor = self.skinForegroundColour ;
+     
+     */
+    [self.playerUpdateButton setTitle:@"Scoreboard" forState:UIControlStateNormal];
     
 }
 
@@ -178,8 +190,11 @@ enum themes {photo, dark, light, modern};
             
         NSString *ago = [timeStamp timeAgo];
 
-        self.breakShownLabel.text = [NSString stringWithFormat:@"%@ is players highest recorded break - %@", p.hiBreak, ago];
-
+        if (self.activeBreakShots.count>0) {
+            self.breakShownLabel.text = [NSString stringWithFormat:@"%@ is players current break score", p.hiBreak];
+        } else {
+            self.breakShownLabel.text = [NSString stringWithFormat:@"%@ is players highest recorded break - %@", p.hiBreak, ago];
+        }
     }
 
 
@@ -187,29 +202,6 @@ enum themes {photo, dark, light, modern};
     self.historyHighestBreakBallsCollection.delegate = self;
 
     [self.historyHighestBreakBallsCollection reloadData];
-    
-    UIImage *changecolourimage;
-
-    
-    changecolourimage = [[UIImage imageNamed:@"buttonplayers"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.playerListButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.playerListButton.tintColor = self.skinForegroundColour;
-
-    changecolourimage = [[UIImage imageNamed:@"buttonheadtohead"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.headToHeadButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.headToHeadButton.tintColor = self.skinForegroundColour;
-
-    changecolourimage = [[UIImage imageNamed:@"buttonmatch"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.matchListButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.matchListButton.tintColor = self.skinForegroundColour;
-
-    
-    changecolourimage = [[UIImage imageNamed:@"buttoncolumn"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.playerStatButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.playerStatButton.tintColor = self.skinForegroundColour;
-   
-    
-    
 }
 
 /* created 20160203 */
@@ -400,33 +392,72 @@ enum themes {photo, dark, light, modern};
 
 
 
-
+/* last updated 20170114 */
 - (void)playerImageTapped:(UIGestureRecognizer *)gestureRecognizer {
     
     
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        
-        [myAlertView show];
-        
-    }else
-    {
-        
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-    
-        [self presentViewController:picker animated:YES completion:NULL];
-        
-    }
+    NSString *titleMessage = @"How would you like to add a photo to Avatar?";
+    NSString *alertMessage = @"";
 
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:titleMessage
+                                                               message:alertMessage
+                                                        preferredStyle:UIAlertControllerStyleActionSheet];
+
+    NSString *cameraOption = [NSString stringWithFormat:@"Take a photo of %@", self.playerNickName.text];
+    NSString *photorollOption = [NSString stringWithFormat:@"Choose photo from camera roll of %@",self.playerNickName.text];
+
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:cameraOption
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                                                                   
+                                                                   UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                                                         message:@"Device has no camera"
+                                                                                                                        delegate:nil
+                                                                                                               cancelButtonTitle:@"OK"
+                                                                                                               otherButtonTitles: nil];
+                                                                   
+                                                                   [myAlertView show];
+                                                                   
+                                                               }else
+                                                               {
+                                                                   
+                                                                   UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                                                   picker.delegate = self;
+                                                                   picker.allowsEditing = YES;
+                                                                   picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                                   picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+                                                                   
+                                                                   [self presentViewController:picker animated:YES completion:NULL];
+                                                                   
+                                                               }
+
+                                                               
+                                                               NSLog(@"you wnt a photo");
+                                                               
+                                                           }];
+
+    
+    
+    UIAlertAction *photorollAction = [UIAlertAction actionWithTitle:photorollOption
+                                                             style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                 
+                                                                 UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                                                 picker.delegate = self;
+                                                                 picker.allowsEditing = YES;
+                                                                 picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                                                 [self presentViewController:picker animated:YES completion:nil];
+                                                                 
+                                                                 NSLog(@"you want to select a photo");
+                                                                 
+                                                             }];
+
+
+    
+    [alert addAction:cameraAction];
+    [alert addAction:photorollAction];
+    
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
@@ -507,13 +538,6 @@ enum themes {photo, dark, light, modern};
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-
-
-
-
-
-
 - (IBAction)closePlayerDetailPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -540,20 +564,11 @@ enum themes {photo, dark, light, modern};
 
 
 - (void)addItemViewController:(playerListingTVC *)controller loadPlayerDetails :(player*) playerSelected {
-    
-    
-    UIImage *changecolourimage;
-    
-    
+
     if (playerSelected.swappedPlayer==true) {
-        changecolourimage = [[UIImage imageNamed:@"updateplayer"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [self.playerUpdateButton setImage:changecolourimage forState:UIControlStateNormal];
-        self.playerUpdateButton.tintColor = self.skinForegroundColour ;
+        [self.playerUpdateButton setTitle:@"Update" forState:UIControlStateNormal];
     } else {
-        
-        changecolourimage = [[UIImage imageNamed:@"buttoneditplayer"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [self.playerUpdateButton setImage:changecolourimage forState:UIControlStateNormal];
-        self.playerUpdateButton.tintColor = self.skinForegroundColour ;
+        [self.playerUpdateButton setTitle:@"Edit Player" forState:UIControlStateNormal];
     }
 
     

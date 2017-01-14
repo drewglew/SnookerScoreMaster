@@ -164,6 +164,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3AF50FD61E01CA0C00EA4D4E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3A037B681C418ED900038BC0 /* playerCellTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = playerCellTVC.h; sourceTree = "<group>"; };
 		3A037B691C418ED900038BC0 /* playerCellTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = playerCellTVC.m; sourceTree = "<group>"; };
@@ -751,6 +764,7 @@
 				96D22D7A1A1FD58100E0ADE3 /* Sources */,
 				96D22D7B1A1FD58100E0ADE3 /* Frameworks */,
 				96D22D7C1A1FD58100E0ADE3 /* Resources */,
+				3AF50FD61E01CA0C00EA4D4E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1087,6 +1101,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "SnookerScoreMaster/SnookerScoreMaster-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = SnookerScoreMaster/Info.plist;
@@ -1110,6 +1128,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "SnookerScoreMaster/SnookerScoreMaster-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = SnookerScoreMaster/Info.plist;
