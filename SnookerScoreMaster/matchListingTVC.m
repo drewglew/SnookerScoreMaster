@@ -154,7 +154,7 @@
             img = [[UIImage alloc] initWithData:data];
             
             if (img==nil) {
-                img = [UIImage imageNamed:@"avatar.png"];
+                img = [UIImage imageNamed:@"avatar0"];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -176,7 +176,7 @@
             img = [[UIImage alloc] initWithData:data];
             
             if (img==nil) {
-                img = [UIImage imageNamed:@"avatar.png"];
+                img = [UIImage imageNamed:@"avatar0"];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -367,7 +367,7 @@
 - (void)addItemViewController:(playerDetailVC *)controller didInsertPlayer :(int)nextPlayerNumber :(NSString*) playerName :(NSString*) playerEmail :(NSString*) playerImageName :(bool)photoUpdated :(NSString*) playerkey {
 }
 
-- (void)addItemViewController:(playerListingTVC *)controller loadPlayerDetails :(player*) playerSelected {
+- (void)addItemViewController:(playerListingVC *)controller loadPlayerDetails :(player*) playerSelected {
     
     // empty
 }

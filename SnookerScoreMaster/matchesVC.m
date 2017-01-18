@@ -62,7 +62,8 @@
     self.view.backgroundColor = self.skinBackgroundColour;
     self.tableView.backgroundColor = self.skinBackgroundColour;
     
-    
+    self.selectionStyleHighlight=1;
+  
     
 }
 
@@ -109,16 +110,25 @@
     }
     */
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:10.0/255.0 blue:10.0/255.0 alpha:1.0];
+    bgColorView.backgroundColor = [UIColor clearColor];
     [cell setSelectedBackgroundView:bgColorView];
+    
+    
     
     if ([m.matchDuration isEqualToString:@"match ongoing"]) {
         cell.userInteractionEnabled = NO;
     } else {
         cell.userInteractionEnabled = YES;
     }
-    
-    
+  /*
+    if (self.selectionStyleHighlight==1) {
+        [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
+    }
+    else
+    {
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
+    */
     
     cell.Player1Name.text = m.player1Name;
     cell.Player1Name.textColor = self.skinForegroundColour;
@@ -153,7 +163,9 @@
     
     
     cell.matchDate.text = [NSString stringWithFormat:@"%@",[self relativeDateStringForDate  :m.matchDate]];
-    cell.matchDate.textColor = self.skinForegroundColour;
+    cell.matchDate.textColor = self.skinBackgroundColour;
+    [cell.matchDate setPersistentBackgroundColor:self.skinForegroundColour];
+    cell.framesWonLabel.textColor= self.skinForegroundColour;
     cell.matchEndDate = [NSString stringWithFormat:@"%@",[self relativeDateStringForDate  :m.matchEndDate]];
     
     cell.MatchId = m.matchid;
@@ -202,7 +214,7 @@
             img = [[UIImage alloc] initWithData:data];
             
             if (img==nil) {
-                img = [UIImage imageNamed:@"avatar.png"];
+                img = [UIImage imageNamed:@"avatar0"];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -224,7 +236,7 @@
             img = [[UIImage alloc] initWithData:data];
             
             if (img==nil) {
-                img = [UIImage imageNamed:@"avatar.png"];
+                img = [UIImage imageNamed:@"avatar0"];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -380,7 +392,7 @@
 - (void)addItemViewController:(playerDetailVC *)controller didInsertPlayer :(int)nextPlayerNumber :(NSString*) playerName :(NSString*) playerEmail :(NSString*) playerImageName :(bool)photoUpdated :(NSString*) playerkey {
 }
 
-- (void)addItemViewController:(playerListingTVC *)controller loadPlayerDetails :(player*) playerSelected {
+- (void)addItemViewController:(playerListingVC *)controller loadPlayerDetails :(player*) playerSelected {
     
     // empty
 }
@@ -444,8 +456,25 @@
     [self.exportButton setBackgroundColor:[UIColor darkGrayColor]];
     [self.exportButton setSelected:false];
     self.cancelExportButton.hidden=true;
+     self.selectionStyleHighlight=0;
 }
 
+/*
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+
+    if (self.selectionStyleHighlight==1) {
+     [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
+        
+        
+    } else {
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+       
+        
+    }
+}
+*/
 
 
 /* created      20160717
@@ -453,10 +482,15 @@
  */
 - (IBAction)exportPressed:(UIButton*)sender {
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    //need to sort out selection
+    
+    
     
     sender.selected =!sender.selected;
     
     if (sender.selected==true) {
+        
+        
         [self.tableView setEditing:sender.selected animated:true];
         
         
@@ -467,9 +501,12 @@
         self.exportButton.tintColor = [UIColor lightGrayColor];
         
         self.cancelExportButton.hidden=false;
-        
+        self.selectionStyleHighlight=1;
         
     } else {
+        
+        
+        
         NSArray *rowsSelectedForExport = [self.tableView indexPathsForSelectedRows];
         BOOL selectedRows = rowsSelectedForExport.count > 0;
         
@@ -539,7 +576,7 @@
           [self.exportButton setTitle:@"Set Export Mode" forState:UIControlStateNormal];
         self.exportButton.tintColor = [UIColor grayColor];
         self.cancelExportButton.hidden=true;
-        
+        self.selectionStyleHighlight=0;
     }
     
 }

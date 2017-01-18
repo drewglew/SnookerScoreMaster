@@ -25,5 +25,18 @@
 @property (strong, nonatomic) NSString *skinPrefix;
 @property (weak, nonatomic) IBOutlet UIButton *adjustButton;
 
+@property (strong, nonatomic) UIColor *skinBackgroundColour;
+@property (strong, nonatomic) UIColor *skinForegroundColour;
+@property (strong, nonatomic) UIColor *skinPlayer1Colour;
+@property (strong, nonatomic) UIColor *skinPlayer2Colour;
+
+@property (strong, nonatomic) UIColor *redColour;
+@property (strong, nonatomic) UIColor *yellowColour;
+@property (strong, nonatomic) UIColor *greenColour;
+@property (strong, nonatomic) UIColor *brownColour;
+@property (strong, nonatomic) UIColor *blueColour;
+@property (strong, nonatomic) UIColor *pinkColour;
+@property (strong, nonatomic) UIColor *blackColour;
+
 
 @end

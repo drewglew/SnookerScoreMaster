@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "match.h"
+#import "PersistentBackgroundLabel.h"
 
 @interface matchCellTVC : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *player1Photo;
@@ -25,9 +26,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *Player2Name;
 @property (weak, nonatomic) IBOutlet UILabel *Player1FrameWins;
 @property (weak, nonatomic) IBOutlet UILabel *Player2FrameWins;
-@property (weak, nonatomic) IBOutlet UILabel *matchDate;
+@property (weak, nonatomic) IBOutlet PersistentBackgroundLabel  *matchDate;
 @property (strong, nonatomic) NSString *matchEndDate;
 @property (weak, nonatomic) IBOutlet UILabel *matchDuration;
+@property (strong, nonatomic) IBOutlet UILabel *framesWonLabel;
 
 
 @end

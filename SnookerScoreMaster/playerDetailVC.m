@@ -9,7 +9,7 @@
 #import "playerDetailVC.h"
 
 
-@interface playerDetailVC () <PlayersListingDelegate, HeadToHeadDelegate, MatchesDelegate>
+@interface playerDetailVC () <PlayerListingDelegate, Head2HeadDelegate, MatchesDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *historyHighestBreakBallsCollection;
 @property (weak, nonatomic) IBOutlet UIButton *playerListButton;
 @property (weak, nonatomic) IBOutlet UIButton *headToHeadButton;
@@ -24,7 +24,7 @@
 @property (strong, nonatomic) UIColor *blueColour;
 @property (strong, nonatomic) UIColor *pinkColour;
 @property (strong, nonatomic) UIColor *blackColour;
-enum themes {photo, dark, light, modern};
+enum themes {greenbaize, dark, light, modern, purplehaze, blur};
 
 @end
 
@@ -45,7 +45,7 @@ enum themes {photo, dark, light, modern};
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backbutton"]
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backnav"]
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self.navigationController
                                                                   action:@selector(popViewControllerAnimated:)];
@@ -71,49 +71,8 @@ enum themes {photo, dark, light, modern};
     self.brownColour = [UIColor colorWithRed:120.0f/255.0f green:64.0f/255.0f blue:0.0f/255.0f alpha:1.0];
     self.blueColour = [UIColor colorWithRed:39.0f/255.0f green:121.0f/255.0f blue:198.0f/255.0f alpha:1.0];
     self.pinkColour = [UIColor colorWithRed:201.0f/255.0f green:78.0f/255.0f blue:184.0f/255.0f alpha:1.0];
-    self.blackColour = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
-    
-    //[self.view setBackgroundColor: self.skinBackgroundColour];
-    
-    
-    if (self.theme==photo) {
-        
-        
-        
-    } else if (self.theme==dark) {
-
-    } else if (self.theme==light) {
-    
-        self.playerNickName.textColor = self.skinForegroundColour;
-        self.playerEmail.textColor = self.skinForegroundColour;
-        self.breakShownLabel.textColor = self.skinForegroundColour;
-        
-    } else if (self.theme == modern) {
-      //  [self.view setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
-    }
-    
-    
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.bounds;
-    
-    if (self.currentPlayerNumber == self.staticPlayer1Number) {
-        //[self.view setBackgroundColor: self.skinPlayer1Colour];
-        gradient.colors = [NSArray arrayWithObjects:(id)[self.skinPlayer1Colour CGColor], (id)[self.skinBackgroundColour CGColor], nil];
-    } else {
-        //[self.view setBackgroundColor: self.skinPlayer2Colour];
-        gradient.colors = [NSArray arrayWithObjects:(id)[self.skinPlayer2Colour CGColor], (id)[self.skinBackgroundColour CGColor], nil];
-    }
-    [self.view.layer insertSublayer:gradient atIndex:0];
-    
-    /* UIImage *changecolourimage;
-    
-    changecolourimage = [[UIImage imageNamed:@"buttoneditplayer"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.playerUpdateButton setImage:changecolourimage forState:UIControlStateNormal];
-    self.playerUpdateButton.tintColor = self.skinForegroundColour ;
-     
-     */
-    [self.playerUpdateButton setTitle:@"Scoreboard" forState:UIControlStateNormal];
-    
+    self.blackColour = [UIColor colorWithRed:33.0f/255.0f green:33.0f/255.0f blue:33.0f/255.0f alpha:1.0];
+ 
 }
 
 
@@ -130,9 +89,7 @@ enum themes {photo, dark, light, modern};
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
 
     player *p;
-    
-    
-    
+
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     /* handle player key if this is a new record or an update to existing */
     if (self.playerIndex==0) {
@@ -140,14 +97,15 @@ enum themes {photo, dark, light, modern};
     } else {
         p = [self.db getPlayerByPlayerNumber :[NSNumber numberWithInt:self.currentPlayerNumber]];
         self.currentPlayerKey = p.playerkey;
+ 
     }
-
+    /* commented out 20170114
     if (self.playerIndex==1) {
         p = self.p1;
     } else {
         p = self.p2;
     }
-    
+    */
 
     if (((self.currentPlayerNumber == self.staticPlayer1Number && self.staticPlayer1CurrentBreak>0) || (self.currentPlayerNumber == self.staticPlayer2Number && self.staticPlayer2CurrentBreak>0)) && self.activeBreakShots.count>0) {
 
@@ -192,9 +150,12 @@ enum themes {photo, dark, light, modern};
 
         if (self.activeBreakShots.count>0) {
             self.breakShownLabel.text = [NSString stringWithFormat:@"%@ is players current break score", p.hiBreak];
-        } else {
+        } else if (p.hiBreak > [NSNumber numberWithInt:0]) {
             self.breakShownLabel.text = [NSString stringWithFormat:@"%@ is players highest recorded break - %@", p.hiBreak, ago];
+        } else {
+            self.breakShownLabel.text = @"No breaks yet!";
         }
+        
     }
 
 
@@ -202,6 +163,40 @@ enum themes {photo, dark, light, modern};
     self.historyHighestBreakBallsCollection.delegate = self;
 
     [self.historyHighestBreakBallsCollection reloadData];
+    
+    
+    
+    if (self.theme==greenbaize) {
+        
+        
+        
+    } else if (self.theme==dark) {
+        
+    } else if (self.theme==light) {
+        
+        self.playerNickName.textColor = self.skinForegroundColour;
+        self.playerEmail.textColor = self.skinForegroundColour;
+        self.breakShownLabel.textColor = self.skinForegroundColour;
+        
+    } else if (self.theme == modern) {
+        //  [self.view setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
+    }
+    
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    
+    if (self.currentPlayerNumber == self.staticPlayer1Number) {
+        //[self.view setBackgroundColor: self.skinPlayer1Colour];
+        gradient.colors = [NSArray arrayWithObjects:(id)[self.skinPlayer1Colour CGColor], (id)[self.skinBackgroundColour CGColor], nil];
+    } else {
+        //[self.view setBackgroundColor: self.skinPlayer2Colour];
+        gradient.colors = [NSArray arrayWithObjects:(id)[self.skinPlayer2Colour CGColor], (id)[self.skinBackgroundColour CGColor], nil];
+    }
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    
+    
+    
 }
 
 /* created 20160203 */
@@ -257,7 +252,7 @@ enum themes {photo, dark, light, modern};
     AvatarV *av = [[AvatarV alloc] initWithFrame:CGRectMake(0, 0, self.avatarPlayer.bounds.size.width, self.avatarPlayer.bounds.size.width)];
     
     if (avatarImageName == nil || [avatarImageName isEqualToString:@""]) {
-        [av setAvatarImage:[UIImage imageNamed:@"avatarcamera.png"]];
+        [av setAvatarImage:[UIImage imageNamed:@"avatar0.png"]];
         
     } else {
         
@@ -273,13 +268,15 @@ enum themes {photo, dark, light, modern};
         self.matchListButton.hidden = true;
         self.playerStatButton.hidden = true;
         
-        [self.playerUpdateButton setImage:[UIImage imageNamed:@"buttonaddplayer"] forState:UIControlStateNormal];
-        
+        [self.playerUpdateButton setTitle:@"Add Player" forState:UIControlStateNormal];
         
         self.navigationItem.title = @"New Player";
     } else {
         self.navigationItem.title = @"Preview";
     }
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:self.skinForegroundColour }];
+    
     av.borderWidth = 10;
     if (self.playerIndex!=0) {
         av.borderColors = @[[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1],
@@ -345,19 +342,41 @@ enum themes {photo, dark, light, modern};
     // Pass the selected object to the new view controller.
     
     if([segue.identifier isEqualToString:@"openListing"]){
-        playerListingTVC *controller = (playerListingTVC *)segue.destinationViewController;
+        playerListingVC *controller = (playerListingVC *)segue.destinationViewController;
         controller.delegate = self;
         controller.viewOption = @"playerListing";
         controller.activePlayerNumber = [NSNumber numberWithInt:self.currentPlayerNumber];
+        if (self.playerIndex == self.p1.playerIndex ) {
+            controller.Player1Key = self.p1.playerkey;
+            controller.Player2Key = self.p2.playerkey;
+        } else {
+            controller.Player1Key = self.p2.playerkey;
+            controller.Player2Key = self.p1.playerkey;
+
+        }
+        
         controller.db = self.db;
         
+        controller.skinForegroundColour = self.skinForegroundColour;
+        controller.skinBackgroundColour = self.skinBackgroundColour;
+        controller.skinPlayer1Colour = self.skinPlayer1Colour;
+        controller.skinPlayer2Colour = self.skinPlayer2Colour;
+        
+        
+        
     } else if([segue.identifier isEqualToString:@"HeadToHeads"]){
-        HeadToHeadTVC *controller = (HeadToHeadTVC *)segue.destinationViewController;
+        headToHeadListingVC *controller = (headToHeadListingVC *)segue.destinationViewController;
         controller.delegate = self;
         controller.activePlayerNumber = [NSNumber numberWithInt:self.currentPlayerNumber];
         controller.staticPlayer1Number = self.staticPlayer1Number;
         controller.staticPlayer2Number = self.staticPlayer2Number;
         controller.db = self.db;
+        
+        controller.skinForegroundColour = self.skinForegroundColour;
+        controller.skinBackgroundColour = self.skinBackgroundColour;
+        controller.skinPlayer1Colour = self.skinPlayer1Colour;
+        controller.skinPlayer2Colour = self.skinPlayer2Colour;
+        
         
     } else if([segue.identifier isEqualToString:@"Matches"]){
         matchesVC *controller = (matchesVC *)segue.destinationViewController;
@@ -396,15 +415,15 @@ enum themes {photo, dark, light, modern};
 - (void)playerImageTapped:(UIGestureRecognizer *)gestureRecognizer {
     
     
-    NSString *titleMessage = @"How would you like to add a photo to Avatar?";
+    NSString *titleMessage = [NSString stringWithFormat:@"How would you like to add a photo to %@'s Avatar?", self.playerNickName.text];
     NSString *alertMessage = @"";
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:titleMessage
                                                                message:alertMessage
                                                         preferredStyle:UIAlertControllerStyleActionSheet];
 
-    NSString *cameraOption = [NSString stringWithFormat:@"Take a photo of %@", self.playerNickName.text];
-    NSString *photorollOption = [NSString stringWithFormat:@"Choose photo from camera roll of %@",self.playerNickName.text];
+    NSString *cameraOption = @"Take a photo with the camera";
+    NSString *photorollOption = @"Choose a photo from camera roll";
 
     UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:cameraOption
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -451,11 +470,16 @@ enum themes {photo, dark, light, modern};
                                                                  
                                                              }];
 
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                                                               NSLog(@"You pressed cancel");
+                                                           }];
+
 
     
     [alert addAction:cameraAction];
     [alert addAction:photorollAction];
-    
+    [alert addAction:cancelAction];
     
     [self presentViewController:alert animated:YES completion:nil];
 }
@@ -482,7 +506,10 @@ enum themes {photo, dark, light, modern};
     if (self.playerIndex!=0) {
         self.imagePathPhoto =[ NSString stringWithFormat:@"avatar_%@.png",self.currentPlayerKey];
     } else {
+        // this means we have a new player
         self.imagePathPhoto =[ NSString stringWithFormat:@"avatar_%@.png",self.nextPlayerKey];
+        
+        
     }
     
     self.photoUpdated = true;
@@ -506,6 +533,8 @@ enum themes {photo, dark, light, modern};
 - (IBAction)updatePlayerPressed:(id)sender {
      self.viewDismissed = false;
     
+    
+    
     /* verify if the photo has been updated or not */
     if (self.photoUpdated) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -520,11 +549,16 @@ enum themes {photo, dark, light, modern};
                                  toPath:[[directoryPaths objectAtIndex:0] stringByAppendingPathComponent:self.imagePathPhoto]  error:NULL]) {
             NSLog(@"Copied successfully");
         }
+    } else {
+        if ((self.imagePathPhoto==nil || [self.imagePathPhoto isEqualToString:@""]) && self.playerIndex==0) {
+             self.imagePathPhoto=@"avatar0.png";
+            self.photoUpdated=true;
+        }
     }
-    
-    if (self.imagePathPhoto==nil) {
-        self.imagePathPhoto=@"";
-    }
+ 
+   // if (self.imagePathPhoto==nil) {
+   //     self.imagePathPhoto=@"";
+   // }
     
     
     /* last part of function is to determine if this is a new player or a modify existing. each handles database updates */
@@ -533,6 +567,7 @@ enum themes {photo, dark, light, modern};
         
     } else {
         [  self.delegate addItemViewController:self didInsertPlayer:self.nextPlayerNumber :self.playerNickName.text :self.playerEmail.text :self.imagePathPhoto :self.photoUpdated :self.nextPlayerKey];
+        
         
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -563,10 +598,10 @@ enum themes {photo, dark, light, modern};
 
 
 
-- (void)addItemViewController:(playerListingTVC *)controller loadPlayerDetails :(player*) playerSelected {
+- (void)addItemViewController:(playerListingVC *)controller loadPlayerDetails :(player*) playerSelected {
 
     if (playerSelected.swappedPlayer==true) {
-        [self.playerUpdateButton setTitle:@"Update" forState:UIControlStateNormal];
+        [self.playerUpdateButton setTitle:@"Switch" forState:UIControlStateNormal];
     } else {
         [self.playerUpdateButton setTitle:@"Edit Player" forState:UIControlStateNormal];
     }
@@ -595,7 +630,7 @@ enum themes {photo, dark, light, modern};
         }
 
         if (playerSelected.photoLocation==nil || [playerSelected.photoLocation isEqualToString:@""]) {
-            [av setAvatarImage:[UIImage imageNamed:@"avatarcamera.png"] ];
+            [av setAvatarImage:[UIImage imageNamed:@"avatar0.png"] ];
             
         } else {
            

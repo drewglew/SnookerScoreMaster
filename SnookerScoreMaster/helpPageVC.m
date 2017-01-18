@@ -17,8 +17,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.ballPageIndicator.layer.cornerRadius =  self.ballPageIndicator.frame.size.width / 2.0;
+    
+    
+   // self.ballPageIndicator.layer.cornerRadius =  self.ballPageIndicator.frame.size.width / 2.0;
 
+    // TODO - check only if page 7.
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"official-rules-of-the-game" ofType:@"pdf"];
+    NSURL *targetURL = [NSURL fileURLWithPath:path];
+    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+   
+    [[self.snookerRulesWV scrollView] setContentOffset:CGPointMake(0,500) animated:YES];
+    [self.snookerRulesWV stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.scrollTo(0.0, 50.0)"]];
+    [self.snookerRulesWV loadRequest:request];
+    
+    
+    
+    
     
 }
 

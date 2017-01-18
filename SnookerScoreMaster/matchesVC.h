@@ -38,6 +38,7 @@
 @property (strong,nonatomic) NSNumber* activeMatchId;
 @property (strong, nonatomic) match *activeMatchPlayers;
 @property (assign) int displayState;
+@property (assign) int selectionStyleHighlight;
 @property (assign) int activeFramePointsRemaining;
 @property (strong, nonatomic) NSString *skinPrefix;
 @property (weak, nonatomic) IBOutlet UIButton *cancelExportButton;

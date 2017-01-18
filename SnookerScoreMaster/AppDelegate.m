@@ -61,6 +61,23 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    NSLog(@"restarted");
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"theme"]) {
+        [defaults setBool:NO forKey:@"isHollow"];
+        [defaults setValue:@"5" forKey:@"theme"];
+        [defaults setValue:@"147" forKey:@"celebrateBreakLimit"];
+        [defaults setBool:NO forKey:@"isShotStopWatch"];
+        [defaults setBool:NO forKey:@"isMenuShot"];
+    }
+    self.theme = [[defaults valueForKey:@"theme"] intValue];
+    self.isHollow = [[defaults valueForKey:@"isHollow"] boolValue];
+    self.isShotStopWatch = [[defaults valueForKey:@"isShotStopWatch"] boolValue];
+    self.breakThreshholdForCelebration = [[defaults valueForKey:@"celebrateBreakLimit"] intValue];
+    self.isMenuShot = [[defaults valueForKey:@"isMenuShot"] boolValue];
+
     [UIApplication sharedApplication].idleTimerDisabled = true;
 
 }

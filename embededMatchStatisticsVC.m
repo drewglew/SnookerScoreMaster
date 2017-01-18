@@ -17,7 +17,7 @@
 
 @implementation embededMatchStatisticsVC {
     UISwipeGestureRecognizer *swipeRight;
-    enum themes {photo, dark, light, modern, mono};
+    enum themes {greenbaize, dark, light, modern,purplehaze,blur};
     
 }
 
@@ -35,7 +35,7 @@
     UIImage *img = [UIImage imageWithData:pngdata];
     
     if (img==nil) {
-        img = [UIImage imageNamed:@"avatar.png"];
+        img = [UIImage imageNamed:@"avatar0"];
     }
 
     [self.player1Photo setImage:img];
@@ -50,7 +50,7 @@
     img = [UIImage imageWithData:pngdata];
     
     if (img==nil) {
-        img = [UIImage imageNamed:@"avatar.png"];
+        img = [UIImage imageNamed:@"avatar0"];
     }
     
     [self.player2Photo setImage:img];
@@ -174,12 +174,12 @@
     self.brownColour = [UIColor colorWithRed:120.0f/255.0f green:64.0f/255.0f blue:0.0f/255.0f alpha:1.0];
     self.blueColour = [UIColor colorWithRed:39.0f/255.0f green:121.0f/255.0f blue:198.0f/255.0f alpha:1.0];
     self.pinkColour = [UIColor colorWithRed:201.0f/255.0f green:78.0f/255.0f blue:184.0f/255.0f alpha:1.0];
-    self.blackColour = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+    self.blackColour = [UIColor colorWithRed:33.0f/255.0f green:33.0f/255.0f blue:33.0f/255.0f alpha:1.0];
     
-    UIImage *changecolourimage = [[UIImage imageNamed:@"ios7-arrow-back-128-000000.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *changecolourimage = [[UIImage imageNamed:@"backbutton"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.backButton setImage:changecolourimage forState:UIControlStateNormal];
     self.backButton.tintColor = self.skinForegroundColour;
-    changecolourimage = [[UIImage imageNamed:@"ios7-arrow-forward-128-000000.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    changecolourimage = [[UIImage imageNamed:@"forwardbutton"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.forwardButton setImage:changecolourimage forState:UIControlStateNormal];
     self.forwardButton.tintColor = self.skinForegroundColour;
     
@@ -209,15 +209,12 @@
     self.player1BreakInfoView.backgroundColor = self.skinPlayer1Colour;
     self.player2BreakInfoView.backgroundColor = self.skinPlayer2Colour;
     
-    if (self.theme == photo) {
+    if (self.theme == greenbaize) {
         self.background.backgroundColor = [UIColor lightGrayColor];
         
-    } else if (self.theme == mono) {
+    } else if (self.theme == purplehaze) {
          self.graphStatisticView.backgroundColor = [UIColor whiteColor];
     }
-    
-
-    
     
     if (self.displayState==8) {
         [self presentBreakStats:0];
@@ -232,18 +229,16 @@
         }
     }
     
+//    self.breakStatistcsView.backgroundColor = [UIColor clearColor];
     
- /*   if (self.theme == dark) {
-        [self.view setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
-        [self.graphStatisticView setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
-    }
- */
+
+    
 }
 
 -(void)viewWillAppear :(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
+   
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self.navigationController setToolbarHidden:YES animated:YES];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
@@ -252,6 +247,9 @@
     
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+
+
+
     
 }
 
@@ -673,10 +671,13 @@
 - (UIImage *) imageWithCollectionView:(UICollectionView *)collectionBreakView
 {
     CGSize widthHeight = CGSizeMake(collectionBreakView.contentSize.width, collectionBreakView.contentSize.height);
-    UIGraphicsBeginImageContextWithOptions(widthHeight, collectionBreakView.opaque, 0.0);
+    
+    UIGraphicsBeginImageContextWithOptions(widthHeight, NO, 0.0);
     [collectionBreakView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+
     UIGraphicsEndImageContext();
+
     return img;
 }
 
@@ -880,6 +881,16 @@
         }
     }
     
+    /*if ( self.frameStatisticView.hidden==false) {
+    self.backgroundView.backgroundColor = [UIColor clearColor];
+    
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleProminent];
+        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        blurEffectView.frame = self.backgroundView.bounds;
+        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.backgroundView addSubview:blurEffectView];
+    }*/
+    
     
     [self updateSummaryLabelContent :self.graphSummaryLabel];
     [self updateDurationVisitLabelContent :self.DurationVisitsLabel];
@@ -903,10 +914,13 @@
             self.background.hidden = !self.background.hidden;
             self.frameStatisticView.hidden = !self.frameStatisticView.hidden;
             self.breakStatistcsView.hidden = !self.breakStatistcsView.hidden;
+             self.backgroundView.hidden = !self.backgroundView.hidden;
+            
         } else {
             self.graphStatisticsOverlayView.hidden = false;
             self.background.hidden = false;
             self.breakStatistcsView.hidden = false;
+            self.backgroundView.hidden = false;
         }
         self.buttonListStats.enabled = self.breakStatistcsView.hidden;
         self.MorePlayer1Button.enabled = self.breakStatistcsView.hidden;
@@ -932,7 +946,7 @@
             self.graphStatisticsOverlayView.hidden = true;
             self.background.hidden = true;
             self.breakStatistcsView.hidden = true;
-            
+            self.backgroundView.hidden = true;
             
             self.graphStatisticsOverlayView.hidden=true;
             
@@ -965,6 +979,10 @@
             [self.tableFrameStatistics reloadData];
         }
         self.buttonDetailStats.enabled = self.frameStatisticView.hidden;
+        
+
+        
+        
         if (self.graphStatisticsOverlayView.hidden == false) {
             
             
@@ -1264,82 +1282,6 @@
 
 
 
-/* export file functions */
-
-/* created 20151012 */
-/* last modified 20151029 */
--(NSString*) exportDataFile :(NSMutableArray*) matchDataSet {
-    
-    NSDate *date = [NSDate date];
-    
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *exportDate = [dateFormatter stringFromDate:date];
-    
-    
-    NSString *fileData = [NSString stringWithFormat:@"%@;%@;%@;%@;%@;%@;%@;%@;%@;%@;%@;%@",self.m.matchkey, self.p1.nickName, self.m.Player1FrameWins, self.m.Player1HiBreak, self.p1.playerkey, self.p2.nickName, self.m.Player2FrameWins, self.m.Player2HiBreak, self.p2.playerkey,exportDate, self.m.matchDate,self.m.matchEndDate];
-    
-    int tempFrameid=1;
-    NSNumber *frameIdx = [NSNumber numberWithInt:0];
-    int tempEntryid=0;
-    
-    for (breakEntry *data in matchDataSet) {
-        
-        if (frameIdx != data.frameid) {
-            tempFrameid ++;
-            frameIdx = data.frameid;
-            NSMutableArray *startDate = [self.db entriesRetreive:self.m.matchid :nil :frameIdx :nil :nil :nil :nil :false];
-            breakEntry *tempEntry = [[breakEntry alloc] init];
-            tempEntry = [startDate objectAtIndex:0];
-            fileData = [NSString stringWithFormat:@"%@\n%@;%@;%@;%@;%@;%@;%@;%@;%@;%@;%@",fileData, tempEntry.entryid,tempEntry.endbreaktimestamp,tempEntry.frameid,@"0",@"0",@"0",@"0",@"FS",@"0",@"0",@"0"];
-        }
-        int potIndex = 0;
-        
-        for (ballShot *ball in data.shots) {
-            int ballPoint;
-            ballPoint = [ball.value intValue];
-            NSNumber *shotDetail1;
-            NSNumber *shotDetail2;
-            NSNumber *pocketid;
-            
-            pocketid = ball.pocketid;
-            
-            if (ball.shotid == [NSNumber numberWithInt:Potted]) {
-                shotDetail1 = ball.distanceid;
-                shotDetail2 = ball.effortid;
-            } else if (ball.shotid == [NSNumber numberWithInt:Foul]) {
-                shotDetail1 = ball.foulid;
-                shotDetail2 = [NSNumber numberWithInt:0];
-            } else if (ball.shotid == [NSNumber numberWithInt:Missed]) {
-                shotDetail1 = ball.distanceid;
-                shotDetail2 = ball.effortid;
-            } else if (ball.shotid == [NSNumber numberWithInt:Safety]) {
-                shotDetail1 = ball.safetyid;
-                shotDetail2 = [NSNumber numberWithInt:0];
-            } else if (ball.shotid == [NSNumber numberWithInt:Bonus]) {
-                shotDetail1 = ball.foulid;
-                shotDetail2 =[NSNumber numberWithInt:0];
-            }  else if (ball.shotid == [NSNumber numberWithInt:Adjustment]) {
-                shotDetail1 = ball.foulid;
-                shotDetail2 = [NSNumber numberWithInt:0];
-            }
-            fileData = [NSString stringWithFormat:@"%@\n%@;%@;%@;%@;%@;%@;%@;%@;%d;%@;%@",fileData, data.entryid, data.endbreaktimestamp,data.frameid,data.playerid,ball.shotid,shotDetail1,shotDetail2,ball.colour,ballPoint,ball.shottimestamp,pocketid];
-            
-            potIndex ++;
-            
-        }
-        tempEntryid = [data.entryid intValue];
-    }
-    
-    frameIdx = [NSNumber numberWithInt:tempFrameid];
-    
-    fileData = [NSString stringWithFormat:@"%@\n%d;%@;%@;%@;%@;%@;%@;%@;%@;%@",fileData, tempEntryid+1 ,[dateFormatter stringFromDate:[NSDate date]],frameIdx,@"0",@"0",@"0",@"0",@"ME",@"0",@"0"];
-    
-    
-    
-    return fileData;
-}
-
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -1520,6 +1462,7 @@
     
     if (self.player2StatView.hidden && self.self.player1StatView.hidden && self.stepperFrame.value>0 && self.breakStatistcsView.hidden) {
         self.frameStatisticView.hidden=!self.frameStatisticView.hidden;
+
     }
 }
 
@@ -1550,12 +1493,10 @@
     }
     if (self.player1StatView.hidden && self.player2StatView.hidden && self.stepperFrame.value>0 && self.frameStatisticView.hidden) {
         self.breakStatistcsView.hidden=!self.breakStatistcsView.hidden;
+        self.backgroundView.hidden =!self.backgroundView.hidden;
         self.graphStatisticsOverlayView.hidden=!self.graphStatisticsOverlayView.hidden;
     }
 }
-
-
-
 
 
 - (void)addItemViewController:(embededMatchStatisticsVC *)controller keepDisplayState:(int)displayState {
@@ -1571,11 +1512,20 @@
  
  if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
  {
- SLComposeViewController *tweetSheetOBJ = [SLComposeViewController
- composeViewControllerForServiceType:SLServiceTypeTwitter];
- [tweetSheetOBJ setInitialText: [NSString stringWithFormat:@"#snooker #score. Nice Score! @earsmusic73 #SnookerScoreMaster"]];
- [tweetSheetOBJ addImage:image];
- [self presentViewController:tweetSheetOBJ animated:YES completion:nil];
+     SLComposeViewController *tweetSheetOBJ = [SLComposeViewController
+                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
+     
+     //breakshotsplayerid
+     NSString *nickname;
+     
+     if (self.breakShotsPlayerId==[NSNumber numberWithInt:1]) {
+         nickname = self.p1.nickName;
+     } else {
+         nickname = self.p2.nickName;
+     }
+     [tweetSheetOBJ setInitialText: [NSString stringWithFormat:@"%@ nice Break of %@! @snookerscorem #snooker #scoreboard",nickname,self.breakShotsPoints ]];
+     [tweetSheetOBJ addImage:image];
+     [self presentViewController:tweetSheetOBJ animated:YES completion:nil];
  }
 
 }

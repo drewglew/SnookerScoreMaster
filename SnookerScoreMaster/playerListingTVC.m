@@ -130,7 +130,7 @@
                     UIImage *img = [[UIImage alloc] initWithData:data];
                     
                     if (img==nil) {
-                        img = [UIImage imageNamed:@"avatar.png"];
+                        img = [UIImage imageNamed:@"avatar0"];
                     }
                     
                     [av setAvatarImage:img];
@@ -276,7 +276,7 @@
     
 }
 
-- (void)addItemViewController:(playerListingTVC *)controller loadPlayerDetails :(player*) playerSelected {
+- (void)addItemViewController:(playerListingVC *)controller loadPlayerDetails :(player*) playerSelected {
     
     // empty
 }

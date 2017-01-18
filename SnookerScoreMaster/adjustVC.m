@@ -40,6 +40,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /* colour setup */
+    self.redColour = [UIColor colorWithRed:217.0f/255.0f green:23.0f/255.0f blue:60.0f/255.0f alpha:1.0];
+    self.yellowColour = [UIColor colorWithRed:222.0f/255.0f green:199.0f/255.0f blue:4.0f/255.0f alpha:1.0];
+    self.greenColour = [UIColor colorWithRed:61.0f/255.0f green:191.0f/255.0f blue:61.0f/255.0f alpha:1.0];
+    self.brownColour = [UIColor colorWithRed:120.0f/255.0f green:64.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+    self.blueColour = [UIColor colorWithRed:39.0f/255.0f green:121.0f/255.0f blue:198.0f/255.0f alpha:1.0];
+    self.pinkColour = [UIColor colorWithRed:201.0f/255.0f green:78.0f/255.0f blue:184.0f/255.0f alpha:1.0];
+    self.blackColour = [UIColor colorWithRed:33.0f/255.0f green:33.0f/255.0f blue:33.0f/255.0f alpha:1.0];
+    
+    
     // Do any additional setup after loading the view.
     if (self.sumOfPlayerFouls == 0) {
         self.labelExplanation.text = [NSString stringWithFormat:@"%@ has not received any foul points from the other player in this frame.\nYou may increase this players score however.",self.playerName];
@@ -48,39 +58,26 @@
     }
     self.stepperBallAdjuster.value = self.ballIndex;
     self.stepperBallAdjuster.maximumValue = self.ballIndex;
+    
+    self.ballImage.layer.cornerRadius = self.ballImage.frame.size.width /2.0f;
+    
     [self updateBallCounter];
-    [self makeRoundShotButton:self.adjustButton :60 :[UIColor colorWithRed:76.0f/255.0f green:218.0f/255.0f blue:100.0f/255.0f alpha:1.0]];
+    
+    self.ballCounter.textColor = self.skinForegroundColour;
 
-    [self makeRoundShotButton:self.selectPlayerButton :60 :[UIColor colorWithRed:76.0f/255.0f green:218.0f/255.0f blue:100.0f/255.0f alpha:1.0]];
-            //self.mainView.backgroundColor = [UIColor blackColor];
-    //self.ballAdjustView.backgroundColor = [UIColor whiteColor];
-    self.skinMainFontColor = [UIColor colorWithRed:76.0f/255.0f green:218.0f/255.0f blue:100.0f/255.0f alpha:1.0];
-    self.ballCounter.textColor = self.skinMainFontColor;
+    [self.ballImage setTitleColor:self.skinForegroundColour forState:UIControlStateNormal];
+    
+    
+   
+    self.stepperBallAdjuster.tintColor = self.skinForegroundColour;
+    
+    self.view.backgroundColor=self.skinBackgroundColour;
 
-    [self.ballImage setTitleColor:self.skinMainFontColor forState:UIControlStateNormal];
-    [self.selectPlayerButton setTitleColor:self.skinMainFontColor forState:UIControlStateNormal];
-    self.stepperBallAdjuster.tintColor = self.skinMainFontColor;
+    self.labelExplanation.textColor = self.skinForegroundColour;
 }
 
 
 
-
-
-
-
-
--(void)makeRoundShotButton :(UIButton*) shotButton :(int) heightWidth :(UIColor*) skinColor {
-    //width and height should be same value
-    shotButton.frame = CGRectMake(0, 0, heightWidth, heightWidth);
-    
-    //Clip/Clear the other pieces whichever outside the rounded corner
-    shotButton.clipsToBounds = YES;
-    
-    //half of the width
-    shotButton.layer.cornerRadius = heightWidth/2.0f;
-    shotButton.layer.borderColor=skinColor.CGColor;
-    shotButton.layer.borderWidth=3.0f;
-}
 
 
 
@@ -141,12 +138,8 @@
     int ballRedAmount=0;
     int ballColourIndex=0;
     
-    NSString* ballImageName;
-    
-    NSString *prefixColourName = @"";
-    if (self.skins==2) {
-        prefixColourName = @"hollow_";
-    }
+
+    UIColor *currentBallColour;
     
     if (self.stepperBallAdjuster.value > 6) {
         // its a red
@@ -154,7 +147,11 @@
         self.ballCounter.text =[NSString stringWithFormat:@"%.f",self.stepperBallAdjuster.value - 6.0];
         ballRedAmount = self.stepperBallAdjuster.value - 6.0;
         ballColourIndex = 1;
-        ballImageName = [NSString stringWithFormat:@"%@red_01",prefixColourName];
+        
+        currentBallColour = self.redColour;
+        
+        
+        //ballImageName = [NSString stringWithFormat:@"%@red_01",prefixColourName];
         
         
     } else {
@@ -164,22 +161,32 @@
         ballColourIndex = 8 - self.stepperBallAdjuster.value;
         
         if (ballColourIndex == 2 ) {
-            ballImageName = [NSString stringWithFormat:@"%@yellow_02",prefixColourName];
+           // ballImageName = [NSString stringWithFormat:@"%@yellow_02",prefixColourName];
+            currentBallColour = self.yellowColour;
         } else if (ballColourIndex==3) {
-            ballImageName = [NSString stringWithFormat:@"%@green_03",prefixColourName];
+            //ballImageName = [NSString stringWithFormat:@"%@green_03",prefixColourName];
+            currentBallColour = self.greenColour;
         } else if (ballColourIndex==4) {
-            ballImageName = [NSString stringWithFormat:@"%@brown_04",prefixColourName];
+            currentBallColour = self.brownColour;
+            //ballImageName = [NSString stringWithFormat:@"%@brown_04",prefixColourName];
         } else if (ballColourIndex==5) {
-            ballImageName = [NSString stringWithFormat:@"%@blue_05",prefixColourName];
+            currentBallColour = self.blueColour;
+
+            //ballImageName = [NSString stringWithFormat:@"%@blue_05",prefixColourName];
         } else if (ballColourIndex==6) {
-            ballImageName = [NSString stringWithFormat:@"%@pink_06",prefixColourName];
+             currentBallColour = self.pinkColour;
+            //ballImageName = [NSString stringWithFormat:@"%@pink_06",prefixColourName];
         } else if (ballColourIndex==7) {
-            ballImageName = [NSString stringWithFormat:@"%@black_07",prefixColourName];
+             currentBallColour = self.blackColour;
+           // ballImageName = [NSString stringWithFormat:@"%@black_07",prefixColourName];
         }
     }
     
-    UIImage *buttonImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",ballImageName ]];
-    [self.ballImage setImage:buttonImage forState:UIControlStateNormal];
+    //UIImage *buttonImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",ballImageName ]];
+    
+    self.ballImage.backgroundColor = currentBallColour;
+    
+    //[self.ballImage setImage:buttonImage forState:UIControlStateNormal];
 
     int pointsRemaining=0;
 

@@ -28,6 +28,4 @@
 
 @property (weak, nonatomic) IBOutlet UIView *selectedvatarView;
 
-
-
 @end

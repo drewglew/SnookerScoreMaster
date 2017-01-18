@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "playerListingTVC.h"
-#import "HeadToHeadTVC.h"
+#import "playerListingVC.h"
+#import "headToHeadListingVC.h"
 #import "matchesVC.h"
 #import "player.h"
 #import "breakBallCell.h"

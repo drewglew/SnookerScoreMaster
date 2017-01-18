@@ -161,6 +161,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *sliderBorderLabel;
 @property (strong, nonatomic) IBOutlet UIView *player2BreakInfoView;
 @property (strong, nonatomic) IBOutlet UIView *player1BreakInfoView;
+@property (strong, nonatomic) IBOutlet UIView *backgroundView;
 
 
 

@@ -148,7 +148,7 @@
             img = [[UIImage alloc] initWithData:data];
             
             if (img==nil) {
-                img = [UIImage imageNamed:@"avatar.png"];
+                img = [UIImage imageNamed:@"avatar0"];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -165,7 +165,7 @@
     UIImage *img = [[UIImage alloc] initWithData:data];
     
     if (img==nil) {
-        img = [UIImage imageNamed:@"avatar.png"];
+        img = [UIImage imageNamed:@"avatar0"];
     }
     [avSelected setAvatarImage:img];
     avSelected.borderWidth = 3;
@@ -282,7 +282,7 @@
 (NSString*) playerImageName :(bool)photoUpdated {
 }
 
-- (void)addItemViewController:(playerListingTVC *)controller loadPlayerDetails :(player*) playerSelected {
+- (void)addItemViewController:(playerListingVC *)controller loadPlayerDetails :(player*) playerSelected {
     
     // empty
 }

@@ -10,5 +10,6 @@
 
 @interface helpPageVC : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *ballPageIndicator;
+@property (strong, nonatomic) IBOutlet UIWebView *snookerRulesWV;
 
 @end
