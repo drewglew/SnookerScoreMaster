@@ -590,7 +590,7 @@
 /* export file functions */
 
 /* created 20151012 */
-/* last modified 20151029 */
+/* last modified 20170119 */
 -(NSString*) exportDataFile :(NSMutableArray*) matchDataSet :(match*) m :(player*) p1 :(player*) p2 {
     
     NSDate *date = [NSDate date];
@@ -616,16 +616,20 @@
             tempEntry = [startDate objectAtIndex:0];
             fileData = [NSString stringWithFormat:@"%@\n%@;%@;%@;%@;%@;%@;%@;%@;%@;%@;%@",fileData, tempEntry.entryid,tempEntry.endbreaktimestamp,tempEntry.frameid,@"0",@"0",@"0",@"0",@"FS",@"0",@"0",@"0"];
         }
+        
         int potIndex = 0;
+        
+        NSString *duration;
+        
+        
+        duration = [NSString stringWithFormat:@"%@",data.duration];
         
         for (ballShot *ball in data.shots) {
             int ballPoint;
             ballPoint = [ball.value intValue];
             NSNumber *shotDetail1;
             NSNumber *shotDetail2;
-            NSNumber *pocketid;
-            
-            pocketid = ball.pocketid;
+
             
             if (ball.shotid == [NSNumber numberWithInt:Potted]) {
                 shotDetail1 = ball.distanceid;
@@ -646,7 +650,10 @@
                 shotDetail1 = ball.foulid;
                 shotDetail2 = [NSNumber numberWithInt:0];
             }
-            fileData = [NSString stringWithFormat:@"%@\n%@;%@;%@;%@;%@;%@;%@;%@;%d;%@;%@",fileData, data.entryid, data.endbreaktimestamp,data.frameid,data.playerid,ball.shotid,shotDetail1,shotDetail2,ball.colour,ballPoint,ball.shottimestamp,pocketid];
+            
+            fileData = [NSString stringWithFormat:@"%@\n%@;%@;%@;%@;%@;%@;%@;%@;%d;%@;%@",fileData, data.entryid, data.endbreaktimestamp,data.frameid,data.playerid,ball.shotid,shotDetail1,shotDetail2,ball.colour,ballPoint,ball.shottimestamp,duration];
+            
+            duration=@"";
             
             potIndex ++;
             

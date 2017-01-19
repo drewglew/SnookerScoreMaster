@@ -14,6 +14,7 @@
 #import "indicator.h"
 #import "DraggableView.h"
 
+
 @interface scoreboardVC () <PlayerDelegate, MatchStatisticsDelegate>
 
 
@@ -756,19 +757,14 @@ issue with startup now controlled by onload block condition
     self.isMenuShot = MY_APPDELEGATE.isMenuShot;
     
     self.skinSelectedScore = [UIColor whiteColor];
-    
-    self.viewScorePlayer1.layer.borderColor = self.skinSelectedScore.CGColor;
-    self.viewScorePlayer1.layer.borderWidth = 1.0f;
 
-    
     if (self.theme==blur) {
         self.snookerBackgroundPhotoImage.hidden = false;
         [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
         self.blurView.hidden = false;
         
-        self.skinForegroundColour = [UIColor colorWithRed:44.0f/255.0f green:62.0f/255.0f blue:80.0f/255.0f alpha:1.0];
+        self.skinForegroundColour = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
         self.skinBackgroundColour  = [UIColor colorWithRed:168.0f/255.0f green:218.0f/255.0f blue:220.0f/255.0f alpha:1.0];
-        
         self.skinPlayer1Colour = [UIColor colorWithRed:255.0f/255.0f green:117.0f/255.0f blue:7.0f/255.0f alpha:1.0];
         self.skinPlayer2Colour = [UIColor colorWithRed:76.0f/255.0f green:218.0f/255.0f blue:100.0f/255.0f alpha:1.0];
 
@@ -785,9 +781,7 @@ issue with startup now controlled by onload block condition
         [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
         self.blurView.hidden = false;
         [self.blurView setEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-        
-        // self.blurView.hidden = true;
-        //self.snookerBackgroundPhotoImage.hidden = true;
+
         self.skinForegroundColour  = [UIColor colorWithRed:76.0f/255.0f green:217.0f/255.0f blue:100.0f/255.0f alpha:1.0];
         self.skinBackgroundColour = [UIColor colorWithRed:28.0f/255.0f green:39.0f/255.0f blue:28.0f/255.0f alpha:1.0];
         self.skinPlayer1Colour = [UIColor colorWithRed:88.0f/255.0f green:86.0f/255.0f blue:214.0f/255.0f alpha:1.0];
@@ -828,7 +822,7 @@ issue with startup now controlled by onload block condition
         [self.textScorePlayer1 setTextColor:self.skinSelectedScore];
         self.view.backgroundColor = skinBackgroundColour;
         
-    } else {   // mono
+    } else {
         self.blurView.hidden = true;
         self.snookerBackgroundPhotoImage.hidden = true;
         self.skinForegroundColour  = [UIColor colorWithRed:241.0f/255.0f green:232.0f/255.0f blue:184.0f/255.0f alpha:1.0];
@@ -855,9 +849,9 @@ issue with startup now controlled by onload block condition
     //self.labelScoreMatchPlayer1.textColor = self.skinForegroundColour;
     self.labelScoreMatchPlayer2.textColor = self.skinForegroundColour;
     
-    self.textScorePlayer2.textColor = self.skinForegroundColour;
-    self.textPlayerTwoName.textColor =  self.skinForegroundColour;
-    
+    self.viewScorePlayer1.layer.borderColor = self.skinSelectedScore.CGColor;
+    self.viewScorePlayer2.layer.borderColor = self.skinSelectedScore.CGColor;
+
     self.scoreBoardBackLabel.layer.cornerRadius = 5;
     self.scoreBoardBackLabel.layer.borderWidth = 1.0f;
     self.scoreBoardBackLabel.layer.borderColor = self.skinForegroundColour.CGColor;
@@ -868,16 +862,21 @@ issue with startup now controlled by onload block condition
     self.visitBallGrid.layer.masksToBounds = YES;
     
     if (self.currentPlayer.playerIndex==1) {
-        self.textScorePlayer1.textColor = self.skinSelectedScore;
-        self.textPlayerOneName.textColor = self.skinSelectedScore;
-        self.labelScoreMatchPlayer1.textColor = self.skinSelectedScore;
-    } else {
+        self.textScorePlayer1.textColor = self.skinForegroundColour;
         self.textScorePlayer2.textColor = self.skinSelectedScore;
-        self.textPlayerTwoName.textColor = self.skinSelectedScore;
-        self.labelScoreMatchPlayer2.textColor = self.skinSelectedScore;
-
-    }
-    
+        self.viewScorePlayer1.layer.borderWidth = 1.0f;
+        self.viewScorePlayer2.layer.borderWidth = 0.0f;
+        self.textPlayerOneName.textColor =  self.skinSelectedScore;
+        self.textPlayerTwoName.textColor =  self.skinForegroundColour;
+        
+    } else {
+        self.textScorePlayer1.textColor = self.skinSelectedScore;
+        self.textScorePlayer2.textColor = self.skinForegroundColour;
+        self.viewScorePlayer1.layer.borderWidth = 0.0f;
+        self.viewScorePlayer2.layer.borderWidth = 1.0f;
+        self.textPlayerOneName.textColor =  self.skinForegroundColour;
+        self.textPlayerTwoName.textColor =  self.skinSelectedScore;
+    }    
 }
 
 
@@ -956,10 +955,7 @@ issue with startup now controlled by onload block condition
     UILongPressGestureRecognizer* blackLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureBallLongPress:)];
     [blackLongPress setMinimumPressDuration:0.3];
     [self.buttonBlack addGestureRecognizer:blackLongPress];
-    
-    
-    
-    
+
 }
 
 
@@ -2012,6 +2008,7 @@ issue with startup now controlled by onload block condition
         [self.textPlayerOneName setTextColor:self.skinForegroundColour];
         [self.labelScoreMatchPlayer2 setTextColor:self.skinSelectedScore];
         [self.labelScoreMatchPlayer1 setTextColor:self.skinForegroundColour ];
+        
         self.viewScorePlayer2.layer.borderColor = self.skinSelectedScore.CGColor;
         self.viewScorePlayer2.layer.borderWidth = 1.0f;
         self.viewScorePlayer1.layer.borderColor = self.skinBackgroundColour.CGColor;
@@ -2023,6 +2020,7 @@ issue with startup now controlled by onload block condition
         [self.textPlayerOneName setTextColor:self.skinSelectedScore];
         [self.labelScoreMatchPlayer2 setTextColor:self.skinForegroundColour];
         [self.labelScoreMatchPlayer1 setTextColor:self.skinSelectedScore];
+        
         self.viewScorePlayer1.layer.borderColor = self.skinSelectedScore.CGColor;
         self.viewScorePlayer1.layer.borderWidth = 1.0f;
         self.viewScorePlayer2.layer.borderColor = self.skinBackgroundColour.CGColor;
