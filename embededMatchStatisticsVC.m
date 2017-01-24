@@ -1190,7 +1190,12 @@
 
 -(void)updateDurationVisitLabelContent :(UILabel*) titleInfo {
     
-    titleInfo.text = [NSString stringWithFormat:@"Duration:%@\nVisits:%d/%lu",self.frameDuration, self.breakShotsIndex, (unsigned long)self.graphStatisticView.frameData.count];
+    
+    if (self.frameDuration!=NULL || self.frameDuration!=nil) {
+        titleInfo.text = [NSString stringWithFormat:@"Duration:%@\nVisits:%d/%lu",self.frameDuration, self.breakShotsIndex, (unsigned long)self.graphStatisticView.frameData.count];
+    } else {
+         titleInfo.text = [NSString stringWithFormat:@"Visits:%d/%lu",self.breakShotsIndex, (unsigned long)self.graphStatisticView.frameData.count];
+    }
 }
 
 /* created 20160204 */

@@ -21,7 +21,7 @@
 #import "Foundation/Foundation.h"
 #import <SpriteKit/SpriteKit.h>
 #import "celebrationSceneSKV.h"
-
+@import Firebase;
 
 @interface scoreboardVC : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate, UINavigationControllerDelegate> {
     int activeColour;

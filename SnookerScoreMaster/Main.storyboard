@@ -19,6 +19,9 @@
         <array key="Aileron-Thin.otf">
             <string>Aileron-Thin</string>
         </array>
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Match StatisticsVC-->
@@ -1107,28 +1110,28 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="ufA-pd-X2T"/>
-                                <exclude reference="O5Y-VE-LYZ"/>
-                                <exclude reference="rNg-Y3-ptu"/>
                                 <exclude reference="gWw-xC-Hzh"/>
                                 <exclude reference="f1z-wk-mdZ"/>
                                 <exclude reference="YRD-Dp-83v"/>
+                                <exclude reference="O5Y-VE-LYZ"/>
+                                <exclude reference="rNg-Y3-ptu"/>
+                                <exclude reference="34H-Ws-oPB"/>
+                                <exclude reference="VeO-lC-b7X"/>
                                 <exclude reference="czY-rK-MDa"/>
                                 <exclude reference="0R4-lL-Pd6"/>
+                                <exclude reference="st8-pW-6UF"/>
+                                <exclude reference="S2m-Vj-yFM"/>
+                                <exclude reference="Vxe-2y-jTV"/>
                                 <exclude reference="GFS-3s-V6z"/>
                                 <exclude reference="K8v-Od-Q1t"/>
                                 <exclude reference="TSV-eO-lpM"/>
                                 <exclude reference="WuD-HH-pYZ"/>
                                 <exclude reference="bac-pq-ApZ"/>
                                 <exclude reference="jOe-rx-w4Z"/>
-                                <exclude reference="st8-pW-6UF"/>
                                 <exclude reference="0Z6-G8-Udf"/>
                                 <exclude reference="8EO-gS-VSj"/>
                                 <exclude reference="jCa-Wi-wGD"/>
                                 <exclude reference="xY7-rh-bMW"/>
-                                <exclude reference="S2m-Vj-yFM"/>
-                                <exclude reference="Vxe-2y-jTV"/>
-                                <exclude reference="34H-Ws-oPB"/>
-                                <exclude reference="VeO-lC-b7X"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -1156,28 +1159,28 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="ufA-pd-X2T"/>
-                                <include reference="O5Y-VE-LYZ"/>
-                                <include reference="rNg-Y3-ptu"/>
                                 <include reference="gWw-xC-Hzh"/>
                                 <include reference="f1z-wk-mdZ"/>
                                 <include reference="YRD-Dp-83v"/>
+                                <include reference="O5Y-VE-LYZ"/>
+                                <include reference="rNg-Y3-ptu"/>
+                                <include reference="34H-Ws-oPB"/>
+                                <include reference="VeO-lC-b7X"/>
                                 <include reference="czY-rK-MDa"/>
                                 <include reference="0R4-lL-Pd6"/>
+                                <include reference="st8-pW-6UF"/>
+                                <include reference="S2m-Vj-yFM"/>
+                                <include reference="Vxe-2y-jTV"/>
                                 <include reference="GFS-3s-V6z"/>
                                 <include reference="K8v-Od-Q1t"/>
                                 <include reference="TSV-eO-lpM"/>
                                 <include reference="WuD-HH-pYZ"/>
                                 <include reference="bac-pq-ApZ"/>
                                 <include reference="jOe-rx-w4Z"/>
-                                <include reference="st8-pW-6UF"/>
                                 <include reference="0Z6-G8-Udf"/>
                                 <include reference="8EO-gS-VSj"/>
                                 <include reference="jCa-Wi-wGD"/>
                                 <include reference="xY7-rh-bMW"/>
-                                <include reference="S2m-Vj-yFM"/>
-                                <include reference="Vxe-2y-jTV"/>
-                                <include reference="34H-Ws-oPB"/>
-                                <include reference="VeO-lC-b7X"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -1507,24 +1510,24 @@
                                 <exclude reference="Z8u-AV-Egd"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="FBi-OY-sfU"/>
-                                <exclude reference="h8Y-i4-ffg"/>
-                                <exclude reference="LIe-R6-2aj"/>
-                                <exclude reference="NBE-R7-QJN"/>
-                                <exclude reference="puz-zV-6LH"/>
+                                <exclude reference="OsN-a6-uxm"/>
+                                <exclude reference="bvm-KO-Y7Q"/>
+                                <exclude reference="h1g-AX-Kkt"/>
+                                <exclude reference="xMI-dS-UZv"/>
                                 <exclude reference="hpE-nG-W7b"/>
                                 <exclude reference="lzP-r3-oOk"/>
                                 <exclude reference="tv1-pR-YD8"/>
                                 <exclude reference="zQA-hm-GLA"/>
                                 <exclude reference="Six-dW-Gv3"/>
                                 <exclude reference="qCO-0Q-djd"/>
+                                <exclude reference="FBi-OY-sfU"/>
+                                <exclude reference="h8Y-i4-ffg"/>
+                                <exclude reference="LIe-R6-2aj"/>
+                                <exclude reference="NBE-R7-QJN"/>
+                                <exclude reference="puz-zV-6LH"/>
                                 <exclude reference="HOn-Ob-ERh"/>
                                 <exclude reference="HVQ-Hd-y5z"/>
                                 <exclude reference="M6U-WK-ZcB"/>
-                                <exclude reference="OsN-a6-uxm"/>
-                                <exclude reference="bvm-KO-Y7Q"/>
-                                <exclude reference="h1g-AX-Kkt"/>
-                                <exclude reference="xMI-dS-UZv"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1538,24 +1541,24 @@
                                 <include reference="Z8u-AV-Egd"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="FBi-OY-sfU"/>
-                                <include reference="h8Y-i4-ffg"/>
-                                <include reference="LIe-R6-2aj"/>
-                                <include reference="NBE-R7-QJN"/>
-                                <include reference="puz-zV-6LH"/>
+                                <include reference="OsN-a6-uxm"/>
+                                <include reference="bvm-KO-Y7Q"/>
+                                <include reference="h1g-AX-Kkt"/>
+                                <include reference="xMI-dS-UZv"/>
                                 <include reference="hpE-nG-W7b"/>
                                 <include reference="lzP-r3-oOk"/>
                                 <include reference="tv1-pR-YD8"/>
                                 <include reference="zQA-hm-GLA"/>
                                 <include reference="Six-dW-Gv3"/>
                                 <include reference="qCO-0Q-djd"/>
+                                <include reference="FBi-OY-sfU"/>
+                                <include reference="h8Y-i4-ffg"/>
+                                <include reference="LIe-R6-2aj"/>
+                                <include reference="NBE-R7-QJN"/>
+                                <include reference="puz-zV-6LH"/>
                                 <include reference="HOn-Ob-ERh"/>
                                 <include reference="HVQ-Hd-y5z"/>
                                 <include reference="M6U-WK-ZcB"/>
-                                <include reference="OsN-a6-uxm"/>
-                                <include reference="bvm-KO-Y7Q"/>
-                                <include reference="h1g-AX-Kkt"/>
-                                <include reference="xMI-dS-UZv"/>
                             </mask>
                         </variation>
                     </view>
@@ -2159,12 +2162,9 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hue-pC-2tI">
-                                <rect key="frame" x="36" y="199" width="200" height="318"/>
+                                <rect key="frame" x="36" y="199" width="186" height="318"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.29803921570000003" green="0.85490196080000003" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="Lma-Kh-12L"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="igg-oy-Wbg" id="ZyO-3w-gfY"/>
                                     <outlet property="delegate" destination="igg-oy-Wbg" id="mgQ-Vg-0Da"/>
@@ -2210,6 +2210,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="ItY-U1-Y20" firstAttribute="leading" secondItem="Hue-pC-2tI" secondAttribute="trailing" constant="42" id="0A7-Vw-9NB"/>
                             <constraint firstItem="3om-MO-xl0" firstAttribute="leading" secondItem="GSz-Uk-HTu" secondAttribute="leadingMargin" constant="10" id="2br-67-ZCh"/>
                             <constraint firstItem="UgT-NX-bid" firstAttribute="top" secondItem="UJa-wR-TgM" secondAttribute="bottom" constant="10" id="3hT-2A-Jhq"/>
                             <constraint firstItem="ItY-U1-Y20" firstAttribute="top" secondItem="gtx-bQ-FH4" secondAttribute="bottom" constant="5" id="8eX-Eh-00K"/>
@@ -2295,7 +2296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GDg-9B-kJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2313" y="-62"/>
+            <point key="canvasLocation" x="2312.8000000000002" y="-62.518740629685162"/>
         </scene>
         <!--Player ListingVC-->
         <scene sceneID="NJ3-Rk-gDV">
@@ -2949,12 +2950,12 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="2" navigationOrientation="horizontal" spineLocation="none" id="OTg-J7-fRi" customClass="IntroPVC" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hsx-0a-HEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-136" y="-1819"/>
+            <point key="canvasLocation" x="-617" y="-1819"/>
         </scene>
         <!--Help PageVC-->
         <scene sceneID="99L-rw-MiF">
             <objects>
-                <viewController storyboardIdentifier="Intro1ID" id="4Pi-mz-pnb" customClass="helpPageVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Intro7ID" id="4Pi-mz-pnb" customClass="helpPageVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Q3D-3v-8bh"/>
                         <viewControllerLayoutGuide type="bottom" id="4je-OS-Rht"/>
@@ -2963,13 +2964,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scoreboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PMI-iT-vOV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configuration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PMI-iT-vOV">
                                 <rect key="frame" x="10" y="40" width="355" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="irU-X0-E4p"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
-                                <color key="textColor" red="0.85098039219999999" green="0.090196078430000007" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.1471515894" green="0.45621460679999998" blue="0.75100356339999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="724-CH-SA3">
@@ -2978,9 +2979,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="PA3-m1-7HK"/>
                                 </constraints>
-                                <string key="text">Directly tapping on any ball within the rack at the foot of the screen will add to current players break.  A player can be switched by touching their score directly.  
-
-</string>
+                                <mutableString key="text">In the App Settings special options are available; For example changing the THEME colours, setting the threshold of when the congratulations message appears and adjusting the mechanism for logging a FOUL.  if the number of reds count is not the desired amount from the main scoreboard you can ADJUST this as well as the points a player may have.</mutableString>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2991,7 +2990,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B1O-qc-d5v">
                                 <rect key="frame" x="16" y="40" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.85098039215686272" green="0.090196078431372548" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14715158939361572" green="0.45621460676193237" blue="0.75100356340408325" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucq-q6-5Al">
                                 <rect key="frame" x="148" y="622" width="75" height="35"/>
@@ -3032,7 +3031,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rR-q6-AtL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="568.79999999999995" y="-1819.3403298350827"/>
+            <point key="canvasLocation" x="3898" y="-1819"/>
         </scene>
         <!--Help PageVC-->
         <scene sceneID="QHr-Z6-UO9">
@@ -3046,18 +3045,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scoreboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jN6-eo-ZUG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scoreboard:Fouls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jN6-eo-ZUG">
                                 <rect key="frame" x="10" y="40" width="355" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="bO4-mK-DOh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
-                                <color key="textColor" red="0.87058823529999996" green="0.78039215689999997" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.090196078430000007" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nh1-ho-46R">
-                                <rect key="frame" x="26" y="90" width="323" height="527"/>
-                                <mutableString key="text">The 'break ball' keeps count of the active break. When a break has ended make sure the player who made the break is selected and tap the break ball to finalize the break.  If you make a mistake before submitting the break; tap the 'undo' button.  It will prompt you to choose between canceling last shot or a complete rerack.    Fouls are added by depressing a ball in the rack for 2 seconds making sure at the same time the player who has made the foul is selected.  A number of options will be shown depending on the situation of the frame.    A frame can be finished by clicking the triangle button.</mutableString>
+                                <rect key="frame" x="26" y="90" width="323" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="FM8-5R-0vT"/>
+                                </constraints>
+                                <string key="text">FOULS are added by depressing a ball in the rack for 2 seconds making sure at the same time the player who has made the foul is selected.  A number of options will be shown depending on the situation of the frame.  </string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3065,7 +3067,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-Ks-4hv">
                                 <rect key="frame" x="16" y="40" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.87058823529411766" green="0.7803921568627451" blue="0.015686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.090196078430000007" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVe-nZ-prp">
                                 <rect key="frame" x="150" y="627" width="75" height="35"/>
@@ -3082,17 +3084,23 @@
                                     <action selector="closeHelpPressed:" destination="yV3-bW-541" eventType="touchUpInside" id="qJH-Dp-tlu"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="helpPage3_scoreboard" translatesAutoresizingMaskIntoConstraints="NO" id="YqX-ao-y2y">
+                                <rect key="frame" x="10" y="250" width="355" height="367"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="nh1-ho-46R" secondAttribute="trailing" constant="10" id="6xT-cN-7fQ"/>
                             <constraint firstAttribute="trailing" secondItem="jN6-eo-ZUG" secondAttribute="trailing" constant="10" id="BmY-QR-OgE"/>
-                            <constraint firstItem="ias-Ia-FCo" firstAttribute="top" secondItem="nh1-ho-46R" secondAttribute="bottom" constant="50" id="KVR-PM-37k"/>
                             <constraint firstItem="ias-Ia-FCo" firstAttribute="top" secondItem="eVe-nZ-prp" secondAttribute="bottom" constant="5" id="KqD-Og-N1M"/>
+                            <constraint firstItem="YqX-ao-y2y" firstAttribute="leading" secondItem="LbL-IR-Xdg" secondAttribute="leading" constant="10" id="Uh0-sn-7cz"/>
                             <constraint firstItem="eVe-nZ-prp" firstAttribute="centerX" secondItem="LbL-IR-Xdg" secondAttribute="centerX" id="bhx-6N-PhD"/>
                             <constraint firstItem="nh1-ho-46R" firstAttribute="top" secondItem="jN6-eo-ZUG" secondAttribute="bottom" constant="10" id="fgD-WC-xx3"/>
+                            <constraint firstItem="ias-Ia-FCo" firstAttribute="top" secondItem="YqX-ao-y2y" secondAttribute="bottom" constant="50" id="hX4-Pp-dKh"/>
                             <constraint firstItem="jN6-eo-ZUG" firstAttribute="leading" secondItem="LbL-IR-Xdg" secondAttribute="leading" constant="10" id="iOJ-we-khL"/>
+                            <constraint firstAttribute="trailing" secondItem="YqX-ao-y2y" secondAttribute="trailing" constant="10" id="jNc-1C-HHY"/>
                             <constraint firstItem="nh1-ho-46R" firstAttribute="leading" secondItem="LbL-IR-Xdg" secondAttribute="leadingMargin" constant="10" id="sep-yy-WUQ"/>
+                            <constraint firstItem="YqX-ao-y2y" firstAttribute="top" secondItem="nh1-ho-46R" secondAttribute="bottom" constant="10" id="tRF-OL-KGO"/>
                             <constraint firstItem="jN6-eo-ZUG" firstAttribute="top" secondItem="qlD-de-IHO" secondAttribute="bottom" constant="20" id="yrB-Jx-va3"/>
                         </constraints>
                     </view>
@@ -3102,7 +3110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HFa-c7-Eci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1238" y="-1819"/>
+            <point key="canvasLocation" x="641" y="-1819"/>
         </scene>
         <!--Help PageVC-->
         <scene sceneID="0KC-bT-FE6">
@@ -3122,7 +3130,7 @@
                                     <constraint firstAttribute="height" constant="40" id="VDN-9K-Jlu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
-                                <color key="textColor" red="0.23921568630000001" green="0.74901960779999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.87058823529999996" green="0.78039215689999997" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYQ-VZ-IZo">
@@ -3145,7 +3153,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="vZB-FX-f8H"/>
                                 </constraints>
-                                <string key="text">Swiping from right to left on the main scoreboard will display the Statistics for the active match.  Back to the main statistic display, using +/- on the frame graph allows you to roll through past frames as well as the current one. </string>
+                                <string key="text">Swiping from right to left on the main scoreboard will display the Statistics for the active match.  Using +/- on the frame graph allows you to roll through past frames as well as the current one.  Entire match statistics can also be shown.</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3153,7 +3161,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nW4-bQ-WxO">
                                 <rect key="frame" x="16" y="40" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.23921568627450979" green="0.74901960784313726" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.87058823529999996" green="0.78039215689999997" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="helpPage2_scoreboard" translatesAutoresizingMaskIntoConstraints="NO" id="s0T-nk-tUF">
                                 <rect key="frame" x="10" y="250" width="355" height="367"/>
@@ -3182,7 +3190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u0U-6r-QIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1936.8" y="-1819.3403298350827"/>
+            <point key="canvasLocation" x="1303" y="-1819"/>
         </scene>
         <!--Embeded Match StatisticsVC-->
         <scene sceneID="SlI-zo-6Wa">
@@ -3726,12 +3734,12 @@
                                                         <exclude reference="rK6-QZ-Gpb"/>
                                                         <exclude reference="bPg-tv-OwB"/>
                                                         <exclude reference="fiP-Qd-F0v"/>
+                                                        <exclude reference="834-1m-u3e"/>
+                                                        <exclude reference="T3q-x5-9w6"/>
                                                         <exclude reference="4Qs-2x-WyB"/>
                                                         <exclude reference="CfS-fn-GQS"/>
                                                         <exclude reference="NTl-Ib-qYR"/>
                                                         <exclude reference="fSW-hr-Wr3"/>
-                                                        <exclude reference="834-1m-u3e"/>
-                                                        <exclude reference="T3q-x5-9w6"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="widthClass=compact">
@@ -3746,12 +3754,12 @@
                                                         <include reference="rK6-QZ-Gpb"/>
                                                         <include reference="bPg-tv-OwB"/>
                                                         <include reference="fiP-Qd-F0v"/>
+                                                        <include reference="834-1m-u3e"/>
+                                                        <include reference="T3q-x5-9w6"/>
                                                         <include reference="4Qs-2x-WyB"/>
                                                         <include reference="CfS-fn-GQS"/>
                                                         <include reference="NTl-Ib-qYR"/>
                                                         <include reference="fSW-hr-Wr3"/>
-                                                        <include reference="834-1m-u3e"/>
-                                                        <include reference="T3q-x5-9w6"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -4744,7 +4752,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="niY-JF-Je6" customClass="ballSumIV">
-                                                        <rect key="frame" x="31" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="30.5" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="5sE-pl-mgb"/>
@@ -4979,7 +4987,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7J1-aA-8fL" userLabel="yellowPottedCount">
-                                                        <rect key="frame" x="31" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="30.5" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="4pu-C5-eVH"/>
@@ -6183,18 +6191,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FCY-wc-yGk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics : Part II" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FCY-wc-yGk">
                                 <rect key="frame" x="10" y="40" width="355" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="KnA-fa-nTE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
-                                <color key="textColor" red="0.47058823529999999" green="0.25098039220000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.87058823529999996" green="0.78039215689999997" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uDp-fE-UY8">
                                 <rect key="frame" x="10" y="90" width="355" height="527"/>
-                                <mutableString key="text">Touching the player avatars on the graph view provides current player statistics inside frame(s) and active match.   The 3 dot 'More' button next to the match/frame selection details each visit.  This allows you to step through the frame while highlighting the entry point on the graph.  Each break detail is shown.  Touching a ball in a break gives further breakdown of shot.      To the right side to the 3 dot 'More' button is the 3 lines icon.  Again only when frame statistic is shown does the view display.  It shows the detais on player visits in order of latest first. </mutableString>
+                                <mutableString key="text">Touching the player avatars on the graph view provides current player statistics inside frame(s) and active match.   The 'Graph detail' button next to the match/frame selection details each visit.  This allows you to step through the frame while highlighting the entry point on the graph.  Each break detail is shown.  Touching a ball in a break gives further breakdown of shot.      To the right side is the 'Listing' button.  Again only when frame statistic is shown does the view display.  It shows the detais on player visits in order of latest first. </mutableString>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6202,7 +6210,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJu-Ns-L0U">
                                 <rect key="frame" x="10" y="40" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.47058823529411764" green="0.25098039215686274" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.87058823529999996" green="0.78039215689999997" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgS-uw-kOu">
                                 <rect key="frame" x="150" y="627" width="75" height="35"/>
@@ -6239,7 +6247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wGg-nf-xFF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2593" y="-1819"/>
+            <point key="canvasLocation" x="1959" y="-1819"/>
         </scene>
         <!--Help PageVC-->
         <scene sceneID="pf3-lH-Vob">
@@ -6259,12 +6267,12 @@
                                     <constraint firstAttribute="height" constant="40" id="dUv-7m-ajM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
-                                <color key="textColor" red="0.1529411765" green="0.47450980390000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.23921568630000001" green="0.74901960779999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="inL-KN-crK">
                                 <rect key="frame" x="10" y="90" width="355" height="527"/>
-                                <mutableString key="text">Tapping a players avatar from the scoreboard presnts the Player Menu.  The border of the avatar is a pie-chart, Green are the proportion of match wins, red are losses and orange drawn.  It is possible to edit the current name,email or photo. touching the update  icon saves the changes and returns back to the scoreboard.    To select a different player or create a new player press the players icon 2nd from left.  The next view you can choose 'New' or select a stored player.  Back inside the player menu page you can accept that player into the current match replacing the original or discard to continue.  </mutableString>
+                                <mutableString key="text">Tapping a players avatar from the scoreboard presnts the Player Menu.  The border of the avatar is a pie-chart, Green are the proportion of match wins, red are losses and orange drawn.  It is possible to edit the current name,email or photo.  Click the avatar for option of taking a photo or using the photo library. Touching the update icon saves the changes and returns back to the scoreboard view.    To select a different player or create a new one press the 'PLAYERS LIST'.  The next view you can choose 'New' or select a stored player.  Back inside the main player avatar page you can accept that player into the current match replacing the original or discard to continue.  The next option 'Head to Heads' provides detail for current player against all the players he/she has competed with. From this view you may select another opponent and see his/her headTohead details. </mutableString>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6272,7 +6280,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rcI-Zh-WZn">
                                 <rect key="frame" x="10" y="40" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.15294117647058825" green="0.47450980392156861" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.23921568630000001" green="0.74901960779999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2F-DF-DRz">
                                 <rect key="frame" x="150" y="627" width="75" height="35"/>
@@ -6309,7 +6317,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZJv-0z-N6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3242" y="-1819"/>
+            <point key="canvasLocation" x="2607" y="-1819"/>
         </scene>
         <!--Help PageVC-->
         <scene sceneID="F9H-K2-emC">
@@ -6323,18 +6331,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="777-ql-4Km">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Menu : Part II" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="777-ql-4Km">
                                 <rect key="frame" x="10" y="40" width="355" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="yhh-88-vvl"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
-                                <color key="textColor" red="0.78823529410000004" green="0.30588235289999999" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.23921568630000001" green="0.74901960779999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9ak-sB-LDW">
-                                <rect key="frame" x="10" y="90" width="355" height="527"/>
-                                <mutableString key="text">The next icon provides head to head detail for current player against all the players he/she has competed with. From the headTohead view you may select another opponent and see his/her headTohead details.  The next icon presents all matches that have either been played on the device or imported.  Choosing a single match opens up the familiar Statistics view.  Exporting of a match can be made from the match list by clicking the export button.  Here you can select multiple matches and export into a single email. </mutableString>
+                                <rect key="frame" x="10" y="90" width="355" height="333"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="gny-gL-LrP"/>
+                                </constraints>
+                                <mutableString key="text">The last option 'SHOW ALL MATCHES' presents all matches that have either been played on the device or imported.  Choosing a single match opens up the familiar Statistics view.   Exporting of a match can be made from the match list by clicking the export button.  Here you can select multiple matches and export into a single email.  Importing a match can be done by opening the email generated from an export and pressing the attachment.  The Snooker Score Master icon allows you to copy the data into the app.  A message will appear once import is made. </mutableString>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6342,7 +6353,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HH3-is-qY4">
                                 <rect key="frame" x="10" y="40" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.78823529411764703" green="0.30588235294117649" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.23921568630000001" green="0.74901960779999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAM-Pb-nBe">
                                 <rect key="frame" x="150" y="627" width="75" height="35"/>
@@ -6360,18 +6371,36 @@
                                     <action selector="closeHelpPressed:" destination="43R-IS-aQ5" eventType="touchUpInside" id="Dyk-SB-kin"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="helpPage4_export2" translatesAutoresizingMaskIntoConstraints="NO" id="uVS-0t-9G1">
+                                <rect key="frame" x="95" y="433" width="254" height="184"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="184" id="qHP-vB-tTn"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="helpPage4_export1" translatesAutoresizingMaskIntoConstraints="NO" id="dTw-Zg-UJw">
+                                <rect key="frame" x="10" y="433" width="75" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="NfQ-Rv-YWo"/>
+                                    <constraint firstAttribute="height" constant="60" id="xar-JH-dP7"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="777-ql-4Km" firstAttribute="top" secondItem="qGv-n6-Cd5" secondAttribute="bottom" constant="20" id="5UY-UO-WaL"/>
                             <constraint firstItem="9ak-sB-LDW" firstAttribute="top" secondItem="777-ql-4Km" secondAttribute="bottom" constant="10" id="9tp-bm-v72"/>
+                            <constraint firstItem="dTw-Zg-UJw" firstAttribute="leading" secondItem="6ym-AB-vUu" secondAttribute="leading" constant="10" id="BUY-Mq-vx1"/>
                             <constraint firstAttribute="trailing" secondItem="777-ql-4Km" secondAttribute="trailing" constant="10" id="Ebw-Sa-Doh"/>
+                            <constraint firstItem="dTw-Zg-UJw" firstAttribute="top" secondItem="9ak-sB-LDW" secondAttribute="bottom" constant="10" id="G1J-oX-mdL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uVS-0t-9G1" secondAttribute="trailing" constant="10" id="JnK-bs-H0O"/>
                             <constraint firstItem="777-ql-4Km" firstAttribute="leading" secondItem="6ym-AB-vUu" secondAttribute="leading" constant="10" id="QLv-t2-juW"/>
                             <constraint firstItem="YgO-59-3tO" firstAttribute="top" secondItem="TAM-Pb-nBe" secondAttribute="bottom" constant="5" id="T2b-lj-ODD"/>
-                            <constraint firstItem="YgO-59-3tO" firstAttribute="top" secondItem="9ak-sB-LDW" secondAttribute="bottom" constant="50" id="UUp-cR-LYz"/>
                             <constraint firstItem="9ak-sB-LDW" firstAttribute="leading" secondItem="6ym-AB-vUu" secondAttribute="leading" constant="10" id="c9C-NN-uc1"/>
+                            <constraint firstItem="uVS-0t-9G1" firstAttribute="top" secondItem="9ak-sB-LDW" secondAttribute="bottom" constant="10" id="dFj-xG-W94"/>
                             <constraint firstAttribute="trailing" secondItem="9ak-sB-LDW" secondAttribute="trailing" constant="10" id="djb-0M-EbO"/>
+                            <constraint firstItem="TAM-Pb-nBe" firstAttribute="top" secondItem="uVS-0t-9G1" secondAttribute="bottom" constant="10" id="gpB-RC-0pE"/>
                             <constraint firstItem="TAM-Pb-nBe" firstAttribute="centerX" secondItem="6ym-AB-vUu" secondAttribute="centerX" id="k5l-rk-esQ"/>
+                            <constraint firstItem="uVS-0t-9G1" firstAttribute="leading" secondItem="dTw-Zg-UJw" secondAttribute="trailing" constant="10" id="spm-ID-Ybv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -6380,12 +6409,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHg-MK-NsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3890" y="-1819"/>
+            <point key="canvasLocation" x="3264.8000000000002" y="-1819.3403298350827"/>
         </scene>
         <!--Help PageVC-->
         <scene sceneID="Iaz-jR-N8a">
             <objects>
-                <viewController storyboardIdentifier="Intro7ID" id="wOA-HE-MM7" customClass="helpPageVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Intro8ID" id="wOA-HE-MM7" customClass="helpPageVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zOS-mU-M7E"/>
                         <viewControllerLayoutGuide type="bottom" id="8mJ-yf-56W"/>
@@ -6400,6 +6429,7 @@
                                     <constraint firstAttribute="height" constant="40" id="I7e-Eo-cFL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQu-dx-Mve">
@@ -6421,7 +6451,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPY-nd-qph">
                                 <rect key="frame" x="10" y="40" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8V-Ll-nmR">
                                 <rect key="frame" x="5" y="90" width="365" height="532"/>
@@ -6450,6 +6480,76 @@
             </objects>
             <point key="canvasLocation" x="4532" y="-1819.3403298350827"/>
         </scene>
+        <!--Help PageVC-->
+        <scene sceneID="C5x-8d-oBv">
+            <objects>
+                <viewController storyboardIdentifier="Intro1ID" id="Aqu-AI-L1d" customClass="helpPageVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Afy-TP-ubb"/>
+                        <viewControllerLayoutGuide type="bottom" id="ezO-dm-vTT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="neG-9T-MR0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scoreboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PRc-5A-2XN">
+                                <rect key="frame" x="10" y="40" width="355" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="sgR-dN-cHh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                <color key="textColor" red="0.85098039219999999" green="0.090196078430000007" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hIe-cO-f31">
+                                <rect key="frame" x="26" y="90" width="323" height="527"/>
+                                <mutableString key="text">Directly tapping on any ball within the RACK at the foot of the screen will add to current players break.  A player can be switched by touching their frame score directly.    The 'BREAK BALL' keeps sum of the active break. When a break has ended make sure the player who made the break is selected and tap the break ball to finalize.  If you make mistake tap the 'UNDO' button.  While the break is active you can undo last shot or break.  If there is no active break the previous break can be undone or even a rerack of the whole frame.  </mutableString>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lC-4Q-Gju">
+                                <rect key="frame" x="16" y="40" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.090196078430000007" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKd-qr-LTM">
+                                <rect key="frame" x="150" y="627" width="75" height="35"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="5ed-CH-QAo"/>
+                                    <constraint firstAttribute="width" constant="75" id="yW7-XE-9sS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeHelpPressed:" destination="Aqu-AI-L1d" eventType="touchUpInside" id="HSR-M0-zrw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="hIe-cO-f31" firstAttribute="leading" secondItem="neG-9T-MR0" secondAttribute="leadingMargin" constant="10" id="0j4-d8-eSC"/>
+                            <constraint firstAttribute="trailing" secondItem="PRc-5A-2XN" secondAttribute="trailing" constant="10" id="C60-IH-nsc"/>
+                            <constraint firstItem="PRc-5A-2XN" firstAttribute="top" secondItem="Afy-TP-ubb" secondAttribute="bottom" constant="20" id="DfT-Rm-mvL"/>
+                            <constraint firstItem="hIe-cO-f31" firstAttribute="top" secondItem="PRc-5A-2XN" secondAttribute="bottom" constant="10" id="VjU-ZO-fJC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hIe-cO-f31" secondAttribute="trailing" constant="10" id="ajS-fQ-V2d"/>
+                            <constraint firstItem="ezO-dm-vTT" firstAttribute="top" secondItem="hIe-cO-f31" secondAttribute="bottom" constant="50" id="eaC-Fb-DbX"/>
+                            <constraint firstItem="HKd-qr-LTM" firstAttribute="centerX" secondItem="neG-9T-MR0" secondAttribute="centerX" id="hy7-XD-99J"/>
+                            <constraint firstItem="PRc-5A-2XN" firstAttribute="leading" secondItem="neG-9T-MR0" secondAttribute="leading" constant="10" id="s2n-3n-StN"/>
+                            <constraint firstItem="ezO-dm-vTT" firstAttribute="top" secondItem="HKd-qr-LTM" secondAttribute="bottom" constant="5" id="wfG-La-Cwf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ballPageIndicator" destination="8lC-4Q-Gju" id="pOQ-MV-hCz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Olh-Fo-Ryh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7" y="-1819"/>
+        </scene>
     </scenes>
     <resources>
         <image name="avatar" width="300" height="300"/>
@@ -6458,7 +6558,10 @@
         <image name="forwardbutton" width="128" height="128"/>
         <image name="greenbaize_clear" width="1100" height="1100"/>
         <image name="helpPage1_scoreboard" width="750" height="1334"/>
-        <image name="helpPage2_scoreboard" width="750" height="1334"/>
+        <image name="helpPage2_scoreboard" width="640" height="1136"/>
+        <image name="helpPage3_scoreboard" width="750" height="1334"/>
+        <image name="helpPage4_export1" width="341" height="266"/>
+        <image name="helpPage4_export2" width="747" height="925"/>
         <image name="tweet" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>

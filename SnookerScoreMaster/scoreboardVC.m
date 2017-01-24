@@ -757,14 +757,18 @@ issue with startup now controlled by onload block condition
     self.isMenuShot = MY_APPDELEGATE.isMenuShot;
     
     self.skinSelectedScore = [UIColor whiteColor];
-
+    
+    
+    
+    
     if (self.theme==blur) {
         self.snookerBackgroundPhotoImage.hidden = false;
         [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
         self.blurView.hidden = false;
         
-        self.skinForegroundColour = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+        self.skinForegroundColour = [UIColor colorWithRed:44.0f/255.0f green:62.0f/255.0f blue:80.0f/255.0f alpha:1.0];
         self.skinBackgroundColour  = [UIColor colorWithRed:168.0f/255.0f green:218.0f/255.0f blue:220.0f/255.0f alpha:1.0];
+        
         self.skinPlayer1Colour = [UIColor colorWithRed:255.0f/255.0f green:117.0f/255.0f blue:7.0f/255.0f alpha:1.0];
         self.skinPlayer2Colour = [UIColor colorWithRed:76.0f/255.0f green:218.0f/255.0f blue:100.0f/255.0f alpha:1.0];
 
@@ -781,7 +785,9 @@ issue with startup now controlled by onload block condition
         [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
         self.blurView.hidden = false;
         [self.blurView setEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-
+        
+        // self.blurView.hidden = true;
+        //self.snookerBackgroundPhotoImage.hidden = true;
         self.skinForegroundColour  = [UIColor colorWithRed:76.0f/255.0f green:217.0f/255.0f blue:100.0f/255.0f alpha:1.0];
         self.skinBackgroundColour = [UIColor colorWithRed:28.0f/255.0f green:39.0f/255.0f blue:28.0f/255.0f alpha:1.0];
         self.skinPlayer1Colour = [UIColor colorWithRed:88.0f/255.0f green:86.0f/255.0f blue:214.0f/255.0f alpha:1.0];
@@ -822,7 +828,7 @@ issue with startup now controlled by onload block condition
         [self.textScorePlayer1 setTextColor:self.skinSelectedScore];
         self.view.backgroundColor = skinBackgroundColour;
         
-    } else {
+    } else {   // mono
         self.blurView.hidden = true;
         self.snookerBackgroundPhotoImage.hidden = true;
         self.skinForegroundColour  = [UIColor colorWithRed:241.0f/255.0f green:232.0f/255.0f blue:184.0f/255.0f alpha:1.0];
@@ -861,22 +867,27 @@ issue with startup now controlled by onload block condition
     self.visitBallGrid.layer.cornerRadius = 5;
     self.visitBallGrid.layer.masksToBounds = YES;
     
+    
     if (self.currentPlayer.playerIndex==1) {
-        self.textScorePlayer1.textColor = self.skinForegroundColour;
-        self.textScorePlayer2.textColor = self.skinSelectedScore;
+        self.textScorePlayer1.textColor = self.skinSelectedScore;
+        self.textScorePlayer2.textColor = self.skinForegroundColour;
         self.viewScorePlayer1.layer.borderWidth = 1.0f;
         self.viewScorePlayer2.layer.borderWidth = 0.0f;
         self.textPlayerOneName.textColor =  self.skinSelectedScore;
         self.textPlayerTwoName.textColor =  self.skinForegroundColour;
         
     } else {
-        self.textScorePlayer1.textColor = self.skinSelectedScore;
-        self.textScorePlayer2.textColor = self.skinForegroundColour;
+        self.textScorePlayer1.textColor = self.skinForegroundColour;
+        self.textScorePlayer2.textColor = self.skinSelectedScore;
         self.viewScorePlayer1.layer.borderWidth = 0.0f;
         self.viewScorePlayer2.layer.borderWidth = 1.0f;
         self.textPlayerOneName.textColor =  self.skinForegroundColour;
         self.textPlayerTwoName.textColor =  self.skinSelectedScore;
-    }    
+    }
+    
+    
+    
+    
 }
 
 
@@ -955,7 +966,10 @@ issue with startup now controlled by onload block condition
     UILongPressGestureRecognizer* blackLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureBallLongPress:)];
     [blackLongPress setMinimumPressDuration:0.3];
     [self.buttonBlack addGestureRecognizer:blackLongPress];
-
+    
+    
+    
+    
 }
 
 
@@ -1549,6 +1563,8 @@ issue with startup now controlled by onload block condition
         
     } else {
         
+        [FIRAnalytics logEventWithName:@"matchstarted" parameters:nil];
+        
         self.activeMatchId = [self.db insertMatch :self.textScorePlayer1.playerNumber :self.textScorePlayer2.playerNumber];
         if (self.activeMatchId==[NSNumber numberWithInt:1]) {
             /* very first new match */
@@ -2008,10 +2024,7 @@ issue with startup now controlled by onload block condition
         [self.textPlayerOneName setTextColor:self.skinForegroundColour];
         [self.labelScoreMatchPlayer2 setTextColor:self.skinSelectedScore];
         [self.labelScoreMatchPlayer1 setTextColor:self.skinForegroundColour ];
-        
-        self.viewScorePlayer2.layer.borderColor = self.skinSelectedScore.CGColor;
         self.viewScorePlayer2.layer.borderWidth = 1.0f;
-        self.viewScorePlayer1.layer.borderColor = self.skinBackgroundColour.CGColor;
         self.viewScorePlayer1.layer.borderWidth = 0.0f;
     } else {
         self.currentPlayer = self.textScorePlayer1;
@@ -2020,10 +2033,7 @@ issue with startup now controlled by onload block condition
         [self.textPlayerOneName setTextColor:self.skinSelectedScore];
         [self.labelScoreMatchPlayer2 setTextColor:self.skinForegroundColour];
         [self.labelScoreMatchPlayer1 setTextColor:self.skinSelectedScore];
-        
-        self.viewScorePlayer1.layer.borderColor = self.skinSelectedScore.CGColor;
         self.viewScorePlayer1.layer.borderWidth = 1.0f;
-        self.viewScorePlayer2.layer.borderColor = self.skinBackgroundColour.CGColor;
         self.viewScorePlayer2.layer.borderWidth = 0.0f;
     }
     [self.currentPlayer setTextColor:self.skinSelectedScore];
@@ -2082,10 +2092,7 @@ issue with startup now controlled by onload block condition
     [self.textPlayerTwoName setTextColor:self.skinForegroundColour];
     [self.labelScoreMatchPlayer2 setTextColor:self.skinForegroundColour];
     [self.labelScoreMatchPlayer1 setTextColor:self.skinSelectedScore];
-    /* here abcdefg*/
-    self.viewScorePlayer1.layer.borderColor = self.skinSelectedScore.CGColor;
     self.viewScorePlayer1.layer.borderWidth = 1.0f;
-    self.viewScorePlayer2.layer.borderColor = self.skinBackgroundColour.CGColor;
     self.viewScorePlayer2.layer.borderWidth = 0.0f;
 
     scoreState = PreviousFrameScore;
@@ -2128,9 +2135,7 @@ issue with startup now controlled by onload block condition
     [self.textPlayerOneName setTextColor:self.skinForegroundColour ];
     [self.labelScoreMatchPlayer2 setTextColor:self.skinSelectedScore];
     [self.labelScoreMatchPlayer1 setTextColor:self.skinForegroundColour];
-    self.viewScorePlayer2.layer.borderColor = self.skinSelectedScore.CGColor;
     self.viewScorePlayer2.layer.borderWidth = 1.0f;
-    self.viewScorePlayer1.layer.borderColor = self.skinBackgroundColour.CGColor;
     self.viewScorePlayer1.layer.borderWidth = 0.0f;
 
     scoreState = PreviousFrameScore;
@@ -2264,6 +2269,31 @@ issue with startup now controlled by onload block condition
     /* so first we present the winner with a congratulations message */
     NSString *alertMessage;
     NSString *titleMessage;
+    
+    
+    NSNumberFormatter *n = [[NSNumberFormatter alloc] init];
+    n.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *matchGamesPlayer1 = [n numberFromString:self.labelScoreMatchPlayer1.text];
+    NSNumber *matchGamesPlayer2 = [n numberFromString:self.labelScoreMatchPlayer2.text];
+    
+    [FIRAnalytics logEventWithName:@"score"
+                        parameters:@{
+                                     @"name": @"match_end",
+                                     @"full_text": [NSString stringWithFormat:@"%@;%@ against %@;%@",self.textScorePlayer1.playerkey,matchGamesPlayer1,self.textScorePlayer2.playerkey, matchGamesPlayer2]
+                                     }];
+    
+    
+    
+    NSString *player1 = [NSString stringWithFormat:@"1red=%@;2yel=%@;3gre=%@;4bro=%@;5blu=%@;6pin=%@;7bla=%@",  [NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:1] :[NSNumber numberWithInt:1]]], [NSNumber numberWithInt: [common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:1] :[NSNumber numberWithInt:2]]],[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:1] :[NSNumber numberWithInt:3]]]
+                         ,[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:1] :[NSNumber numberWithInt:4]]],[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:1] :[NSNumber numberWithInt:5]]],[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:1] :[NSNumber numberWithInt:6]]],[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:1] :[NSNumber numberWithInt:7]]]];
+    
+    NSString *player2 = [NSString stringWithFormat:@"1red=%@;2yel=%@;3gre=%@;4bro=%@;5blu=%@;6pin=%@;7bla=%@",  [NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:1]]], [NSNumber numberWithInt: [common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:2]]],[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:3]]]
+                         ,[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:4]]],[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:5]]],[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:6]]],[NSNumber numberWithInt:[common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:7]]]];
+    
+    [FIRAnalytics logEventWithName:@"match_balls_potted" parameters:@{@"name":self.textScorePlayer1.playerkey, @"full_text" : player1}];
+    [FIRAnalytics logEventWithName:@"match_balls_potted" parameters:@{@"name":self.textScorePlayer2.playerkey, @"full_text" : player2}];
+    
+    
 
     if (self.labelScoreMatchPlayer1.framesWon > self.labelScoreMatchPlayer2.framesWon) {
         titleMessage = [NSString stringWithFormat:@"Congratulations %@",self.textPlayerOneName.text];
