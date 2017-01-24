@@ -248,6 +248,7 @@
 		3AC847F31BF257870028C0A2 /* snookerTableStatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = snookerTableStatsView.m; sourceTree = "<group>"; };
 		3AD0BAA11E37CD9800BC6C3B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3AD0BAA31E37CF0200BC6C3B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		3AD4AB9A1E37EED300460B0D /* SnookerScoreMaster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnookerScoreMaster.entitlements; sourceTree = "<group>"; };
 		3ADBD1FE1C497758001876F2 /* embededMatchStatisticsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = embededMatchStatisticsVC.h; path = ../embededMatchStatisticsVC.h; sourceTree = "<group>"; };
 		3ADBD1FF1C497758001876F2 /* embededMatchStatisticsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = embededMatchStatisticsVC.m; path = ../embededMatchStatisticsVC.m; sourceTree = "<group>"; };
 		3AEF7ECE1D3B4BFC001609A7 /* matchesTV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matchesTV.h; sourceTree = "<group>"; };
@@ -540,6 +541,7 @@
 		96D22D801A1FD58100E0ADE3 /* SnookerScoreMaster */ = {
 			isa = PBXGroup;
 			children = (
+				3AD4AB9A1E37EED300460B0D /* SnookerScoreMaster.entitlements */,
 				3AB429041BC95E83002FE58E /* Main.storyboard */,
 				3AAFA8DE1E2B84E700458493 /* UILabel */,
 				3A7379411DF372AA00E5D556 /* UIPageViewController */,
@@ -648,6 +650,11 @@
 					96D22D7D1A1FD58100E0ADE3 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 6QW2ZP6GTA;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					96D22D961A1FD58100E0ADE3 = {
 						CreatedOnToolsVersion = 6.1;
@@ -926,6 +933,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = SnookerScoreMaster/SnookerScoreMaster.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -954,6 +962,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = SnookerScoreMaster/SnookerScoreMaster.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
