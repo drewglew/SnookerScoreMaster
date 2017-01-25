@@ -749,6 +749,7 @@ issue with startup now controlled by onload block condition
 }
 
 /* created 20170117 */
+/* last modified 20170125 */
 -(void) loadTheme {
     self.theme = MY_APPDELEGATE.theme;
     self.isHollow =  MY_APPDELEGATE.isHollow;
@@ -757,10 +758,7 @@ issue with startup now controlled by onload block condition
     self.isMenuShot = MY_APPDELEGATE.isMenuShot;
     
     self.skinSelectedScore = [UIColor whiteColor];
-    
-    
-    
-    
+
     if (self.theme==blur) {
         self.snookerBackgroundPhotoImage.hidden = false;
         [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
@@ -782,22 +780,16 @@ issue with startup now controlled by onload block condition
         self.skinPlayer2Colour = [UIColor colorWithRed:90.0f/255.0f green:200.0f/255.0f blue:250.0f/255.0f alpha:1.0];
  
     } else if (self.theme==dark) {
+        self.snookerBackgroundPhotoImage.hidden = false;
         [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
         self.blurView.hidden = false;
         [self.blurView setEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-        
-        // self.blurView.hidden = true;
-        //self.snookerBackgroundPhotoImage.hidden = true;
+
         self.skinForegroundColour  = [UIColor colorWithRed:76.0f/255.0f green:217.0f/255.0f blue:100.0f/255.0f alpha:1.0];
         self.skinBackgroundColour = [UIColor colorWithRed:28.0f/255.0f green:39.0f/255.0f blue:28.0f/255.0f alpha:1.0];
         self.skinPlayer1Colour = [UIColor colorWithRed:88.0f/255.0f green:86.0f/255.0f blue:214.0f/255.0f alpha:1.0];
         self.skinPlayer2Colour = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0];
-        
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        gradient.frame = self.view.bounds;
-        gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor colorWithRed:28.0f/255.0f green:39.0f/255.0f blue:28.0f/255.0f alpha:1.0] CGColor], nil];
-        [self.view.layer insertSublayer:gradient atIndex:0];
- 
+
     } else if (self.theme==modern) {
         self.blurView.hidden = true;
         self.snookerBackgroundPhotoImage.hidden = true;
@@ -806,7 +798,6 @@ issue with startup now controlled by onload block condition
         self.skinPlayer1Colour = [UIColor colorWithRed:9.0f/255.0f green:9.0f/255.0f blue:59.0f/255.0f alpha:1.0];
         self.skinPlayer2Colour = [UIColor colorWithRed:86.0f/255.0f green:86.0f/255.0f blue:149.0f/255.0f alpha:1.0];
         self.view.backgroundColor = skinBackgroundColour;
-        /* TODO */
         
     } else if (self.theme==light) {
         
@@ -814,8 +805,7 @@ issue with startup now controlled by onload block condition
         self.blurView.hidden = false;
         [self.blurView setEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
         
-        //self.blurView.hidden = true;
-        //self.snookerBackgroundPhotoImage.hidden = true;
+        self.snookerBackgroundPhotoImage.hidden = false;
         
         self.skinForegroundColour  = [UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0];
         self.skinBackgroundColour = [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0];
@@ -828,7 +818,7 @@ issue with startup now controlled by onload block condition
         [self.textScorePlayer1 setTextColor:self.skinSelectedScore];
         self.view.backgroundColor = skinBackgroundColour;
         
-    } else {   // mono
+    } else {   // purple haze
         self.blurView.hidden = true;
         self.snookerBackgroundPhotoImage.hidden = true;
         self.skinForegroundColour  = [UIColor colorWithRed:241.0f/255.0f green:232.0f/255.0f blue:184.0f/255.0f alpha:1.0];
@@ -852,7 +842,6 @@ issue with startup now controlled by onload block condition
     
     self.labelStopwatch.textColor = self.skinForegroundColour;
     self.labelVisitCounter.textColor = self.skinForegroundColour;
-    //self.labelScoreMatchPlayer1.textColor = self.skinForegroundColour;
     self.labelScoreMatchPlayer2.textColor = self.skinForegroundColour;
     
     self.viewScorePlayer1.layer.borderColor = self.skinSelectedScore.CGColor;
@@ -884,10 +873,7 @@ issue with startup now controlled by onload block condition
         self.textPlayerOneName.textColor =  self.skinForegroundColour;
         self.textPlayerTwoName.textColor =  self.skinSelectedScore;
     }
-    
-    
-    
-    
+
 }
 
 
@@ -1577,8 +1563,7 @@ issue with startup now controlled by onload block condition
         if (self.isShotStopWatch) {
             self.labelStopwatch.hidden = false;
         }
-  //      self.viewBreak.hidden = false;
-        //self.activeBreak.hidden = true;
+
         [self.activeBreak clearBreak:self.viewBreak];
         
         self.imagePottedBall.image = nil;
@@ -1590,7 +1575,7 @@ issue with startup now controlled by onload block condition
 }
 
 
-/* last modified 20161130 */
+/* last modified 20170125 */
 -(void)ballPotted:(ball*)pottedBall :(indicator*) indicatorBall {
     
     bool freeBall=false;
@@ -1629,12 +1614,12 @@ issue with startup now controlled by onload block condition
         [self closeBreak];
 
         if ((self.shotFoulId==foulPotAndInOff && [pottedBall.colour isEqualToString:@"RED"]) || self.shotFoulId==foulWrongRedPot) {
-            //if (self.activeColour==pottedBall.pottedPoints) {
-                [self.buttonRed decreaseQty];
-                if (self.buttonRed.quantity == 0) {
-                    activeColour ++;
-                }
-            //}
+            
+            [self.buttonRed decreaseQty];
+            if (self.buttonRed.quantity == 0) {
+                activeColour ++;
+            }
+            
         }
         
        
@@ -1666,7 +1651,7 @@ issue with startup now controlled by onload block condition
             self.currentPlayer.text = [NSString stringWithFormat:@"%d",liveTotal];
         }
         
- 
+        [self clearIndicators :hide];
         
         
 
@@ -2174,6 +2159,9 @@ issue with startup now controlled by onload block condition
 
 /* created 20150928 */
 /* last modified 20151029 */
+
+// need to use same file as the SSM
+
 -(NSString*) composeResultsFile :(NSMutableArray*) frameDataSet :(NSString*) playerName1 :(NSString*) playerName2 {
     
     NSString *fileData = @"EntryID,BreakEndDT,Frame,Player,shotType,shotDetail1,shotDetail2,BallColor,Points,PotDT,pocketID,duration";
@@ -2417,13 +2405,6 @@ issue with startup now controlled by onload block condition
     
         [snookerScorerMailComposer setMessageBody:body isHTML:YES];
 
-        /* attach files */
-       /* for (int frameIndex = 0; frameIndex < [self.currentFrameId intValue] && frameIndex <= self.noOfGraphsInEmail; frameIndex++) {
-            NSData *data = UIImagePNGRepresentation([self printGraph:[NSNumber numberWithInt:frameIndex]]);
-            [snookerScorerMailComposer addAttachmentData:data
-                                            mimeType:@"image/png"
-                                            fileName:[NSString stringWithFormat:@"frame%d.png",frameIndex]];
-        } */
 
         NSData *csvFile = [NSData dataWithContentsOfFile:filePathCSV];
         [snookerScorerMailComposer addAttachmentData:csvFile
@@ -2513,12 +2494,6 @@ issue with startup now controlled by onload block condition
     
     _frameVisitCounter=0;
     self.labelVisitCounter.text = [NSString stringWithFormat:@"Visits %d",_frameVisitCounter];
-
-    // Reload the player break details
-    //self.textScorePlayer1.hiBreakHistory = [self.db playerHiBreakInPreviousMatches:self.textScorePlayer1.playerNumber];
-    //self.textScorePlayer2.hiBreakHistory = [self.db playerHiBreakInPreviousMatches:self.textScorePlayer2.playerNumber];
-    
-    // new
     self.textScorePlayer1 = [self setPlayerData:self.textScorePlayer1];
     self.textScorePlayer2 = [self setPlayerData:self.textScorePlayer2];
     
@@ -2554,7 +2529,7 @@ issue with startup now controlled by onload block condition
 
 
 
-/* modified 20151013 */
+/* modified 20170125 */
 -(NSString*)composePlayerStatsForFrame :(NSNumber*) playerId :(NSNumber*)frameId  {
 
     NSMutableArray *frame = [self getData:self.activeMatchData :frameId];
@@ -2566,31 +2541,11 @@ issue with startup now controlled by onload block condition
     NSString *PottedPoints = [NSString stringWithFormat:@"</br>Potted Points: %d ",[common getScoreByShotId:frame :playerId :[NSNumber numberWithInt:Potted]]];
     
     
-    NSString *hiBreakBallsPlayer;
-    NSString *hiBreakBallsStringFormat;
-    
-        hiBreakBallsPlayer = @"</br>";
-        hiBreakBallsStringFormat = @"%@%@%@%@</br>%@";
-
- 
-    for (ballShot *ballObj in [common getHiBreakBalls:self.activeMatchData :playerId :frameId]) {
-        /* added check to make sure only pots are shown */
-        if (ballObj.shotid == [NSNumber numberWithInt:Potted]) {
-            UIImage *emailImage = [UIImage imageNamed:[self getSmallImage:ballObj.colour]];
-
-            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(emailImage)];
-            NSString *base64String = [imageData base64EncodedStringWithOptions:0 ];
-            NSString *ballImageData = [NSString stringWithFormat:@"<img src='data:image/png;base64,%@'>",base64String];
-
-                hiBreakBallsPlayer = [NSString stringWithFormat:@"%@%@&nbsp",hiBreakBallsPlayer, ballImageData];
-
-        }
-    }
-    NSString *ballsPotted = [NSString stringWithFormat:@"Total Pots: %d</br>", [common getAmtOfBallsPotted:self.activeMatchData :playerId :frameId]];
+       NSString *ballsPotted = [NSString stringWithFormat:@"Total Pots: %d</br>", [common getAmtOfBallsPotted:self.activeMatchData :playerId :frameId]];
     
     NSString *dataPlayer;
 
-        dataPlayer = [NSString stringWithFormat:hiBreakBallsStringFormat,ballsPotted, PottedPoints, bonusPoints, hiBreakPlayer, hiBreakBallsPlayer];
+        dataPlayer = [NSString stringWithFormat:ballsPotted, PottedPoints, bonusPoints, hiBreakPlayer];
 
     return dataPlayer;
 }
@@ -4008,7 +3963,7 @@ issue with startup now controlled by onload block condition
         }
     }
     self.buttonGreen.imageNameLarge = @"green_03";
-    self.buttonGreen.imageNameSmall = @"green_03_green";
+    self.buttonGreen.imageNameSmall = @"green_03_small";
     
     self.buttonBrown.colour = @"BROWN";
     self.buttonBrown.ballColour=[UIColor colorWithRed:120.0f/255.0f green:64.0f/255.0f blue:0.0f/255.0f alpha:1.0];

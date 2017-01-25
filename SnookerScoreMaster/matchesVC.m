@@ -52,8 +52,6 @@
     
     [self.tableView reloadData];
     
-    //UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    //[self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
     self.exportButton.tintColor = [UIColor whiteColor];
     [self.exportButton setTitle:@"Set Export Mode" forState:UIControlStateNormal];
     [self.exportButton setBackgroundColor:[UIColor darkGrayColor]];
@@ -403,9 +401,6 @@
 }
 
 
-
-
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     //Here the dataSource array is of dictionary objects
     match *m = [self.matches objectAtIndex:indexPath.row];
@@ -492,10 +487,7 @@
         
         
         [self.tableView setEditing:sender.selected animated:true];
-        
-        
-       // UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-       // [self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
+
         [self.exportButton setTitle:@"Export Selected" forState:UIControlStateNormal];
         [self.exportButton setBackgroundColor:[UIColor darkGrayColor]];
         self.exportButton.tintColor = [UIColor lightGrayColor];
@@ -504,9 +496,7 @@
         self.selectionStyleHighlight=1;
         
     } else {
-        
-        
-        
+
         NSArray *rowsSelectedForExport = [self.tableView indexPathsForSelectedRows];
         BOOL selectedRows = rowsSelectedForExport.count > 0;
         
@@ -571,9 +561,8 @@
            
         }
         [self setEditing:sender.selected animated:true];
-       // UIImage *changecolourimage = [[UIImage imageNamed:@"export2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        //[self.exportButton setImage:changecolourimage forState:UIControlStateNormal];
-          [self.exportButton setTitle:@"Set Export Mode" forState:UIControlStateNormal];
+
+        [self.exportButton setTitle:@"Set Export Mode" forState:UIControlStateNormal];
         self.exportButton.tintColor = [UIColor grayColor];
         self.cancelExportButton.hidden=true;
         self.selectionStyleHighlight=0;

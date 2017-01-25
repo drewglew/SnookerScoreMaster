@@ -50,22 +50,12 @@
 		3A6172E61BC96478004B9198 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6172E51BC96478004B9198 /* libsqlite3.tbd */; };
 		3A6172E81BC965AD004B9198 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6172E71BC965AD004B9198 /* main.m */; };
 		3A61EEC11C3EDB0700BEF957 /* playerDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A61EEC01C3EDB0700BEF957 /* playerDetailVC.m */; };
-		3A61EEC31C3EE40700BEF957 /* Snooker_balls_triangled.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A61EEC21C3EE40700BEF957 /* Snooker_balls_triangled.png */; };
 		3A6311051C5C196E007EC892 /* AvatarV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6311041C5C196E007EC892 /* AvatarV.m */; };
 		3A7379441DF372D400E5D556 /* IntroPVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7379431DF372D400E5D556 /* IntroPVC.m */; };
 		3A7379471DF3F8BB00E5D556 /* helpPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7379461DF3F8BB00E5D556 /* helpPageVC.m */; };
 		3A7ADE0F1C4A23D30014B847 /* matchStatisticsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7ADE0E1C4A23D30014B847 /* matchStatisticsVC.m */; };
 		3A7ADE121C4A316C0014B847 /* graphV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7ADE111C4A316C0014B847 /* graphV.m */; };
-		3A7D12131D37EA2B006EB2CE /* Aileron-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D79721D37E35800307714 /* Aileron-Black.otf */; };
-		3A7D12141D37EA2B006EB2CE /* Aileron-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D79741D37E35900307714 /* Aileron-Bold.otf */; };
-		3A7D12151D37EA2B006EB2CE /* Aileron-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D79761D37E35900307714 /* Aileron-Heavy.otf */; };
-		3A7D12161D37EA2B006EB2CE /* Aileron-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D79791D37E35900307714 /* Aileron-Light.otf */; };
-		3A7D12171D37EA2B006EB2CE /* Aileron-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D797B1D37E35900307714 /* Aileron-Regular.otf */; };
-		3A7D12181D37EA2B006EB2CE /* Aileron-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D797C1D37E35900307714 /* Aileron-SemiBold.otf */; };
-		3A7D12191D37EA2B006EB2CE /* Aileron-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D797E1D37E35900307714 /* Aileron-Thin.otf */; };
-		3A7D121A1D37EA2B006EB2CE /* Aileron-UltraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D79801D37E35900307714 /* Aileron-UltraLight.otf */; };
 		3A82B6B51C6930AD00C94C85 /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A82B6B41C6930AD00C94C85 /* common.m */; };
-		3A9D796E1D36DCAE00307714 /* Imprima-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D796C1D36DCAE00307714 /* Imprima-Regular.ttf */; };
 		3A9EB7821D3299300055A1CE /* HelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EB7811D3299300055A1CE /* HelpVC.m */; };
 		3AAFA8D51E2A7DBC00458493 /* playerListingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFA8D41E2A7DBC00458493 /* playerListingVC.m */; };
 		3AAFA8D81E2A7E2B00458493 /* playerListingTV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFA8D71E2A7E2B00458493 /* playerListingTV.m */; };
@@ -187,7 +177,6 @@
 		3A6172E71BC965AD004B9198 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		3A61EEBF1C3EDB0700BEF957 /* playerDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = playerDetailVC.h; sourceTree = "<group>"; };
 		3A61EEC01C3EDB0700BEF957 /* playerDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = playerDetailVC.m; sourceTree = "<group>"; };
-		3A61EEC21C3EE40700BEF957 /* Snooker_balls_triangled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Snooker_balls_triangled.png; sourceTree = "<group>"; };
 		3A6311031C5C196E007EC892 /* AvatarV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarV.h; sourceTree = "<group>"; };
 		3A6311041C5C196E007EC892 /* AvatarV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarV.m; sourceTree = "<group>"; };
 		3A7379421DF372D400E5D556 /* IntroPVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroPVC.h; sourceTree = "<group>"; };
@@ -200,29 +189,6 @@
 		3A7ADE111C4A316C0014B847 /* graphV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graphV.m; sourceTree = "<group>"; };
 		3A82B6B31C6930AD00C94C85 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		3A82B6B41C6930AD00C94C85 /* common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = common.m; sourceTree = "<group>"; };
-		3A9D79651D359BEA00307714 /* Tahoma Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tahoma Bold.ttf"; sourceTree = "<group>"; };
-		3A9D79661D359BEA00307714 /* Tahoma.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tahoma.ttf; sourceTree = "<group>"; };
-		3A9D79671D36C6E800307714 /* MicroFLF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MicroFLF.ttf; sourceTree = "<group>"; };
-		3A9D79681D36C6E800307714 /* MicroFLF-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MicroFLF-Bold.ttf"; sourceTree = "<group>"; };
-		3A9D79691D36C6E800307714 /* MicroFLF-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MicroFLF-Italic.ttf"; sourceTree = "<group>"; };
-		3A9D796A1D36C6E800307714 /* MicroFLF-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MicroFLF-BoldItalic.ttf"; sourceTree = "<group>"; };
-		3A9D796C1D36DCAE00307714 /* Imprima-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Imprima-Regular.ttf"; path = "imprima/Imprima-Regular.ttf"; sourceTree = "<group>"; };
-		3A9D79721D37E35800307714 /* Aileron-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Black.otf"; sourceTree = "<group>"; };
-		3A9D79731D37E35900307714 /* Aileron-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-BlackItalic.otf"; sourceTree = "<group>"; };
-		3A9D79741D37E35900307714 /* Aileron-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Bold.otf"; sourceTree = "<group>"; };
-		3A9D79751D37E35900307714 /* Aileron-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-BoldItalic.otf"; sourceTree = "<group>"; };
-		3A9D79761D37E35900307714 /* Aileron-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Heavy.otf"; sourceTree = "<group>"; };
-		3A9D79771D37E35900307714 /* Aileron-HeavyItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-HeavyItalic.otf"; sourceTree = "<group>"; };
-		3A9D79781D37E35900307714 /* Aileron-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Italic.otf"; sourceTree = "<group>"; };
-		3A9D79791D37E35900307714 /* Aileron-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Light.otf"; sourceTree = "<group>"; };
-		3A9D797A1D37E35900307714 /* Aileron-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-LightItalic.otf"; sourceTree = "<group>"; };
-		3A9D797B1D37E35900307714 /* Aileron-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Regular.otf"; sourceTree = "<group>"; };
-		3A9D797C1D37E35900307714 /* Aileron-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-SemiBold.otf"; sourceTree = "<group>"; };
-		3A9D797D1D37E35900307714 /* Aileron-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-SemiBoldItalic.otf"; sourceTree = "<group>"; };
-		3A9D797E1D37E35900307714 /* Aileron-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-Thin.otf"; sourceTree = "<group>"; };
-		3A9D797F1D37E35900307714 /* Aileron-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-ThinItalic.otf"; sourceTree = "<group>"; };
-		3A9D79801D37E35900307714 /* Aileron-UltraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-UltraLight.otf"; sourceTree = "<group>"; };
-		3A9D79811D37E35900307714 /* Aileron-UltraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Aileron-UltraLightItalic.otf"; sourceTree = "<group>"; };
 		3A9EB7801D3299300055A1CE /* HelpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpVC.h; sourceTree = "<group>"; };
 		3A9EB7811D3299300055A1CE /* HelpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpVC.m; sourceTree = "<group>"; };
 		3AAFA8D31E2A7DBC00458493 /* playerListingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = playerListingVC.h; sourceTree = "<group>"; };
@@ -359,7 +325,6 @@
 				3A5997E71D328A74005A11DF /* cup_bronze.png */,
 				3A5997E81D328A74005A11DF /* cup_gold.png */,
 				3A5997E91D328A74005A11DF /* cup_silver.png */,
-				3A61EEC21C3EE40700BEF957 /* Snooker_balls_triangled.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -477,36 +442,6 @@
 			name = UIPageViewController;
 			sourceTree = "<group>";
 		};
-		3A9D79641D359BDD00307714 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				3A9D79721D37E35800307714 /* Aileron-Black.otf */,
-				3A9D79731D37E35900307714 /* Aileron-BlackItalic.otf */,
-				3A9D79741D37E35900307714 /* Aileron-Bold.otf */,
-				3A9D79751D37E35900307714 /* Aileron-BoldItalic.otf */,
-				3A9D79761D37E35900307714 /* Aileron-Heavy.otf */,
-				3A9D79771D37E35900307714 /* Aileron-HeavyItalic.otf */,
-				3A9D79781D37E35900307714 /* Aileron-Italic.otf */,
-				3A9D79791D37E35900307714 /* Aileron-Light.otf */,
-				3A9D797A1D37E35900307714 /* Aileron-LightItalic.otf */,
-				3A9D797B1D37E35900307714 /* Aileron-Regular.otf */,
-				3A9D797C1D37E35900307714 /* Aileron-SemiBold.otf */,
-				3A9D797D1D37E35900307714 /* Aileron-SemiBoldItalic.otf */,
-				3A9D797E1D37E35900307714 /* Aileron-Thin.otf */,
-				3A9D797F1D37E35900307714 /* Aileron-ThinItalic.otf */,
-				3A9D79801D37E35900307714 /* Aileron-UltraLight.otf */,
-				3A9D79811D37E35900307714 /* Aileron-UltraLightItalic.otf */,
-				3A9D79671D36C6E800307714 /* MicroFLF.ttf */,
-				3A9D796C1D36DCAE00307714 /* Imprima-Regular.ttf */,
-				3A9D79681D36C6E800307714 /* MicroFLF-Bold.ttf */,
-				3A9D79691D36C6E800307714 /* MicroFLF-Italic.ttf */,
-				3A9D796A1D36C6E800307714 /* MicroFLF-BoldItalic.ttf */,
-				3A9D79651D359BEA00307714 /* Tahoma Bold.ttf */,
-				3A9D79661D359BEA00307714 /* Tahoma.ttf */,
-			);
-			name = Fonts;
-			sourceTree = "<group>";
-		};
 		3AAFA8DE1E2B84E700458493 /* UILabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,7 +480,6 @@
 				3AB429041BC95E83002FE58E /* Main.storyboard */,
 				3AAFA8DE1E2B84E700458493 /* UILabel */,
 				3A7379411DF372AA00E5D556 /* UIPageViewController */,
-				3A9D79641D359BDD00307714 /* Fonts */,
 				3A0582101C457ADF00E37873 /* UITableView */,
 				3A037B671C418EAB00038BC0 /* UITableViewCell */,
 				3A2B6AC01C40FB65003F8FC4 /* UITableViewControllers */,
@@ -686,14 +620,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A7D12131D37EA2B006EB2CE /* Aileron-Black.otf in Resources */,
-				3A7D12141D37EA2B006EB2CE /* Aileron-Bold.otf in Resources */,
-				3A7D12151D37EA2B006EB2CE /* Aileron-Heavy.otf in Resources */,
-				3A7D12161D37EA2B006EB2CE /* Aileron-Light.otf in Resources */,
-				3A7D12171D37EA2B006EB2CE /* Aileron-Regular.otf in Resources */,
-				3A7D12181D37EA2B006EB2CE /* Aileron-SemiBold.otf in Resources */,
-				3A7D12191D37EA2B006EB2CE /* Aileron-Thin.otf in Resources */,
-				3A7D121A1D37EA2B006EB2CE /* Aileron-UltraLight.otf in Resources */,
 				3A6101971D3C309B001F6BF6 /* MyParticle.sks in Resources */,
 				3AAFF57B1D3824D70048ACC7 /* ballCountV.xib in Resources */,
 				3A5997EB1D328A74005A11DF /* cup_gold.png in Resources */,
@@ -705,11 +631,9 @@
 				3AAFA8DA1E2AC15500458493 /* official-rules-of-the-game.pdf in Resources */,
 				3A61019A1D3D3A81001F6BF6 /* MyParticle2.sks in Resources */,
 				3A61019E1D3D6294001F6BF6 /* bokeh.png in Resources */,
-				3A9D796E1D36DCAE00307714 /* Imprima-Regular.ttf in Resources */,
 				3A35C23F1BD6067800B89BD2 /* Settings.bundle in Resources */,
 				3A2683D01D3958A8003307BE /* selected.png in Resources */,
 				3AB429061BC95E83002FE58E /* Main.storyboard in Resources */,
-				3A61EEC31C3EE40700BEF957 /* Snooker_balls_triangled.png in Resources */,
 				3A5997EA1D328A74005A11DF /* cup_bronze.png in Resources */,
 				96D22D8F1A1FD58100E0ADE3 /* Images.xcassets in Resources */,
 				3A61019D1D3D6294001F6BF6 /* MyParticle3.sks in Resources */,
