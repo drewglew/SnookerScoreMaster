@@ -9,17 +9,14 @@
 /* Begin PBXBuildFile section */
 		3A037B6A1C418ED900038BC0 /* playerCellTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A037B691C418ED900038BC0 /* playerCellTVC.m */; };
 		3A0582091C455FA500E37873 /* HeadToHeadCellTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0582081C455FA500E37873 /* HeadToHeadCellTVC.m */; };
-		3A05820C1C4566B400E37873 /* HeadToHeadTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A05820B1C4566B400E37873 /* HeadToHeadTVC.m */; };
 		3A05820F1C457AD800E37873 /* HeadToHeadTV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A05820E1C457AD800E37873 /* HeadToHeadTV.m */; };
 		3A065F9E1DD2486B00C35BDC /* frameStatisticCellTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A065F9D1DD2486B00C35BDC /* frameStatisticCellTVC.m */; };
 		3A066B2A1C484221006C7033 /* matchCellTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A066B291C484221006C7033 /* matchCellTVC.m */; };
-		3A066B2D1C48426C006C7033 /* matchListingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A066B2C1C48426C006C7033 /* matchListingTVC.m */; };
 		3A066B301C48473F006C7033 /* match.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A066B2F1C48473F006C7033 /* match.m */; };
 		3A13858E1C580C1600ECF0EF /* frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A13858D1C580C1600ECF0EF /* frame.m */; };
 		3A1385911C580C6600ECF0EF /* snookerbreak.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1385901C580C6600ECF0EF /* snookerbreak.m */; };
 		3A1EC1911D3E9AAE00B2348E /* hibreak.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1EC1901D3E9AAE00B2348E /* hibreak.m */; };
 		3A2683D01D3958A8003307BE /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A2683CF1D3958A8003307BE /* selected.png */; };
-		3A2B6AC31C40FB8A003F8FC4 /* playerListingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B6AC21C40FB8A003F8FC4 /* playerListingTVC.m */; };
 		3A2DB0451D27B919002AC19A /* PlayerStatisticsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DB0441D27B919002AC19A /* PlayerStatisticsVC.m */; };
 		3A2DB0481D27BA46002AC19A /* singlePlayerStatsV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DB0471D27BA46002AC19A /* singlePlayerStatsV.m */; };
 		3A2DB04B1D27BAA0002AC19A /* PlayerStatisticsV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DB04A1D27BAA0002AC19A /* PlayerStatisticsV.m */; };
@@ -108,16 +105,12 @@
 		3A037B691C418ED900038BC0 /* playerCellTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = playerCellTVC.m; sourceTree = "<group>"; };
 		3A0582071C455FA500E37873 /* HeadToHeadCellTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadToHeadCellTVC.h; sourceTree = "<group>"; };
 		3A0582081C455FA500E37873 /* HeadToHeadCellTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadToHeadCellTVC.m; sourceTree = "<group>"; };
-		3A05820A1C4566B400E37873 /* HeadToHeadTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadToHeadTVC.h; sourceTree = "<group>"; };
-		3A05820B1C4566B400E37873 /* HeadToHeadTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadToHeadTVC.m; sourceTree = "<group>"; };
 		3A05820D1C457AD800E37873 /* HeadToHeadTV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadToHeadTV.h; sourceTree = "<group>"; };
 		3A05820E1C457AD800E37873 /* HeadToHeadTV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadToHeadTV.m; sourceTree = "<group>"; };
 		3A065F9C1DD2486B00C35BDC /* frameStatisticCellTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frameStatisticCellTVC.h; sourceTree = "<group>"; };
 		3A065F9D1DD2486B00C35BDC /* frameStatisticCellTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = frameStatisticCellTVC.m; sourceTree = "<group>"; };
 		3A066B281C484221006C7033 /* matchCellTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matchCellTVC.h; sourceTree = "<group>"; };
 		3A066B291C484221006C7033 /* matchCellTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = matchCellTVC.m; sourceTree = "<group>"; };
-		3A066B2B1C48426C006C7033 /* matchListingTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matchListingTVC.h; sourceTree = "<group>"; };
-		3A066B2C1C48426C006C7033 /* matchListingTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = matchListingTVC.m; sourceTree = "<group>"; };
 		3A066B2E1C48473F006C7033 /* match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = match.h; sourceTree = "<group>"; };
 		3A066B2F1C48473F006C7033 /* match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = match.m; sourceTree = "<group>"; };
 		3A13858C1C580C1600ECF0EF /* frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frame.h; sourceTree = "<group>"; };
@@ -127,8 +120,6 @@
 		3A1EC18F1D3E9AAE00B2348E /* hibreak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hibreak.h; sourceTree = "<group>"; };
 		3A1EC1901D3E9AAE00B2348E /* hibreak.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hibreak.m; sourceTree = "<group>"; };
 		3A2683CF1D3958A8003307BE /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
-		3A2B6AC11C40FB8A003F8FC4 /* playerListingTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = playerListingTVC.h; sourceTree = "<group>"; };
-		3A2B6AC21C40FB8A003F8FC4 /* playerListingTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = playerListingTVC.m; sourceTree = "<group>"; };
 		3A2DB0431D27B919002AC19A /* PlayerStatisticsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerStatisticsVC.h; sourceTree = "<group>"; };
 		3A2DB0441D27B919002AC19A /* PlayerStatisticsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerStatisticsVC.m; sourceTree = "<group>"; };
 		3A2DB0461D27BA46002AC19A /* singlePlayerStatsV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = singlePlayerStatsV.h; sourceTree = "<group>"; };
@@ -304,19 +295,6 @@
 			name = "New Group";
 			sourceTree = "<group>";
 		};
-		3A2B6AC01C40FB65003F8FC4 /* UITableViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				3A2B6AC11C40FB8A003F8FC4 /* playerListingTVC.h */,
-				3A2B6AC21C40FB8A003F8FC4 /* playerListingTVC.m */,
-				3A05820A1C4566B400E37873 /* HeadToHeadTVC.h */,
-				3A05820B1C4566B400E37873 /* HeadToHeadTVC.m */,
-				3A066B2B1C48426C006C7033 /* matchListingTVC.h */,
-				3A066B2C1C48426C006C7033 /* matchListingTVC.m */,
-			);
-			name = UITableViewControllers;
-			sourceTree = "<group>";
-		};
 		3A35C1B01BD5F8A700B89BD2 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,7 +460,6 @@
 				3A7379411DF372AA00E5D556 /* UIPageViewController */,
 				3A0582101C457ADF00E37873 /* UITableView */,
 				3A037B671C418EAB00038BC0 /* UITableViewCell */,
-				3A2B6AC01C40FB65003F8FC4 /* UITableViewControllers */,
 				3A35C2111BD5FAD300B89BD2 /* UITextFields */,
 				3A35C20A1BD5FA9800B89BD2 /* UIViews */,
 				3A35C2031BD5FA5A00B89BD2 /* UIViewControllers */,
@@ -707,7 +684,6 @@
 				3A61018C1D3C1EBE001F6BF6 /* celebrationSceneSKV.m in Sources */,
 				3A61017D1D3B5B58001F6BF6 /* matchesVC.m in Sources */,
 				3A9EB7821D3299300055A1CE /* HelpVC.m in Sources */,
-				3A066B2D1C48426C006C7033 /* matchListingTVC.m in Sources */,
 				3A35C1FF1BD5FA0200B89BD2 /* player.m in Sources */,
 				3A2DB0481D27BA46002AC19A /* singlePlayerStatsV.m in Sources */,
 				3AEF7ED01D3B4BFC001609A7 /* matchesTV.m in Sources */,
@@ -733,7 +709,6 @@
 				3A61EEC11C3EDB0700BEF957 /* playerDetailVC.m in Sources */,
 				3A7379441DF372D400E5D556 /* IntroPVC.m in Sources */,
 				3A35C20F1BD5FAB500B89BD2 /* DraggableView.m in Sources */,
-				3A05820C1C4566B400E37873 /* HeadToHeadTVC.m in Sources */,
 				3AAFA8D51E2A7DBC00458493 /* playerListingVC.m in Sources */,
 				3A6311051C5C196E007EC892 /* AvatarV.m in Sources */,
 				3A13858E1C580C1600ECF0EF /* frame.m in Sources */,
@@ -750,7 +725,6 @@
 				3A065F9E1DD2486B00C35BDC /* frameStatisticCellTVC.m in Sources */,
 				3A7ADE0F1C4A23D30014B847 /* matchStatisticsVC.m in Sources */,
 				3A35C2021BD5FA2B00B89BD2 /* dbHelper.m in Sources */,
-				3A2B6AC31C40FB8A003F8FC4 /* playerListingTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -473,7 +473,7 @@
 
 
 /* created      20160717
- last modified  20160717
+ last modified  20170125
  */
 - (IBAction)exportPressed:(UIButton*)sender {
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
@@ -506,7 +506,7 @@
             if (!ok) return;
             
             
-            NSString *body = [NSString stringWithFormat:@"%lu Matches for export from Snooker Score Master Application",(unsigned long)rowsSelectedForExport.count];
+            NSString *body = [NSString stringWithFormat:@"%lu Match(es) for export from Snooker Score Master Application",(unsigned long)rowsSelectedForExport.count];
             
             MFMailComposeViewController* snookerScorerMailComposer = [MFMailComposeViewController new];
             snookerScorerMailComposer.mailComposeDelegate = self;
@@ -514,9 +514,19 @@
             
             //[snookerScorerMailComposer setToRecipients:[NSArray arrayWithObjects:self.p1.emailAddress, self.p2.emailAddress, nil]];
             
-            [snookerScorerMailComposer setMessageBody:body isHTML:YES];
 
-           
+            // Convert string to date object
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            
+            NSDateFormatter *niceFormatter = [[NSDateFormatter alloc] init];
+            [niceFormatter setDateFormat:@"E, d MMM yyyy HH:mm"];
+            
+            //NSString *exportDate = [dateFormatter stringFromDate:date];
+            
+
+            NSString *additionalBody=@"";
+            
             int attachmentIndex = 0;
             for (NSIndexPath *selectionIndex in rowsSelectedForExport)
             {
@@ -525,6 +535,11 @@
                 
                 match *m = [self.matches objectAtIndex:selectionIndex.row];
             
+                NSDate *matchStart = [dateFormat dateFromString:m.matchDate];
+                NSString *matchStartNice = [niceFormatter stringFromDate:matchStart];
+                
+                additionalBody = [NSString stringWithFormat:@"%@</br>Match day: %@</br>Attachment Refrence: MatchData%d.ssm</br>%@ : %@ v %@ : %@</br>",additionalBody,matchStartNice,attachmentIndex,m.player1Name, m.Player1FrameWins, m.player2Name, m.Player2FrameWins];
+                
                 player *p1 = [self.db getPlayerByPlayerNumber:m.Player1Number];
                 player *p2 = [self.db getPlayerByPlayerNumber:m.Player2Number];
                 
@@ -551,10 +566,14 @@
                                                 mimeType:@"text/plain"
                                                     fileName:[NSString stringWithFormat:@"MatchData%d.ssm",attachmentIndex]];
             
-                [self presentViewController:snookerScorerMailComposer animated:YES completion:nil];
-            
-                NSLog(@"%ld",(long)selectionIndex.row);
+                
+                
+               // [self presentViewController:snookerScorerMailComposer animated:YES completion:nil];
+
+
             }
+            
+            [snookerScorerMailComposer setMessageBody:[NSString stringWithFormat:@"%@</br>%@",body,additionalBody] isHTML:YES];
             
             [self presentViewController:snookerScorerMailComposer animated:YES completion:nil];
             
