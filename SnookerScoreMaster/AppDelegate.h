@@ -32,7 +32,7 @@
 @property (assign) bool isHollow;
 @property (assign) bool isMenuShot;
 @property (assign) bool isShotStopWatch;
-
+@property (nonatomic) NSString *refereeVoice;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

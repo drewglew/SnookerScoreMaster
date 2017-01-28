@@ -71,6 +71,7 @@
 		3AD0BAA41E37CF0200BC6C3B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD0BAA31E37CF0200BC6C3B /* AdSupport.framework */; };
 		3ADBD2001C497758001876F2 /* embededMatchStatisticsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADBD1FF1C497758001876F2 /* embededMatchStatisticsVC.m */; };
 		3AEF7ED01D3B4BFC001609A7 /* matchesTV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF7ECF1D3B4BFC001609A7 /* matchesTV.m */; };
+		3AF777CA1E3BC83600D3765F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF777C91E3BC83600D3765F /* AVFoundation.framework */; };
 		7CF073F704F111CD84DC73A6 /* libPods-SnookerScoreMaster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82954035CE9FA60CF351889B /* libPods-SnookerScoreMaster.a */; };
 		96D22D871A1FD58100E0ADE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D22D861A1FD58100E0ADE3 /* AppDelegate.m */; };
 		96D22D8F1A1FD58100E0ADE3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D22D8E1A1FD58100E0ADE3 /* Images.xcassets */; };
@@ -210,6 +211,7 @@
 		3ADBD1FF1C497758001876F2 /* embededMatchStatisticsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = embededMatchStatisticsVC.m; path = ../embededMatchStatisticsVC.m; sourceTree = "<group>"; };
 		3AEF7ECE1D3B4BFC001609A7 /* matchesTV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matchesTV.h; sourceTree = "<group>"; };
 		3AEF7ECF1D3B4BFC001609A7 /* matchesTV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = matchesTV.m; sourceTree = "<group>"; };
+		3AF777C91E3BC83600D3765F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		82954035CE9FA60CF351889B /* libPods-SnookerScoreMaster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnookerScoreMaster.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D22D7E1A1FD58100E0ADE3 /* SnookerScoreMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnookerScoreMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D22D821A1FD58100E0ADE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF777CA1E3BC83600D3765F /* AVFoundation.framework in Frameworks */,
 				3AD0BAA41E37CF0200BC6C3B /* AdSupport.framework in Frameworks */,
 				3A6101861D3C1D33001F6BF6 /* SpriteKit.framework in Frameworks */,
 				3A6172E61BC96478004B9198 /* libsqlite3.tbd in Frameworks */,
@@ -404,6 +407,7 @@
 		3A6101831D3C1B19001F6BF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AF777C91E3BC83600D3765F /* AVFoundation.framework */,
 				3AD0BAA31E37CF0200BC6C3B /* AdSupport.framework */,
 				3A6101841D3C1B19001F6BF6 /* SpriteKit.framework */,
 				82954035CE9FA60CF351889B /* libPods-SnookerScoreMaster.a */,

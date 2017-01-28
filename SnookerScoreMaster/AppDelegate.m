@@ -71,13 +71,14 @@
         [defaults setValue:@"147" forKey:@"celebrateBreakLimit"];
         [defaults setBool:NO forKey:@"isShotStopWatch"];
         [defaults setBool:NO forKey:@"isMenuShot"];
+        [defaults setValue:@"0" forKey:@"referee_voice"];
     }
     self.theme = [[defaults valueForKey:@"theme"] intValue];
     self.isHollow = [[defaults valueForKey:@"isHollow"] boolValue];
     self.isShotStopWatch = [[defaults valueForKey:@"isShotStopWatch"] boolValue];
     self.breakThreshholdForCelebration = [[defaults valueForKey:@"celebrateBreakLimit"] intValue];
     self.isMenuShot = [[defaults valueForKey:@"isMenuShot"] boolValue];
-
+    self.refereeVoice = [defaults stringForKey:@"referee_voice"];
     [UIApplication sharedApplication].idleTimerDisabled = true;
 
 }

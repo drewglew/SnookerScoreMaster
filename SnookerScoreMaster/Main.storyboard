@@ -986,6 +986,14 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoS-TX-xRq">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TbX-Sn-zmp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVi-CE-5nn" customClass="SKView">
                                 <rect key="frame" x="1" y="44" width="373" height="623"/>
                                 <subviews>
@@ -1037,6 +1045,7 @@
                         <color key="backgroundColor" red="0.1137254902" green="0.20784313730000001" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="BVk-D7-AyH" secondAttribute="bottom" constant="75" id="0R4-lL-Pd6"/>
+                            <constraint firstItem="xoS-TX-xRq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0Uu-f1-Fa6"/>
                             <constraint firstItem="Iid-KG-oAz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="0Z6-G8-Udf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="q0Q-j7-8Fb" secondAttribute="trailing" constant="-103" id="1Dj-ok-6RQ"/>
                             <constraint firstItem="q0Q-j7-8Fb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="21g-Iv-Ibl"/>
@@ -1052,6 +1061,7 @@
                             <constraint firstItem="0Gp-S9-NhC" firstAttribute="top" secondItem="HDt-8a-IaH" secondAttribute="bottom" constant="-75" id="GFS-3s-V6z"/>
                             <constraint firstItem="0Gp-S9-NhC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K8v-Od-Q1t"/>
                             <constraint firstItem="7pL-yv-TMP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LaW-RB-JGS"/>
+                            <constraint firstItem="xoS-TX-xRq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="NhP-uN-Eis"/>
                             <constraint firstItem="zbo-VC-TiV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-10" id="O5Y-VE-LYZ"/>
                             <constraint firstItem="Snw-xa-VfU" firstAttribute="leading" secondItem="8Km-uF-Tfd" secondAttribute="trailing" constant="5" id="OJF-sN-D9c"/>
                             <constraint firstItem="IVi-CE-5nn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-15" id="Paq-D6-GvP"/>
@@ -1064,6 +1074,7 @@
                             <constraint firstItem="0Gp-S9-NhC" firstAttribute="height" secondItem="BVk-D7-AyH" secondAttribute="height" id="WuD-HH-pYZ"/>
                             <constraint firstItem="7jH-dA-Uqi" firstAttribute="width" secondItem="8Km-uF-Tfd" secondAttribute="width" id="XzG-YU-EB1"/>
                             <constraint firstItem="MsL-R4-o6o" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="YRD-Dp-83v"/>
+                            <constraint firstAttribute="trailing" secondItem="xoS-TX-xRq" secondAttribute="trailing" id="YcG-cR-jIw"/>
                             <constraint firstItem="7jH-dA-Uqi" firstAttribute="leading" secondItem="MsL-R4-o6o" secondAttribute="trailing" constant="5" id="ZAr-Pj-N5o"/>
                             <constraint firstItem="8Km-uF-Tfd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="aba-Jm-G4A"/>
                             <constraint firstItem="0Gp-S9-NhC" firstAttribute="top" secondItem="zbo-VC-TiV" secondAttribute="bottom" constant="10" id="bac-pq-ApZ"/>
@@ -1079,6 +1090,7 @@
                             <constraint firstItem="1ou-rw-GfI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="ksD-Ip-CtH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0Wa-Cf-oUb" secondAttribute="bottom" id="lCi-CQ-igR"/>
                             <constraint firstItem="q0Q-j7-8Fb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lOZ-rG-DDB"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xoS-TX-xRq" secondAttribute="bottom" id="nuS-2z-9RM"/>
                             <constraint firstAttribute="trailing" secondItem="BVk-D7-AyH" secondAttribute="trailing" constant="10" id="p0G-e1-QwC"/>
                             <constraint firstItem="1ou-rw-GfI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pCg-Ht-5OH"/>
                             <constraint firstItem="MsL-R4-o6o" firstAttribute="leading" secondItem="ibx-9o-5vh" secondAttribute="trailing" constant="5" id="peQ-3S-aJA"/>
@@ -1110,28 +1122,28 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="ufA-pd-X2T"/>
+                                <exclude reference="O5Y-VE-LYZ"/>
+                                <exclude reference="rNg-Y3-ptu"/>
                                 <exclude reference="gWw-xC-Hzh"/>
                                 <exclude reference="f1z-wk-mdZ"/>
                                 <exclude reference="YRD-Dp-83v"/>
-                                <exclude reference="O5Y-VE-LYZ"/>
-                                <exclude reference="rNg-Y3-ptu"/>
-                                <exclude reference="34H-Ws-oPB"/>
-                                <exclude reference="VeO-lC-b7X"/>
                                 <exclude reference="czY-rK-MDa"/>
                                 <exclude reference="0R4-lL-Pd6"/>
-                                <exclude reference="st8-pW-6UF"/>
-                                <exclude reference="S2m-Vj-yFM"/>
-                                <exclude reference="Vxe-2y-jTV"/>
                                 <exclude reference="GFS-3s-V6z"/>
                                 <exclude reference="K8v-Od-Q1t"/>
                                 <exclude reference="TSV-eO-lpM"/>
                                 <exclude reference="WuD-HH-pYZ"/>
                                 <exclude reference="bac-pq-ApZ"/>
                                 <exclude reference="jOe-rx-w4Z"/>
+                                <exclude reference="st8-pW-6UF"/>
                                 <exclude reference="0Z6-G8-Udf"/>
                                 <exclude reference="8EO-gS-VSj"/>
                                 <exclude reference="jCa-Wi-wGD"/>
                                 <exclude reference="xY7-rh-bMW"/>
+                                <exclude reference="S2m-Vj-yFM"/>
+                                <exclude reference="Vxe-2y-jTV"/>
+                                <exclude reference="34H-Ws-oPB"/>
+                                <exclude reference="VeO-lC-b7X"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -1159,28 +1171,28 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="ufA-pd-X2T"/>
+                                <include reference="O5Y-VE-LYZ"/>
+                                <include reference="rNg-Y3-ptu"/>
                                 <include reference="gWw-xC-Hzh"/>
                                 <include reference="f1z-wk-mdZ"/>
                                 <include reference="YRD-Dp-83v"/>
-                                <include reference="O5Y-VE-LYZ"/>
-                                <include reference="rNg-Y3-ptu"/>
-                                <include reference="34H-Ws-oPB"/>
-                                <include reference="VeO-lC-b7X"/>
                                 <include reference="czY-rK-MDa"/>
                                 <include reference="0R4-lL-Pd6"/>
-                                <include reference="st8-pW-6UF"/>
-                                <include reference="S2m-Vj-yFM"/>
-                                <include reference="Vxe-2y-jTV"/>
                                 <include reference="GFS-3s-V6z"/>
                                 <include reference="K8v-Od-Q1t"/>
                                 <include reference="TSV-eO-lpM"/>
                                 <include reference="WuD-HH-pYZ"/>
                                 <include reference="bac-pq-ApZ"/>
                                 <include reference="jOe-rx-w4Z"/>
+                                <include reference="st8-pW-6UF"/>
                                 <include reference="0Z6-G8-Udf"/>
                                 <include reference="8EO-gS-VSj"/>
                                 <include reference="jCa-Wi-wGD"/>
                                 <include reference="xY7-rh-bMW"/>
+                                <include reference="S2m-Vj-yFM"/>
+                                <include reference="Vxe-2y-jTV"/>
+                                <include reference="34H-Ws-oPB"/>
+                                <include reference="VeO-lC-b7X"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -1218,6 +1230,7 @@
                         <outlet property="buttonRed" destination="EZE-8n-Ejo" id="rbs-jh-V5V"/>
                         <outlet property="buttonSwapPlayer" destination="0Gp-S9-NhC" id="fb4-5g-dIB"/>
                         <outlet property="buttonYellow" destination="d5I-b0-aFU" id="4H8-kv-xWn"/>
+                        <outlet property="celebrationBgroundView" destination="xoS-TX-xRq" id="0J5-6s-oP1"/>
                         <outlet property="closeButtonCongratulations" destination="j86-IG-0yZ" id="Xq7-GE-dtn"/>
                         <outlet property="disabledView" destination="0ie-m5-kVx" id="Y7B-TQ-Vn6"/>
                         <outlet property="greenIndicator" destination="KPb-vB-xSH" id="CwS-LT-IGR"/>
@@ -2931,7 +2944,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="i47-Tx-fHO" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="a27-Fk-esy">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a27-Fk-esy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2979,7 +2992,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="PA3-m1-7HK"/>
                                 </constraints>
-                                <mutableString key="text">In the App Settings special options are available; For example changing the THEME colours, setting the threshold of when the congratulations message appears and adjusting the mechanism for logging a FOUL.  if the number of reds count is not the desired amount from the main scoreboard you can ADJUST this as well as the points a player may have.</mutableString>
+                                <string key="text">In the App Settings special options are available; For example changing the THEME colours, setting the threshold of when the congratulations message appears and adjusting the mechanism for logging a FOUL.  if the number of reds count is not the desired amount from the main scoreboard you can ADJUST this as well as the points a player may have.</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3205,10 +3218,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KuB-bb-Ug8" userLabel="Player2BreakInfo">
-                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="128"/>
+                                <rect key="frame" x="0.0" y="0.0" width="188" height="128"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaE-hd-EzU" userLabel="P2breakAmount">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="188" height="128"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="80"/>
                                         <color key="textColor" red="0.1137254902" green="0.20784313730000001" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -3233,7 +3246,7 @@
                                         </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJh-xv-8zZ" userLabel="P2BreakInfo">
-                                        <rect key="frame" x="10" y="-2" width="167.5" height="120"/>
+                                        <rect key="frame" x="10" y="-2" width="168" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="MWC-vw-IaG"/>
                                         </constraints>
@@ -3305,10 +3318,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXx-3f-nfF" userLabel="Player1View">
-                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="128"/>
+                                <rect key="frame" x="0.0" y="0.0" width="188" height="128"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1 Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BhP-vD-Bf8">
-                                        <rect key="frame" x="30" y="106" width="127.5" height="20"/>
+                                        <rect key="frame" x="30" y="106" width="128" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="JSR-2R-tzL"/>
                                         </constraints>
@@ -3346,13 +3359,13 @@
                                         </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="147" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zH-R5-80L">
-                                        <rect key="frame" x="2" y="2" width="183.5" height="36"/>
+                                        <rect key="frame" x="2" y="2" width="184" height="36"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="25"/>
                                         <color key="textColor" red="0.90196078430000004" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7J-5T-m4Y">
-                                        <rect key="frame" x="0.0" y="38" width="187.5" height="68"/>
+                                        <rect key="frame" x="0.0" y="38" width="188" height="68"/>
                                         <connections>
                                             <action selector="buttonMorePlayer1Pressed:" destination="O7v-XD-Fu3" eventType="touchUpInside" id="dTP-8w-jwo"/>
                                         </connections>
@@ -3799,10 +3812,10 @@
                                         </variation>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Fb-YW-EQU" userLabel="Player2Stats" customClass="singlePlayerStatsV">
-                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="462"/>
+                                        <rect key="frame" x="188" y="0.0" width="187" height="462"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Flw-L7-Thm">
-                                                <rect key="frame" x="10" y="5" width="167.5" height="120"/>
+                                                <rect key="frame" x="10" y="5" width="167" height="120"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="50" constant="20" id="0cB-Te-gNp"/>
@@ -3909,7 +3922,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="u9B-17-bfR" userLabel="avgBreak">
-                                                <rect key="frame" x="120" y="150" width="58.5" height="15"/>
+                                                <rect key="frame" x="120" y="150" width="58" height="15"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="eSK-HB-JXx"/>
@@ -3929,10 +3942,10 @@
                                                 </variation>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScR-b4-aZ3" userLabel="P2PottedBallCounters">
-                                                <rect key="frame" x="5" y="432" width="177.5" height="25"/>
+                                                <rect key="frame" x="5" y="432" width="177" height="25"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u4g-ss-mIW" customClass="ballSumIV">
-                                                        <rect key="frame" x="5.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="5" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="8AS-EZ-ivg"/>
@@ -3952,7 +3965,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yi1-hk-eX7" customClass="ballSumIV">
-                                                        <rect key="frame" x="30.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="30" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="9CX-lv-K5v"/>
@@ -3972,7 +3985,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="076-fc-y8c" customClass="ballSumIV">
-                                                        <rect key="frame" x="81.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="81" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="KK8-2m-UGD"/>
@@ -3992,7 +4005,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Asn-Ji-9Ur" customClass="ballSumIV">
-                                                        <rect key="frame" x="106.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="106" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="O7y-K6-Msq"/>
@@ -4012,7 +4025,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S2f-p5-ZEi" customClass="ballSumIV">
-                                                        <rect key="frame" x="131.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="131" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="4Gc-ZZ-n0z"/>
@@ -4032,7 +4045,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ecQ-Ke-fEK" customClass="ballSumIV">
-                                                        <rect key="frame" x="157.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="157" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="2pg-5n-F8Y"/>
@@ -4072,7 +4085,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adF-jh-boo" userLabel="redPottedCount">
-                                                        <rect key="frame" x="5.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="5" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="fnu-4J-ITx"/>
@@ -4118,7 +4131,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMS-BX-3wP" userLabel="brownPottedCount">
-                                                        <rect key="frame" x="81.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="81" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="PSZ-nX-D7e"/>
@@ -4141,7 +4154,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFk-n2-NWA" userLabel="bluePottedCount">
-                                                        <rect key="frame" x="106.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="106" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="TiV-tH-WQ6"/>
@@ -4164,7 +4177,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6RG-Ca-GJd" userLabel="pinkPottedCount">
-                                                        <rect key="frame" x="131.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="131" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="Fwz-dm-NVu"/>
@@ -4187,7 +4200,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B0R-Yh-oTD" userLabel="yellowPottedCount">
-                                                        <rect key="frame" x="30.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="30" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="QFq-pn-6bo"/>
@@ -4209,7 +4222,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c67-MJ-kew" userLabel="blackPottedCount">
-                                                        <rect key="frame" x="157.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="157" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="KvK-yU-chT"/>
@@ -4409,7 +4422,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qjE-MC-hB5" userLabel="sumpotsfouls">
-                                                <rect key="frame" x="120" y="190" width="58.5" height="15"/>
+                                                <rect key="frame" x="120" y="190" width="58" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="pyH-u1-Czq"/>
                                                 </constraints>
@@ -4428,7 +4441,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ud3-Zc-V4G" userLabel="hiBreak">
-                                                <rect key="frame" x="120" y="130" width="58.5" height="15"/>
+                                                <rect key="frame" x="120" y="130" width="58" height="15"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="0ln-4x-bBc"/>
@@ -4470,13 +4483,13 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No breaks yet!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XIg-5C-TC2">
-                                                <rect key="frame" x="110" y="220" width="72.5" height="197"/>
+                                                <rect key="frame" x="110" y="220" width="72" height="197"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="N5T-gx-Lk3" userLabel="ballavg">
-                                                <rect key="frame" x="120" y="170" width="58.5" height="15"/>
+                                                <rect key="frame" x="120" y="170" width="58" height="15"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="flt-f8-Zhn"/>
@@ -4660,7 +4673,7 @@
                                         </variation>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEE-rd-62O" userLabel="Player1Stats" customClass="singlePlayerStatsV">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="462"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="188" height="462"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highest Break:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0b6-A8-Frs">
                                                 <rect key="frame" x="5" y="130" width="100" height="15"/>
@@ -4709,7 +4722,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="S38-48-OvW" userLabel="hiBreak">
-                                                <rect key="frame" x="120" y="130" width="58.5" height="15"/>
+                                                <rect key="frame" x="120" y="130" width="59" height="15"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="Txn-zU-8hU"/>
@@ -4729,10 +4742,10 @@
                                                 </variation>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUF-37-e8e" userLabel="P1PottedBallCounters">
-                                                <rect key="frame" x="5" y="432" width="177.5" height="25"/>
+                                                <rect key="frame" x="5" y="432" width="178" height="25"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="464-U3-WrM" customClass="ballSumIV">
-                                                        <rect key="frame" x="5.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="5" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="j9c-pb-6SC"/>
@@ -4752,7 +4765,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="niY-JF-Je6" customClass="ballSumIV">
-                                                        <rect key="frame" x="30.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="31" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="5sE-pl-mgb"/>
@@ -4772,7 +4785,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jxW-P8-p1O" customClass="ballSumIV">
-                                                        <rect key="frame" x="81.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="82" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Hvn-9r-BDc"/>
@@ -4792,7 +4805,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sur-y8-fYK" customClass="ballSumIV">
-                                                        <rect key="frame" x="106.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="107" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="0Ov-bE-awF"/>
@@ -4812,7 +4825,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mrO-cL-IIL" customClass="ballSumIV">
-                                                        <rect key="frame" x="131.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="132" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="7vO-oR-xax"/>
@@ -4832,7 +4845,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Er-qG-ZaH" customClass="ballSumIV">
-                                                        <rect key="frame" x="157.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="158" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="bc9-EP-BvM"/>
@@ -4872,7 +4885,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5S-S5-N2y" userLabel="redPottedCount">
-                                                        <rect key="frame" x="5.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="5" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="20R-Kg-mca"/>
@@ -4918,7 +4931,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaK-cu-nyX" userLabel="brownPottedCount">
-                                                        <rect key="frame" x="81.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="82" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="RlT-S2-P3H"/>
@@ -4941,7 +4954,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2b-NR-RCc" userLabel="bluePottedCount">
-                                                        <rect key="frame" x="106.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="107" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="5mp-LK-zc9"/>
@@ -4964,7 +4977,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="332-VW-M8A" userLabel="pinkPottedCount">
-                                                        <rect key="frame" x="131.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="132" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="fCq-jK-U1T"/>
@@ -4987,7 +5000,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7J1-aA-8fL" userLabel="yellowPottedCount">
-                                                        <rect key="frame" x="30.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="31" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="4pu-C5-eVH"/>
@@ -5009,7 +5022,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbG-nI-oDC" userLabel="blackPottedCount">
-                                                        <rect key="frame" x="157.5" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="158" y="0.0" width="20" height="20"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="ACE-9i-gnZ"/>
@@ -5164,7 +5177,7 @@
                                                 </variation>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aSM-8A-eIq" userLabel="avgBreak">
-                                                <rect key="frame" x="120" y="150" width="58.5" height="15"/>
+                                                <rect key="frame" x="120" y="150" width="59" height="15"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="K44-To-Thq"/>
@@ -5206,7 +5219,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Obq-Be-IO2" userLabel="ballavg">
-                                                <rect key="frame" x="120" y="170" width="58.5" height="15"/>
+                                                <rect key="frame" x="120" y="170" width="59" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="kPu-Pt-Ckj"/>
                                                 </constraints>
@@ -5247,7 +5260,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5JR-EB-JqI" userLabel="sumpotsfouls">
-                                                <rect key="frame" x="120" y="190" width="58.5" height="15"/>
+                                                <rect key="frame" x="120" y="190" width="59" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="1Qz-uJ-zl7"/>
                                                 </constraints>
@@ -5288,13 +5301,13 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No breaks yet!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Sdp-dQ-5cK">
-                                                <rect key="frame" x="110" y="220" width="72.5" height="197"/>
+                                                <rect key="frame" x="110" y="220" width="73" height="197"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mxR-hm-fr9">
-                                                <rect key="frame" x="10" y="5" width="167.5" height="120"/>
+                                                <rect key="frame" x="10" y="5" width="168" height="120"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="120" id="B1S-ZC-J8t"/>
@@ -5363,7 +5376,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ucF-X5-laZ">
-                                                <rect key="frame" x="120" y="210" width="58.5" height="15"/>
+                                                <rect key="frame" x="120" y="210" width="59" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="NyJ-Ip-63g"/>
                                                 </constraints>
@@ -5736,16 +5749,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPU-EE-DEI" userLabel="Player1BreakInfo">
-                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="128"/>
+                                <rect key="frame" x="188" y="0.0" width="187" height="128"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRv-py-xfO" userLabel="P1breakAmount">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="128"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="80"/>
                                         <color key="textColor" red="0.1137254902" green="0.20784313730000001" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="whU-MD-OKE" customClass="ballSumIV">
-                                        <rect key="frame" x="127.5" y="10" width="50" height="50"/>
+                                        <rect key="frame" x="127" y="10" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Kqw-Gs-CFv"/>
                                             <constraint firstAttribute="height" constant="50" id="ep6-Fe-AOB"/>
@@ -5764,7 +5777,7 @@
                                         </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lp2-y3-TGF" userLabel="P1BreakInfo">
-                                        <rect key="frame" x="10" y="-2" width="167.5" height="120"/>
+                                        <rect key="frame" x="10" y="-2" width="167" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="xfc-uC-yjj"/>
                                         </constraints>
@@ -5836,10 +5849,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8q-H0-KVB" userLabel="Player2View">
-                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="128"/>
+                                <rect key="frame" x="188" y="0.0" width="187" height="128"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2 Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdR-xi-N7C">
-                                        <rect key="frame" x="30" y="106" width="127.5" height="20"/>
+                                        <rect key="frame" x="30" y="106" width="127" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="7Fc-xu-u3T"/>
                                         </constraints>
@@ -5858,7 +5871,7 @@
                                         </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="qBb-v8-TkW" userLabel="Player 2 Photo">
-                                        <rect key="frame" x="68.5" y="53" width="50" height="50"/>
+                                        <rect key="frame" x="68" y="53" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="1Dc-GN-vVO"/>
                                             <constraint firstAttribute="width" constant="50" id="CeK-c8-9zq"/>
@@ -5877,13 +5890,13 @@
                                         </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="147" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzz-mT-DUD">
-                                        <rect key="frame" x="2" y="2" width="183.5" height="36"/>
+                                        <rect key="frame" x="2" y="2" width="183" height="36"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="25"/>
                                         <color key="textColor" red="0.27058823529999998" green="0.4823529412" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWY-8c-7de">
-                                        <rect key="frame" x="0.0" y="38" width="187.5" height="68"/>
+                                        <rect key="frame" x="0.0" y="38" width="187" height="68"/>
                                         <connections>
                                             <action selector="buttonMorePlayer2Pressed:" destination="O7v-XD-Fu3" eventType="touchUpInside" id="gHR-hc-kAX"/>
                                         </connections>
@@ -6202,7 +6215,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uDp-fE-UY8">
                                 <rect key="frame" x="10" y="90" width="355" height="527"/>
-                                <mutableString key="text">Touching the player avatars on the graph view provides current player statistics inside frame(s) and active match.   The 'Graph detail' button next to the match/frame selection details each visit.  This allows you to step through the frame while highlighting the entry point on the graph.  Each break detail is shown.  Touching a ball in a break gives further breakdown of shot.      To the right side is the 'Listing' button.  Again only when frame statistic is shown does the view display.  It shows the detais on player visits in order of latest first. </mutableString>
+                                <string key="text">Touching the player avatars on the graph view provides current player statistics inside frame(s) and active match.   The 'Graph detail' button next to the match/frame selection details each visit.  This allows you to step through the frame while highlighting the entry point on the graph.  Each break detail is shown.  Touching a ball in a break gives further breakdown of shot.      To the right side is the 'Listing' button.  Again only when frame statistic is shown does the view display.  It shows the detais on player visits in order of latest first. </string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6272,7 +6285,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="inL-KN-crK">
                                 <rect key="frame" x="10" y="90" width="355" height="527"/>
-                                <mutableString key="text">Tapping a players avatar from the scoreboard presnts the Player Menu.  The border of the avatar is a pie-chart, Green are the proportion of match wins, red are losses and orange drawn.  It is possible to edit the current name,email or photo.  Click the avatar for option of taking a photo or using the photo library. Touching the update icon saves the changes and returns back to the scoreboard view.    To select a different player or create a new one press the 'PLAYERS LIST'.  The next view you can choose 'New' or select a stored player.  Back inside the main player avatar page you can accept that player into the current match replacing the original or discard to continue.  The next option 'Head to Heads' provides detail for current player against all the players he/she has competed with. From this view you may select another opponent and see his/her headTohead details. </mutableString>
+                                <string key="text">Tapping a players avatar from the scoreboard presnts the Player Menu.  The border of the avatar is a pie-chart, Green are the proportion of match wins, red are losses and orange drawn.  It is possible to edit the current name,email or photo.  Click the avatar for option of taking a photo or using the photo library. Touching the update icon saves the changes and returns back to the scoreboard view.    To select a different player or create a new one press the 'PLAYERS LIST'.  The next view you can choose 'New' or select a stored player.  Back inside the main player avatar page you can accept that player into the current match replacing the original or discard to continue.  The next option 'Head to Heads' provides detail for current player against all the players he/she has competed with. From this view you may select another opponent and see his/her headTohead details. </string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6345,7 +6358,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="gny-gL-LrP"/>
                                 </constraints>
-                                <mutableString key="text">The last option 'SHOW ALL MATCHES' presents all matches that have either been played on the device or imported.  Choosing a single match opens up the familiar Statistics view.   Exporting of a match can be made from the match list by clicking the export button.  Here you can select multiple matches and export into a single email.  Importing a match can be done by opening the email generated from an export and pressing the attachment.  The Snooker Score Master icon allows you to copy the data into the app.  A message will appear once import is made. </mutableString>
+                                <string key="text">The last option 'SHOW ALL MATCHES' presents all matches that have either been played on the device or imported.  Choosing a single match opens up the familiar Statistics view.   Exporting of a match can be made from the match list by clicking the export button.  Here you can select multiple matches and export into a single email.  Importing a match can be done by opening the email generated from an export and pressing the attachment.  The Snooker Score Master icon allows you to copy the data into the app.  A message will appear once import is made. </string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6503,7 +6516,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hIe-cO-f31">
                                 <rect key="frame" x="26" y="90" width="323" height="527"/>
-                                <mutableString key="text">Directly tapping on any ball within the RACK at the foot of the screen will add to current players break.  A player can be switched by touching their frame score directly.    The 'BREAK BALL' keeps sum of the active break. When a break has ended make sure the player who made the break is selected and tap the break ball to finalize.  If you make mistake tap the 'UNDO' button.  While the break is active you can undo last shot or break.  If there is no active break the previous break can be undone or even a rerack of the whole frame.  </mutableString>
+                                <string key="text">Directly tapping on any ball within the RACK at the foot of the screen will add to current players break.  A player can be switched by touching their frame score directly.    The 'BREAK BALL' keeps sum of the active break. When a break has ended make sure the player who made the break is selected and tap the break ball to finalize.  If you make mistake tap the 'UNDO' button.  While the break is active you can undo last shot or break.  If there is no active break the previous break can be undone or even a rerack of the whole frame.  </string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>

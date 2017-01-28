@@ -15,6 +15,8 @@
 #import "DraggableView.h"
 
 
+
+
 @interface scoreboardVC () <PlayerDelegate, MatchStatisticsDelegate>
 
 
@@ -88,7 +90,9 @@
 @property (nonatomic) NSString *emailPlayer2;
 @property (nonatomic) NSString *imagePlayer1;
 @property (nonatomic) NSString *imagePlayer2;
+@property (nonatomic) NSString *refereeVoice;
 @property (nonatomic) NSString *shotBallColour;
+@property (nonatomic) NSNumber *breakOffPlayerIndex;
 @property (assign) int statPlayer1item;
 @property (assign) int statPlayer2item;
 @property (assign) int visitBallCount;
@@ -115,7 +119,9 @@
 @property (strong, nonatomic) ball *buttonNoColor;
 @property (strong, nonatomic) indicator *buttonIndicator;
 @property (strong, nonatomic) IBOutlet UIVisualEffectView *blurView;
-
+@property (strong, nonatomic) AVSpeechUtterance *utterance;
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *celebrationBgroundView;
 
 @property (weak, nonatomic) NSTimer *myTimer;
 @property int frameTimeInSeconds;
@@ -145,8 +151,7 @@
 @synthesize activeMatchId;
 @synthesize db;
 @synthesize skinPrefix;
-
-
+@synthesize breakOffPlayerIndex;
 @synthesize skinPlayer1Colour;
 @synthesize skinPlayer2Colour;
 @synthesize skinBackgroundColour;
@@ -538,6 +543,8 @@ issue with startup now controlled by onload block condition
 
     [super viewDidLoad];
     
+    self.synthesizer = [[AVSpeechSynthesizer alloc]init];
+    
     [self loadConfigDefaults];
     [self initDB];
     [self.db alterTableNewColumn];
@@ -661,6 +668,10 @@ issue with startup now controlled by onload block condition
         self.isPaused=false;
         
     }
+    
+
+    
+    
 }
 
 /* created 20151011 */
@@ -756,6 +767,12 @@ issue with startup now controlled by onload block condition
     self.isShotStopWatch = MY_APPDELEGATE.isShotStopWatch;
     self.breakThreshholdForCelebration = MY_APPDELEGATE.breakThreshholdForCelebration;
     self.isMenuShot = MY_APPDELEGATE.isMenuShot;
+    self.refereeVoice = MY_APPDELEGATE.refereeVoice;
+    
+    self.utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:self.refereeVoice];
+    [self.utterance setRate:0.5f];
+    self.utterance.postUtteranceDelay = 2.0f;
+    
     
     self.skinSelectedScore = [UIColor whiteColor];
 
@@ -772,6 +789,7 @@ issue with startup now controlled by onload block condition
 
     } else if (self.theme==greenbaize) {
         self.blurView.hidden = true;
+        [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"greenbaize_clear"]];
         self.snookerBackgroundPhotoImage.hidden = false;
         self.skinForegroundColour = [UIColor colorWithRed:192.0f/255.0f green:139.0f/255.0f blue:98.0f/255.0f alpha:1.0];
         self.skinBackgroundColour  = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
@@ -1166,6 +1184,15 @@ issue with startup now controlled by onload block condition
         [self.currentPlayer setNbrOfBreaks:self.currentPlayer.nbrOfBreaks + 1];
         [self processCurrentUsersHighestBreak];
 
+        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
+            NSString *refereeComment;
+            if (self.activeBreak.points==[NSNumber numberWithInt:1]) {
+                refereeComment = [NSString stringWithFormat:@"%@ %@ point",self.currentPlayer.nickName, self.activeBreak.points];
+            } else {
+                refereeComment = [NSString stringWithFormat:@"%@ %@ points",self.currentPlayer.nickName, self.activeBreak.points];
+            }
+            [self speak :refereeComment];
+        }
         
         /* animate by droping the ball through the bottom of the main view... */
         CATransition *transition = nil;
@@ -1183,6 +1210,9 @@ issue with startup now controlled by onload block condition
         self.medalImgPlayer1.alpha=0.0f;
         self.medalImgPlayer2.alpha=0.0f;
         _entryTimeInSeconds = 0;
+        
+        
+        
     }
 }
 
@@ -1234,13 +1264,13 @@ issue with startup now controlled by onload block condition
             optionText = @"Cannot end, frame still tied";
         } else {
             optionText = @"New Frame";
+            
         }
-    
-   
     
         if (showprompt==true) {
     
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"End Of Frame %@ Request", self.currentFrameId] message:[NSString stringWithFormat:@"Frame Completed in %@", [self getElapsedTime :self.currentFrameId :self.importedFile]] preferredStyle:UIAlertControllerStyleActionSheet]; // 1
+            
             UIAlertAction *NewFrameAction = [UIAlertAction actionWithTitle:optionText
                                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                   
@@ -1249,7 +1279,7 @@ issue with startup now controlled by onload block condition
                                                                      if (ignoreEndOfFrame == false) {
                     
                                                                          [self closeBreak];
-                                                               
+                                                                         
                                                                          /* get player point values */
                                                                          int playerPoints1 = [self getFramePoints:self.activeFrameData :[NSNumber numberWithInt:1] :self.currentFrameId];
                                                                
@@ -1298,7 +1328,14 @@ issue with startup now controlled by onload block condition
                                                                          _frameVisitCounter=0;
                                                                          self.labelVisitCounter.text = [NSString stringWithFormat:@"Visits %d",_frameVisitCounter];
 
-                                                                         //[self.statsView resetFrameData];
+                                                                         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+                                                                         f.numberStyle = NSNumberFormatterDecimalStyle;
+                                                                        
+                                                                         self.textScorePlayer1.wonframes=[f numberFromString:self.labelScoreMatchPlayer1.text];
+                                                                         self.textScorePlayer2.wonframes=[f numberFromString:self.labelScoreMatchPlayer2.text];
+                                                                         
+                                                                         [self provideMatchStatusForReferee :false];
+                                                                         
                                                                      }
                                                     
                                                                      NSLog(@"You pressed Go and end Match");
@@ -1533,12 +1570,10 @@ issue with startup now controlled by onload block condition
             // Present the scene.
             [self.skView presentScene:scene];
             
-            
+            self.celebrationBgroundView.hidden=false;
             self.skView.hidden = false;
         
         }
-                
-                
         /* add break score to users frame total and hide the cueball */
         [self closeBreak];
         [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
@@ -1551,6 +1586,11 @@ issue with startup now controlled by onload block condition
         
         [FIRAnalytics logEventWithName:@"matchstarted" parameters:nil];
         
+        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
+            NSString *refereeComment = [NSString stringWithFormat:@"%@ to break off",self.currentPlayer.nickName];
+            [self speak :refereeComment];
+        }
+
         self.activeMatchId = [self.db insertMatch :self.textScorePlayer1.playerNumber :self.textScorePlayer2.playerNumber];
         if (self.activeMatchId==[NSNumber numberWithInt:1]) {
             /* very first new match */
@@ -1575,11 +1615,18 @@ issue with startup now controlled by onload block condition
 }
 
 
+
+
+
+
+
 /* last modified 20170125 */
 -(void)ballPotted:(ball*)pottedBall :(indicator*) indicatorBall {
     
     bool freeBall=false;
     ball* pottedFreeBall;
+    
+    NSString *refereeComment=@"";
 
     if (self.activeBreak.playerid == [NSNumber numberWithInt:0]) {
 
@@ -1611,6 +1658,12 @@ issue with startup now controlled by onload block condition
         [self.activeBreak setDuration:[NSNumber numberWithInt:_entryTimeInSeconds]];
         [self addBreakToData :self.activeBreak];
 
+
+        if (self.activeBreak.points>0) {
+            refereeComment = [NSString stringWithFormat:@"%@ %@ points with ", self.currentPlayer.nickName, self.activeBreak.points];
+        }
+        
+        
         [self closeBreak];
 
         if ((self.shotFoulId==foulPotAndInOff && [pottedBall.colour isEqualToString:@"RED"]) || self.shotFoulId==foulWrongRedPot) {
@@ -1637,6 +1690,13 @@ issue with startup now controlled by onload block condition
         // add the foul points to opposing player
         [self.opposingPlayer setFoulScore:pottedBall.foulPoints];
 
+        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
+            refereeComment = [NSString stringWithFormat:@"%@ foul. %@ %d points",refereeComment, self.opposingPlayer.nickName, pottedBall.foulPoints];
+            [self speak :refereeComment];
+        }
+        
+        
+        
         [self.activeBreak clearBreak:self.viewBreak];
         
         self.buttonAdjust.enabled = true;
@@ -1827,6 +1887,14 @@ issue with startup now controlled by onload block condition
                 }
                 indicatorBall.hidden = false;
             }
+        
+
+        
+        if (![self.refereeVoice isEqualToString:@"0"]) {
+            refereeComment = [NSString stringWithFormat:@"%@", self.activeBreak.points];
+            [self speak :refereeComment];
+        }
+        
         
         [self displayMedal];
         [self.currentPlayer.currentFrame increaseFrameScore:self.currentPlayer.frameScore];
@@ -2027,47 +2095,6 @@ issue with startup now controlled by onload block condition
 }
 
 /* last modified 20151014 */
--(void)selectPlayerOneTap:(UITapGestureRecognizer *)gesture {
-
-    NSString *labelScore;
-    
-    if (self.textScorePlayer1 == self.opposingPlayer) {
-        [self selectPlayerOne];
-        int liveTotal = self.opposingPlayer.currentFrame.frameScore;
-        labelScore = [NSString stringWithFormat:@"%d",liveTotal];
-        self.textScorePlayer2.text = labelScore;
-    }
-    if (scoreState==PreviousFrameScore) {
-        // show 'live score'
-        int liveTotal = self.currentPlayer.currentFrame.frameScore + [self.activeBreak.points intValue];
-        labelScore = [NSString stringWithFormat:@"%d",liveTotal];
-        self.currentPlayer.text = labelScore;
-        [self.currentPlayer setTextColor:self.skinSelectedScore];
-        scoreState = LiveFrameScore;
-    } else {
-        labelScore = [NSString stringWithFormat:@"%d",self.currentPlayer.currentFrame.frameScore];
-        self.currentPlayer.text = labelScore;
-        [self.currentPlayer setTextColor:self.skinForegroundColour];
-        scoreState = PreviousFrameScore;
-    }
-
-}
-
-/* last modified 20151014 */
--(void)celebrationTap:(UITapGestureRecognizer *)gesture {
-    [UIView transitionWithView:self.skView
-                      duration:0.4
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        self.skView.hidden=true;
-                    }
-                    completion:NULL];
-    
-    
-}
-
-
-/* last modified 20151014 */
 -(void)selectPlayerOne {
     self.currentPlayer = self.textScorePlayer1;
     self.opposingPlayer = self.textScorePlayer2;
@@ -2080,35 +2107,10 @@ issue with startup now controlled by onload block condition
     self.viewScorePlayer1.layer.borderWidth = 1.0f;
     self.viewScorePlayer2.layer.borderWidth = 0.0f;
 
-    scoreState = PreviousFrameScore;
     [self displayMedal];
 }
 
-/* last modified 20151014 */
--(void)selectPlayerTwoTap:(UITapGestureRecognizer *)gesture {
 
-    NSString *labelScore;
-    
-    if (self.textScorePlayer2 == self.opposingPlayer) {
-        [self selectPlayerTwo];
-        int liveTotal = self.opposingPlayer.currentFrame.frameScore;
-        labelScore = [NSString stringWithFormat:@"%d",liveTotal];
-        self.textScorePlayer1.text = labelScore;
-    }
-    if (scoreState==PreviousFrameScore) {
-            // show 'live score'
-            int liveTotal = self.currentPlayer.currentFrame.frameScore + [self.activeBreak.points intValue];
-            labelScore = [NSString stringWithFormat:@"%d",liveTotal];
-            self.currentPlayer.text = labelScore;
-            [self.currentPlayer setTextColor:self.skinSelectedScore];
-            scoreState = LiveFrameScore;
-    } else {
-            labelScore = [NSString stringWithFormat:@"%d",self.currentPlayer.currentFrame.frameScore];
-            self.currentPlayer.text = labelScore;
-            [self.currentPlayer setTextColor:self.skinForegroundColour];
-            scoreState = PreviousFrameScore;
-    }
-}
 
 /* last modified 20151014 */
 -(void)selectPlayerTwo {
@@ -2122,10 +2124,193 @@ issue with startup now controlled by onload block condition
     [self.labelScoreMatchPlayer1 setTextColor:self.skinForegroundColour];
     self.viewScorePlayer2.layer.borderWidth = 1.0f;
     self.viewScorePlayer1.layer.borderWidth = 0.0f;
-
-    scoreState = PreviousFrameScore;
+    
     [self displayMedal];
 }
+
+/* last modified 20170128 */
+-(void)selectPlayerOneTap:(UITapGestureRecognizer *)gesture {
+
+    NSString *labelScore;
+    
+    if (self.textScorePlayer1 == self.opposingPlayer) {
+        [self selectPlayerOne];
+        int liveTotal = self.opposingPlayer.currentFrame.frameScore;
+        labelScore = [NSString stringWithFormat:@"%d",liveTotal];
+        self.textScorePlayer2.text = labelScore;
+        liveTotal = self.currentPlayer.currentFrame.frameScore + [self.activeBreak.points intValue];
+        labelScore = [NSString stringWithFormat:@"%d",liveTotal];
+        self.currentPlayer.text = labelScore;
+    } else {
+
+        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
+            [self provideFrameStatusForReferee];
+        }
+    }
+}
+
+/* last modified 20170128 */
+-(void)selectPlayerTwoTap:(UITapGestureRecognizer *)gesture {
+    
+    NSString *labelScore;
+    
+    if (self.textScorePlayer2 == self.opposingPlayer) {
+        [self selectPlayerTwo];
+        int liveTotal = self.opposingPlayer.currentFrame.frameScore;
+        labelScore = [NSString stringWithFormat:@"%d",liveTotal];
+        self.textScorePlayer1.text = labelScore;
+        
+        liveTotal = self.currentPlayer.currentFrame.frameScore + [self.activeBreak.points intValue];
+        labelScore = [NSString stringWithFormat:@"%d",liveTotal];
+        self.currentPlayer.text = labelScore;
+    } else {
+        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
+            [self provideFrameStatusForReferee];
+        }
+    }
+}
+
+
+
+/* created 20170127 */
+-(void)provideFrameStatusForReferee {
+    int currentScore=0;
+    int opposingScore=0;
+    NSString *refereeComment=@"";
+    NSNumber *pointsRemainingonTable = [NSNumber numberWithInt:[common getPointsRemainingInFrame:self.buttonRed :self.activeBreak :self.activeColour]];
+    
+    currentScore = [self.currentPlayer.text intValue];
+    opposingScore = [self.opposingPlayer.text intValue];
+    
+    if (currentScore > opposingScore) {
+        /* we need to locate remaining points */
+        refereeComment = [NSString stringWithFormat:@"%@ points remain. %@ leads %@ by %d",pointsRemainingonTable,self.currentPlayer.nickName,self.opposingPlayer.nickName, currentScore - opposingScore];
+        
+    } else if (opposingScore > currentScore) {
+        
+        refereeComment = [NSString stringWithFormat:@"%@ points remain. %@ is behind %@ by %d",pointsRemainingonTable,self.currentPlayer.nickName,self.opposingPlayer.nickName, opposingScore - currentScore];
+        
+    } else {
+        // players tied
+        
+        if (pointsRemainingonTable>0) {
+            refereeComment = [NSString stringWithFormat:@"%@ remain. %@ and %@ are level",pointsRemainingonTable,self.currentPlayer.nickName,self.opposingPlayer.nickName];
+        } else {
+            refereeComment = [NSString stringWithFormat:@"%@ and %@ are level",self.currentPlayer.nickName,self.opposingPlayer.nickName];
+        }
+        
+    }
+    
+    [self speak :refereeComment];
+
+}
+
+/* created 20170127 */
+-(void)provideMatchStatusForReferee :(bool) isEndOfMatch {
+    int currentScore=0;
+    int opposingScore=0;
+    NSString *refereeComment=@"";
+    
+    currentScore = [self.currentPlayer.wonframes intValue];
+    NSString *spokenCurrentScore;
+    if (currentScore==0) {
+        spokenCurrentScore=@"nil";
+    } else {
+        spokenCurrentScore = [NSString stringWithFormat:@"%d",currentScore];
+    }
+    opposingScore = [self.opposingPlayer.wonframes intValue];
+    NSString *spokenOpposingScore;
+    if (opposingScore==0) {
+        spokenOpposingScore=@"nil";
+    } else {
+        spokenOpposingScore = [NSString stringWithFormat:@"%d",opposingScore];
+    }
+    
+    NSString *spokenFrameCount;
+    
+    NSString *state;
+    
+    if (isEndOfMatch) {
+        state = @" has beaten ";
+    } else {
+        state = @" leads ";
+    }
+    
+    if (currentScore > opposingScore) {
+        /* we need to locate remaining points */
+        if (currentScore>1) {
+            spokenFrameCount = @"frames";
+        } else {
+            spokenFrameCount = @"frame";
+        }
+        
+        refereeComment = [NSString stringWithFormat:@"%@%@%@ by %@ %@ to %@--",self.currentPlayer.nickName,state,self.opposingPlayer.nickName, spokenCurrentScore, spokenFrameCount, spokenOpposingScore];
+        
+    } else if (opposingScore > currentScore) {
+        if (opposingScore>1) {
+            spokenFrameCount = @"frames";
+        } else {
+            spokenFrameCount = @"frame";
+        }
+        
+        refereeComment = [NSString stringWithFormat:@"%@%@%@ by %@ %@ to %@--",self.opposingPlayer.nickName,state,self.currentPlayer.nickName, spokenOpposingScore, spokenFrameCount, spokenCurrentScore];
+        
+    } else {
+        // players tied
+         if (isEndOfMatch) {
+              refereeComment = [NSString stringWithFormat:@"match drawn %@ frames all--",spokenOpposingScore];
+         } else {
+             refereeComment = [NSString stringWithFormat:@"match level at %@ frames all--",spokenOpposingScore];
+         }
+    }
+    
+    [self speak :refereeComment];
+    
+    if (!isEndOfMatch) {
+        refereeComment = [NSString stringWithFormat:@"Frame %@--", self.currentFrameId];
+        [self speak :refereeComment];
+    
+        NSString *breakOffPlayer=@"";
+        if (self.breakOffPlayerIndex==[NSNumber numberWithInt:1]) {
+            breakOffPlayer = self.textScorePlayer2.nickName;
+            [self selectPlayerTwo];
+            self.breakOffPlayerIndex = [NSNumber numberWithInt:2];
+            
+        } else {
+            breakOffPlayer = self.textScorePlayer1.nickName;
+            [self selectPlayerOne];
+            self.breakOffPlayerIndex = [NSNumber numberWithInt:1];
+        }
+        
+        refereeComment = [NSString stringWithFormat:@"%@ to break off",breakOffPlayer];
+    
+        [self speak :refereeComment];
+    }
+    
+    
+}
+
+
+
+
+
+
+/* last modified 20151014 */
+-(void)celebrationTap:(UITapGestureRecognizer *)gesture {
+    [UIView transitionWithView:self.skView
+                      duration:0.4
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        self.celebrationBgroundView.hidden=true;
+                        self.skView.hidden=true;
+                    }
+                    completion:NULL];
+    
+    
+}
+
+
+
 
 
 -(IBAction)dismissPlayerOneKB:(id)sender {
@@ -2300,6 +2485,8 @@ issue with startup now controlled by onload block condition
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:titleMessage
                                                                    message:alertMessage
                                                             preferredStyle:UIAlertControllerStyleActionSheet]; // 1
+    
+    [self provideMatchStatusForReferee :true];
     
     
     
@@ -4122,9 +4309,25 @@ issue with startup now controlled by onload block condition
 }
 
 - (IBAction)closeCongratsPressed:(id)sender {
-    
+    self.celebrationBgroundView.hidden=true;
     self.skView.hidden=true;
 }
+
+-(void)speak :(NSString*) refereeComment {
+    
+    self.utterance = [AVSpeechUtterance speechUtteranceWithString:refereeComment];
+    self.utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:self.refereeVoice];
+    [self.synthesizer speakUtterance:self.utterance];
+}
+
+
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance
+{
+
+    
+    
+}
+
 
 
 @end

@@ -21,9 +21,10 @@
 #import "Foundation/Foundation.h"
 #import <SpriteKit/SpriteKit.h>
 #import "celebrationSceneSKV.h"
+@import AVFoundation;
 @import Firebase;
 
-@interface scoreboardVC : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate, UINavigationControllerDelegate> {
+@interface scoreboardVC : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate, UINavigationControllerDelegate, AVSpeechSynthesizerDelegate> {
     int activeColour;
     bool ballReplaced;
     int colourStateAtStartOfBreak;
