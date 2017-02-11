@@ -772,7 +772,7 @@ issue with startup now controlled by onload block condition
     self.utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:self.refereeVoice];
     [self.utterance setRate:0.5f];
     self.utterance.postUtteranceDelay = 2.0f;
-    
+    self.synthesizer.delegate = self;
     
     self.skinSelectedScore = [UIColor whiteColor];
 
@@ -1175,6 +1175,27 @@ issue with startup now controlled by onload block condition
 -(void)closeBreak {
     /* set counter variables and clear break */
     if ([self.activeBreak.points intValue] > 0) {
+        if (self.shotTypeId == Potted || self.shotTypeId== Missed) {
+            if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"] || [self.refereeVoice isEqualToString:@"en-IE"]) {
+                NSString *refereeComment;
+                if (self.activeBreak.points==[NSNumber numberWithInt:1]) {
+                    refereeComment = [NSString stringWithFormat:@"%@ %@ point",self.currentPlayer.nickName, self.activeBreak.points];
+                } else {
+                    refereeComment = [NSString stringWithFormat:@"%@ %@ points",self.currentPlayer.nickName, self.activeBreak.points];
+                }
+                if (self.currentPlayer.playerIndex==1) {
+                    self.viewScorePlayer1.backgroundColor = self.skinPlayer1Colour;
+                }
+                else
+                {
+                    self.viewScorePlayer2.backgroundColor = self.skinPlayer2Colour;
+                }
+                
+                [self speak :refereeComment];
+            }
+        }
+        
+        
         if (self.activeBreak.playerid!=[NSNumber numberWithInt:0]) {
             [self.currentPlayer setFrameScore:[self.activeBreak.points intValue]];
         }
@@ -1184,16 +1205,8 @@ issue with startup now controlled by onload block condition
         [self.currentPlayer setNbrOfBreaks:self.currentPlayer.nbrOfBreaks + 1];
         [self processCurrentUsersHighestBreak];
 
-        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
-            NSString *refereeComment;
-            if (self.activeBreak.points==[NSNumber numberWithInt:1]) {
-                refereeComment = [NSString stringWithFormat:@"%@ %@ point",self.currentPlayer.nickName, self.activeBreak.points];
-            } else {
-                refereeComment = [NSString stringWithFormat:@"%@ %@ points",self.currentPlayer.nickName, self.activeBreak.points];
-            }
-            [self speak :refereeComment];
-        }
-        
+
+
         /* animate by droping the ball through the bottom of the main view... */
         CATransition *transition = nil;
         transition = [CATransition animation];
@@ -1534,10 +1547,6 @@ issue with startup now controlled by onload block condition
             }
         }
 
-        // self.breakThreshholdForCelebration
-        
-
-        
         if (self.breakThreshholdForCelebration != 0) {
            // breakThreshold = self.activeBreak.points;
             congratsMsg = [NSString stringWithFormat:@"Congratulations %@, you have made a big break!", self.currentPlayer.nickName];
@@ -1564,8 +1573,14 @@ issue with startup now controlled by onload block condition
             scene.backgroundColor = [UIColor clearColor];
             self.labelCongratsMessage.text = [NSString stringWithFormat:@"%@", self.activeBreak.text];
             self.labelCongratsPlayerMessage.text = congratsMsg;
+             if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"] || [self.refereeVoice isEqualToString:@"en-IE"]) {
+                 [self speak :congratsMsg];
+             }
             
-            
+            NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"applause7" ofType:@"mp3"];
+            SystemSoundID soundID;
+            AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
+            AudioServicesPlaySystemSound(soundID);
             
             // Present the scene.
             [self.skView presentScene:scene];
@@ -1586,8 +1601,8 @@ issue with startup now controlled by onload block condition
         
         [FIRAnalytics logEventWithName:@"matchstarted" parameters:nil];
         
-        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
-            NSString *refereeComment = [NSString stringWithFormat:@"%@ to break off",self.currentPlayer.nickName];
+        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"] || [self.refereeVoice isEqualToString:@"en-IE"]) {
+            NSString *refereeComment = [NSString stringWithFormat:@"%@ to break!",self.currentPlayer.nickName];
             [self speak :refereeComment];
         }
 
@@ -1654,15 +1669,16 @@ issue with startup now controlled by onload block condition
             [self.activeBreak addShotToBreak :pottedBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Foul] :[NSNumber numberWithInt:self.shotFoulId] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
         }
         
+        if (self.activeBreak.points >0) {
+            if (self.activeBreak.points==[NSNumber numberWithInt:1]) {
+                refereeComment = [NSString stringWithFormat:@"%@ %@ point with ",self.currentPlayer.nickName, self.activeBreak.points];
+            } else {
+                refereeComment = [NSString stringWithFormat:@"%@ %@ points with ",self.currentPlayer.nickName, self.activeBreak.points];
+            }
+        }
         
         [self.activeBreak setDuration:[NSNumber numberWithInt:_entryTimeInSeconds]];
         [self addBreakToData :self.activeBreak];
-
-
-        if (self.activeBreak.points>0) {
-            refereeComment = [NSString stringWithFormat:@"%@ %@ points with ", self.currentPlayer.nickName, self.activeBreak.points];
-        }
-        
         
         [self closeBreak];
 
@@ -1690,8 +1706,9 @@ issue with startup now controlled by onload block condition
         // add the foul points to opposing player
         [self.opposingPlayer setFoulScore:pottedBall.foulPoints];
 
-        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
-            refereeComment = [NSString stringWithFormat:@"%@ foul. %@ %d points",refereeComment, self.opposingPlayer.nickName, pottedBall.foulPoints];
+        
+        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"] || [self.refereeVoice isEqualToString:@"en-IE"]) {
+            refereeComment = [NSString stringWithFormat:@"%@ foul. %@ %d bonus points",refereeComment, self.opposingPlayer.nickName, pottedBall.foulPoints];
             [self speak :refereeComment];
         }
         
@@ -1779,6 +1796,8 @@ issue with startup now controlled by onload block condition
                         
                     } else if (pottedBall.pottedPoints == 7 && (self.currentPlayer.currentFrame.frameScore + [self.activeBreak.points intValue] +7) == self.opposingPlayer.currentFrame.frameScore) {
                         /* small modification on 20160315 */
+                        refereeComment = [NSString stringWithFormat:@"Scores tied, respotted black required!"];
+                        [self speak :refereeComment];
                         
                     } else if (freeBall == false) {
                         [pottedBall decreaseQty];
@@ -2143,7 +2162,7 @@ issue with startup now controlled by onload block condition
         self.currentPlayer.text = labelScore;
     } else {
 
-        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
+        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"] || [self.refereeVoice isEqualToString:@"en-IE"]) {
             [self provideFrameStatusForReferee];
         }
     }
@@ -2164,7 +2183,7 @@ issue with startup now controlled by onload block condition
         labelScore = [NSString stringWithFormat:@"%d",liveTotal];
         self.currentPlayer.text = labelScore;
     } else {
-        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"]) {
+        if ([self.refereeVoice isEqualToString:@"en-AU"] || [self.refereeVoice isEqualToString:@"en-US"] ||  [self.refereeVoice isEqualToString:@"en-GB"] || [self.refereeVoice isEqualToString:@"en-IE"]) {
             [self provideFrameStatusForReferee];
         }
     }
@@ -2182,9 +2201,15 @@ issue with startup now controlled by onload block condition
     currentScore = [self.currentPlayer.text intValue];
     opposingScore = [self.opposingPlayer.text intValue];
     
+    if (self.currentPlayer.playerIndex==1) {
+        self.viewScorePlayer1.backgroundColor = self.skinPlayer1Colour;
+    } else {
+        self.viewScorePlayer2.backgroundColor = self.skinPlayer2Colour;
+    }
+    
     if (currentScore > opposingScore) {
         /* we need to locate remaining points */
-        refereeComment = [NSString stringWithFormat:@"%@ points remain. %@ leads %@ by %d",pointsRemainingonTable,self.currentPlayer.nickName,self.opposingPlayer.nickName, currentScore - opposingScore];
+        refereeComment = [NSString stringWithFormat:@"%@ points remain. %@ is ahead of %@ by %d",pointsRemainingonTable,self.currentPlayer.nickName,self.opposingPlayer.nickName, currentScore - opposingScore];
         
     } else if (opposingScore > currentScore) {
         
@@ -2233,7 +2258,7 @@ issue with startup now controlled by onload block condition
     if (isEndOfMatch) {
         state = @" has beaten ";
     } else {
-        state = @" leads ";
+        state = @" is ahead of ";
     }
     
     if (currentScore > opposingScore) {
@@ -2264,6 +2289,7 @@ issue with startup now controlled by onload block condition
          }
     }
     
+
     [self speak :refereeComment];
     
     if (!isEndOfMatch) {
@@ -2282,8 +2308,8 @@ issue with startup now controlled by onload block condition
             self.breakOffPlayerIndex = [NSNumber numberWithInt:1];
         }
         
-        refereeComment = [NSString stringWithFormat:@"%@ to break off",breakOffPlayer];
-    
+        refereeComment = [NSString stringWithFormat:@"%@ to break!",breakOffPlayer];
+        
         [self speak :refereeComment];
     }
     
@@ -3847,13 +3873,13 @@ issue with startup now controlled by onload block condition
         
         int currentPlayerIndex = self.currentPlayer.playerIndex;
         if (currentPlayerIndex==1) {
-            titleMessage = [NSString stringWithFormat:@"Nominate shot played by %@",self.textPlayerOneName.text];
+            titleMessage = [NSString stringWithFormat:@"Nominate shot played by\n%@",self.textPlayerOneName.text];
            
         } else {
-            titleMessage = [NSString stringWithFormat:@"Nominate shot played by %@",self.textPlayerTwoName.text];
+            titleMessage = [NSString stringWithFormat:@"Nominate shot played by\n%@",self.textPlayerTwoName.text];
         }
 
-        NSString *alertMessage = @"The selected ball might be either the\ntarget or the foul ball itself.";
+        NSString *alertMessage = @"The selected ball might\nbe either the target or\nthe foul ball itself.";
 
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:titleMessage
                                                                        message:alertMessage
@@ -4278,9 +4304,6 @@ issue with startup now controlled by onload block condition
 }
 
 
-
-
-
 -(void)updateFrameVisitCounter {
     _frameVisitCounter ++;
     self.labelVisitCounter.text = [NSString stringWithFormat:@"Visits %d",
@@ -4321,11 +4344,16 @@ issue with startup now controlled by onload block condition
 }
 
 
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didStartSpeechUtterance:(AVSpeechUtterance *)utterance{
+
+    
+}
+
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance
 {
 
-    
-    
+    self.viewScorePlayer1.backgroundColor = [UIColor clearColor];
+    self.viewScorePlayer2.backgroundColor = [UIColor clearColor];
 }
 
 
