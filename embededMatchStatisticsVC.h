@@ -76,8 +76,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *p1SumPotsFouls;
 @property (weak, nonatomic) IBOutlet UILabel *p1TopBreaks;
 @property (weak, nonatomic) IBOutlet UILabel *p1ShotAvgTimeLabel;
-
-
+@property (weak, nonatomic) IBOutlet UILabel *p1MaxAmtOfBallsInSuccession;
 
 @property (weak, nonatomic) IBOutlet UILabel *p1RedCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *p1YellowCountLabel;
@@ -90,10 +89,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *p2SumPotsFouls;
 @property (weak, nonatomic) IBOutlet UILabel *p2TopBreaks;
 @property (weak, nonatomic) IBOutlet UILabel *p2ShotAvgTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *p2MaxAmtOfBallsInSuccession;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *p2HiBreakLabel;
 @property (weak, nonatomic) IBOutlet UILabel *p2AvgBreakLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *p2RedCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *p2YellowCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *p2GreenCountLabel;

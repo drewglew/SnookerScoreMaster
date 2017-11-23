@@ -35,6 +35,7 @@
 		3A5997EA1D328A74005A11DF /* cup_bronze.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5997E71D328A74005A11DF /* cup_bronze.png */; };
 		3A5997EB1D328A74005A11DF /* cup_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5997E81D328A74005A11DF /* cup_gold.png */; };
 		3A5997EC1D328A74005A11DF /* cup_silver.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5997E91D328A74005A11DF /* cup_silver.png */; };
+		3A607CD61EAE789E00EFFDA4 /* graphData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A607CD51EAE789E00EFFDA4 /* graphData.m */; };
 		3A61017D1D3B5B58001F6BF6 /* matchesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A61017C1D3B5B58001F6BF6 /* matchesVC.m */; };
 		3A6101801D3BE350001F6BF6 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A61017F1D3BE350001F6BF6 /* NSDate+TimeAgo.m */; };
 		3A6101861D3C1D33001F6BF6 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6101841D3C1B19001F6BF6 /* SpriteKit.framework */; };
@@ -53,6 +54,7 @@
 		3A7ADE0F1C4A23D30014B847 /* matchStatisticsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7ADE0E1C4A23D30014B847 /* matchStatisticsVC.m */; };
 		3A7ADE121C4A316C0014B847 /* graphV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7ADE111C4A316C0014B847 /* graphV.m */; };
 		3A82B6B51C6930AD00C94C85 /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A82B6B41C6930AD00C94C85 /* common.m */; };
+		3A965EAE1FAF858800936FD1 /* refspeech.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A965EAD1FAF858700936FD1 /* refspeech.png */; };
 		3A9EB7821D3299300055A1CE /* HelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EB7811D3299300055A1CE /* HelpVC.m */; };
 		3AAFA8D51E2A7DBC00458493 /* playerListingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFA8D41E2A7DBC00458493 /* playerListingVC.m */; };
 		3AAFA8D81E2A7E2B00458493 /* playerListingTV.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFA8D71E2A7E2B00458493 /* playerListingTV.m */; };
@@ -154,6 +156,8 @@
 		3A5997E71D328A74005A11DF /* cup_bronze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cup_bronze.png; sourceTree = "<group>"; };
 		3A5997E81D328A74005A11DF /* cup_gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cup_gold.png; sourceTree = "<group>"; };
 		3A5997E91D328A74005A11DF /* cup_silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cup_silver.png; sourceTree = "<group>"; };
+		3A607CD41EAE789E00EFFDA4 /* graphData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphData.h; sourceTree = "<group>"; };
+		3A607CD51EAE789E00EFFDA4 /* graphData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graphData.m; sourceTree = "<group>"; };
 		3A61017B1D3B5B58001F6BF6 /* matchesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matchesVC.h; sourceTree = "<group>"; };
 		3A61017C1D3B5B58001F6BF6 /* matchesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = matchesVC.m; sourceTree = "<group>"; };
 		3A61017E1D3BE350001F6BF6 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 		3A7ADE111C4A316C0014B847 /* graphV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graphV.m; sourceTree = "<group>"; };
 		3A82B6B31C6930AD00C94C85 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		3A82B6B41C6930AD00C94C85 /* common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = common.m; sourceTree = "<group>"; };
+		3A965EAD1FAF858700936FD1 /* refspeech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refspeech.png; sourceTree = "<group>"; };
 		3A9EB7801D3299300055A1CE /* HelpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpVC.h; sourceTree = "<group>"; };
 		3A9EB7811D3299300055A1CE /* HelpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpVC.m; sourceTree = "<group>"; };
 		3AAFA8D31E2A7DBC00458493 /* playerListingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = playerListingVC.h; sourceTree = "<group>"; };
@@ -303,6 +308,7 @@
 		3A35C1B01BD5F8A700B89BD2 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3A965EAD1FAF858700936FD1 /* refspeech.png */,
 				3A2683CF1D3958A8003307BE /* selected.png */,
 				3AB4CF081CDF8D8700C07BD0 /* whiteblue.png */,
 				3A5997E71D328A74005A11DF /* cup_bronze.png */,
@@ -337,6 +343,8 @@
 				3A61018B1D3C1EBE001F6BF6 /* celebrationSceneSKV.m */,
 				3A1EC18F1D3E9AAE00B2348E /* hibreak.h */,
 				3A1EC1901D3E9AAE00B2348E /* hibreak.m */,
+				3A607CD41EAE789E00EFFDA4 /* graphData.h */,
+				3A607CD51EAE789E00EFFDA4 /* graphData.m */,
 			);
 			name = NSObjects;
 			sourceTree = "<group>";
@@ -618,6 +626,7 @@
 				3A61019E1D3D6294001F6BF6 /* bokeh.png in Resources */,
 				3A35C23F1BD6067800B89BD2 /* Settings.bundle in Resources */,
 				3A2683D01D3958A8003307BE /* selected.png in Resources */,
+				3A965EAE1FAF858800936FD1 /* refspeech.png in Resources */,
 				3AB429061BC95E83002FE58E /* Main.storyboard in Resources */,
 				3A5997EA1D328A74005A11DF /* cup_bronze.png in Resources */,
 				96D22D8F1A1FD58100E0ADE3 /* Images.xcassets in Resources */,
@@ -707,6 +716,7 @@
 				3A82B6B51C6930AD00C94C85 /* common.m in Sources */,
 				3A35C1FE1BD5FA0200B89BD2 /* breakBallCell.m in Sources */,
 				3AAFF5791D3824A20048ACC7 /* ballCountV.m in Sources */,
+				3A607CD61EAE789E00EFFDA4 /* graphData.m in Sources */,
 				3A6172E81BC965AD004B9198 /* main.m in Sources */,
 				3AC847F41BF257870028C0A2 /* snookerTableStatsView.m in Sources */,
 				3A05820F1C457AD800E37873 /* HeadToHeadTV.m in Sources */,
@@ -848,7 +858,7 @@
 				GCC_PREFIX_HEADER = "SnookerScoreMaster/SnookerScoreMaster-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = SnookerScoreMaster/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -877,7 +887,7 @@
 				GCC_PREFIX_HEADER = "SnookerScoreMaster/SnookerScoreMaster-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = SnookerScoreMaster/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

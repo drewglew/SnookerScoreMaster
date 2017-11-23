@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+ 
     self.activeMatchData = [self.db entriesRetreive :self.m.matchid :nil :nil :nil :nil :nil :nil :true];
     self.breakShots = [[NSMutableArray alloc] init];
     NSData *pngdata;
@@ -168,13 +168,13 @@
     
     
     /* colour setup */
-    self.redColour = [UIColor colorWithRed:217.0f/255.0f green:23.0f/255.0f blue:60.0f/255.0f alpha:1.0];
-    self.yellowColour = [UIColor colorWithRed:222.0f/255.0f green:199.0f/255.0f blue:4.0f/255.0f alpha:1.0];
-    self.greenColour = [UIColor colorWithRed:61.0f/255.0f green:191.0f/255.0f blue:61.0f/255.0f alpha:1.0];
-    self.brownColour = [UIColor colorWithRed:120.0f/255.0f green:64.0f/255.0f blue:0.0f/255.0f alpha:1.0];
-    self.blueColour = [UIColor colorWithRed:39.0f/255.0f green:121.0f/255.0f blue:198.0f/255.0f alpha:1.0];
-    self.pinkColour = [UIColor colorWithRed:201.0f/255.0f green:78.0f/255.0f blue:184.0f/255.0f alpha:1.0];
-    self.blackColour = [UIColor colorWithRed:33.0f/255.0f green:33.0f/255.0f blue:33.0f/255.0f alpha:1.0];
+    self.redColour = [UIColor colorWithRed:247.0f/255.0f green:27.0f/255.0f blue:60.0f/255.0f alpha:1.0];
+    self.yellowColour = [UIColor colorWithRed:255.0f/255.0f green:168.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+    self.greenColour = [UIColor colorWithRed:0.0f/255.0f green:101.0f/255.0f blue:116.0f/255.0f alpha:1.0];
+    self.brownColour = [UIColor colorWithRed:114.0f/255.0f green:43.0f/255.0f blue:22.0f/255.0f alpha:1.0];
+    self.blueColour = [UIColor colorWithRed:0.0f/255.0f green:79.0f/255.0f blue:233.0f/255.0f alpha:1.0];
+    self.pinkColour = [UIColor colorWithRed:255.0f/255.0f green:81.0f/255.0f blue:143.0f/255.0f alpha:1.0];
+    self.blackColour = [UIColor colorWithRed:4.0f/255.0f green:3.0f/255.0f blue:8.0f/255.0f alpha:1.0];
     
     UIImage *changecolourimage = [[UIImage imageNamed:@"backbutton"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.backButton setImage:changecolourimage forState:UIControlStateNormal];
@@ -228,11 +228,7 @@
             [self presentPlayer1Stats:0];
         }
     }
-    
-//    self.breakStatistcsView.backgroundColor = [UIColor clearColor];
-    
-
-    
+   
 }
 
 -(void)viewWillAppear :(BOOL)animated {
@@ -383,15 +379,17 @@
 
 
 /* player frame/match statistics */
-/* modified 20161124 */
+/* modified 20170424 */
 
 -(void)loadPlayerStatistics :(NSNumber *) playerIndex {
     
     
     int hibreak = [common getHiBreak :self.activeMatchData :playerIndex :[NSNumber numberWithInt:self.graphStatisticView.graphReferenceId]];
     float avgbreak, avgball, avgShotTime;
-    int redcount, yellowcount, greencount, browncount, bluecount, pinkcount, blackcount;
+    int redcount, yellowcount, greencount, browncount, bluecount, pinkcount, blackcount, successioncount;
     NSString *potfouls, *topbreaks;
+    NSMutableDictionary *breakData =  [[NSMutableDictionary alloc] init];
+    topbreaks = @"";
     
     //getTotalPottedPoints
     
@@ -408,10 +406,15 @@
         
         potfouls = [NSString stringWithFormat:@"%d : %d", [common getSumOfShotsByType :[self.graphStatisticView frameData] :playerIndex :Potted], [common getSumOfShotsByType :[self.graphStatisticView frameData] :playerIndex :Foul]];
         
-        topbreaks = [common getTopRangeOfPlayerBreaks:[self.graphStatisticView frameData] :playerIndex];
-        
+        //topbreaks = [common getTopRangeOfPlayerBreaks:[self.graphStatisticView frameData] :playerIndex];
+        successioncount = [common getMaxAmtOfBallsInSuccession:[self.graphStatisticView frameData] :playerIndex];
         
         avgShotTime = [common getAvgShotDuration:[self.graphStatisticView frameData]  :playerIndex];
+        
+        breakData = [common getDataSetForBreaks:[self.graphStatisticView frameData] :playerIndex];
+        
+
+        //p2MaxAmtOfBallsInSuccession
         
         
     } else {
@@ -426,17 +429,31 @@
         avgball = [common getAvgBallAmt :self.activeMatchData :playerIndex];
         
         potfouls = [NSString stringWithFormat:@"%d : %d", [common getSumOfShotsByType :self.activeMatchData :playerIndex :Potted], [common getSumOfShotsByType :self.activeMatchData :playerIndex :Foul]];
-        topbreaks = [common getTopRangeOfPlayerBreaks:self.activeMatchData :playerIndex];
+        //topbreaks = [common getTopRangeOfPlayerBreaks:self.activeMatchData :playerIndex];
         avgShotTime = [common getAvgShotDuration:self.activeMatchData :playerIndex];
+        successioncount = [common getMaxAmtOfBallsInSuccession:self.activeMatchData :playerIndex];
+        
+        breakData = [common getDataSetForBreaks:self.activeMatchData :playerIndex];
+        
+        
     }
+
+    for(id key in breakData) {
+        int amt = [[breakData objectForKey:key] intValue];
+        if (amt>0) {
+        topbreaks = [NSString stringWithFormat:@"%@\n%@ = %d", topbreaks, [key substringFromIndex:3], amt ];
+        }
+    }
+    
     
     if ([playerIndex intValue]==1) {
         self.p1HiBreakLabel.text = [NSString stringWithFormat:@"%d",hibreak];
         self.p1AvgBreakLabel.text = [NSString stringWithFormat:@"%.02f",avgbreak];
         self.p1BallAvgLabel.text = [NSString stringWithFormat:@"%.02f",avgball];
+        self.p1MaxAmtOfBallsInSuccession.text = [NSString stringWithFormat:@"%d",successioncount];
         
         if (redcount==0) {
-            self.p1ImageBallRed.hidden=true;
+            //self.p1ImageBallRed.hidden=true;
             self.p1RedCountLabel.hidden=true;
         } else {
             self.p1ImageBallRed.hidden=false;
@@ -444,7 +461,7 @@
             self.p1RedCountLabel.text = [NSString stringWithFormat:@"%d",redcount];
         }
         if (yellowcount==0) {
-            self.p1ImageBallYellow.hidden=true;
+            //self.p1ImageBallYellow.hidden=true;
             self.p1YellowCountLabel.hidden=true;
         } else {
             self.p1ImageBallYellow.hidden=false;
@@ -452,7 +469,7 @@
             self.p1YellowCountLabel.text = [NSString stringWithFormat:@"%d",yellowcount];
         }
         if (greencount==0) {
-            self.p1ImageBallGreen.hidden=true;
+            //self.p1ImageBallGreen.hidden=true;
             self.p1GreenCountLabel.hidden=true;
         } else {
             self.p1ImageBallGreen.hidden=false;
@@ -460,7 +477,7 @@
             self.p1GreenCountLabel.text = [NSString stringWithFormat:@"%d",greencount];
         }
         if (browncount==0) {
-            self.p1ImageBallBrown.hidden=true;
+            //self.p1ImageBallBrown.hidden=true;
             self.p1BrownCountLabel.hidden=true;
         } else {
             self.p1ImageBallBrown.hidden=false;
@@ -468,7 +485,7 @@
             self.p1BrownCountLabel.text = [NSString stringWithFormat:@"%d",browncount];
         }
         if (bluecount==0) {
-            self.p1ImageBallBlue.hidden=true;
+            //self.p1ImageBallBlue.hidden=true;
             self.p1BlueCountLabel.hidden=true;
         } else {
             self.p1ImageBallBlue.hidden=false;
@@ -476,7 +493,7 @@
             self.p1BlueCountLabel.text = [NSString stringWithFormat:@"%d",bluecount];
         }
         if (pinkcount==0) {
-            self.p1ImageBallPink.hidden=true;
+            //self.p1ImageBallPink.hidden=true;
             self.p1PinkCountLabel.hidden=true;
         } else {
             self.p1ImageBallPink.hidden=false;
@@ -484,7 +501,7 @@
             self.p1PinkCountLabel.text = [NSString stringWithFormat:@"%d",pinkcount];
         }
         if (blackcount==0) {
-            self.p1ImageBallBlack.hidden=true;
+            //self.p1ImageBallBlack.hidden=true;
             self.p1BlackCountLabel.hidden=true;
         } else {
             self.p1ImageBallBlack.hidden=false;
@@ -499,9 +516,10 @@
         self.p2HiBreakLabel.text = [NSString stringWithFormat:@"%d",hibreak];
         self.p2AvgBreakLabel.text = [NSString stringWithFormat:@"%.02f",avgbreak];
         self.p2BallAvgLabel.text = [NSString stringWithFormat:@"%.02f",avgball];
+        self.p2MaxAmtOfBallsInSuccession.text = [NSString stringWithFormat:@"%d",successioncount];
         
         if (redcount==0) {
-            self.p2ImageBallRed.hidden=true;
+            //self.p2ImageBallRed.hidden=true;
             self.p2RedCountLabel.hidden=true;
         } else {
             self.p2ImageBallRed.hidden=false;
@@ -510,7 +528,7 @@
         }
         
         if (yellowcount==0) {
-            self.p2ImageBallYellow.hidden=true;
+            //self.p2ImageBallYellow.hidden=true;
             self.p2YellowCountLabel.hidden=true;
         } else {
             self.p2ImageBallYellow.hidden=false;
@@ -518,7 +536,7 @@
             self.p2YellowCountLabel.text = [NSString stringWithFormat:@"%d",yellowcount];
         }
         if (greencount==0) {
-            self.p2ImageBallGreen.hidden=true;
+            //self.p2ImageBallGreen.hidden=true;
             self.p2GreenCountLabel.hidden=true;
         } else {
             self.p2ImageBallGreen.hidden=false;
@@ -526,7 +544,7 @@
             self.p2GreenCountLabel.text = [NSString stringWithFormat:@"%d",greencount];
         }
         if (browncount==0) {
-            self.p2ImageBallBrown.hidden=true;
+            //self.p2ImageBallBrown.hidden=true;
             self.p2BrownCountLabel.hidden=true;
         } else {
             self.p2ImageBallBrown.hidden=false;
@@ -534,7 +552,7 @@
             self.p2BrownCountLabel.text = [NSString stringWithFormat:@"%d",browncount];
         }
         if (bluecount==0) {
-            self.p2ImageBallBlue.hidden=true;
+            //self.p2ImageBallBlue.hidden=true;
             self.p2BlueCountLabel.hidden=true;
         } else {
             self.p2ImageBallBlue.hidden=false;
@@ -542,7 +560,7 @@
             self.p2BlueCountLabel.text = [NSString stringWithFormat:@"%d",bluecount];
         }
         if (pinkcount==0) {
-            self.p2ImageBallPink.hidden=true;
+            //self.p2ImageBallPink.hidden=true;
             self.p2PinkCountLabel.hidden=true;
         } else {
             self.p2ImageBallPink.hidden=false;
@@ -550,7 +568,7 @@
             self.p2PinkCountLabel.text = [NSString stringWithFormat:@"%d",pinkcount];
         }
         if (blackcount==0) {
-            self.p2ImageBallBlack.hidden=true;
+            //self.p2ImageBallBlack.hidden=true;
             self.p2BlackCountLabel.hidden=true;
         } else {
             self.p2ImageBallBlack.hidden=false;
@@ -1317,13 +1335,21 @@
     
     NSLog(@"Number test:%@ %@",entry.lastshotid, [NSNumber numberWithInt:Bonus]);
     
+   // cell.layer.borderWidth = 1.0;
+    
+    
     /* normal text within cell */
     if(entry.playerid==[NSNumber numberWithInt:1]) {
         cell.playerLabel.text = self.p1.nickName;
-        cell.cellContentView.backgroundColor = self.skinPlayer1Colour;
+        
+        cell.cellContentView.layer.borderColor = self.skinPlayer1Colour.CGColor;
+        
+        
+        //cell.cellContentView.backgroundColor = self.skinPlayer1Colour;
     } else if(entry.playerid==[NSNumber numberWithInt:2]) {
         cell.playerLabel.text = self.p2.nickName;
-        cell.cellContentView.backgroundColor = self.skinPlayer2Colour;
+         cell.cellContentView.layer.borderColor = self.skinPlayer2Colour.CGColor;
+       // cell.cellContentView.backgroundColor = self.skinPlayer2Colour;
     } else {
         cell.playerLabel.text = @"Adjustment";
         cell.cellContentView.backgroundColor = self.skinBackgroundColour;

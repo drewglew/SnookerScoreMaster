@@ -14,6 +14,7 @@
 #import "snookerbreak.h"
 #import "breakEntry.h"
 #import "breakBallCell.h"
+#import "graphData.h"
 
 @interface common : NSObject
 
@@ -47,6 +48,7 @@
 
 + (NSNumber*) getHBTotal :(NSMutableArray *) activeDataSet :(NSNumber *) playerId :(NSNumber *) frameId;
 + (NSMutableArray *) getHBBalls :(NSMutableArray*) activeDataSet :(NSNumber*)playerId :(NSNumber*)frameId;
-
++ (int) getMaxAmtOfBallsInSuccession :(NSMutableArray *) frameDataSet :(NSNumber *) playerId;
++ (NSMutableDictionary *) getDataSetForBreaks :(NSMutableArray*) activeDataSet :(NSNumber*)playerId;
 
 @end

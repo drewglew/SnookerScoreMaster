@@ -21,9 +21,25 @@
 //@synthesize importedMatchData;
 //@synthesize mediaMatchData;
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone) {
+        
+        switch ((int)[[UIScreen mainScreen] nativeBounds].size.height) {
+            case 2436:
+                application.statusBarHidden = false;
+                
+                
+                break;
+            default:
+                application.statusBarHidden = true;
+                NSLog(@"unknown");
+        }
+    }
+    
+    
     return YES;
 }
 
@@ -71,7 +87,7 @@
         [defaults setValue:@"147" forKey:@"celebrateBreakLimit"];
         [defaults setBool:NO forKey:@"isShotStopWatch"];
         [defaults setBool:NO forKey:@"isMenuShot"];
-        [defaults setValue:@"0" forKey:@"referee_voice"];
+        [defaults setValue:@"en-GB" forKey:@"referee_voice"];
     }
     self.theme = [[defaults valueForKey:@"theme"] intValue];
     self.isHollow = [[defaults valueForKey:@"isHollow"] boolValue];

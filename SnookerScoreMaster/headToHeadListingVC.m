@@ -50,7 +50,7 @@
     
     [self.navigationController setToolbarHidden:YES animated:YES];
     self.navigationController.view.backgroundColor = [UIColor clearColor];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+   // [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 }
 
 

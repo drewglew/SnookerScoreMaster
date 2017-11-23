@@ -239,14 +239,13 @@ last modified -
 }
 
 
-
-/* 
-created 20150928
-last modified 20161123
+/*
+ created 20150928
+ last modified 20161123
  
-20160206 fixed bug with returned ballshot array, it was not excluding the balls that were not needed in the break count 
-20160208 moved into common class
-*/
+ 20160206 fixed bug with returned ballshot array, it was not excluding the balls that were not needed in the break count
+ 20160208 moved into common class
+ */
 
 + (NSMutableArray *) getHiBreakBalls :(NSMutableArray*) activeDataSet :(NSNumber*)playerId :(NSNumber*)frameId {
     int highestBreak=0;
@@ -278,6 +277,136 @@ last modified 20161123
     }
     return balls;
 }
+
+
+
+/* 
+created 20170424
+last modified 20170424
+*/
+
++ (int) getMaxAmtOfBallsInSuccession :(NSMutableArray *) frameDataSet :(NSNumber *) playerId {
+    int totalBallsInSuccession=0;
+    for (breakEntry *data in frameDataSet) {
+        int totalBalls=0;
+        if (playerId == data.playerid) {
+            for (ballShot *shot in data.shots) {
+                if (shot.shotid==[NSNumber numberWithInt:Potted]) {
+                    totalBalls ++;
+                }
+            }
+            if (totalBalls>totalBallsInSuccession) {
+                totalBallsInSuccession = totalBalls;
+            }
+        }
+    }
+    return totalBallsInSuccession;
+}
+
+/*
+ created 20170424
+ last modified 20170424
+ 
+ */
+
++ (NSMutableDictionary *) getDataSetForBreaks :(NSMutableArray*) activeDataSet :(NSNumber*)playerId {
+    
+    int totalBalls=0;
+    int breakamt=0;
+    int value;
+
+    // http://stackoverflow.com/questions/2132811/objective-c-convert-array-of-objects-with-date-field-into-dictionary-of-arra
+    
+    NSMutableDictionary *data =  [[NSMutableDictionary alloc] init];
+    
+    
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"01. Under 10"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"02. Between 11 and 20"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"03. Between 21 and 30"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"04. Between 31 and 40"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"05. Between 41 and 50"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"06. Between 51 and 60"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"07. Between 61 and 70"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"08. Between 71 and 80"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"09. Between 81 and 90"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"10. Between 91 and 100"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"11. Between 101 and 110"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"12. Between 111 and 120"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"13. Between 121 and 130"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"14. Between 131 and 140"];
+    [data setObject:[NSNumber numberWithInt:0] forKey:@"15. Between 141 and 147+"];
+    
+    for (breakEntry *visit in activeDataSet) {
+        if (playerId == visit.playerid) {
+            totalBalls = 0;
+            breakamt = 0;
+            for (ballShot *shot in visit.shots) {
+                if (shot.shotid==[NSNumber numberWithInt:Potted]) {
+                    totalBalls ++;
+                    breakamt += [shot.value intValue];
+                }
+            }
+
+            if (totalBalls > 1) {
+                
+                if (breakamt<=10) {
+                    value = [[data valueForKey:@"01. Under 10"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"01. Under 10"];
+                } else if (breakamt<=20) {
+                    value = [[data valueForKey:@"02. Between 11 and 20"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"02. Between 11 and 20"];
+                } else if (breakamt<=30) {
+                    value = [[data valueForKey:@"03. Between 21 and 30"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"03. Between 21 and 30"];
+                } else if (breakamt<=40) {
+                    value = [[data valueForKey:@"04. Between 31 and 40"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"04. Between 31 and 40"];
+                } else if (breakamt<=50) {
+                    value = [[data valueForKey:@"05. Between 41 and 50"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"05. Between 41 and 50"];
+                } else if (breakamt<=60) {
+                    value = [[data valueForKey:@"06. Between 51 and 60"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"06. Between 51 and 60"];
+                } else if (breakamt<=70) {
+                    value = [[data valueForKey:@"07. Between 61 and 70"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"07. Between 61 and 70"];
+                } else if (breakamt<=80) {
+                    value = [[data valueForKey:@"08. Between 71 and 80"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"08. Between 71 and 80"];
+                } else if (breakamt<=90) {
+                    value = [[data valueForKey:@"09. Between 81 and 90"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"09. Between 81 and 90"];
+                } else if (breakamt<=100) {
+                    value = [[data valueForKey:@"10. Between 91 and 100"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"10. Between 91 and 100"];
+                } else if (breakamt<=110) {
+                    value = [[data valueForKey:@"11. Between 101 and 110"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"11. Between 101 and 110"];
+                } else if (breakamt<=120) {
+                    value = [[data valueForKey:@"12. Between 111 and 120"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"12. Between 111 and 120"];
+                } else if (breakamt<=130) {
+                    value = [[data valueForKey:@"13. Between 121 and 130"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"13. Between 121 and 130"];
+                } else if (breakamt<=140) {
+                    value = [[data valueForKey:@"14. Between 131 and 140"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"14. Between 131 and 140"];
+                } else if (breakamt>140) {
+                    value = [[data valueForKey:@"15. Between 141 and 147+"] intValue];
+                    [data setValue:[NSNumber numberWithInt:value + 1] forKey:@"15. Between 141 and 147+"];
+                }
+                
+            }
+        }
+    }
+    return data;
+}
+
+
+
+
+
+
 
 
 

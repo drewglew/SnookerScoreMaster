@@ -41,13 +41,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     /* colour setup */
-    self.redColour = [UIColor colorWithRed:217.0f/255.0f green:23.0f/255.0f blue:60.0f/255.0f alpha:1.0];
-    self.yellowColour = [UIColor colorWithRed:222.0f/255.0f green:199.0f/255.0f blue:4.0f/255.0f alpha:1.0];
-    self.greenColour = [UIColor colorWithRed:61.0f/255.0f green:191.0f/255.0f blue:61.0f/255.0f alpha:1.0];
-    self.brownColour = [UIColor colorWithRed:120.0f/255.0f green:64.0f/255.0f blue:0.0f/255.0f alpha:1.0];
-    self.blueColour = [UIColor colorWithRed:39.0f/255.0f green:121.0f/255.0f blue:198.0f/255.0f alpha:1.0];
-    self.pinkColour = [UIColor colorWithRed:201.0f/255.0f green:78.0f/255.0f blue:184.0f/255.0f alpha:1.0];
-    self.blackColour = [UIColor colorWithRed:33.0f/255.0f green:33.0f/255.0f blue:33.0f/255.0f alpha:1.0];
+    self.redColour = [UIColor colorWithRed:247.0f/255.0f green:27.0f/255.0f blue:60.0f/255.0f alpha:1.0];
+    self.yellowColour = [UIColor colorWithRed:255.0f/255.0f green:168.0f/255.0f blue:0.0f/255.0f alpha:1.0];
+    self.greenColour = [UIColor colorWithRed:0.0f/255.0f green:101.0f/255.0f blue:116.0f/255.0f alpha:1.0];
+    self.brownColour = [UIColor colorWithRed:114.0f/255.0f green:43.0f/255.0f blue:22.0f/255.0f alpha:1.0];
+    self.blueColour = [UIColor colorWithRed:0.0f/255.0f green:79.0f/255.0f blue:233.0f/255.0f alpha:1.0];
+    self.pinkColour = [UIColor colorWithRed:255.0f/255.0f green:81.0f/255.0f blue:143.0f/255.0f alpha:1.0];
+    self.blackColour = [UIColor colorWithRed:4.0f/255.0f green:3.0f/255.0f blue:8.0f/255.0f alpha:1.0];
     
     
     // Do any additional setup after loading the view.
