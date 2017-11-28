@@ -10,7 +10,6 @@
 #import <MessageUI/MessageUI.h>
 #import "player.h"
 #import "frameScore.h"
-#import "adjustVC.h"
 #import <iAd/iAd.h>
 #import "AppDelegate.h"
 #import "playerDetailVC.h"
@@ -25,7 +24,7 @@
 @import AVFoundation;
 @import Firebase;
 
-@interface scoreboardVC : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, AdjustPointsDelegate, UINavigationControllerDelegate, AVSpeechSynthesizerDelegate> {
+@interface scoreboardVC : UIViewController <MFMailComposeViewControllerDelegate,UIAlertViewDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, AVSpeechSynthesizerDelegate> {
     int activeColour;
     bool ballReplaced;
     int colourStateAtStartOfBreak;

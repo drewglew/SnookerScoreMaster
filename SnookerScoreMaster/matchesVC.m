@@ -85,10 +85,6 @@
 
 /* last modified 20160204 */
 
-
-
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"matchrow";
@@ -100,13 +96,7 @@
     }
     //Here the dataSource array is of dictionary objects
     match *m = [self.matches objectAtIndex:indexPath.row];
-    /*
-    if (([m.Player1Number intValue]  == self.staticPlayer1Number && [m.Player2Number intValue] == self.staticPlayer2Number)) {
-        //cell.contentView.superview.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
-    } else {
-        //cell.contentView.superview.backgroundColor = [UIColor whiteColor];
-    }
-    */
+
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [UIColor clearColor];
     [cell setSelectedBackgroundView:bgColorView];
@@ -118,15 +108,7 @@
     } else {
         cell.userInteractionEnabled = YES;
     }
-  /*
-    if (self.selectionStyleHighlight==1) {
-        [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
-    }
-    else
-    {
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    }
-    */
+
     
     cell.Player1Name.text = m.player1Name;
     cell.Player1Name.textColor = self.skinForegroundColour;
@@ -161,8 +143,10 @@
     
     
     cell.matchDate.text = [NSString stringWithFormat:@"%@",[self relativeDateStringForDate  :m.matchDate]];
-    cell.matchDate.textColor = self.skinBackgroundColour;
-    [cell.matchDate setPersistentBackgroundColor:self.skinForegroundColour];
+    cell.matchDate.textColor = [UIColor colorWithRed:44.0f/255.0f green:62.0f/255.0f blue:80.0f/255.0f alpha:1.0];
+    cell.matchDate.backgroundColor = [UIColor colorWithRed:136.0f/255.0f green:160.0f/255.0f blue:150.0f/255.0f alpha:1.0];
+    
+    [cell.matchDate setPersistentBackgroundColor:[UIColor colorWithRed:136.0f/255.0f green:160.0f/255.0f blue:150.0f/255.0f alpha:1.0]];
     cell.framesWonLabel.textColor= self.skinForegroundColour;
     cell.matchEndDate = [NSString stringWithFormat:@"%@",[self relativeDateStringForDate  :m.matchEndDate]];
     
@@ -263,37 +247,45 @@
     cell.player1Photo.layer.cornerRadius = 75/2.0f;
     
     
-    cell.player1Photo.layer.borderWidth=1.5f;
-    
+    cell.player1Photo.layer.borderWidth=4.0f;
+    cell.player1Badge.backgroundColor = [UIColor colorWithRed:93.0f/255.0f green:46.0f/255.0f blue:140.0f/255.0f alpha:1.0];
     cell.player1Badge.layer.cornerRadius = 15;
     
     cell.player2Photo.frame = CGRectMake(cell.player2Photo.frame.origin.x, cell.player2Photo.frame.origin.y, 75, 75);
     cell.player2Photo.clipsToBounds = YES;
     cell.player2Photo.layer.cornerRadius = 75/2.0f;
     
-    cell.player2Photo.layer.borderColor=[UIColor orangeColor].CGColor;
-    cell.player2Photo.layer.borderWidth=1.5f;
+    cell.player2Photo.layer.borderColor=self.yellowColour.CGColor;
+    cell.player2Photo.layer.borderWidth=4.0f;
+    cell.player2Badge.backgroundColor = [UIColor colorWithRed:93.0f/255.0f green:46.0f/255.0f blue:140.0f/255.0f alpha:1.0];
     cell.player2Badge.layer.cornerRadius = 15;
     
     cell.backgroundColor = self.skinBackgroundColour;
+    ;
  
     cell.tintColor = self.skinForegroundColour;
     
     if (m.Player1FrameWins > m.Player2FrameWins) {
-        
-        cell.player1Photo.layer.borderColor=[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1].CGColor;
-        cell.player2Photo.layer.borderColor=[UIColor colorWithRed:255.0/255.0 green:59.0/255.0 blue:48.0/255.0 alpha:1].CGColor;
-        
-        
+        cell.Player1FrameWins.textColor=self.greenColour;
+        cell.Player1Name.textColor=self.greenColour;
+        cell.player1Photo.layer.borderColor=self.greenColour.CGColor;
+        cell.player2Photo.layer.borderColor=self.redColour.CGColor;
+        cell.Player2Name.textColor=self.redColour;
+        cell.Player2FrameWins.textColor=self.redColour;
     } else if (m.Player1FrameWins < m.Player2FrameWins) {
-        
-        cell.player1Photo.layer.borderColor=[UIColor colorWithRed:255.0/255.0 green:59.0/255.0 blue:48.0/255.0 alpha:1].CGColor;
-        cell.player2Photo.layer.borderColor=[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1].CGColor;
-        
+        cell.Player1FrameWins.textColor=self.redColour;
+        cell.Player1Name.textColor=self.redColour;
+        cell.player1Photo.layer.borderColor=self.redColour.CGColor;
+        cell.player2Photo.layer.borderColor=self.greenColour.CGColor;
+        cell.Player2Name.textColor=self.greenColour;
+        cell.Player2FrameWins.textColor=self.greenColour;
     } else {
-        cell.player1Photo.layer.borderColor=[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0.0/255.0 alpha:1].CGColor;
-        cell.player2Photo.layer.borderColor=[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0.0/255.0 alpha:1].CGColor;
-        
+        cell.Player1FrameWins.textColor=self.skinForegroundColour;
+        cell.Player1Name.textColor=self.skinForegroundColour;
+        cell.player1Photo.layer.borderColor=self.skinForegroundColour.CGColor;
+        cell.player2Photo.layer.borderColor=self.skinForegroundColour.CGColor;
+        cell.Player2FrameWins.textColor=self.skinForegroundColour;
+        cell.Player2Name.textColor=self.skinForegroundColour;
     }
     
     

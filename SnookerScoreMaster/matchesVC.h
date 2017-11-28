@@ -49,4 +49,8 @@
 @property (strong, nonatomic) UIColor *skinPlayer1Colour;
 @property (strong, nonatomic) UIColor *skinPlayer2Colour;
 
+@property (strong, nonatomic) UIColor *redColour;
+@property (strong, nonatomic) UIColor *yellowColour;
+@property (strong, nonatomic) UIColor *greenColour;
+@property (strong, nonatomic) UIColor *blueColour;
 @end

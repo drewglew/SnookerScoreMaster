@@ -53,8 +53,8 @@
 #define kGraphTop 0
 #define kStepY 50
 #define kOffsetY 0
-#define kCircleRadius 4.5
-#define kSmallCircleRadius 2.0
+#define kCircleRadius 1.0
+#define kSmallCircleRadius 1.0
 
 -(void) loadSharedData;
 -(void) initColours:(UIColor*) skinPlayer1Colour :(UIColor*) skinPlayer2Colour ;

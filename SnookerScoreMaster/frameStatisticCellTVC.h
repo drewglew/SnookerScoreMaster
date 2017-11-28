@@ -12,6 +12,8 @@
 
 @interface frameStatisticCellTVC : UITableViewCell <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *playerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *visitLabel;
+
 @property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutlet UILabel *durationLabel;
 @property (strong, nonatomic) IBOutlet UICollectionView *frameBallCollectionView;

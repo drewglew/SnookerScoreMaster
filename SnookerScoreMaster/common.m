@@ -149,7 +149,7 @@ last modified -
     //half of the width
     shotButton.layer.cornerRadius = heightWidth/2.0f;
     shotButton.layer.borderColor=colour.CGColor;
-    shotButton.layer.borderWidth=1.5f;
+    shotButton.layer.borderWidth=3.0f;
 }
 
 /*

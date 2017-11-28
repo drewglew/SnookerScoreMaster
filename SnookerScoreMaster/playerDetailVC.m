@@ -99,13 +99,7 @@ enum themes {greenbaize, dark, light, modern, purplehaze, blur};
         self.currentPlayerKey = p.playerkey;
  
     }
-    /* commented out 20170114
-    if (self.playerIndex==1) {
-        p = self.p1;
-    } else {
-        p = self.p2;
-    }
-    */
+
 
     if (((self.currentPlayerNumber == self.staticPlayer1Number && self.staticPlayer1CurrentBreak>0) || (self.currentPlayerNumber == self.staticPlayer2Number && self.staticPlayer2CurrentBreak>0)) && self.activeBreakShots.count>0) {
 
@@ -163,37 +157,14 @@ enum themes {greenbaize, dark, light, modern, purplehaze, blur};
     self.historyHighestBreakBallsCollection.delegate = self;
 
     [self.historyHighestBreakBallsCollection reloadData];
-    
-    
-    /*
-    if (self.theme==greenbaize) {
-        
-        
-        
-    } else if (self.theme==dark) {
-        
-    } else if (self.theme==light) {
-        
-        self.playerNickName.textColor = self.skinForegroundColour;
-        self.playerEmail.textColor = self.skinForegroundColour;
-        self.breakShownLabel.textColor = self.skinForegroundColour;
-        
-    } else if (self.theme == modern) {
-        //  [self.view setBackgroundColor:[UIColor colorWithRed:45.0f/255.0f green:45.0f/255.0f blue:45.0f/255.0f alpha:1.0]];
+
+    if (self.currentPlayerNumber == 0) {
+        self.view.backgroundColor = self.skinBackgroundColour;
+    } else if (self.currentPlayerNumber == self.staticPlayer1Number) {
+        self.view.backgroundColor = self.skinPlayer1Colour;
+    } else if (self.currentPlayerNumber == self.staticPlayer2Number){
+         self.view.backgroundColor = self.skinPlayer2Colour;
     }
-    */
-    
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.bounds;
-    
-    if (self.currentPlayerNumber == self.staticPlayer1Number) {
-        //[self.view setBackgroundColor: self.skinPlayer1Colour];
-        gradient.colors = [NSArray arrayWithObjects:(id)[self.skinPlayer1Colour CGColor], (id)[self.skinBackgroundColour CGColor], nil];
-    } else {
-        //[self.view setBackgroundColor: self.skinPlayer2Colour];
-        gradient.colors = [NSArray arrayWithObjects:(id)[self.skinPlayer2Colour CGColor], (id)[self.skinBackgroundColour CGColor], nil];
-    }
-    [self.view.layer insertSublayer:gradient atIndex:0];
     
     
     
@@ -231,7 +202,7 @@ enum themes {greenbaize, dark, light, modern, purplehaze, blur};
     // aniimate if not a new player
     if (self.playerIndex!=0) {
         
-        [av animateToBorderValues:[self.db getPlayerMatchStatistics: [NSNumber numberWithInt:self.currentPlayerNumber]] duration:1];
+        [av animateToBorderValues:[self.db getPlayerMatchStatistics: [NSNumber numberWithInt:self.currentPlayerNumber]] duration:0.5];
     }
     
     [self.avatarPlayer setNeedsDisplay];
@@ -279,14 +250,16 @@ enum themes {greenbaize, dark, light, modern, purplehaze, blur};
     
     av.borderWidth = 10;
     if (self.playerIndex!=0) {
-        av.borderColors = @[[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1],
-                            [UIColor colorWithRed:255.0/255.0 green:59.0/255.0 blue:48.0/255.0 alpha:1],
-                            [UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0.0/255.0 alpha:1]];
+        // needs to be
+        
+        av.borderColors = @[self.greenColour,
+                            self.redColour,
+                            self.yellowColour];
         /* we will have animation so first state for avatar border will be empty */
         av.borderValues = @[@(0), @(0), @(0)];
         
     } else {
-        av.borderColors = @[[UIColor yellowColor]];
+        av.borderColors = @[self.yellowColour];
         av.borderValues = @[@(1.0)];
         
     }
@@ -345,6 +318,7 @@ enum themes {greenbaize, dark, light, modern, purplehaze, blur};
         playerListingVC *controller = (playerListingVC *)segue.destinationViewController;
         controller.delegate = self;
         controller.viewOption = @"playerListing";
+        
         controller.activePlayerNumber = [NSNumber numberWithInt:self.currentPlayerNumber];
         if (self.playerIndex == self.p1.playerIndex ) {
             controller.Player1Key = self.p1.playerkey;
@@ -361,6 +335,11 @@ enum themes {greenbaize, dark, light, modern, purplehaze, blur};
         controller.skinBackgroundColour = self.skinBackgroundColour;
         controller.skinPlayer1Colour = self.skinPlayer1Colour;
         controller.skinPlayer2Colour = self.skinPlayer2Colour;
+        
+        controller.redColour = self.redColour;
+        controller.yellowColour = self.yellowColour;
+        controller.greenColour = self.greenColour;
+        
         
         
         
@@ -398,6 +377,11 @@ enum themes {greenbaize, dark, light, modern, purplehaze, blur};
         controller.skinBackgroundColour = self.skinBackgroundColour;
         controller.skinPlayer1Colour = self.skinPlayer1Colour;
         controller.skinPlayer2Colour = self.skinPlayer2Colour;
+        
+        controller.redColour = self.redColour;
+        controller.yellowColour = self.yellowColour;
+        controller.greenColour = self.greenColour;
+        controller.blueColour = self.blueColour;
         
         
     } else if ([segue.identifier isEqualToString:@"PlayerStatistics"]) {

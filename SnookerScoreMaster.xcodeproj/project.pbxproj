@@ -25,7 +25,6 @@
 		3A35C1FE1BD5FA0200B89BD2 /* breakBallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35C1F91BD5FA0200B89BD2 /* breakBallCell.m */; };
 		3A35C1FF1BD5FA0200B89BD2 /* player.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35C1FB1BD5FA0200B89BD2 /* player.m */; };
 		3A35C2021BD5FA2B00B89BD2 /* dbHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35C2011BD5FA2B00B89BD2 /* dbHelper.m */; };
-		3A35C2081BD5FA8600B89BD2 /* adjustVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35C2051BD5FA8600B89BD2 /* adjustVC.m */; };
 		3A35C2091BD5FA8600B89BD2 /* scoreboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35C2071BD5FA8600B89BD2 /* scoreboardVC.m */; };
 		3A35C20F1BD5FAB500B89BD2 /* DraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35C20C1BD5FAB500B89BD2 /* DraggableView.m */; };
 		3A35C2161BD5FB0600B89BD2 /* breakEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35C2131BD5FB0600B89BD2 /* breakEntry.m */; };
@@ -68,6 +67,10 @@
 		3AB429061BC95E83002FE58E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB429041BC95E83002FE58E /* Main.storyboard */; };
 		3AB429071BC95E83002FE58E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB429051BC95E83002FE58E /* LaunchScreen.xib */; };
 		3AB4CF091CDF8D8700C07BD0 /* whiteblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB4CF081CDF8D8700C07BD0 /* whiteblue.png */; };
+		3AC0427F1FCCBE3000FA01F4 /* Icon-App-76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC0427E1FCCBE2D00FA01F4 /* Icon-App-76x76@2x.png */; };
+		3AC042821FCCC6A000FA01F4 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC042801FCCC69F00FA01F4 /* clock.png */; };
+		3AC042831FCCC6A000FA01F4 /* stopwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC042811FCCC6A000FA01F4 /* stopwatch.png */; };
+		3AC4CF161FC8CAEE00BD5587 /* ssm_title_blur.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC4CF151FC8CAED00BD5587 /* ssm_title_blur.png */; };
 		3AC847F41BF257870028C0A2 /* snookerTableStatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC847F31BF257870028C0A2 /* snookerTableStatsView.m */; };
 		3AD0BAA21E37CD9800BC6C3B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AD0BAA11E37CD9800BC6C3B /* GoogleService-Info.plist */; };
 		3AD0BAA41E37CF0200BC6C3B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD0BAA31E37CF0200BC6C3B /* AdSupport.framework */; };
@@ -140,8 +143,6 @@
 		3A35C1FB1BD5FA0200B89BD2 /* player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = player.m; sourceTree = "<group>"; };
 		3A35C2001BD5FA2B00B89BD2 /* dbHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbHelper.h; sourceTree = "<group>"; };
 		3A35C2011BD5FA2B00B89BD2 /* dbHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dbHelper.m; sourceTree = "<group>"; };
-		3A35C2041BD5FA8600B89BD2 /* adjustVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjustVC.h; sourceTree = "<group>"; };
-		3A35C2051BD5FA8600B89BD2 /* adjustVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = adjustVC.m; sourceTree = "<group>"; };
 		3A35C2061BD5FA8600B89BD2 /* scoreboardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scoreboardVC.h; sourceTree = "<group>"; };
 		3A35C2071BD5FA8600B89BD2 /* scoreboardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = scoreboardVC.m; sourceTree = "<group>"; };
 		3A35C20B1BD5FAB500B89BD2 /* DraggableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableView.h; sourceTree = "<group>"; };
@@ -208,6 +209,10 @@
 		3AB429041BC95E83002FE58E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3AB429051BC95E83002FE58E /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		3AB4CF081CDF8D8700C07BD0 /* whiteblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteblue.png; sourceTree = "<group>"; };
+		3AC0427E1FCCBE2D00FA01F4 /* Icon-App-76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-76x76@2x.png"; sourceTree = "<group>"; };
+		3AC042801FCCC69F00FA01F4 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		3AC042811FCCC6A000FA01F4 /* stopwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopwatch.png; sourceTree = "<group>"; };
+		3AC4CF151FC8CAED00BD5587 /* ssm_title_blur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ssm_title_blur.png; sourceTree = "<group>"; };
 		3AC847F21BF257870028C0A2 /* snookerTableStatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = snookerTableStatsView.h; sourceTree = "<group>"; };
 		3AC847F31BF257870028C0A2 /* snookerTableStatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = snookerTableStatsView.m; sourceTree = "<group>"; };
 		3AD0BAA11E37CD9800BC6C3B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -308,6 +313,10 @@
 		3A35C1B01BD5F8A700B89BD2 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3AC042801FCCC69F00FA01F4 /* clock.png */,
+				3AC042811FCCC6A000FA01F4 /* stopwatch.png */,
+				3AC0427E1FCCBE2D00FA01F4 /* Icon-App-76x76@2x.png */,
+				3AC4CF151FC8CAED00BD5587 /* ssm_title_blur.png */,
 				3A965EAD1FAF858700936FD1 /* refspeech.png */,
 				3A2683CF1D3958A8003307BE /* selected.png */,
 				3AB4CF081CDF8D8700C07BD0 /* whiteblue.png */,
@@ -358,8 +367,6 @@
 				3A7379461DF3F8BB00E5D556 /* helpPageVC.m */,
 				3A7ADE0D1C4A23D30014B847 /* matchStatisticsVC.h */,
 				3A7ADE0E1C4A23D30014B847 /* matchStatisticsVC.m */,
-				3A35C2041BD5FA8600B89BD2 /* adjustVC.h */,
-				3A35C2051BD5FA8600B89BD2 /* adjustVC.m */,
 				3A35C2061BD5FA8600B89BD2 /* scoreboardVC.h */,
 				3A35C2071BD5FA8600B89BD2 /* scoreboardVC.m */,
 				3A61EEBF1C3EDB0700BEF957 /* playerDetailVC.h */,
@@ -613,12 +620,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6101971D3C309B001F6BF6 /* MyParticle.sks in Resources */,
+				3AC4CF161FC8CAEE00BD5587 /* ssm_title_blur.png in Resources */,
 				3AAFF57B1D3824D70048ACC7 /* ballCountV.xib in Resources */,
 				3A5997EB1D328A74005A11DF /* cup_gold.png in Resources */,
 				3AD0BAA21E37CD9800BC6C3B /* GoogleService-Info.plist in Resources */,
 				3A6101981D3C309B001F6BF6 /* spark.png in Resources */,
 				3A5997EC1D328A74005A11DF /* cup_silver.png in Resources */,
 				3AB4CF091CDF8D8700C07BD0 /* whiteblue.png in Resources */,
+				3AC042831FCCC6A000FA01F4 /* stopwatch.png in Resources */,
 				3AB429071BC95E83002FE58E /* LaunchScreen.xib in Resources */,
 				3AAFA8DA1E2AC15500458493 /* official-rules-of-the-game.pdf in Resources */,
 				3A61019A1D3D3A81001F6BF6 /* MyParticle2.sks in Resources */,
@@ -628,6 +637,8 @@
 				3A2683D01D3958A8003307BE /* selected.png in Resources */,
 				3A965EAE1FAF858800936FD1 /* refspeech.png in Resources */,
 				3AB429061BC95E83002FE58E /* Main.storyboard in Resources */,
+				3AC0427F1FCCBE3000FA01F4 /* Icon-App-76x76@2x.png in Resources */,
+				3AC042821FCCC6A000FA01F4 /* clock.png in Resources */,
 				3A5997EA1D328A74005A11DF /* cup_bronze.png in Resources */,
 				96D22D8F1A1FD58100E0ADE3 /* Images.xcassets in Resources */,
 				3A61019D1D3D6294001F6BF6 /* MyParticle3.sks in Resources */,
@@ -732,7 +743,6 @@
 				3A13858E1C580C1600ECF0EF /* frame.m in Sources */,
 				3AAFA8D81E2A7E2B00458493 /* playerListingTV.m in Sources */,
 				3A7379471DF3F8BB00E5D556 /* helpPageVC.m in Sources */,
-				3A35C2081BD5FA8600B89BD2 /* adjustVC.m in Sources */,
 				3A066B301C48473F006C7033 /* match.m in Sources */,
 				3ADBD2001C497758001876F2 /* embededMatchStatisticsVC.m in Sources */,
 				3A35C21A1BD5FB8800B89BD2 /* frameScore.m in Sources */,

@@ -33,9 +33,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.cellContentView.layer.cornerRadius = 5.0;;
-    self.cellContentView.layer.borderWidth = 1,0;
     self.cellContentView.layer.masksToBounds = YES;
- 
 }
 
 

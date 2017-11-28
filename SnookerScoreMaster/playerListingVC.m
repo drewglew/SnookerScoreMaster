@@ -163,15 +163,15 @@
                     }
                     
                     [av setAvatarImage:img];
-                    av.borderWidth = 3;
+                    av.borderWidth = 4;
                     
                     if ([p.playerWinsPC intValue]==-1) {
-                        av.borderColors = @[[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0.0/255.0 alpha:1]];
+                        av.borderColors = @[self.yellowColour];
                         av.borderValues = @[@(1.0)];
                     } else {
                         
-                        av.borderColors = @[[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1],
-                                            [UIColor colorWithRed:255.0/255.0 green:59.0/255.0 blue:48.0/255.0 alpha:1]];
+                        av.borderColors = @[self.greenColour,
+                                           self.redColour];
                         
                         float winPC = [p.playerWinsPC floatValue]/100.0f;
                         float losePC = 1.0f - winPC;

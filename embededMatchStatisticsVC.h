@@ -78,13 +78,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *p1ShotAvgTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *p1MaxAmtOfBallsInSuccession;
 
-@property (weak, nonatomic) IBOutlet UILabel *p1RedCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p1YellowCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p1GreenCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p1BrownCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p1BlueCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p1PinkCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p1BlackCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *p2BallAvgLabel;
 @property (weak, nonatomic) IBOutlet UILabel *p2SumPotsFouls;
 @property (weak, nonatomic) IBOutlet UILabel *p2TopBreaks;
@@ -95,13 +88,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *p2HiBreakLabel;
 @property (weak, nonatomic) IBOutlet UILabel *p2AvgBreakLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *p2RedCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p2YellowCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p2GreenCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p2BrownCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p2BlueCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p2PinkCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *p2BlackCountLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *p1HiBreakCollection;
 @property (weak, nonatomic) IBOutlet UICollectionView *p2HiBreakCollection;
 @property (weak, nonatomic) IBOutlet UICollectionView *breakCollection;
@@ -141,20 +127,6 @@
 @property (strong, nonatomic) UIColor *blueColour;
 @property (strong, nonatomic) UIColor *pinkColour;
 @property (strong, nonatomic) UIColor *blackColour;
-@property (weak, nonatomic) IBOutlet UIImageView *p1ImageBallRed;
-@property (weak, nonatomic) IBOutlet UIImageView *p1ImageBallYellow;
-@property (weak, nonatomic) IBOutlet UIImageView *p1ImageBallGreen;
-@property (weak, nonatomic) IBOutlet UIImageView *p1ImageBallBrown;
-@property (weak, nonatomic) IBOutlet UIImageView *p1ImageBallBlue;
-@property (weak, nonatomic) IBOutlet UIImageView *p1ImageBallPink;
-@property (weak, nonatomic) IBOutlet UIImageView *p1ImageBallBlack;
-@property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallRed;
-@property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallYellow;
-@property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallGreen;
-@property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallBrown;
-@property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallBlue;
-@property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallPink;
-@property (weak, nonatomic) IBOutlet UIImageView *p2ImageBallBlack;
 @property (strong, nonatomic) IBOutlet UIView *frameStatisticView;
 @property (strong, nonatomic) IBOutlet UITableView *tableFrameStatistics;
 @property (strong, nonatomic) IBOutlet UIButton *buttonDetailStats;
@@ -163,16 +135,12 @@
 @property (strong, nonatomic) IBOutlet UIView *player2BreakInfoView;
 @property (strong, nonatomic) IBOutlet UIView *player1BreakInfoView;
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
-
-
-
-
-
-
 @property (strong, nonatomic) UIColor *skinBackgroundColour;
 @property (strong, nonatomic) UIColor *skinForegroundColour;
 @property (strong, nonatomic) UIColor *skinPlayer1Colour;
 @property (strong, nonatomic) UIColor *skinPlayer2Colour;
+@property (weak, nonatomic) IBOutlet UIView *p1BallGraph;
+@property (weak, nonatomic) IBOutlet UIView *p2BallGraph;
 
 
 @end

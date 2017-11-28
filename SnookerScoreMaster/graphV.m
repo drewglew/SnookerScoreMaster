@@ -218,7 +218,7 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
 
 -(void)plotPlayerLines:(bool)fillGraph :(CGContextRef)ctx :(int) playerIndex :(int) breakOfPlayer  :(UIColor*) playerColour {
     
-    CGContextSetLineWidth(ctx, 1.5);
+    CGContextSetLineWidth(ctx, 1);
     CGContextSetStrokeColorWithColor(ctx, [playerColour CGColor]);
     CGContextSetFillColorWithColor(ctx, [playerColour CGColor]);
     
@@ -399,7 +399,7 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
             if (self.frameData.count > 30)
                 rect = CGRectMake(plotVisitsX - kSmallCircleRadius, plotPointsY - kSmallCircleRadius, 2 * kSmallCircleRadius, 2 * kSmallCircleRadius);
             else {
-                rect = CGRectMake(plotVisitsX - kCircleRadius, plotPointsY - kCircleRadius, 2 * kCircleRadius, 2 * kCircleRadius);
+                rect = CGRectMake(plotVisitsX - kSmallCircleRadius, plotPointsY - kSmallCircleRadius, 2 * kSmallCircleRadius, 2 * kSmallCircleRadius);
             }
 
             CGContextBeginPath(ctx);
@@ -420,7 +420,7 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
 
 -(void)plotPlayerMarkers:(CGContextRef)ctx :(int) playerIndex  :(UIColor*) playerColour :(int) breakIndex {
     
-    CGContextSetLineWidth(ctx, 4.0);
+    CGContextSetLineWidth(ctx, 1.0);
     CGContextSetStrokeColorWithColor(ctx, [playerColour CGColor]);
     CGContextSetFillColorWithColor(ctx, [playerColour CGColor]);
     
@@ -457,7 +457,7 @@ rect = CGRectMake(plotFramesMinX+colPadding, plotPointsMaxY, plotFramesMaxX - pl
                 if (self.frameData.count > 30)
                     rect = CGRectMake(plotVisitsX - kSmallCircleRadius, plotPointsY - kSmallCircleRadius, 2 * kSmallCircleRadius, 2 * kSmallCircleRadius);
                 else {
-                    rect = CGRectMake(plotVisitsX - kCircleRadius, plotPointsY - kCircleRadius, 2 * kCircleRadius, 2 * kCircleRadius);
+                    rect = CGRectMake(plotVisitsX - kSmallCircleRadius, plotPointsY - kSmallCircleRadius, 2 * kSmallCircleRadius, 2 * kSmallCircleRadius);
                 }
                 if (dataIndex<100) {
                     touchAreas[dataIndex] = rect;

@@ -83,9 +83,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelPlayerOneName;
 @property (weak, nonatomic) IBOutlet UILabel *labelPlayerTwoName;
 
-
-
-
 @property (strong, nonatomic) IBOutlet UIView *viewScorePlayer1;
 @property (strong, nonatomic) IBOutlet UIView *viewScorePlayer2;
 
@@ -98,7 +95,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *buttonNew;
 @property (strong, nonatomic) IBOutlet UIButton *buttonEnd;
 @property (strong, nonatomic) IBOutlet UIButton *buttonClear;
-@property (strong, nonatomic) IBOutlet UIButton *buttonAdjust;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *breakViewLeadingConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *breakViewTrailingConstraint;
 @property (strong, nonatomic) IBOutlet UIView *ballRowDisabledView;
@@ -134,9 +130,6 @@
 @property (assign) bool isShotStopWatch;
 //@property (assign) bool embedImagesInHTML;
 @property(nonatomic) CGPoint aaaShotViewPos;
-@property (strong, nonatomic) UIAlertView *alertEndScores;
-@property (strong, nonatomic) UIAlertView *alertOkNotification;
-@property (strong, nonatomic) UIAlertView *alertUndoEntry;
 @property (strong, nonatomic) UIColor *skinMainFontColor;
 @property (nonatomic) UIDynamicAnimator *animator;
 @property (strong, nonatomic) ball *buttonNoColor;
@@ -150,6 +143,18 @@
 @property int frameTimeInSeconds;
 @property int entryTimeInSeconds;
 @property int frameVisitCounter;
+
+@property (weak, nonatomic) IBOutlet UILabel *extendedClockLabel;
+@property (weak, nonatomic) IBOutlet UIStepper *stepperRedBalls;
+@property (weak, nonatomic) IBOutlet UISlider *sliderAdjustmentValue;
+@property (weak, nonatomic) IBOutlet UIButton *p1AdjusterButton;
+@property (weak, nonatomic) IBOutlet UIButton *p2AdjusterButton;
+@property (weak, nonatomic) IBOutlet UIImageView *stopWatchImage;
+@property (weak, nonatomic) IBOutlet UIImageView *clockImage;
+
+
+
+
 @end
 
 @implementation scoreboardVC {
@@ -200,7 +205,6 @@ enum themes {greenbaize, dark, light, modern, purplehaze, blur, minimal};
     self.db = [[dbHelper alloc] init];
     [self.db deleteDB:@"snookmast.db"];
     [self.db dbCreate :@"snookerm2_0.db"];
-    
 }
 
 
@@ -314,7 +318,7 @@ issue with startup now controlled by onload block condition
 
 
 /* created 20150922 */
-/* last modified 20160506 */
+/* last modified 28/11/2017 */
 -(void)addBreakToData :(breakEntry*) lastBreak {
     
     /* TODO needs to add the _entrytime from breakEntry */
@@ -324,9 +328,8 @@ issue with startup now controlled by onload block condition
         if (lastBreak.active==[NSNumber numberWithInt:activeFlag_PlayerSwapped]) {
             lastBreak.active=[NSNumber numberWithInt:1];
         }
-        
-        /* first thing is to add to database */
-        NSNumber *newRow = [self.db entriesInsert:lastBreak.matchid :lastBreak.playerid :lastBreak.frameid :lastBreak.lastshotid :lastBreak.points :lastBreak.active :lastBreak.duration];
+        lastBreak.frameballqty = [NSNumber numberWithDouble:self.stepperRedBalls.value];
+        NSNumber *newRow = [self.db entriesInsert:lastBreak.matchid :lastBreak.playerid :lastBreak.frameid :lastBreak.lastshotid :lastBreak.points :lastBreak.active :lastBreak.duration :lastBreak.frameballqty];
         
         if (newRow == [NSNumber numberWithInt:-1]) {
             // nothing to do
@@ -450,6 +453,7 @@ issue with startup now controlled by onload block condition
         self.activeMatchData = [[NSMutableArray alloc] init];
     }
     _frameVisitCounter=0;
+    
 }
 
 /* created 20150911 */
@@ -470,6 +474,8 @@ issue with startup now controlled by onload block condition
 -(void)initFrame :(NSNumber*)currentFrameId {
     [self.activeFrameData removeAllObjects];
     self.activeFrameData = [self.db entriesRetreive:[self getMatchId] :nil :self.currentFrameId :nil :nil :[NSNumber numberWithInt:1] :nil :false];
+    
+    
 
 }
 
@@ -563,23 +569,16 @@ issue with startup now controlled by onload block condition
 /* last modified 20161211 */
 -(void)viewDidLoad {
     
-
-    /*CGFloat extendedViewWidth = self.extendedSlideWidthConstant.constant - self.extendedSlideBackgroundTrailingConstant.constant;
-    
-    CGFloat extendedViewLeading = self.extendedSlideLeadingConstant.constant;
-    
-    self.self.extendedSlideLeadingConstant.constant -= extendedViewWidth;
-    */
-   
-    
-
     
     [super viewDidLoad];
+    
+   
     
     self.synthesizer = [[AVSpeechSynthesizer alloc]init];
     
     [self loadConfigDefaults];
     [self initDB];
+    
     [self.db alterTableNewColumn];
     
     self.activeMatchId = [self getMatchId];
@@ -596,7 +595,7 @@ issue with startup now controlled by onload block condition
            doCheckPausedState = true;
         } else {
             /* we are starting over */
-            
+            self.stepperRedBalls.value = 21;
             self.imagePottedBall.layer.backgroundColor = [UIColor whiteColor].CGColor;
             self.imagePottedBall.layer.borderColor = [UIColor whiteColor].CGColor;
             
@@ -618,13 +617,21 @@ issue with startup now controlled by onload block condition
             [self.labelScoreMatchPlayer1 resetFramesWon];
             [self.labelScoreMatchPlayer2 resetFramesWon];
         }
+       
         [self loadDefaults];
+       //self.stepperRedBalls.value = self.buttonRed.quantity;
     }
 
     self.textScorePlayer1 = [self setPlayerData :self.textScorePlayer1 ];
     self.textScorePlayer2 = [self setPlayerData :self.textScorePlayer2 ];
     self.labelPlayerOneName.text = self.textScorePlayer1.nickName;
     self.labelPlayerTwoName.text = self.textScorePlayer2.nickName;
+    
+    [self.p1AdjusterButton setTitle:[NSString stringWithFormat:@"%@",self.textScorePlayer1.nickName] forState:UIControlStateNormal];
+    
+    [self.p2AdjusterButton setTitle:[NSString stringWithFormat:@"%@",self.textScorePlayer2.nickName] forState:UIControlStateNormal];
+    
+    
     
     self.remainingBallsCollection.dataSource = self;
     self.remainingBallsCollection.delegate = self;
@@ -715,12 +722,29 @@ issue with startup now controlled by onload block condition
     self.slideViewTab.layer.cornerRadius = 5; // this value vary as per your desire
     self.slideViewTab.clipsToBounds = YES;
  
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle: NSDateFormatterShortStyle];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0
+                                     target:self
+                                   selector:@selector(tickTock:)
+                                   userInfo:nil
+                                    repeats:YES];
+    
     
 }
 
 /* created 20151011 */
 - (void)didBecomeActive:(NSNotification *)notification {
     [self doCheckOnImportFile];
+}
+
+-(void)tickTock:(id)sender
+{
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *currentTime = [dateFormatter stringFromDate: [NSDate date]];
+    self.extendedClockLabel.text = currentTime;
 }
 
 
@@ -784,10 +808,19 @@ issue with startup now controlled by onload block condition
     [self.textScorePlayer2 updateFrameScore:[self getFramePoints:self.activeFrameData :[NSNumber numberWithInt:2] :self.currentFrameId]];
     [self getFramesWon:self.currentFrameId :self.labelScoreMatchPlayer1 :self.labelScoreMatchPlayer2];
     self.activeBreak.hidden = true;
+    
+    /* set the extended views items accordingly */
+    self.activeBallsCollection.hidden = true;
+    self.activeBreakLabel.hidden = true;
+    self.sliderAdjustmentValue.hidden = false;
+    self.stepperRedBalls.hidden = false;
+    self.p1AdjusterButton.hidden = false;
+    self.p2AdjusterButton.hidden = false;
+
     //self.imagePottedBall.hidden = true;
     self.isMatchStarted = true;
     self.ballCollectionView.hidden = false;
-    self.activeColour = 1;
+    self.stepperRedBalls.value = [[self.db getFrameBallIndex] doubleValue];
 }
 
 /* last modified 20170117 */
@@ -821,99 +854,30 @@ issue with startup now controlled by onload block condition
     self.skinSelectedScore = [UIColor whiteColor];
     self.scoreBoardBackLabel.layer.borderWidth = 1.0f;
     
-    //if (self.theme==blur) {
-        self.snookerBackgroundPhotoImage.hidden = false;
-        [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
-        self.blurView.hidden = false;
+    self.snookerBackgroundPhotoImage.hidden = false;
+    [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
+    self.blurView.hidden = false;
         
-        self.skinForegroundColour = [UIColor colorWithRed:44.0f/255.0f green:62.0f/255.0f blue:80.0f/255.0f alpha:1.0];
-        self.skinBackgroundColour  = [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0];
+    self.skinForegroundColour = [UIColor colorWithRed:44.0f/255.0f green:62.0f/255.0f blue:80.0f/255.0f alpha:1.0];
+    self.skinBackgroundColour  = [UIColor colorWithRed:180.0f/255.0f green:184.0f/255.0f blue:171.0f/255.0f alpha:1.0];
         
-        self.skinPlayer1Colour = [UIColor colorWithRed:88.0f/255.0f green:86.0f/255.0f blue:214.0f/255.0f alpha:1.0];
-        self.skinPlayer2Colour = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0];
-    
-    
-    
-    
+    self.skinPlayer1Colour = [UIColor colorWithRed:153.0f/255.0f green:161.0f/255.0f blue:166.0f/255.0f alpha:1.0];
+    self.skinPlayer2Colour = [UIColor colorWithRed:237.0f/255.0f green:106.0f/255.0f blue:90.0f/255.0f alpha:1.0];
 
-   /* } else if (self.theme==greenbaize) {
-        self.blurView.hidden = true;
-        [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"greenbaize_clear"]];
-        self.snookerBackgroundPhotoImage.hidden = false;
-        self.skinForegroundColour = [UIColor colorWithRed:192.0f/255.0f green:139.0f/255.0f blue:98.0f/255.0f alpha:1.0];
-        self.skinBackgroundColour  = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
-        
-        self.skinPlayer1Colour = [UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0];
-        self.skinPlayer2Colour = [UIColor colorWithRed:90.0f/255.0f green:200.0f/255.0f blue:250.0f/255.0f alpha:1.0];
- 
-    } else if (self.theme==dark) {
-        self.snookerBackgroundPhotoImage.hidden = false;
-        [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
-        self.blurView.hidden = false;
-        [self.blurView setEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-
-        self.skinForegroundColour  = [UIColor colorWithRed:76.0f/255.0f green:217.0f/255.0f blue:100.0f/255.0f alpha:1.0];
-        self.skinBackgroundColour = [UIColor colorWithRed:28.0f/255.0f green:39.0f/255.0f blue:28.0f/255.0f alpha:1.0];
-        self.skinPlayer1Colour = [UIColor colorWithRed:88.0f/255.0f green:86.0f/255.0f blue:214.0f/255.0f alpha:1.0];
-        self.skinPlayer2Colour = [UIColor colorWithRed:255.0f/255.0f green:45.0f/255.0f blue:85.0f/255.0f alpha:1.0];
-
-    } else if (self.theme==modern) {
-        self.blurView.hidden = true;
-        self.snookerBackgroundPhotoImage.hidden = true;
-        self.skinForegroundColour  = [UIColor colorWithRed:168.0f/255.0f green:218.0f/255.0f blue:220.0f/255.0f alpha:1.0];
-        self.skinBackgroundColour = [UIColor colorWithRed:29.0f/255.0f green:53.0f/255.0f blue:87.0f/255.0f alpha:1.0];
-        self.skinPlayer1Colour = [UIColor colorWithRed:9.0f/255.0f green:9.0f/255.0f blue:59.0f/255.0f alpha:1.0];
-        self.skinPlayer2Colour = [UIColor colorWithRed:86.0f/255.0f green:86.0f/255.0f blue:149.0f/255.0f alpha:1.0];
-        self.view.backgroundColor = skinBackgroundColour;
-        
-    } else if (self.theme==light) {
-        
-        [self.snookerBackgroundPhotoImage setImage:[UIImage imageNamed:@"tablepocket"]];
-        self.blurView.hidden = false;
-        [self.blurView setEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
-        
-        self.snookerBackgroundPhotoImage.hidden = false;
-        
-        self.skinForegroundColour  = [UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0];
-        self.skinBackgroundColour = [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0];
-        self.skinPlayer1Colour = [UIColor colorWithRed:52.0f/255.0f green:170.0f/255.0f blue:220.0f/255.0f alpha:1.0];
-        self.skinPlayer2Colour = [UIColor colorWithRed:76.0f/255.0f green:217.0f/255.0f blue:100.0f/255.0f alpha:1.0];
-        self.skinSelectedScore = [UIColor blackColor];
-        
-        [self.textPlayerOneName setTextColor:self.skinSelectedScore];
-        [self.labelScoreMatchPlayer1 setTextColor:self.skinSelectedScore];
-        [self.textScorePlayer1 setTextColor:self.skinSelectedScore];
-        self.view.backgroundColor = skinBackgroundColour;
-        
-    } else if (self.theme==purplehaze ) {   // purple haze
-        self.blurView.hidden = true;
-        self.snookerBackgroundPhotoImage.hidden = true;
-        self.skinForegroundColour  = [UIColor colorWithRed:241.0f/255.0f green:232.0f/255.0f blue:184.0f/255.0f alpha:1.0];
-        self.skinBackgroundColour = [UIColor colorWithRed:93.0f/255.0f green:46.0f/255.0f blue:140.0f/255.0f alpha:1.0];
-        self.skinPlayer1Colour = [UIColor colorWithRed:255.0f/255.0f green:102.0f/255.0f blue:101.0f/255.0f alpha:1.0];
-        self.skinPlayer2Colour = [UIColor colorWithRed:0.0f/255.0f green:148.0f/255.0f blue:198.0f/255.0f alpha:1.0];
-        
-    } else { // minimal
-        self.labelVisitCounter.hidden=true;
-        self.blurView.hidden = true;
-        self.scoreBoardBackLabel.layer.borderWidth = 0.0f;
-        self.snookerBackgroundPhotoImage.hidden = true;
-        self.skinForegroundColour  = [UIColor colorWithRed:173.0f/255.0f green:168.0f/255.0f blue:182.0f/255.0f alpha:1.0];
-        self.skinSelectedScore = self.skinForegroundColour;
-
-        self.skinBackgroundColour = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0];
-        self.skinPlayer1Colour = [UIColor colorWithRed:241.0f/255.0f green:80.0f/255.0f blue:37.0f/255.0f alpha:1.0];
-        self.skinPlayer2Colour = [UIColor colorWithRed:12.0f/255.0f green:206.0f/255.0f blue:198.0f/255.0f alpha:1.0];
-         self.imagePottedBall.layer.borderWidth=0.0;
-    }
-    */
+    [self.p1AdjusterButton setTintColor:self.skinPlayer1Colour];
+    self.p1AdjusterButton.layer.borderWidth = 2.0f;
+    self.p1AdjusterButton.layer.borderColor = self.skinPlayer1Colour.CGColor;
+    [self.p2AdjusterButton setTintColor:self.skinPlayer2Colour];
+    self.p2AdjusterButton.layer.borderWidth = 2.0f;
+    self.p2AdjusterButton.layer.borderColor = self.skinPlayer2Colour.CGColor;
+    
     self.slideViewTab.backgroundColor = self.skinForegroundColour;
     self.extendedViewbackgroundLabel.backgroundColor = self.skinForegroundColour;
     
 
     [self.remainingRedLabel setTextColor:self.skinBackgroundColour];
     [self.activeBreakLabel setTextColor:self.skinBackgroundColour];
-    [self.labelFrameStopwatch setTextColor:self.skinBackgroundColour];
+    //[self.labelFrameStopwatch setTextColor:self.skinBackgroundColour];
     [self.slideViewTab setTitleColor:self.skinBackgroundColour forState:UIControlStateNormal];
     
     
@@ -921,12 +885,15 @@ issue with startup now controlled by onload block condition
     
     self.sliderBorderLabel.backgroundColor = self.skinForegroundColour;
     
+
+    self.stopWatchImage.image = [self.stopWatchImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.stopWatchImage setTintColor:self.skinBackgroundColour];
+        
     
+    self.clockImage.image = [self.clockImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.clockImage setTintColor:self.skinBackgroundColour];
     
-    
-    if (!self.isShotStopWatch) {
-        self.labelStopwatch.hidden = true;
-    }
+
     
     self.labelStopwatch.textColor = self.skinForegroundColour;
     self.labelVisitCounter.textColor = self.skinForegroundColour;
@@ -978,7 +945,7 @@ issue with startup now controlled by onload block condition
     self.buttonNoColor.imageNameLarge = @"";
     self.buttonNoColor.imageNameSmall = @"";
     self.buttonEnd.hidden = false;
-    [self.buttonNew setTitle:@"New" forState:UIControlStateNormal];
+    //[self.buttonNew setTitle:@"New" forState:UIControlStateNormal];
     scoreState = LiveFrameScore;
 }
 
@@ -1287,7 +1254,6 @@ issue with startup now controlled by onload block condition
         }
         [self.buttonClear setTitle:@"Undo" forState:UIControlStateNormal];
         self.isUndoShot = false;
-        self.buttonAdjust.enabled = true;
         [self.currentPlayer setNbrOfBreaks:self.currentPlayer.nbrOfBreaks + 1];
         [self processCurrentUsersHighestBreak];
 
@@ -1314,7 +1280,7 @@ issue with startup now controlled by onload block condition
         self.medalImgPlayer2.alpha=0.0f;
         _entryTimeInSeconds = 0;
         
-        
+        //[self.db updateFrameStatus:[NSNumber numberWithDouble:self.stepperRedBalls.value]];
         
     }
 }
@@ -1573,14 +1539,9 @@ issue with startup now controlled by onload block condition
 
 
 -(void)resetIndicatorStyle :(UILabel*) indicatorBall {
-    //[indicatorBall setFont:[UIFont systemFontOfSize:24]];
-    
+
     UIFont *font = [UIFont fontWithName:@"Avenir-Book" size:24];
     [indicatorBall setFont:font];
-    
-    //[indicatorBall setFont:[UIFont systemFontOfSize:24.0f weight:UIFontWeightRegular]];
-    
-    //indicatorBall.font = [UIFont fontWithName:@"Verdana" size:24.0f];
     indicatorBall.textColor = self.skinForegroundColour;
 }
 
@@ -1602,6 +1563,9 @@ issue with startup now controlled by onload block condition
     self.buttonBlack.quantity = 1;
     self.activeColour=1;
     self.ballReplaced = false;
+    // [self.db updateFrameStatus:[NSNumber numberWithInt:21]];
+    self.stepperRedBalls.value=21;
+    
 }
 
 
@@ -1687,6 +1651,14 @@ issue with startup now controlled by onload block condition
         [self closeBreak];
         [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
         self.activeBreak.hidden = true;
+        /* set the extended views items accordingly */
+        self.activeBallsCollection.hidden = true;
+        self.activeBreakLabel.hidden = true;
+        self.sliderAdjustmentValue.hidden = false;
+        self.stepperRedBalls.hidden = false;
+        self.p1AdjusterButton.hidden = false;
+        self.p2AdjusterButton.hidden = false;
+        
         [self updateFrameVisitCounter];
         /* next player up */
         [self swapPlayers];
@@ -1739,10 +1711,18 @@ issue with startup now controlled by onload block condition
 
     if (self.activeBreak.playerid == [NSNumber numberWithInt:0]) {
 
-        self.buttonAdjust.enabled = false;
         self.isUndoShot = true;
 
         self.activeBreak.hidden = false;
+        
+        /* set the extended views items accordingly */
+        self.activeBallsCollection.hidden = false;
+        self.activeBreakLabel.hidden = false;
+        self.sliderAdjustmentValue.hidden = true;
+        self.stepperRedBalls.hidden = true;
+        self.p1AdjusterButton.hidden = true;
+        self.p2AdjusterButton.hidden = true;
+        
         
         [self.activeBreak setMatchid:self.activeMatchId];
         [self.activeBreak setFrameid:currentFrameId];
@@ -1782,9 +1762,9 @@ issue with startup now controlled by onload block condition
         if ((self.shotFoulId==foulPotAndInOff && [pottedBall.colour isEqualToString:@"RED"]) || self.shotFoulId==foulWrongRedPot) {
             
             [self.buttonRed decreaseQty];
-            if (self.buttonRed.quantity == 0) {
-                activeColour ++;
-            }
+            self.stepperRedBalls.value --;
+            
+            [self.remainingBallsCollection reloadData];
             
         }
         
@@ -1808,12 +1788,9 @@ issue with startup now controlled by onload block condition
             refereeComment = [NSString stringWithFormat:@"%@ foul. %@ %d bonus points",refereeComment, self.opposingPlayer.nickName, pottedBall.foulPoints];
             [self speak :refereeComment];
         }
-        
-        
-        
+
         [self.activeBreak clearBreak:self.viewBreak];
-        
-        self.buttonAdjust.enabled = true;
+
         self.isUndoShot = false;
         
         [self updateFrameVisitCounter];
@@ -1843,6 +1820,12 @@ issue with startup now controlled by onload block condition
         
         //int test = [self.activeBreak.points intValue];
         //20160315 testing black tiebreak mechanism.
+        
+        NSLog(@"Active Color:%d",self.activeColour);
+        
+        NSLog(@"Potted Points:%d",pottedBall.pottedPoints);
+        
+        NSLog(@"ActiveBreak Points:%@",self.activeBreak.points);
         
         [self.activeBreak setLastshotid:[NSNumber numberWithInt:self.shotTypeId]];
             if (self.activeColour < pottedBall.pottedPoints && (self.activeBreak.points == [NSNumber numberWithInt:0] || self.activeBreak.points == nil )) {
@@ -1880,16 +1863,23 @@ issue with startup now controlled by onload block condition
                 [self.currentPlayer incrementNbrBalls:1];
                 [self.currentPlayer.currentFrame incrementFrameBallsPotted];
                 
+                NSLog(@"quantity:%d",pottedBall.quantity);
+                NSLog(@"pottedpoints:%d",pottedBall.pottedPoints);
+                NSLog(@"freeBall:%d",freeBall);
+                
+                
+                
                 if (pottedBall.quantity >= 1 && pottedBall.pottedPoints == 1 && freeBall == false) {
                     [pottedBall decreaseQty];
                     
-                    [self.remainingBallsCollection reloadData];
-                    
-                    
-                    if (pottedBall.quantity == 0) {
-                        activeColour ++;
+                    self.stepperRedBalls.value --;
+                    if (pottedBall.quantity==0) {
+                        self.activeColour ++;
                         self.ballReplaced=true;
                     }
+                    
+                    [self.remainingBallsCollection reloadData];
+                    
                 } else if (pottedBall.pottedPoints == self.activeColour) {
                     
                     if (self.ballReplaced && pottedBall.pottedPoints == 2) {
@@ -1903,6 +1893,9 @@ issue with startup now controlled by onload block condition
                         
                     } else if (freeBall == false) {
                         [pottedBall decreaseQty];
+                        self.stepperRedBalls.value --;
+                        
+                        [self.remainingBallsCollection reloadData];
                         self.activeColour ++;
                     }
                 } else if (pottedBall.pottedPoints != self.activeColour && self.activeColour == 2 && self.ballReplaced) {
@@ -2058,7 +2051,6 @@ issue with startup now controlled by onload block condition
             [self closeBreak];
             [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
             [self.activeBreak clearBreak:self.viewBreak];
-            self.buttonAdjust.enabled = true;
             self.isUndoShot = false;
             [self updateFrameVisitCounter];
             [self swapPlayers];
@@ -2100,7 +2092,6 @@ issue with startup now controlled by onload block condition
             [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
             [self.activeBreak setLastshotid:[NSNumber numberWithInt:self.shotTypeId]];
             [self.activeBreak clearBreak:self.viewBreak];
-            self.buttonAdjust.enabled = true;
             self.isUndoShot = false;
             [self swapPlayers];
         } else {
@@ -2444,8 +2435,6 @@ issue with startup now controlled by onload block condition
         
              [self speak :refereeComment];
     }
-    
-    
 }
 
 
@@ -2463,8 +2452,6 @@ issue with startup now controlled by onload block condition
                         self.skView.hidden=true;
                     }
                     completion:NULL];
-    
-    
 }
 
 
@@ -2669,9 +2656,6 @@ issue with startup now controlled by onload block condition
                                                                               self.viewBreak.hidden=false;
                                                                               NSLog(@"You pressed Scratch Match");
                                                                           }];
-    
-    
-    
 
     UIAlertAction *CancelAction = [UIAlertAction actionWithTitle:@"Cancel"
                                                            style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -2697,8 +2681,6 @@ issue with startup now controlled by onload block condition
         }
     }
     [alert addAction:CancelAction];
-    
-    
     
     [self presentViewController:alert animated:YES completion:nil];
 }
@@ -2818,8 +2800,7 @@ issue with startup now controlled by onload block condition
     
     self.textScorePlayer2.frameScore=0;
     self.textScorePlayer2.text=@"000";
-    
-    self.buttonAdjust.enabled = true;
+
     self.isUndoShot = false;
 
     self.currentFrameId=[NSNumber numberWithInt:1];
@@ -2833,6 +2814,17 @@ issue with startup now controlled by onload block condition
     
     
     self.activeBreak.hidden = false;
+    
+    /* set the extended views items accordingly */
+    self.activeBallsCollection.hidden = false;
+    self.activeBreakLabel.hidden = false;
+    self.sliderAdjustmentValue.hidden = true;
+    self.stepperRedBalls.hidden = true;
+    self.p1AdjusterButton.hidden = true;
+    self.p2AdjusterButton.hidden = true;
+    
+    
+    
     self.labelStopwatch.hidden = true;
     self.isMatchStarted = false;
     self.ballCollectionView.hidden = true;
@@ -3080,30 +3072,10 @@ issue with startup now controlled by onload block condition
     } else {
         p1ActiveBreak = 0;
         p2ActiveBreak = [self.activeBreak.points intValue];
+        
     }
-        
- 
-
-    if([segue.identifier isEqualToString:@"showAdjustNumberPicker"]){
-        adjustVC *controller = (adjustVC *)segue.destinationViewController;
-        controller.delegate = self;
-        controller.sumOfPlayerFouls = self.currentPlayer.currentFrame.foulScore;
-        controller.ballIndex = self.buttonRed.quantity+self.buttonYellow.quantity+self.buttonGreen.quantity+self.buttonBrown.quantity+self.buttonBlue.quantity+self.buttonPink.quantity+self.buttonBlack.quantity;
-        controller.skins = self.theme;
-        controller.skinPrefix = self.skinPrefix;
-        
-        if (self.currentPlayer == self.textScorePlayer1) {
-            controller.playerName = self.labelPlayerOneName.text;
-        } else {
-            controller.playerName = self.labelPlayerTwoName.text;
-        }
-        controller.skinForegroundColour = self.skinForegroundColour;
-        controller.skinBackgroundColour = self.skinBackgroundColour;
-        controller.skinPlayer1Colour = self.skinPlayer1Colour;
-        controller.skinPlayer2Colour = self.skinPlayer2Colour;
-        
-        
-    } else if([segue.identifier isEqualToString:@"player1DetailShow"]){
+    
+    if([segue.identifier isEqualToString:@"player1DetailShow"]){
         /* current match data */
         match *m = [[match alloc]init];
         
@@ -3265,6 +3237,8 @@ issue with startup now controlled by onload block condition
         
         self.emailPlayer1 = p.emailAddress;
         
+        [self.p1AdjusterButton setTitle:[NSString stringWithFormat:@"%@",p.nickName] forState:UIControlStateNormal];
+        
         
         
         if (self.imagePlayer1 != p.photoLocation) {
@@ -3281,6 +3255,9 @@ issue with startup now controlled by onload block condition
         
         self.labelPlayerTwoName.text = p.nickName;
         self.emailPlayer2 = p.emailAddress;
+        
+        [self.p2AdjusterButton setTitle:[NSString stringWithFormat:@"%@",p.nickName] forState:UIControlStateNormal];
+        
         
         if (self.imagePlayer2 != p.photoLocation) {
             updatedAvatarImage = true;
@@ -3332,6 +3309,7 @@ issue with startup now controlled by onload block condition
         
         self.emailPlayer1 = playerEmail;
         
+        [self.p1AdjusterButton setTitle:[NSString stringWithFormat:@"%@",playerName] forState:UIControlStateNormal];
         
         
         if (self.imagePlayer1 != playerImageName) {
@@ -3349,6 +3327,9 @@ issue with startup now controlled by onload block condition
         
         self.labelPlayerTwoName.text = playerName;
         self.emailPlayer2 = playerEmail;
+        
+        [self.p2AdjusterButton setTitle:[NSString stringWithFormat:@"%@",playerName] forState:UIControlStateNormal];
+        
         
         if (self.imagePlayer2 != playerImageName) {
             updatedAvatarImage = true;
@@ -3386,93 +3367,6 @@ issue with startup now controlled by onload block condition
     [self setPlayerData:self.textScorePlayer2];
     
     
-}
-
--(void)addItemViewController:(adjustVC *)controller didPickDeduction:(int)selectedPoints {
-    
-    ball* currentBall = [[ball alloc] init];
-    
-    [self.activeBreak setMatchid:self.activeMatchId];
-    [self.activeBreak setFrameid:currentFrameId];
-    [self.activeBreak setPlayerid:[NSNumber numberWithInt:self.currentPlayer.playerIndex]];
-    [self.activeBreak setLastshotid:[NSNumber numberWithInt:Bonus]];
-    [self.activeBreak setActive:[NSNumber numberWithInt:activeFlag_Active]];
-    [self.activeBreak setEndbreaktimestamp:@""];
-
-    [self.activeBreak setPoints:[NSNumber numberWithInt:selectedPoints]];
-    [self.activeBreak setPlayerid:[NSNumber numberWithInt:self.currentPlayer.playerIndex]];
-    
-    currentBall.foulPoints = selectedPoints;
-    
-    [self.activeBreak addShotToBreak :currentBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Bonus] :[NSNumber numberWithInt:adjusted] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
-
-    [self.activeBreak setDuration:[NSNumber numberWithInt:_entryTimeInSeconds]];
-    
-    [self addBreakToData:self.activeBreak];
-    [self closeBreak];
-    [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
-}
-
-    
-    
-/* modified 20151006 */
-- (void)addItemViewController:(adjustVC *)controller didPickBallAdjust:(int)startBallIndex :(int)ballIndex {
-    
-    ball* currentBall = [[ball alloc] init];
-    
-    [self.activeBreak setMatchid:self.activeMatchId];
-    [self.activeBreak setFrameid:currentFrameId];
-    [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
-    [self.activeBreak setLastshotid:[NSNumber numberWithInt:Adjustment]];
-    [self.activeBreak setActive:[NSNumber numberWithInt:activeFlag_Active]];
-    [self.activeBreak setEndbreaktimestamp:@""];
-    
-    int runningPoints=0;
-    
-    for(int i=startBallIndex;i>ballIndex;i--) {
-        
-        if (i>6) {
-            // reds
-            currentBall = self.buttonRed;
-            runningPoints++;
-            // cover the switch between the last red and the yellow
-            if (i==7) {
-                activeColour = 2;
-            }
-            [currentBall decreaseQty];
-        
-            [self.activeBreak addShotToBreak :currentBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Adjustment] :[NSNumber numberWithInt:adjusted] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
-            colourQuantityAtStartOfBreak = ballIndex - 6;
-    
-        } else {
-            // colours
-            if (i==6) {
-                currentBall = self.buttonYellow;
-            } else if (i==5) {
-                currentBall = self.buttonGreen;
-            } else if (i==4) {
-                currentBall = self.buttonBrown;
-            } else if (i==3) {
-                currentBall = self.buttonBlue;
-            } else if (i==2) {
-                currentBall = self.buttonPink;
-            } else if (i==1) {
-                currentBall = self.buttonBlack;
-            }
-            
-            [currentBall decreaseQty];
-            self.activeColour = 8 - i + 1;
-            runningPoints+=currentBall.pottedPoints;
-            
-             [self.activeBreak addShotToBreak :currentBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Adjustment] :[NSNumber numberWithInt:adjusted] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
-            colourQuantityAtStartOfBreak = 1;
-        }
-    }
-    
-    [self.activeBreak setDuration:[NSNumber numberWithInt:_entryTimeInSeconds]];
-    [self.activeBreak setPoints:[NSNumber numberWithInt:runningPoints]];
-    [self addBreakToData:self.activeBreak];
-    [self closeBreak];
 }
 
 
@@ -3563,9 +3457,7 @@ issue with startup now controlled by onload block condition
                                                                             self.activeBreak.points = [NSNumber numberWithInt:points];
                                                                             
                                                                             self.activeBreak.text = [NSString stringWithFormat:@"%@",self.activeBreak.points];
-                                                                            
-                                                                            
-                                                                            
+
                                                                             self.breakViewLeadingConstraint.constant = originalLeadingConstraint + self.viewBreak.frame.size.width;
                                                                             self.breakViewTrailingConstraint.constant = originalTrailingConstraint - self.viewBreak.frame.size.width;
                                                                             [self.view layoutIfNeeded];
@@ -3600,8 +3492,6 @@ issue with startup now controlled by onload block condition
                                                                                  
                                                                                  if ([deletedBall.colour isEqualToString:@"RED"]) {
                                                                                      [self undoBallinShot :deletedBall :self.buttonRed :self.redIndicator];
-                                                                                     [self.remainingBallsCollection reloadData];
-                                                                                   
                                                                                  } else if ([deletedBall.colour isEqualToString:@"YELLOW"]) {
                                                                                      [self undoBallinShot :deletedBall :self.buttonYellow :self.yellowIndicator];
                                                                                  } else if ([deletedBall.colour isEqualToString:@"GREEN"]) {
@@ -3615,7 +3505,9 @@ issue with startup now controlled by onload block condition
                                                                                  } else if ([deletedBall.colour isEqualToString:@"BLACK"]) {
                                                                                      [self undoBallinShot :deletedBall :self.buttonBlack :self.blackIndicator];
                                                                                  }
+                                                                                 [self.remainingBallsCollection reloadData];
                                                                                  [self.activeBallsCollection reloadData];
+                                                                                 
                                                                                  self.isUndoShot = true;
                                                                                  
                                                                                  self.ballRowDisabledView.hidden = true;
@@ -3631,42 +3523,24 @@ issue with startup now controlled by onload block condition
                                                                              }];
                                                                         }];
 
-                                                                       
-                                                                      // self.imagePottedBall.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png",self.skinPrefix,previousBall.imageNameLarge]];
-                                                                       
-                                                                    
-                                                                       
-                                                                       
                                                                    } else {
+                                                                       /*
+                                                                        last modified section:         28/11/2017
+                                                                        must be tested more! - however this section is looking good.
+                                                                        */
+                                                                       
                                                                        /* final ball in break, we do something similar to clearing the whole break.*/
-                                                                       
-                                                                       /* need to test this part! */
-                                                                       
                                                                        self.isUndoShot = false;
                                                                        
                                                                        [self.activeBreak clearBreak:self.viewBreak];
                                                                        [self clearIndicators :hide];
                                                                        
                                                                        [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
+                  
+                                                                       breakEntry *lastBreak = [[breakEntry alloc] init];
+                                                                       lastBreak = [self.activeFrameData objectAtIndex:self.activeFrameData.count - 1];
                                                                        
-                                                                       self.buttonAdjust.enabled=true;
-                                                                       
-                                                                       ball* currentBall;
-                                                                    
-                                                                       for (int i = colourStateAtStartOfBreak; i <= activeColour; i++)
-                                                                       {
-                                                                           currentBall = [self findBall:i];
-
-                                                                           if (i==1) {
-                                                                               currentBall.quantity=colourQuantityAtStartOfBreak;
-                                                                               currentBall.enabled = true;
-                                                                           } else {
-                                                                               currentBall.quantity=1;
-                                                                               currentBall.enabled = true;
-                                                                               
-                                                                           }
-                                                                       }
-                                                                       activeColour = colourStateAtStartOfBreak;
+                                                                       self.stepperRedBalls.value = [lastBreak.frameballqty doubleValue];
                                                                        
                                                                        [self setBallCounters];
                                                                        
@@ -3679,25 +3553,27 @@ issue with startup now controlled by onload block condition
                                                                            int liveTotal = self.currentPlayer.currentFrame.frameScore + [self.activeBreak.points intValue];
                                                                            self.currentPlayer.text = [NSString stringWithFormat:@"%03d",liveTotal];;
                                                                        }
-                                                                       [self.remainingBallsCollection reloadData];
-                                                                       [self.activeBallsCollection reloadData];
-                                                                       
-                                                                       
                                                                    }
-                                                                  
-                                                                   
-
+                                                                   [self.activeBallsCollection reloadData];
+                                                                    [self.remainingBallsCollection reloadData];
 
                                                                }];
 
         UIAlertAction *CurrentBreakAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Current Break of %@",self.activeBreak.points]
                                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                                      NSLog(@"You pressed undo whole break");
-                                                                     ball* currentBall;
+
+                                                                     /*
+                                                                      last modified section:         28/11/2017
+                                                                      must be tested more! - however this section is looking good.
+                                                                      */
+                                                                     
                                                                      /* below is clear whole active break, to do if user wants to clear break or wants to remove only shot in break */
                                                                      if ([self.activeBreak.points intValue] > 0) {
-                                                                         self.buttonAdjust.enabled = true;
-                                                                         
+
+                                                                         breakEntry *lastBreak = [[breakEntry alloc] init];
+                                                                         lastBreak = [self.activeFrameData objectAtIndex:self.activeFrameData.count - 1];
+
                                                                          self.isUndoShot = false;
                                                                          
                                                                          [self.currentPlayer setNbrBallsPotted:(self.currentPlayer.nbrBallsPotted - (int)self.activeBreak.shots.count)];
@@ -3707,23 +3583,11 @@ issue with startup now controlled by onload block condition
                                                                          [self.activeBreak clearBreak:self.viewBreak];
                                                                          [self clearIndicators :hide];
                                                                          
-                                                                         // reset counters impacted!
-                                                                         for (int i = colourStateAtStartOfBreak; i <= activeColour; i++)
-                                                                         {
-                                                                             currentBall = [self findBall:i];
-                                                                             
-                                                                             if (i==1) {
-                                                                                 currentBall.quantity=colourQuantityAtStartOfBreak;
-                                                                                 currentBall.enabled = true;
-                                                                             } else {
-                                                                                 currentBall.quantity=1;
-                                                                                 currentBall.enabled = true;
-                                                                                 
-                                                                             }
-                                                                             
-                                                                         }
-                                                                         activeColour = colourStateAtStartOfBreak;
-                                                                         [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
+                                                                         self.stepperRedBalls.value = [lastBreak.frameballqty doubleValue];
+                                                                        
+                                                                        [self setBallCounters];
+                                                                          
+                                                                          
                                                                      }
                                                                      
                                                                      self.medalImgPlayer1.alpha=0.0f;
@@ -3733,6 +3597,8 @@ issue with startup now controlled by onload block condition
                                                                          int liveTotal = self.currentPlayer.currentFrame.frameScore + [self.activeBreak.points intValue];
                                                                          self.currentPlayer.text = [NSString stringWithFormat:@"%03d",liveTotal];;
                                                                      }
+                                                                     
+                                                                     [self.remainingBallsCollection reloadData];
                                                                      
                                                                  }];
         
@@ -3776,16 +3642,40 @@ issue with startup now controlled by onload block condition
             
             
         } else {
-            /* must be tested more!  */
+            /*
+             last modified section:         28/11/2017
+             must be tested more! - however this section is looking good.
+             */
             breakEntry *lastBreak = [[breakEntry alloc] init];
             lastBreak = [self.activeFrameData objectAtIndex:self.activeFrameData.count - 1];
+            
+            /*
+             To obtain the number of frame balls before the last break, we do not need the last record
+             as that has the same number of balls after the break occurred. We actually need the record prior that one!
+             */
+            
+            __block NSNumber *secondLastBallQty;
+            
+            if (self.activeFrameData.count==1) {
+                secondLastBallQty = [NSNumber numberWithInt:21];
+            }
+            else {
+                breakEntry *secondLastBreak = [[breakEntry alloc] init];
+                secondLastBreak = [self.activeFrameData objectAtIndex:self.activeFrameData.count - 2];
+                secondLastBallQty = secondLastBreak.frameballqty;
+            }
+
+            
             
             NSString *visitor;
             NSNumber *visitorIndex = lastBreak.playerid;
             NSNumber *visitorBreakAmount = lastBreak.points;
+           
+            
             NSMutableArray *visitorShots = lastBreak.shots;
             
             __block ballShot *firstShot = [visitorShots firstObject];
+            
             NSNumber *visitorShotId = [firstShot valueForKey:@"shotid"];
             
             if ([visitorIndex intValue]==1) {
@@ -3838,6 +3728,8 @@ issue with startup now controlled by onload block condition
                 lastEntryText = [NSString stringWithFormat:@"Last Entry of %@ points", visitorBreakAmount];
             }
             
+            
+            // ISSUE #01
             UIAlertAction *LastEntryAction = [UIAlertAction actionWithTitle:lastEntryText
                                                                style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                                    /* obtain break that is about to be deleted first potted ball. this will give us the best
@@ -3846,6 +3738,8 @@ issue with startup now controlled by onload block condition
                                                                    if (firstShot.shotid==[NSNumber numberWithInt:Potted]) {
                                                                        activeColour = [firstShot.value intValue];
                                                                    }
+                                                                   
+                                                                   NSLog(@"%@",secondLastBallQty);
                                                                    
                                                                    [self removeLastBreak];
                                                                    
@@ -3859,12 +3753,16 @@ issue with startup now controlled by onload block condition
                                                                    
                                                                    [self setBallCounters];
                                                                    
+                                                                   
                                                                    [self selectPlayerOne];
                                                                    scoreState=LiveFrameScore;
                                                                    
+                                                                   self.stepperRedBalls.value = [secondLastBallQty doubleValue];
+                                                                   [self setBallCounters];
+                                                                   
                                                                    [self.remainingBallsCollection reloadData];
                                                                     [self.activeBallsCollection reloadData];
-                                                                    NSLog(@"You pressed undo last entry");
+                                                                  NSLog(@"You pressed undo last entry");
                                                                    
                                                                }];
             
@@ -3880,8 +3778,16 @@ issue with startup now controlled by onload block condition
                                                                         // ERROR here, need to test the frame entries from db too.
                                                                     self.frameVisitCounter=0;
                                                                     self.labelVisitCounter.text = @"Reracked!";
-                                                                    NSLog(@"%@", [NSString stringWithFormat:@"frmae number:%@",self.currentFrameId]);
+                                                                    NSLog(@"%@", [NSString stringWithFormat:@"frame number:%@",self.currentFrameId]);
                                                                         NSLog(@"You pressed Rerack");
+                                                                    
+                                                                    /* set the extended views items accordingly */
+                                                                    self.activeBallsCollection.hidden = true;
+                                                                    self.activeBreakLabel.hidden = true;
+                                                                    self.sliderAdjustmentValue.hidden = false;
+                                                                    self.stepperRedBalls.hidden = false;
+                                                                    self.p1AdjusterButton.hidden = false;
+                                                                    self.p2AdjusterButton.hidden = false;
                                                                     
                                                                     
                                                                     self.textScorePlayer1 = [self setPlayerData:self.textScorePlayer1];
@@ -3911,9 +3817,10 @@ issue with startup now controlled by onload block condition
 
 
 /* created 20151003 */
-/* last modified 20170423 */
+/* last modified 28/11/2017 */
 -(void) undoBallinShot :(ballShot*) selectedBall :(ball*) ballButton :(indicator*) ballIndicator {
     ballButton.potsInBreakCounter--;
+    
     if (selectedBall.killed==[NSNumber numberWithInt:1]) {
         ballButton.enabled=true;
         ballButton.quantity ++;
@@ -3921,20 +3828,26 @@ issue with startup now controlled by onload block condition
         if (ballButton.pottedPoints==2) {
             self.ballReplaced=false;
         }
-        
+        NSLog(@"%f",self.stepperRedBalls.value);
+        self.stepperRedBalls.value ++;
+        NSLog(@"%f",self.stepperRedBalls.value);
         self.activeColour=[selectedBall.value intValue];
     } else {
         if (self.activeColour==2) {
             self.ballReplaced=true;
-        } else if (self.activeColour==1) {
+            //self.stepperRedBalls.value ++;
+        } else if (self.activeColour==1 && [ballButton.colour isEqualToString:@"RED"]) {
             ballButton.quantity ++;
-
+            self.stepperRedBalls.value ++;
         }
     }
+
     ballIndicator.text = [NSString stringWithFormat:@"%d",ballButton.potsInBreakCounter];
     if ([ballIndicator.text isEqualToString:@"0"]) {
         ballIndicator.hidden=true;
     }
+    
+    
 }
 
 
@@ -4238,7 +4151,6 @@ issue with startup now controlled by onload block condition
 -(void)enableControls :(bool) enabledFlag {
     self.buttonEnd.enabled=enabledFlag;
     self.buttonClear.enabled=enabledFlag;
-    self.buttonAdjust.enabled=enabledFlag;
     self.buttonNew.enabled=enabledFlag;
     self.buttonRed.enabled=enabledFlag;
     self.buttonYellow.enabled=enabledFlag;
@@ -4277,10 +4189,17 @@ issue with startup now controlled by onload block condition
     self.redIndicator.ballIndex = [NSNumber numberWithInt:1];
     self.buttonRed.foulPoints = 4;
     self.buttonRed.pottedPoints = 1;
-    self.buttonRed.quantity =  15 - [common getQtyOfBallsByColor:self.activeFrameData :[NSNumber numberWithInt:0] :[NSNumber  numberWithInt:1]];
-    if (self.buttonRed.quantity==0) {
+    
+    //self.stepperRedBalls.value =  [[self.db getFrameBallIndex] doubleValue];
+    
+    if (self.stepperRedBalls.value > 6) {
+        self.buttonRed.quantity = (int)self.stepperRedBalls.value - 6;
+        self.activeColour = self.buttonRed.pottedPoints;
+    } else {
+        self.buttonRed.quantity = 0;
         self.buttonRed.enabled=false;
     }
+
     self.buttonRed.imageNameLarge = @"red_01";
     self.buttonRed.imageNameSmall = @"red_01_small";
  
@@ -4290,34 +4209,44 @@ issue with startup now controlled by onload block condition
     self.yellowIndicator.ballIndex = [NSNumber numberWithInt:2];
     self.buttonYellow.foulPoints = 4;
     self.buttonYellow.pottedPoints = 2;
-    // TODO HERE
-    self.buttonYellow.quantity = 1;
-    if (self.buttonRed.quantity==0) {
-        self.buttonRed.enabled = false;
-        if ([self isColourKilled :self.activeFrameData :[NSNumber numberWithInt:[self.buttonYellow pottedPoints]]]) {
-            self.buttonYellow.quantity = 0;
-            self.buttonYellow.enabled = false;
-        } else {
+    // TODO HERE stepper value equal to 5, we don't want to enable the yellow..
+    
+    if (self.stepperRedBalls.value > 5) {
+        if (self.stepperRedBalls.value == 6) {
             self.activeColour = self.buttonYellow.pottedPoints;
         }
+        self.buttonYellow.quantity = 1;
+        self.buttonYellow.enabled = true;
+    } else
+    {
+        self.buttonYellow.quantity = 0;
+        self.buttonYellow.enabled = false;
     }
+
     self.buttonYellow.imageNameLarge = @"yellow_02";
     self.buttonYellow.imageNameSmall = @"yellow_02_small";
     
     self.buttonGreen.colour = @"GREEN";
     self.buttonGreen.ballColour=[UIColor colorWithRed:0.0f/255.0f green:101.0f/255.0f blue:116.0f/255.0f alpha:1.0];
     self.greenIndicator.ballIndex = [NSNumber numberWithInt:3];
+    
     self.buttonGreen.foulPoints = 4;
     self.buttonGreen.pottedPoints = 3;
-    self.buttonGreen.quantity = 1;
-    if (self.buttonYellow.quantity==0) {
-        if ([self isColourKilled :self.activeFrameData  :[NSNumber numberWithInt:[self.buttonGreen pottedPoints]]]) {
-            self.buttonGreen.quantity = 0;
-            self.buttonGreen.enabled = false;
-        } else {
+    
+    
+    
+    if (self.stepperRedBalls.value > 4) {
+        if (self.stepperRedBalls.value == 5) {
             self.activeColour = self.buttonGreen.pottedPoints;
         }
+        self.buttonGreen.quantity = 1;
+        self.buttonGreen.enabled = true;
+    } else
+    {
+        self.buttonGreen.quantity = 0;
+        self.buttonGreen.enabled = false;
     }
+
     self.buttonGreen.imageNameLarge = @"green_03";
     self.buttonGreen.imageNameSmall = @"green_03_small";
     
@@ -4326,15 +4255,18 @@ issue with startup now controlled by onload block condition
     self.brownIndicator.ballIndex = [NSNumber numberWithInt:4];
     self.buttonBrown.foulPoints = 4;
     self.buttonBrown.pottedPoints = 4;
-    self.buttonBrown.quantity = 1;
-    if (self.buttonGreen.quantity==0) {
-        if ([self isColourKilled :self.activeFrameData :[NSNumber numberWithInt:[self.buttonBrown pottedPoints]]]) {
-            self.buttonBrown.quantity = 0;
-            self.buttonBrown.enabled = false;
-        } else {
-            self.activeColour = self.buttonBrown.pottedPoints;
-        }
+if (self.stepperRedBalls.value > 3) {
+    if (self.stepperRedBalls.value == 4) {
+        self.activeColour = self.buttonBrown.pottedPoints;
     }
+    self.buttonBrown.quantity = 1;
+    self.buttonBrown.enabled = true;
+} else
+{
+    self.buttonBrown.quantity = 0;
+    self.buttonBrown.enabled = false;
+}
+
     self.buttonBrown.imageNameLarge = @"brown_04";
     self.buttonBrown.imageNameSmall = @"brown_04_small";
     
@@ -4343,15 +4275,19 @@ issue with startup now controlled by onload block condition
         self.blueIndicator.ballIndex = [NSNumber numberWithInt:5];
     self.buttonBlue.foulPoints = 5;
     self.buttonBlue.pottedPoints = 5;
-    self.buttonBlue.quantity = 1;
-    if (self.buttonBrown.quantity==0) {
-        if ([self isColourKilled :self.activeFrameData :[NSNumber numberWithInt:[self.buttonBlue pottedPoints]]]) {
-            self.buttonBlue.quantity = 0;
-            self.buttonBlue.enabled = false;
-        } else {
-            self.activeColour = self.buttonBlue.pottedPoints;
-        }
+if (self.stepperRedBalls.value > 2) {
+    if (self.stepperRedBalls.value == 3) {
+        self.activeColour = self.buttonBlue.pottedPoints;
     }
+    self.buttonBlue.quantity = 1;
+    self.buttonBlue.enabled = true;
+} else
+{
+    self.buttonBlue.quantity = 0;
+    self.buttonBlue.enabled = false;
+}
+
+
     self.buttonBlue.imageNameLarge = @"blue_05";
     self.buttonBlue.imageNameSmall = @"blue_05_small";
 
@@ -4360,15 +4296,18 @@ issue with startup now controlled by onload block condition
     self.pinkIndicator.ballIndex = [NSNumber numberWithInt:6];
     self.buttonPink.foulPoints = 6;
     self.buttonPink.pottedPoints = 6;
-    self.buttonPink.quantity = 1;
-    if (self.buttonBlue.quantity==0) {
-        if ([self isColourKilled: self.activeFrameData :[NSNumber numberWithInt:[self.buttonPink pottedPoints]]]) {
-            self.buttonPink.quantity = 0;
-            self.buttonPink.enabled = false;
-        } else {
-            self.activeColour = self.buttonPink.pottedPoints;
-        }
+if (self.stepperRedBalls.value > 1) {
+    if (self.stepperRedBalls.value == 2) {
+        self.activeColour = self.buttonPink.pottedPoints;
     }
+    self.buttonPink.quantity = 1;
+    self.buttonPink.enabled = true;
+} else
+{
+    self.buttonPink.quantity = 0;
+    self.buttonPink.enabled = false;
+}
+
     self.buttonPink.imageNameLarge = @"pink_06";
     self.buttonPink.imageNameSmall = @"pink_06_small";
     
@@ -4378,15 +4317,19 @@ issue with startup now controlled by onload block condition
     self.blackIndicator.ballIndex = [NSNumber numberWithInt:7];
     self.buttonBlack.foulPoints = 7;
     self.buttonBlack.pottedPoints = 7;
-    self.buttonBlack.quantity = 1;
-    if (self.buttonPink.quantity==0) {
-        if ([self isColourKilled: self.activeFrameData :[NSNumber numberWithInt:[self.buttonBlack pottedPoints]]]) {
-            self.buttonBlack.quantity = 0;
-            self.buttonBlack.enabled = false;
-        } else {
-            self.activeColour = self.buttonBlack.pottedPoints;
-        }
+if (self.stepperRedBalls.value > 0) {
+    if (self.stepperRedBalls.value == 1) {
+        self.activeColour = self.buttonBlack.pottedPoints;
     }
+    self.buttonBlack.quantity = 1;
+    self.buttonBlack.enabled = true;
+    
+} else
+{
+    self.buttonBlack.quantity = 0;
+    self.buttonBlack.enabled = false;
+}
+
     self.buttonBlack.imageNameLarge = @"black_07";
     self.buttonBlack.imageNameSmall = @"black_07_small";
     /* black ball setup end */
@@ -4507,8 +4450,8 @@ issue with startup now controlled by onload block condition
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (collectionView == self.remainingBallsCollection) {
-        [self.remainingRedLabel setText:[NSString stringWithFormat:@"%d reds remaining",self.buttonRed.quantity]];
-        return self.buttonRed.quantity;
+        [self.remainingRedLabel setText:[NSString stringWithFormat:@"%.0f balls remaining",self.stepperRedBalls.value]];
+        return self.stepperRedBalls.value;
     } else {
         if ([self.activeBreak.points intValue]==0) {
              [self.activeBreakLabel setText:@"No break"];
@@ -4528,11 +4471,24 @@ issue with startup now controlled by onload block condition
         cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"ballCell" forIndexPath:indexPath];
         [[cell contentView] setFrame:[cell bounds]];
 
-    
         ballShot* b = [[ballShot alloc] init];
-    
-        b.colour = @"RED";
-    
+        
+        if (indexPath.row==0) {
+           b.colour = @"BLACK";
+        } else if (indexPath.row==1) {
+            b.colour = @"PINK";
+        } else if (indexPath.row==2) {
+            b.colour = @"BLUE";
+        } else if (indexPath.row==3) {
+            b.colour = @"BROWN";
+        } else if (indexPath.row==4) {
+            b.colour = @"GREEN";
+        } else if (indexPath.row==5) {
+            b.colour = @"YELLOW";
+        } else {
+             b.colour = @"RED";
+        }
+        
         cell.ball = b;
         
     } else {
@@ -4553,12 +4509,13 @@ issue with startup now controlled by onload block condition
 /* last modified 20160714 */
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(breakBallCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (collectionView == self.activeBallsCollection) {
+   // if (collectionView == self.activeBallsCollection) {
     
     cell.ballStoreImage.layer.borderColor = [self getColourFromBallName:cell.ball].CGColor;
+        
     if (!self.isHollow) cell.ballStoreImage.backgroundColor = [self getColourFromBallName:cell.ball];
         
-    }
+   // }
 }
 
 -(UIColor*) getColourFromBallName :(ballShot*) ball {
@@ -4632,13 +4589,122 @@ issue with startup now controlled by onload block condition
          }];
 
     }
+ 
     
+}
+- (IBAction)stepperRedCounterChanged:(id)sender {
     
+    if (self.activeColour<=2) {
+        [self.buttonRed setQuantity :self.stepperRedBalls.value];
+        if (self.buttonRed.quantity!=0) {
+            //[self.buttonRed setEnabled:true];
+            self.activeColour=1;
+        } else {
+             //[self.buttonRed setEnabled:false];
+            self.activeColour=2;
+        }
+        
        
+    } else {
+        self.activeColour = self.stepperRedBalls.value;
+    }
+    // [self.db updateFrameStatus :[NSNumber numberWithInt:self.stepperRedBalls.value]];
     
+   [self setBallCounters];
+    
+    [self.remainingBallsCollection reloadData];
     
     
 }
+
+/*
+ created date:          26/11/2017
+ */
+- (IBAction)SliderAdjumentChanged:(id)sender {
+    [self UpdateSliderThumbNumber];
+}
+
+/*
+ created date:          27/11/2017
+ */
+-(void)UpdateSliderThumbNumber {
+    //Get the Image View
+    UIImageView *handleView = [_sliderAdjustmentValue.subviews lastObject];
+    
+    // Get the Slider value label
+    UILabel *label = (UILabel*)[handleView viewWithTag:1000];
+    
+    // If the slider label not exist then create it and add it to the Handleview. So handle view will have only one slider value label, so no more memory issues & not needed to remove from superview.
+    // Creation of object is Pain to iOS. So simply reuse it by creating only once.
+    // Note that tag setting below, which will helpful to find out that view presents in later case
+    if (label==nil) {
+        label = [[UILabel alloc] initWithFrame:handleView.bounds];
+        label.tag = 1000;
+        label.backgroundColor = [UIColor clearColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        [handleView addSubview:label];
+    }
+    
+    // Update the slider value
+    label.text = [NSString stringWithFormat:@"%0.0f", self.sliderAdjustmentValue.value];
+}
+
+/*
+ created date:          27/11/2017
+ */
+- (IBAction)p1AdjusterButtonPressed:(id)sender {
+    [self selectPlayerOne];
+    [self addBonusPoints :[NSNumber numberWithInt:1] :[NSNumber numberWithInt: self.sliderAdjustmentValue.value]];
+    self.sliderAdjustmentValue.value=0.0f;
+    [self UpdateSliderThumbNumber];
+}
+
+/*
+ created date:          27/11/2017
+ */
+- (IBAction)p2AdjusterButtonPressed:(id)sender {
+    [self selectPlayerTwo];
+    [self addBonusPoints :[NSNumber numberWithInt:2] :[NSNumber numberWithInt: self.sliderAdjustmentValue.value]];
+    self.sliderAdjustmentValue.value=0.0f;
+    [self UpdateSliderThumbNumber];
+    
+}
+
+/*
+ created date:          27/11/2017
+ */
+-(void) addBonusPoints :(NSNumber*) playerIndex :(NSNumber*) points {
+    ball* currentBall = [[ball alloc] init];
+
+    if (points==[NSNumber numberWithInt:0]) {
+        return;
+    }
+    
+    [self.activeBreak setMatchid:self.activeMatchId];
+    [self.activeBreak setFrameid:currentFrameId];
+    [self.activeBreak setPlayerid:playerIndex];
+    [self.activeBreak setLastshotid:[NSNumber numberWithInt:Bonus]];
+    [self.activeBreak setActive:[NSNumber numberWithInt:activeFlag_Active]];
+    [self.activeBreak setEndbreaktimestamp:@""];
+
+    [self.activeBreak setPoints:points];
+    [self.activeBreak setPlayerid:playerIndex];
+
+    currentBall.foulPoints = [points intValue];
+
+    [self.activeBreak addShotToBreak :currentBall  :self.imagePottedBall :self.viewBreak :[NSNumber numberWithInt:Bonus] :[NSNumber numberWithInt:adjusted] :[NSNumber numberWithInt:0] :self.pocketId :nil :self.isHollow];
+    
+    [self.activeBreak setDuration:[NSNumber numberWithInt:_entryTimeInSeconds]];
+
+    [self addBreakToData:self.activeBreak];
+    [self closeBreak];
+    [self.activeBreak setPlayerid:[NSNumber numberWithInt:0]];
+
+}
+
+
+
+
 
 
 @end

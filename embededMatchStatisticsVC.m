@@ -40,9 +40,9 @@
 
     [self.player1Photo setImage:img];
     
-    self.player1Photo.frame = CGRectMake(self.player1Photo.frame.origin.x, self.player1Photo.frame.origin.y, 50, 50);
+    self.player1Photo.frame = CGRectMake(self.player1Photo.frame.origin.x, self.player1Photo.frame.origin.y, 60, 60);
     self.player1Photo.clipsToBounds = YES;
-    self.player1Photo.layer.cornerRadius = 50/2.0f;
+    self.player1Photo.layer.cornerRadius = 60/2.0f;
 
     
     pngdata = [NSData dataWithContentsOfFile:[[paths objectAtIndex:0] stringByAppendingPathComponent:self.p2.photoLocation]];
@@ -55,9 +55,9 @@
     
     [self.player2Photo setImage:img];
     
-    self.player2Photo.frame = CGRectMake(self.player2Photo.frame.origin.x, self.player2Photo.frame.origin.y, 50, 50);
+    self.player2Photo.frame = CGRectMake(self.player2Photo.frame.origin.x, self.player2Photo.frame.origin.y, 60, 60);
     self.player2Photo.clipsToBounds = YES;
-    self.player2Photo.layer.cornerRadius = 50/2.0f;
+    self.player2Photo.layer.cornerRadius = 60/2.0f;
     
     self.player1Name.text=self.p1.nickName;
     self.player2Name.text=self.p2.nickName;
@@ -375,11 +375,41 @@
     }
 }
 
+/*
+ author:        Andrew Glew
+ created date:  25/11/2017
+ last updated:  25/11/2017
+ */
+-(void)addBallGraphLine :(UIView*) PottedBallGraph :(int) ballquantity :(int) ballIndex :(CGFloat) blockWidth :(UIColor*) ballColor  {
+    
+    CGFloat LineWidth = ballquantity * blockWidth;
+    UIBezierPath* shape;
+    shape = [UIBezierPath bezierPathWithRect: CGRectMake(5, 15 + ((ballIndex - 1)*20), LineWidth, 10)];
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    [shapeLayer setFillColor:ballColor.CGColor];
+    shapeLayer.path = shape.CGPath;
+    [PottedBallGraph.layer addSublayer:shapeLayer];
+    UIView *shapeBall=[[UIView alloc]initWithFrame:CGRectMake(LineWidth, 10 + ((ballIndex - 1)*20), 20, 20)];
+    [shapeBall setBackgroundColor:ballColor];
+    shapeBall.layer.cornerRadius = shapeBall.frame.size.width / 2.0;
+    UILabel *quantityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [quantityLabel setTextColor:[UIColor whiteColor]];
+    [quantityLabel setBackgroundColor:[UIColor clearColor]];
+    [quantityLabel setTextAlignment:NSTextAlignmentCenter];
+    [quantityLabel setFont:[UIFont fontWithName: @"Avenir-Book" size: 10.0f]];
+    [quantityLabel setText:[NSString stringWithFormat:@"%d",ballquantity]];
+    [shapeBall addSubview:quantityLabel];
+    [PottedBallGraph addSubview:shapeBall];
+}
 
 
 
-/* player frame/match statistics */
-/* modified 20170424 */
+
+/*
+ player frame/match statistics
+ created date:      2017?
+ last modified:     25/11/2017
+*/
 
 -(void)loadPlayerStatistics :(NSNumber *) playerIndex {
     
@@ -390,9 +420,7 @@
     NSString *potfouls, *topbreaks;
     NSMutableDictionary *breakData =  [[NSMutableDictionary alloc] init];
     topbreaks = @"";
-    
-    //getTotalPottedPoints
-    
+
     if (self.graphStatisticView.graphReferenceId>0) {
         redcount = [common getQtyOfBallsByColor :[self.graphStatisticView frameData] :playerIndex :[NSNumber numberWithInt:1]];
         yellowcount = [common getQtyOfBallsByColor :[self.graphStatisticView frameData] :playerIndex :[NSNumber numberWithInt:2]];
@@ -412,10 +440,7 @@
         avgShotTime = [common getAvgShotDuration:[self.graphStatisticView frameData]  :playerIndex];
         
         breakData = [common getDataSetForBreaks:[self.graphStatisticView frameData] :playerIndex];
-        
-
-        //p2MaxAmtOfBallsInSuccession
-        
+ 
         
     } else {
         redcount = [common getQtyOfBallsByColor :self.activeMatchData :playerIndex :[NSNumber numberWithInt:1]];
@@ -451,63 +476,26 @@
         self.p1AvgBreakLabel.text = [NSString stringWithFormat:@"%.02f",avgbreak];
         self.p1BallAvgLabel.text = [NSString stringWithFormat:@"%.02f",avgball];
         self.p1MaxAmtOfBallsInSuccession.text = [NSString stringWithFormat:@"%d",successioncount];
+
+        CGFloat areaWidth=self.p1BallGraph.bounds.size.width-35;
+        CGFloat blockWidth;
+        if (self.stepperFrame.value==0) {
+            int opponentredcount = [common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:2] :[NSNumber numberWithInt:1]];
+            blockWidth=areaWidth / MAX(redcount,opponentredcount);
+        } else
+        {
+            blockWidth=areaWidth/16.0f;
+        }
+
+        self.p1BallGraph.layer.sublayers = nil;
         
-        if (redcount==0) {
-            //self.p1ImageBallRed.hidden=true;
-            self.p1RedCountLabel.hidden=true;
-        } else {
-            self.p1ImageBallRed.hidden=false;
-            self.p1RedCountLabel.hidden=false;
-            self.p1RedCountLabel.text = [NSString stringWithFormat:@"%d",redcount];
-        }
-        if (yellowcount==0) {
-            //self.p1ImageBallYellow.hidden=true;
-            self.p1YellowCountLabel.hidden=true;
-        } else {
-            self.p1ImageBallYellow.hidden=false;
-            self.p1YellowCountLabel.hidden=false;
-            self.p1YellowCountLabel.text = [NSString stringWithFormat:@"%d",yellowcount];
-        }
-        if (greencount==0) {
-            //self.p1ImageBallGreen.hidden=true;
-            self.p1GreenCountLabel.hidden=true;
-        } else {
-            self.p1ImageBallGreen.hidden=false;
-            self.p1GreenCountLabel.hidden=false;
-            self.p1GreenCountLabel.text = [NSString stringWithFormat:@"%d",greencount];
-        }
-        if (browncount==0) {
-            //self.p1ImageBallBrown.hidden=true;
-            self.p1BrownCountLabel.hidden=true;
-        } else {
-            self.p1ImageBallBrown.hidden=false;
-            self.p1BrownCountLabel.hidden=false;
-            self.p1BrownCountLabel.text = [NSString stringWithFormat:@"%d",browncount];
-        }
-        if (bluecount==0) {
-            //self.p1ImageBallBlue.hidden=true;
-            self.p1BlueCountLabel.hidden=true;
-        } else {
-            self.p1ImageBallBlue.hidden=false;
-            self.p1BlueCountLabel.hidden=false;
-            self.p1BlueCountLabel.text = [NSString stringWithFormat:@"%d",bluecount];
-        }
-        if (pinkcount==0) {
-            //self.p1ImageBallPink.hidden=true;
-            self.p1PinkCountLabel.hidden=true;
-        } else {
-            self.p1ImageBallPink.hidden=false;
-            self.p1PinkCountLabel.hidden=false;
-            self.p1PinkCountLabel.text = [NSString stringWithFormat:@"%d",pinkcount];
-        }
-        if (blackcount==0) {
-            //self.p1ImageBallBlack.hidden=true;
-            self.p1BlackCountLabel.hidden=true;
-        } else {
-            self.p1ImageBallBlack.hidden=false;
-            self.p1BlackCountLabel.hidden=false;
-            self.p1BlackCountLabel.text = [NSString stringWithFormat:@"%d",blackcount];
-        }
+        [self addBallGraphLine:self.p1BallGraph :redcount :1 :blockWidth :self.redColour];
+        [self addBallGraphLine:self.p1BallGraph :yellowcount :2 :blockWidth :self.yellowColour];
+        [self addBallGraphLine:self.p1BallGraph :greencount :3 :blockWidth :self.greenColour];
+        [self addBallGraphLine:self.p1BallGraph :browncount :4 :blockWidth :self.brownColour];
+        [self addBallGraphLine:self.p1BallGraph :bluecount :5 :blockWidth :self.blueColour];
+        [self addBallGraphLine:self.p1BallGraph :pinkcount :6 :blockWidth :self.pinkColour];
+        [self addBallGraphLine:self.p1BallGraph :blackcount :7 :blockWidth :self.blackColour];
 
         self.p1SumPotsFouls.text = potfouls;
         self.p1TopBreaks.text = topbreaks;
@@ -518,63 +506,28 @@
         self.p2BallAvgLabel.text = [NSString stringWithFormat:@"%.02f",avgball];
         self.p2MaxAmtOfBallsInSuccession.text = [NSString stringWithFormat:@"%d",successioncount];
         
-        if (redcount==0) {
-            //self.p2ImageBallRed.hidden=true;
-            self.p2RedCountLabel.hidden=true;
-        } else {
-            self.p2ImageBallRed.hidden=false;
-            self.p2RedCountLabel.hidden=false;
-            self.p2RedCountLabel.text = [NSString stringWithFormat:@"%d",redcount];
+        
+        CGFloat areaWidth=self.p2BallGraph.bounds.size.width-35;
+        CGFloat blockWidth;
+        if (self.stepperFrame.value==0) {
+            // issue here...
+            int opponentredcount = [common getQtyOfBallsByColor :self.activeMatchData :[NSNumber numberWithInt:1] :[NSNumber numberWithInt:1]];
+            blockWidth=areaWidth / MAX(redcount,opponentredcount);
+            
+        } else
+        {
+            blockWidth=areaWidth/16.0f;
         }
         
-        if (yellowcount==0) {
-            //self.p2ImageBallYellow.hidden=true;
-            self.p2YellowCountLabel.hidden=true;
-        } else {
-            self.p2ImageBallYellow.hidden=false;
-            self.p2YellowCountLabel.hidden=false;
-            self.p2YellowCountLabel.text = [NSString stringWithFormat:@"%d",yellowcount];
-        }
-        if (greencount==0) {
-            //self.p2ImageBallGreen.hidden=true;
-            self.p2GreenCountLabel.hidden=true;
-        } else {
-            self.p2ImageBallGreen.hidden=false;
-            self.p2GreenCountLabel.hidden=false;
-            self.p2GreenCountLabel.text = [NSString stringWithFormat:@"%d",greencount];
-        }
-        if (browncount==0) {
-            //self.p2ImageBallBrown.hidden=true;
-            self.p2BrownCountLabel.hidden=true;
-        } else {
-            self.p2ImageBallBrown.hidden=false;
-            self.p2BrownCountLabel.hidden=false;
-            self.p2BrownCountLabel.text = [NSString stringWithFormat:@"%d",browncount];
-        }
-        if (bluecount==0) {
-            //self.p2ImageBallBlue.hidden=true;
-            self.p2BlueCountLabel.hidden=true;
-        } else {
-            self.p2ImageBallBlue.hidden=false;
-            self.p2BlueCountLabel.hidden=false;
-            self.p2BlueCountLabel.text = [NSString stringWithFormat:@"%d",bluecount];
-        }
-        if (pinkcount==0) {
-            //self.p2ImageBallPink.hidden=true;
-            self.p2PinkCountLabel.hidden=true;
-        } else {
-            self.p2ImageBallPink.hidden=false;
-            self.p2PinkCountLabel.hidden=false;
-            self.p2PinkCountLabel.text = [NSString stringWithFormat:@"%d",pinkcount];
-        }
-        if (blackcount==0) {
-            //self.p2ImageBallBlack.hidden=true;
-            self.p2BlackCountLabel.hidden=true;
-        } else {
-            self.p2ImageBallBlack.hidden=false;
-            self.p2BlackCountLabel.hidden=false;
-            self.p2BlackCountLabel.text = [NSString stringWithFormat:@"%d",blackcount];
-        }
+        self.p2BallGraph.layer.sublayers = nil;
+        
+        [self addBallGraphLine:self.p2BallGraph :redcount :1 :blockWidth :self.redColour];
+        [self addBallGraphLine:self.p2BallGraph :yellowcount :2 :blockWidth :self.yellowColour];
+        [self addBallGraphLine:self.p2BallGraph :greencount :3 :blockWidth :self.greenColour];
+        [self addBallGraphLine:self.p2BallGraph :browncount :4 :blockWidth :self.brownColour];
+        [self addBallGraphLine:self.p2BallGraph :bluecount :5 :blockWidth :self.blueColour];
+        [self addBallGraphLine:self.p2BallGraph :pinkcount :6 :blockWidth :self.pinkColour];
+        [self addBallGraphLine:self.p2BallGraph :blackcount :7 :blockWidth :self.blackColour];
         
         self.p2SumPotsFouls.text = potfouls;
         self.p2TopBreaks.text = topbreaks;
@@ -947,9 +900,7 @@
         if (self.graphStatisticsOverlayView.hidden == false) {
             
             self.tweetButton.enabled = true;
-            
-            
-            
+ 
             [self loadBreakShots:self.breakShotsIndex :false];
             
             self.stepperFrame.minimumValue=1;
@@ -1333,23 +1284,18 @@
     
     cell.scoreLabel.text = [NSString stringWithFormat:@"%@",entry.points];
     
-    NSLog(@"Number test:%@ %@",entry.lastshotid, [NSNumber numberWithInt:Bonus]);
-    
-   // cell.layer.borderWidth = 1.0;
-    
-    
+    cell.visitLabel.text = [NSString stringWithFormat:@"%ld.",self.graphStatisticView.frameDataReversed.count -  (long)indexPath.row];
+
     /* normal text within cell */
     if(entry.playerid==[NSNumber numberWithInt:1]) {
         cell.playerLabel.text = self.p1.nickName;
         
-        cell.cellContentView.layer.borderColor = self.skinPlayer1Colour.CGColor;
-        
-        
-        //cell.cellContentView.backgroundColor = self.skinPlayer1Colour;
+        //cell.cellContentView.layer.borderColor = self.skinPlayer1Colour.CGColor;
+        cell.cellContentView.backgroundColor = self.skinPlayer1Colour;
     } else if(entry.playerid==[NSNumber numberWithInt:2]) {
         cell.playerLabel.text = self.p2.nickName;
-         cell.cellContentView.layer.borderColor = self.skinPlayer2Colour.CGColor;
-       // cell.cellContentView.backgroundColor = self.skinPlayer2Colour;
+        //cell.cellContentView.layer.borderColor = self.skinPlayer2Colour.CGColor;
+        cell.cellContentView.backgroundColor = self.skinPlayer2Colour;
     } else {
         cell.playerLabel.text = @"Adjustment";
         cell.cellContentView.backgroundColor = self.skinBackgroundColour;

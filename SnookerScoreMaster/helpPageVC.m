@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     
     
-   // self.ballPageIndicator.layer.cornerRadius =  self.ballPageIndicator.frame.size.width / 2.0;
+    self.ballPageIndicator.layer.cornerRadius =  self.ballPageIndicator.frame.size.width / 2.0;
 
     // TODO - check only if page 7.
     
